@@ -7,14 +7,13 @@ const instructorSchema=new Schema({
         required:true
     },
     lastName:{
-        type:Number,
+        type:String,
         required:true,
         
     },
     userName:{
-        type:Number,
+        type:String,
         required:true,
-        minlength:6
     },
     password:{
        type:String,
