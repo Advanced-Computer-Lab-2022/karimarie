@@ -1,3 +1,4 @@
+const Instructor = require("../models/Instructor");
 const instTable=require("../models/Instructor");
 
 const getAllInst=async(req,res,next)=>{
@@ -37,5 +38,7 @@ const addInst=async (req,res,next)=>{
         }
         return res.status(201).json({inst})
 }
+
+
 
 module.exports={getAllInst,addInst};

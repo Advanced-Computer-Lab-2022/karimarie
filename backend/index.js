@@ -3,8 +3,8 @@ const express = require("express");
 const mongoose = require('mongoose');
 const app=express();
 app.use(express.json())
-const port = process.env.PORT;
-const MongoURI = 'mongodb+srv://networks:user123@cluster0.pvjwiid.mongodb.net/?retryWrites=true&w=majority' ;
+const port =  process.env.PORT;
+const MongoURI = process.env.MONG_URI;
 //IMPORTING MODELS
 const courseTable=require('./models/Course');
 const instTable=require('./models/Instructor');
@@ -47,5 +47,5 @@ app.use("/inst",adminRouter);
 //instructor use
 
 //course use
-
+app.use("/search",instRouter);
 //trainee use
