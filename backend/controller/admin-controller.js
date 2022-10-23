@@ -1,5 +1,7 @@
 const instTable=require("../models/Instructor");
 
+
+
 const getAllInst=async(req,res,next)=>{
     console.log("heys")
     const{firstName,lastName,userName,password}=req.body

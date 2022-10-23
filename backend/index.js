@@ -40,7 +40,7 @@ var{MongoClient}=require('mongodb')
 app.use("/inst",adminRouter);
 
 //instructor use
-
+app.use("/addCourse",instRouter)
 //course use
 
 //trainee use
