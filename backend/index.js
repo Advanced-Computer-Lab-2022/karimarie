@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require('mongoose');
 const app=express();
 app.use(express.json())
-const port = process.env.PORT || "2000";
+const port = process.env.PORT;
 const MongoURI = 'mongodb+srv://networks:user123@cluster0.pvjwiid.mongodb.net/?retryWrites=true&w=majority' ;
 //IMPORTING MODELS
 const courseTable=require('./models/Course');
@@ -15,6 +16,10 @@ mongoose.connect(MongoURI)
 .then(()=>{
   console.log("MongoDB is now connected!")
 // Starting server
+
+app.get('/', (req, res) => {
+  res.json({mssg: 'Welcome to the app'})
+})
  app.listen(port, () => {
     console.log(`Listening to requests on http://localhost:${port}`);
   })
