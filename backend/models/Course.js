@@ -13,11 +13,10 @@ const coursesSchema=new Schema({
     },
     rating:{
         type:Number,
-        required:true,
         minlength:6
     },
     instructor:{
-       type:mongoose.Types.ObjectId,
+       type:String,
        ref:"Instructor",
        required:true
     },

@@ -1,22 +1,22 @@
 const instTable=require("../models/Instructor");
+const traineeTable=require("../models/Trainee");
 
 const getAllInst=async(req,res,next)=>{
-    console.log("heys")
+    //console.log("heys")
     const{firstName,lastName,userName,password}=req.body
     let inst;
     try{
-      inst=await instTable.find();
+      inst=await instTable.find({});
+      return res.status(200).json(inst)
     }
-    catch(err){
-       console.log(err);
+    catch(error){
+        return res.status(400).json({error : error.message});
+      // console.log(err);
     }
-    if(!inst){
-       return res.status(404).json({message:"no"})
-    }
-    return res.status(200).json({inst:inst})
+    
 }
 const addInst=async (req,res,next)=>{
-        console.log("heys")
+        //console.log("heys")
         const{firstName,lastName,userName,password}=req.body
         let inst;
         try{
@@ -27,15 +27,37 @@ const addInst=async (req,res,next)=>{
                 password
             })
             await inst.save();
-    
+            return res.status(201).json({inst})
         }
-        catch(err){
-            console.log(err)
-        }
-        if(!inst){
-            return res.status(404).json({message:"no"})
-        }
-        return res.status(201).json({inst})
+        catch(error){
+            //console.log(error)
+            return res.status(400).json({error: error.message})
+        }        
 }
 
-module.exports={getAllInst,addInst};
+const addCorpTrainee=async (req,res,next)=>{
+    console.log("heyy");
+    const {firstName,lastName,userName,password,email}=req.body;
+    const type="corporate trainee";
+    let corpTrainee;
+    try{
+        corpTrainee=new traineeTable({
+            firstName:firstName,
+            lastName:lastName,
+            userName:userName,
+            password:password,
+            email:email,
+            type:type
+
+        })
+        console.log({firstName});
+        await corpTrainee.save();
+        return res.status(201).json({corpTrainee});
+    }
+    catch(error){
+        return res.status(400).json({error:error.message})
+    }
+
+}
+
+module.exports={getAllInst,addInst,addCorpTrainee};

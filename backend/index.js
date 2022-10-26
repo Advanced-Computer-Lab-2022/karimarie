@@ -4,13 +4,15 @@ const mongoose = require('mongoose');
 const app=express();
 app.use(express.json())
 const port = process.env.PORT;
-const MongoURI = 'mongodb+srv://networks:user123@cluster0.pvjwiid.mongodb.net/?retryWrites=true&w=majority' ;
+const MongoURI =process.env.MongoURI ;
 //IMPORTING MODELS
 const courseTable=require('./models/Course');
 const instTable=require('./models/Instructor');
+const traineeTable=require('./models/Trainee');
 //IMPORTING ROUTES
 const instRouter=require('./routes/inst-routes');
 const adminRouter=require("./routes/admin-routes");
+const loginRouter=require("./routes/login-routes");
 //Db connection
 mongoose.connect(MongoURI)
 .then(()=>{
@@ -25,7 +27,8 @@ app.get('/', (req, res) => {
   })
 })
 
-var{MongoClient}=require('mongodb')
+var{MongoClient}=require('mongodb');
+const { login } = require('./controller/starting-controller');
  var client = new MongoClient(MongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -42,10 +45,14 @@ var{MongoClient}=require('mongodb')
   };
 
 //admin use
-app.use("/inst",adminRouter);
+app.use('/admin',adminRouter);
 
 //instructor use
+app.use("/instructor",instRouter);
 
 //course use
 
 //trainee use
+
+//login use
+app.use("/login",loginRouter);

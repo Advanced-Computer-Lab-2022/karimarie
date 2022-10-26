@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
-const coursesSchema=new Schema({
+const traineeSchema=new Schema({
     firstName:{
         type:String,
         required:true
@@ -14,15 +14,13 @@ const coursesSchema=new Schema({
     userName:{
         type:String,
         required:true,
-        minlength:6
     },
     password:{
        type:String,
        required:true
     },
     gender:{
-        type:char,
-        required: true
+        type:String,
     },
     email:{
         type:String,
@@ -33,9 +31,8 @@ const coursesSchema=new Schema({
         ref:"Course"
     }],
     type:{
-        type:String,
-        required: true
+        type:String
     }
 });
-const Trainee = mongoose.model('Trainee', Trainee);
+const Trainee = mongoose.model('Trainee', traineeSchema);
 module.exports = Trainee;

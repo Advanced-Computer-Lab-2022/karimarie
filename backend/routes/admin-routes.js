@@ -1,8 +1,10 @@
 const express=require('express');
 const adminRouter=express.Router();
 const instTable=require("../models/Instructor");
-const {getAllInst,addInst}=require("../controller/admin-controller");
+const traineeTable=require("../models/Trainee");
+const {getAllInst,addInst, addCorpTrainee}=require("../controller/admin-controller");
 
-    adminRouter.get("/",getAllInst)
-    adminRouter.post("/",addInst)
+    adminRouter.get('/',getAllInst)
+    adminRouter.post('/addInstructor',addInst)
+    adminRouter.post('/addCorpTrainee',addCorpTrainee)
     module.exports=adminRouter;
