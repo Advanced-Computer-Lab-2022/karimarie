@@ -9,17 +9,14 @@ const coursesSchema=new Schema({
     price:{
         type:Number,
         required:true,
-        
     },
     rating:{
-        type:Number,
-        required:true,
-        minlength:6
+        type:Number
     },
     instructor:{
-       type:mongoose.Types.ObjectId,
-       ref:"Instructor",
-       required:true
+        type:String,
+        ref:"Instructor",
+        required:true
     },
     totalHours:{
         type:Number,
@@ -32,6 +29,10 @@ const coursesSchema=new Schema({
     description:{
         type:String,
         required:true,
+    },
+    subtitles:{
+        type:String,
+        required:true
     },
     numStudents:{
         type:Number
