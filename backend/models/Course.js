@@ -4,39 +4,46 @@ const Schema=mongoose.Schema;
 const coursesSchema=new Schema({
     title:{
         type:String,
-        required:true
+        required:isMyFieldRequired
     },
     price:{
         type:Number,
         required:true,
+        default:0,
+        min:0
     },
     rating:{
         type:Number
     },
     instructor:{
-        type:String,
+        type:mongoose.Schema.ObjectId,
         ref:"Instructor",
-        required:true
+        required:isMyFieldRequired
     },
     totalHours:{
         type:Number,
-        required:true,
+        required:isMyFieldRequired
     },
     subject:{
         type:String,
-        required:true, 
+        required:isMyFieldRequired
     },
     description:{
         type:String,
-        required:true,
+        required:isMyFieldRequired
     },
     subtitles:{
         type:String,
-        required:true
+        required:isMyFieldRequired
     },
     numStudents:{
         type:Number
     }
 });
+
+
+function isMyFieldRequired() {
+    return typeof this.myField === "string" ? false : true;
+  }
 const Course = mongoose.model('Course', coursesSchema);
 module.exports = Course;

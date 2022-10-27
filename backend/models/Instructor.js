@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
-
+const {ObjectId} = mongoose.Schema;
 const instructorSchema=new Schema({
     firstName:{
         type:String,
@@ -9,11 +9,11 @@ const instructorSchema=new Schema({
     lastName:{
         type:String,
         required:true,
+        
     },
     userName:{
         type:String,
         required:true,
-        unique:true
     },
     password:{
        type:String,
@@ -33,12 +33,7 @@ const instructorSchema=new Schema({
     },
     reviews:{
         type:String
-    },
-    courses:[{
-        type:Schema.Types.ObjectId,
-        ref:"Course"
-        
-    }]
+    }
 });
 const Instructor = mongoose.model('Instructor', instructorSchema);
 module.exports = Instructor;

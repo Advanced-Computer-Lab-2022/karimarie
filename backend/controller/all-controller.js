@@ -30,6 +30,8 @@ const getAllCourses = async (req, res) => {
 //  } // view details of a single course by pressing on it
 
 const getFilterSubject=async (req,res) => {
+  console.log("aaaaaaaaa")
+  console.log(req.params.subject)
   let filter={}
   let courseList;
   if(req.params.subject){

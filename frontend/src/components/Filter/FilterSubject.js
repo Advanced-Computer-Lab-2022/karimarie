@@ -16,7 +16,7 @@ const FilterSubject = ({subject}) => {
           return data;
       };
       useEffect(() => {
-        sendRequest().then((data) => setCourses(data.courses));
+        sendRequest().then((data) => setCourses(data.courseList));
         
       }, []);
   return (
