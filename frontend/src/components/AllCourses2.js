@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar,Box,Card,CardContent,CardHeader,CardMedia,IconButton,Typography, Button,CardActions } from "@mui/material";
-const AllCourses2 = ({title,price,totalHours}) => {
-    console.log(title)
+import { useNavigate, useParams } from "react-router-dom";
+const AllCourses2 = ({id,title,price,totalHours}) => {
+  const navigate = useNavigate();
+  const [idF,setCourseId]=useState()
+  const viewDetails = (e) => {
+   setCourseId(id);
+    console.log("aaaaaa",id);
+   navigate("/myCourse/${id}")
+
+  };
   return (
     <div>
        
@@ -20,17 +28,19 @@ const AllCourses2 = ({title,price,totalHours}) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {title}
+       
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+         {title}
         </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>
+        
       </CardActions>
+
+      <button onClick={viewDetails}>View Details</button>
     </Card>
     </div>
   )
