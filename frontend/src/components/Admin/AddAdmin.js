@@ -5,31 +5,7 @@ const AddAdmin = () => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
 
-  //   const admin = {userName,password}
-    
-  //   const response = await fetch('/admin/addAdmin', {
-  //     method: 'POST',
-  //     body: JSON.stringify(admin),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //   const json = await response.json()
-
-  //   if (!response.ok) {
-  //     setError(json.error)
-  //   }
-  //   if (response.ok) {
-  //     setError(null)
-  //     setUserName('')
-  //     setPassword('')
-  //     console.log('new admin added:', json)
-  //   }
-
-  // }
   const sendRequest = async () => {
     const res = await axios
       .post("http://localhost:2000/admin/addAdmin", {

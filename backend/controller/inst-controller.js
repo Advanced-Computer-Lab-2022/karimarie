@@ -81,4 +81,16 @@ const createCourse=async (req,res,next)=>{
    
  
 }
-module.exports={getAllInst,searchCourse,createCourse};
+const getMyCourses=async (req,res) => {
+    let myCourses={};
+    if(req.body.id){
+        myCourses= {instructor: req.body.id} 
+    }
+    const resultList= await courseTable.find(myCourses).populate('instructor');
+    if(!resultList){
+        return res.status(404).json({error :'Invalid Input'});
+    }
+    res.send(resultList);
+
+}
+module.exports={getAllInst,searchCourse,createCourse,getMyCourses};

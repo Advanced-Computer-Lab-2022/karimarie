@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { Avatar,Box,Card,CardContent,CardHeader,CardMedia,IconButton,Typography, Button,CardActions } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-const AllCourses2 = ({id,title,price,totalHours}) => {
+const AllCourses2 = ({title,price,totalHours}) => {
   const navigate = useNavigate();
-  const [idF,setCourseId]=useState()
-  const viewDetails = (e) => {
-   setCourseId(id);
-    console.log("aaaaaa",id);
-   navigate("/myCourse/${id}")
+  const [id,setCourseId]=useState()
+  // const viewDetails = (e) => {
+  //  setCourseId(id);
+  //  navigate("/myCourse/${id}")
+  //   console.log("aaaaaa",id);
+   
 
-  };
+  // };
   return (
     <div>
        
@@ -40,7 +41,7 @@ const AllCourses2 = ({id,title,price,totalHours}) => {
         
       </CardActions>
 
-      <button onClick={viewDetails}>View Details</button>
+      <button >View Details</button>
     </Card>
     </div>
   )

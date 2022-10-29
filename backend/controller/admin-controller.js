@@ -16,7 +16,9 @@ const getAllInst=async(req,res,next)=>{
 }
 
 const addInst=async (req,res,next)=>{
+
     const{firstName,lastName,userName,password}=req.body
+    console.log(password)
     let inst;
     try{
         inst =new instTable({
@@ -71,5 +73,22 @@ const addAdmin=async (req,res,next)=>{
     
     
  }
- 
-module.exports={getAllInst,addInst,addCorpTrainee,addAdmin};
+ const addI = async(req,res)=>{
+    const {name,password,gender,email,username} = req.body 
+    console.log("heyy")
+   //console.log(name)
+    try {
+        const instructor = new instTable({name,password,gender,email})
+        await instructor.save()
+        
+        //const token = createToken(instructor._id)
+    
+       
+        res.status(200).json({instructor})
+
+       }
+       catch(error){
+        res.status(400).json({error: error.message})
+       }
+}
+module.exports={getAllInst,addInst,addCorpTrainee,addAdmin,addI};

@@ -5,15 +5,19 @@ import AllCourses2 from './AllCourses2';
 import { Button, Typography } from '@mui/material';
 import FilterSubject from './Filter/FilterSubject';
 import FilterPrice from './Filter/FilterPrice';
+import FilterRating from './Filter/FilterRating';
+import FilterBoth from './Filter/FilterBoth';
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);
   const [filter, setClearFilter] = useState(false);
   const [subjectList, setSubjectList] = useState([]);//list of subjects
   const [filterResult,setFilterResult]=useState();
   const [price,setPrice]=useState();
-  const [temp,setTemp]=useState();
-  const [isToggled,setToggled]=useState(true)
+  const [rating,setRating]=useState();
   const [choose,setChoose]=useState('All');
+  const [rating2,setRating2]=useState();
+  const [subject2,setSubject2]=useState();
+
   const sendRequest = async () => {
     const res = await axios
       .get("http://localhost:2000/home")
@@ -32,6 +36,18 @@ const AllCourses = () => {
     setChoose('Price')
 
   };
+  const  handleSubmitRating = (e) => {
+    e.preventDefault();
+    setClearFilter(true);
+    setChoose('Rating')
+
+  }
+  const  handleSubmitBoth = (e) => {
+    e.preventDefault();
+    setClearFilter(true);
+    setChoose('Both')
+
+  };
   const sendRequest2 = async () => {
     const res = await axios
       .get("http://localhost:2000/subjects")
@@ -47,14 +63,12 @@ const AllCourses = () => {
   const handleChange = (event) =>{
     console.log(event.target.value);
     setFilterResult(event.target.value);
-   // setToggled(false);
     setClearFilter(true);
     setChoose('Subject')
 }
 const clearFilter=()=>{
   setFilterResult('');
-  setPrice('')
-  //setToggled(true);
+  setPrice('');
   setClearFilter(false);
   setChoose('All')
 }
@@ -78,6 +92,28 @@ const clearFilter=()=>{
         value={price}
       /> <button>Filter</button>
       </form>
+      <form className="create" onSubmit={handleSubmitRating}> 
+      <h3>Filter by Rating</h3>
+      <input 
+        type="text" 
+        onChange={(e) => setRating(e.target.value)} 
+        value={rating}
+      /> <button>Filter</button>
+      </form>
+      <form className="create" onSubmit={handleSubmitBoth}> 
+      <h3>Filter by Rating and Subject</h3>
+      <input 
+        type="text" 
+        onChange={(e) => setRating2(e.target.value)} 
+        value={rating2}
+      />
+      <input 
+        type="text" 
+        onChange={(e) => setSubject2(e.target.value)} 
+        value={subject2}
+      />
+       <button>Filter</button>
+      </form>
      <div>
     {choose==="All" && courses &&
       courses.map((courses) => (
@@ -98,6 +134,15 @@ const clearFilter=()=>{
   <div>
   {choose==="Price" && <FilterPrice
       price={price}/>  }
+  </div>
+  <div>
+    {choose==="Rating"&&  <FilterRating
+    rating={rating}/>}
+  </div>
+  <div>
+    {choose==="Both" && <FilterBoth
+    subject={subject2}
+    rating={rating2}/>}
   </div>
   {filter&&<Button onClick={clearFilter}>Clear Filter</Button>}   
   </React.Fragment>

@@ -19,15 +19,6 @@ const getAllCourses = async (req, res) => {
     }
     catch(error){res.status(404).json({error:error.message}) }
   }
-// const viewAcourse=async(req,res,next)=>{
-//     const id=req.params.id;
-//     let course;
-//     try{
-//        course=courseTable.findById(id)
-//        return res.status(200).json({course})
-//     }
-//     catch(error){return res.status(400).json({error:error.message})}
-//  } // view details of a single course by pressing on it
 
 const getFilterSubject=async (req,res) => {
   console.log("aaaaaaaaa")
@@ -75,5 +66,52 @@ const getById = async (req, res, next) => {
     return res.status(404).json({ message: err.message });
   }
 };
+const searchCourse = async (req, res) => {
+  //console.log("Input", req.params.key);
+  // await courseTable
+  //   .find()
+  //   .populate("instructor", "userName")
+  //   .exec(async (err, courses) => {
+  //     if (err) return;
+  //     let instructorCourses =
+  //       courses.filter((course) =>
+  //         course.instructor.userName.includes(req.params.key)
+  //       ) || [];
 
-  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById}
+  //     let keyCourses = await courseTable.find({
+  //       $or: [
+  //         { title: { $regex: req.params.key } },
+  //         {
+  //           subject: { $regex: req.params.key },
+  //         },
+  //       ],
+  //     });
+
+  //     res.send([...instructorCourses, ...keyCourses]);
+  //   });
+};
+const getFilterRating=async (req,res) => {
+
+  let Rfilter={}
+  console.log(req.params.rating)
+  if(req.params.rating){
+      Rfilter= {rating: req.params.rating} 
+  }
+  try{
+    const RcourseList= await courseTable.find(Rfilter).populate('rating');
+    return res.status(200).json({RcourseList})
+  }
+  catch(err){ res.status(404).json({error: err.message})}
+ 
+  
+
+};
+const filterRatingSubject=async (req,res) => {
+  console.log( req.params.rating)
+  try{
+    const resultList= await courseTable.find({rating: req.params.rating,subject: req.params.subject});
+    return res.status(200).json({resultList})
+  }
+  catch(err){  return res.status(404).json({error :err.message});}
+}
+  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,searchCourse,getFilterRating,filterRatingSubject}

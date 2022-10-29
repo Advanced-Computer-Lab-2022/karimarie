@@ -10,6 +10,8 @@ import InstructorHome from '../pages/InstructorHome';
 import CorpTraineeHome from '../pages/CorpTraineeHome';
 import FilterPrice from './Filter/FilterPrice';
 import CourseDetails from '../pages/CourseDetails';
+import Hi from './Hi';
+import Hii from './Hii';
 const App = () => {
   return <React.Fragment>
     {/* <header>
@@ -19,10 +21,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Choose/>}/>
         <Route path="/Home" element={<AllCourses/>}/>
+      
         <Route path="/AdminHome" element={<AdminHome/>}/>
        // <Route path="/InstructorHome" element={<InstructorHome/>}/>
         <Route path="/CorpTraineeHome" element={<CorpTraineeHome/>}/>
+        <Route path="/hi" element={<Hii/>}/>
         <Route path="/myCourse/:id" element={<CourseDetails/>} />
+     
       </Routes>
     </main>
   </React.Fragment>
