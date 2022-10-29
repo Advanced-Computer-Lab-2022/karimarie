@@ -21,10 +21,10 @@ const CourseDetails = () => {
   return (
   <React.Fragment>
     <p>Hello</p>
-  </React.Fragment>
+    </React.Fragment>
 
 
   )
-}
+  }
 
 export default CourseDetails

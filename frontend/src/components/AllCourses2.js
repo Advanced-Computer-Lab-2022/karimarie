@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar,Box,Card,CardContent,CardHeader,CardMedia,IconButton,Typography, Button,CardActions } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-const AllCourses2 = ({id,title,price,totalHours}) => {
+const AllCourses2 = ({id,title,price,totalHours,rating}) => {
   const navigate = useNavigate();
   const [idF,setCourseId]=useState()
   const viewDetails = (e) => {
@@ -28,11 +28,18 @@ const AllCourses2 = ({id,title,price,totalHours}) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-       
+        {rating}
         </Typography>
         <Typography variant="body2" color="text.secondary">
          {title}
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+         {price}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+         {totalHours}
+        </Typography>
+       
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>

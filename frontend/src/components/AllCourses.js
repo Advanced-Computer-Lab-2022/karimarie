@@ -5,12 +5,16 @@ import AllCourses2 from './AllCourses2';
 import { Button, Typography } from '@mui/material';
 import FilterSubject from './Filter/FilterSubject';
 import FilterPrice from './Filter/FilterPrice';
+import FilterRating from './Filter/FilterRating';
+import SearchCourse from './SearchCourse';
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);
   const [filter, setClearFilter] = useState(false);
   const [subjectList, setSubjectList] = useState([]);//list of subjects
   const [filterResult,setFilterResult]=useState();
   const [price,setPrice]=useState();
+  const [rating,setRating]=useState();
+  const [search,setSearch]=useState();
   const [temp,setTemp]=useState();
   const [isToggled,setToggled]=useState(true)
   const [choose,setChoose]=useState('All');
@@ -26,10 +30,25 @@ const AllCourses = () => {
     sendRequest().then((data) => setCourses(data.courses));
     
   }, []);
-  const handleSubmit = (e) => {
+  const handleSubmitPrice = (e) => {
+    console.log(price)
     e.preventDefault();
     setClearFilter(true);
     setChoose('Price')
+
+  };
+  const handleSubmitRating = (e) => {
+    console.log(rating);
+    e.preventDefault();
+    setClearFilter(true);
+    setChoose('Rating')
+
+  };
+  const handleSubmitSearch = (e) => {
+    console.log(search);
+    e.preventDefault();
+    setClearFilter(true);
+    setChoose('Search')
 
   };
   const sendRequest2 = async () => {
@@ -54,6 +73,8 @@ const AllCourses = () => {
 const clearFilter=()=>{
   setFilterResult('');
   setPrice('')
+  setRating('')
+  setSearch('')
   //setToggled(true);
   setClearFilter(false);
   setChoose('All')
@@ -65,19 +86,40 @@ const clearFilter=()=>{
      <select className="form-control" value={filterResult} onChange={handleChange}>
               <option value="">Choose A Subject</option>
         {subjectList.map(subject => (
-              <option value={subject.title} key={subject.id} >{subject.title}</option>
+              <option value={subject.title} key={subject._id} >{subject.title}</option>
               ))
               }
 
           </select> 
-          <form className="create" onSubmit={handleSubmit}> 
+          <form className="create" onSubmit={handleSubmitPrice} > 
       <h3>Filter by Price</h3>
       <input 
         type="text" 
         onChange={(e) => setPrice(e.target.value)} 
         value={price}
+      /> <button >Filter</button>
+  </form>
+
+      <form className="create" onSubmit={handleSubmitRating} > 
+      <h3>Filter by Rating</h3>
+      <input 
+        type="text" 
+        onChange={(e) => setRating(e.target.value)} 
+        value={rating}
       /> <button>Filter</button>
       </form>
+      
+      <form className="create" onSubmit={handleSubmitSearch} > 
+      <h3>Search for Courses </h3>
+      <input 
+        type="text" 
+        onChange={(e) => setSearch(e.target.value)} 
+        value={search}
+      /> <button>Search</button>
+      </form>
+
+
+
      <div>
     {choose==="All" && courses &&
       courses.map((courses) => (
@@ -86,6 +128,8 @@ const clearFilter=()=>{
           title={courses.title}
           price={courses.price}
           totalHours={courses.totalHours}
+          rating={courses.rating}
+          
           
         />
       ))}
@@ -98,6 +142,14 @@ const clearFilter=()=>{
   <div>
   {choose==="Price" && <FilterPrice
       price={price}/>  }
+  </div>
+  <div>
+  {choose==="Rating" && <FilterRating
+      rating={rating}/>  }
+  </div>
+  <div>
+  {choose==="Search" && <SearchCourse
+      search={search}/>  }
   </div>
   {filter&&<Button onClick={clearFilter}>Clear Filter</Button>}   
   </React.Fragment>

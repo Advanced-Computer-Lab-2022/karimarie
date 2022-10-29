@@ -6,7 +6,7 @@ const Choose = () => {
     <div>
         <Button variant="contained" LinkComponent={Link} to="/InstructorHome" >Instructor</Button>
         <Button variant="contained" LinkComponent={Link} to="/AdminHome">Admin</Button>
-        <Button variant="contained">Trainee</Button>
+        <Button variant="contained" LinkComponent={Link} to="/Home">Trainee</Button>
         <Button variant="contained" LinkComponent={Link} to="/CorpTraineeHome">corporateTrainee</Button>
     </div> 
   )

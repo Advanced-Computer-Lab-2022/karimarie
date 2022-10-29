@@ -30,7 +30,7 @@ const getAllCourses = async (req, res) => {
 //  } // view details of a single course by pressing on it
 
 const getFilterSubject=async (req,res) => {
-  console.log("aaaaaaaaa")
+  //console.log("aaaaaaaaa")
   console.log(req.params.subject)
   let filter={}
   let courseList;
@@ -49,7 +49,7 @@ const getFilterSubject=async (req,res) => {
 
 }
 const postFilterPrice=async (req,res) => {
-  console.log("aaaaaaaaa")
+  //console.log("aaaaaaaaa")
    let Pfilter={};
    let priceList;
    if(req.body.price){
@@ -63,7 +63,7 @@ const postFilterPrice=async (req,res) => {
    catch(err){ res.status(404).json({err: err.message})}
 }
 const getById = async (req, res, next) => {
-  console.log("s")
+  //console.log("s")
   const id = req.params.id;
   console.log(id)
   let course;
@@ -76,4 +76,42 @@ const getById = async (req, res, next) => {
   }
 };
 
-  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById}
+const filterRating=async (req,res) => {
+
+  let Rfilter={}
+  console.log(req.params.rating)
+  if(req.params.rating){
+      Rfilter= {rating: req.params.rating} 
+  }
+  try{
+    const RcourseList= await courseTable.find(Rfilter).populate('rating');
+    return res.status(200).json({RcourseList})
+  }
+  catch(err){ res.status(404).json({error: err.message})}
+};
+
+const searchCourse = async (req, res) => {
+  //console.log("Input", req.params.key);
+  await courseTable
+    .find()
+    .populate("instructor", "userName")
+    .exec(async (err, courses) => {
+      if (err) return;
+      let instructorCourses =
+        courses.filter((course) =>
+          course.instructor.userName.includes(req.params.key)
+        ) || [];
+
+      let keyCourses = await courseTable.find({
+        $or: [
+          { title: { $regex: req.params.key } },
+          {
+            subject: { $regex: req.params.key },
+          },
+        ],
+      });
+      let searchResult=[...instructorCourses, ...keyCourses];
+      res.send(searchResult);
+    });
+};
+  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse}
