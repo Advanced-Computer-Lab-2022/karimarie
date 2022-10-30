@@ -96,7 +96,7 @@ const Text = () =><div>
 <form className="create" onSubmit={handleSubmitPrice} > 
       <h3>Filter by Price</h3>
       <input 
-        type="text" 
+        type="Number" 
         onChange={(e) => setPrice(e.target.value)} 
         value={price}
       /> <button >Filter</button>

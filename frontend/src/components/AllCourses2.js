@@ -18,7 +18,7 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
   
   const navigate = useNavigate();
   const [idF,setCourseId]=useState()
-  const Price = () => <div>price : {newPrice}{currencyP}</div>;
+  const Price = () => <div>price : {newPrice} {currencyP}</div>;
   const Title=()=> <div> Title:{title}</div>
   const TotalHours=()=> <div> Total Hours:{totalHours}</div>
   const Rating=()=> <div>Rating:{rating}</div>
@@ -27,54 +27,47 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
             if(currency==="Egypt"){
             const x= price
             setNewPrice(x)
-            setCurrencyP('EGP')
           }
           if(currency==="Europe"){
             const x= price*23
             setNewPrice(x)
-            setCurrencyP('EURO')
           }
           if(currency==="USA"){
             const x= price*20
             setNewPrice(x)
-            setCurrencyP('DOLLAR')
           }
+          setCurrencyP('EGP')
         }
 
         if (country==="Europe"){
           if(currency==="Egypt"){
           const x= price*0.043
           setNewPrice(x)
-          setCurrencyP('EGP')
         }
         if(currency==="Europe"){
           const x= price
           setNewPrice(x)
-          setCurrencyP('EURO')
         }
         if(currency==="USA"){
           const x= price
           setNewPrice(x)
-          setCurrencyP('DOLLAR')
-
         }
+        setCurrencyP('EURO')
       }
       if (country==="USA"){
         if(currency==="Egypt"){
         const x= price*0.043
         setNewPrice(x)
-        setCurrencyP('EGP')
       }
       if(currency==="Europe"){
         const x= price
         setNewPrice(x)
-        setCurrencyP('EURO')
       }
       if(currency==="USA"){
         const x= price
         setNewPrice(x)
-        setCurrencyP('DOLLAR')
       }
+      setCurrencyP('DOLLAR')
       }
 
       }, [newPrice])
@@ -88,7 +81,7 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
           boxShadow: "5px 5px 10px #ccc",
           ":hover": {
           boxShadow: "10px 10px 20px #ccc"}}}>
-           <a href={`/course/${id}`} >
+           <a href={`/course/${id}/${newPrice}/${currencyP}`} >
       <CardMedia
         component="img"
         alt="green iguana"
