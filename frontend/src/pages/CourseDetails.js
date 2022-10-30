@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 function CourseDetails() {
     
     const id = useParams().id;
+    const newprice=useParams().newPrice;
+    const currencyP=useParams().currencyP;
     const [Course, setCourses]= useState([''])
 
     const sendRequest = async () => {
@@ -46,7 +48,7 @@ function CourseDetails() {
              Course Subject : {Course.subject}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Course Price : {Course.price} {Course.currency}
+            Course Price : {newprice} {currencyP}
             </Typography>
             {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {Course.subtitles}

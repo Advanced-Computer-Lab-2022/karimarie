@@ -24,8 +24,7 @@ const App = () => {
         <Route path="/AdminHome" element={<AdminHome/>}/>
        // <Route path="/InstructorHome" element={<InstructorHome/>}/>
         <Route path="/CorpTraineeHome" element={<CorpTraineeHome/>}/>
-        <Route path="/myCourse/:id" element={<CourseDetails/>} />
-        <Route path="/course/:id" element={<CourseDetails/>} />
+        <Route path="/course/:id/:newPrice/:currencyP" element={<CourseDetails/>} />
       </Routes>
     </main>
   </React.Fragment>
