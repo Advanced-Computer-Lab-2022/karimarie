@@ -2,10 +2,11 @@ import React from 'react'
 import {AppBar, Typography,Toolbar, Button,Box, Tabs,Tab} from '@mui/material'
 import{ useState } from 'react'
 import GetCourses from '../components/CorpTrainee/GetCourses';
+import AllCourses from '../components/AllCourses';
 const CorpTraineeHome = () => {
-    const [active,isActive]=useState();
+    const [chooseC,setChoose]=useState('CorpTrainee');
     return <React.Fragment>
-    <GetCourses/>
+    <AllCourses chooseC={chooseC}/>
       </React.Fragment>
 }
 

@@ -31,20 +31,20 @@ const instLogin=async(req,res,next)=>{
     
 }
 
-const searchCourse=async(req,res,next)=>{
-   let course;
-   const{input}=req.body
-   try{
-      console.log(input)
-      course = courseTable.find({'title':input})
+// const searchCourse=async(req,res,next)=>{
+//    let course;
+//    const{input}=req.body
+//    try{
+//       console.log(input)
+//       course = courseTable.find({'title':input})
       
-      return res.status(200).json({inst})
+//       return res.status(200).json({inst})
       
-   }
-   catch(error){  
-      console.log("Error")
-      return res.status(404).json({message:error.message})}
-}
+//    }
+//    catch(error){  
+//       console.log("Error")
+//       return res.status(404).json({message:error.message})}
+// }
 const createCourse=async (req,res,next)=>{     
    const{title,price,instructor, totalHours, subject, description,subtitles}=req.body
    let course;
@@ -77,8 +77,53 @@ const createCourse=async (req,res,next)=>{
        return res.status(404).json({message:err.message})
    }
  
-     
-   
- 
 }
-module.exports={getAllInst,searchCourse,createCourse};
+
+const getMyCourses=async (req,res) => {
+   let myCourses={};
+   if(req.params.instructor){
+       myCourses= {instructor: req.params.instructor} 
+   }
+   const resultList= await courseTable.find(myCourses).populate('instructor');
+   if(!resultList){
+       return res.status(404).json({error :'Invalid Input'});
+   }
+   res.send(resultList);
+
+}
+
+const filterMyCSubject =async (req,res) => {
+   
+   const resultList= await courseTable.find({instructor: req.params.instructor,subject: req.params.subject});
+   
+   if(!resultList){
+       return res.status(404).json({error :'Invalid Input'});
+   }
+   res.send(resultList);
+}
+
+const filterMyCPrice =async (req,res) => {
+   //console.log("hiuuuuuu")
+   const resultList= await courseTable.find({instructor: req.params.instructor,price: {$lte:req.params.price}});
+   
+   if(!resultList){
+       return res.status(404).json({error :'Invalid Input'});
+   }
+   
+   res.send(resultList);
+}
+
+const searchInstCourse = async (req, res) =>{
+   //console.log("dakhalt");
+   const resultListTitle= await courseTable.find({instructor: req.params.instructor,title: req.params.search});
+   const resultListSubject= await courseTable.find({instructor: req.params.instructor,subject: req.params.search});
+   if(!resultListTitle || !resultListSubject){
+       return res.status(404).json({error :'Invalid Input'});
+   }
+   let searchResult=[...resultListTitle, ...resultListSubject];
+   res.send(searchResult);
+   //console.log(searchResult);
+
+}
+
+module.exports={getAllInst,createCourse,getMyCourses,filterMyCSubject,filterMyCPrice,searchInstCourse};

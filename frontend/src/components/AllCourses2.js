@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Avatar,Box,Card,CardContent,CardHeader,CardMedia,IconButton,Typography, Button,CardActions } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 const AllCourses2 = ({id,title,price,totalHours,rating}) => {
+  const [showText, setShowText] = useState(true);
+  useEffect(() => {
+    if(!price){
+      setShowText(false); 
+     }
+  }, []);
+  
   const navigate = useNavigate();
   const [idF,setCourseId]=useState()
   const viewDetails = (e) => {
@@ -10,6 +17,7 @@ const AllCourses2 = ({id,title,price,totalHours,rating}) => {
    navigate("/myCourse/${id}")
 
   };
+  const Text = () => <div>price : {price}</div>;
   return (
     <div>
        
@@ -28,16 +36,16 @@ const AllCourses2 = ({id,title,price,totalHours,rating}) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-        {rating}
+        Rating : {rating}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-         {title}
+         Title :{title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">  
+          {showText ? <Text /> : null}  
         </Typography>
         <Typography variant="body2" color="text.secondary">
-         {price}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-         {totalHours}
+         TotalHours :{totalHours}
         </Typography>
        
       </CardContent>
@@ -50,7 +58,9 @@ const AllCourses2 = ({id,title,price,totalHours,rating}) => {
       <button onClick={viewDetails}>View Details</button>
     </Card>
     </div>
+    
   )
+  
 }
 
 export default AllCourses2

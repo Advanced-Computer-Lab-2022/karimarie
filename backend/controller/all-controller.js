@@ -114,4 +114,15 @@ const searchCourse = async (req, res) => {
       res.send(searchResult);
     });
 };
-  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse}
+
+const filterRatingSubject=async (req,res) => {
+  
+  try{
+    const resultList= await courseTable.find({rating: req.params.rating,subject: req.params.subject});
+    console.log( req.params.rating+""+req.params.subject)
+    return res.status(200).json({resultList})
+  }
+  catch(err){  return res.status(404).json({error :err.message});}
+};
+
+  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject}

@@ -3,21 +3,21 @@ import { Typography } from '@mui/material'
 import React from 'react'
 import { useEffect } from "react";
 import axios from "axios";
-import AllCourses2 from '../AllCourses2';
-const FilterPrice = ({price}) => {
+import AllCourses2 from '../../AllCourses2';
+const FilterPrice = ({instructor,price}) => {
+    console.log(instructor);
     const [courses, setCourses] = useState([]);
         const sendRequest = async () => {
             const res = await axios
-            .post("http://localhost:2000/filterP", {
-              price:{price}
-            })
+            .get(`http://localhost:2000/instructor/filterMyPrice/${instructor}/${price}`)
             .catch((err) => console.log(err));
             const data = await res.data;
+            console.log(data + "okkkkkk");
             return data;
           };
         useEffect(() => {
-            sendRequest().then((data) => setCourses(data.priceList));
-            console.log(courses)
+            sendRequest().then((data) => setCourses(data));
+            console.log("hi")
           }, []);
       
    

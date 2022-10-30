@@ -29,6 +29,7 @@ const FilterRating = ({rating}) => {
           title={courses.title}
           price={courses.price}
           totalHours={courses.totalHours}
+          rating={courses.rating}
         />
       ))}
     </React.Fragment>
