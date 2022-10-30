@@ -1,17 +1,73 @@
 import React, { useState,useEffect } from 'react'
 import { Avatar,Box,Card,CardContent,CardHeader,CardMedia,IconButton,Typography, Button,CardActions } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-const AllCourses2 = ({id,title,price,totalHours,rating}) => {
+const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
   const [showText, setShowText] = useState(true);
+  const [showTitleOnly,setShowTitleOnly]=useState(false);//ana mesh instructor 3ayz yeshoof 7agto bas
+  
+  const country=localStorage.getItem("country");
+  const [newPrice,setNewPrice]= useState('')
   useEffect(() => {
     if(!price){
       setShowText(false); 
      }
+     if(!price&&!totalHours&&!rating&&!currency){
+      setShowTitleOnly(true); //ana instructor 3ayz yeshoof only his titles
+    }
   }, []);
   
   const navigate = useNavigate();
   const [idF,setCourseId]=useState()
-  const Text = () => <div>price : {price}</div>;
+  const Price = () => <div>price : {price}</div>;
+  const Title=()=> <div> Title:{title}</div>
+  const TotalHours=()=> <div> Total Hours:{totalHours}</div>
+  const Rating=()=> <div>Rating:{rating}</div>
+        useEffect(()=>{
+          if (country==="Egypt"){
+            if(currency==="Egypt"){
+            const x= price
+            setNewPrice(x)
+          }
+          if(currency==="Europe"){
+            const x= price*23
+            setNewPrice(x)
+          }
+          if(currency==="USA"){
+            const x= price*20
+            setNewPrice(x)
+          }
+        }
+
+        if (country==="Europe"){
+          if(currency==="Egypt"){
+          const x= price*0.043
+          setNewPrice(x)
+        }
+        if(currency==="Europe"){
+          const x= price
+          setNewPrice(x)
+        }
+        if(currency==="USA"){
+          const x= price
+          setNewPrice(x)
+        }
+      }
+      if (country==="USA"){
+        if(currency==="Egypt"){
+        const x= price*0.043
+        setNewPrice(x)
+      }
+      if(currency==="Europe"){
+        const x= price
+        setNewPrice(x)
+      }
+      if(currency==="USA"){
+        const x= price
+        setNewPrice(x)
+      }
+      }
+
+      }, [newPrice])
   return (
     <div>
        
@@ -31,17 +87,21 @@ const AllCourses2 = ({id,title,price,totalHours,rating}) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-        Rating : {rating}
+        {showTitleOnly ? null:  <Rating />}  
         </Typography>
         <Typography variant="body2" color="text.secondary">
-         Title :{title}
+         <Title/>
         </Typography>
         <Typography variant="body2" color="text.secondary">  
-          {showText ? <Text /> : null}  
+        {showText&&!showTitleOnly ? <Price /> : null} 
         </Typography>
         <Typography variant="body2" color="text.secondary">
-         TotalHours :{totalHours}
+        {showTitleOnly ? null:  <TotalHours />}  
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+         {newPrice}
+        </Typography>
+
        
       </CardContent>
       </a>

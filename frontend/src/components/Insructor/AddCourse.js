@@ -15,7 +15,7 @@ const AddCourse = () => {
   const [instructor, setInstructor] = useState('')
   const [subtitles, setSubtitles] = useState('')
   const [error, setError] = useState(null)
-  const [currency,setCurrency]=useState('')
+  const [currency, setCurrency] = useState('EGP')
 
   const sendRequest = async () => {
     const res = await axios
@@ -93,6 +93,18 @@ const AddCourse = () => {
         onChange={(e) => setPrice(e.target.value)} 
         value={price}
       />
+      <select
+        className="custom-select"
+        value={currency}
+        onChange={(e) => {
+          const selectedCurr = e.target.value;
+          setCurrency(selectedCurr );
+        }}
+      >
+        <option value="Egypt">EGP</option>
+        <option value="USA">DOLLAR</option>
+        <option value="Europe">EUR</option>
+      </select>
 
       <label>Total Hours:</label>
       <input 
@@ -112,6 +124,8 @@ const AddCourse = () => {
 
           </select>
 
+          
+
    
 
 
@@ -128,13 +142,6 @@ const AddCourse = () => {
         onChange={(e) => setInstructor(e.target.value)} 
         value={instructor} 
       />
-
-      <label>Currency:</label>
-            <input 
-              type="text" 
-              onChange={(e) => setCurrency(e.target.value)} 
-              value={currency} 
-            />
       
      <div className="row">
        <div className="col-sm-12">

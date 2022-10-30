@@ -1,8 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from "react";
-import axios from "axios";
-import AllCourses2 from '../AllCourses2';
-import { Button, Typography } from '@mui/material';
+import { useState } from "react";
 
 
 import GetCoursesInstructor from './GetCoursesInstructor';

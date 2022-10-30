@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from "axios";
 
 const AddCorpTrainee = () => {
   const [firstName, setFirstName] = useState('')
@@ -10,32 +11,31 @@ const AddCorpTrainee = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    const corpTrainee = {firstName, lastName, userName,password,email}
-    
-    const response = await fetch('/admin/addCorpTrainee', {
-      method: 'POST',
-      body: JSON.stringify(corpTrainee),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const json = await response.json()
-
-    if (!response.ok) {
-      setError(json.error)
-    }
-    if (response.ok) {
+    sendRequest()
+      .then((data) => console.log(data))
       setError(null)
       setFirstName('')
       setLastname('')
       setUserName('')
       setPassword('')
       setEmail('')
-      console.log('new corpTrainee added:', json)
-    }
-
   }
+    const sendRequest = async () => {
+      const res = await axios
+        .post("http://localhost:2000/admin/addCorpTrainee", {
+          firstName: firstName,
+          lastName:lastName,
+          userName:userName,
+          password:password,
+          email:email
+        })
+        .catch((err) => console.log(err));
+      const data = await res.data;
+      return data;
+    };
+    
+
+  
 
   return (
     <form className="create" onSubmit={handleSubmit}> 
