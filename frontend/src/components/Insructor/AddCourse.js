@@ -4,6 +4,7 @@ import React from 'react'
 import { useEffect } from "react";
 import axios from "axios";
 
+
 const AddCourse = () => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
@@ -14,6 +15,7 @@ const AddCourse = () => {
   const [instructor, setInstructor] = useState('')
   const [subtitles, setSubtitles] = useState('')
   const [error, setError] = useState(null)
+  const [currency,setCurrency]=useState('')
 
   const sendRequest = async () => {
     const res = await axios
@@ -27,10 +29,11 @@ const AddCourse = () => {
     
   }, []);
   const handleChange = (event) =>{
-    console.log(event.target.value);
+    //console.log(event.target.value);
     setResultingSubject(event.target.value);
 }
   const sendRequest2 = async () => {
+    //console.log(inputList)
     const res = await axios
       .post("http://localhost:2000/instructor/addCourse", {
         title: title,
@@ -39,7 +42,8 @@ const AddCourse = () => {
         subject:resultingSubject,
         description:description,
         instructor:instructor,
-        subtitles:subtitles
+        subtitles:inputList,
+        currency:currency
       })
       .catch((err) => console.log(err));
     const data = await res.data;
@@ -50,6 +54,27 @@ const AddCourse = () => {
     sendRequest2();
      
   };
+
+
+  const [inputList, setinputList]= useState([{title:'', totalHours:''}]);
+
+  const handleinputchange=(e, index)=>{
+    const {name, value}= e.target;
+    const list= [...inputList];
+    list[index][name]= value;
+    setinputList(list);
+
+  }
+ 
+  const handleremove= index=>{
+    const list=[...inputList];
+    list.splice(index,1);
+    setinputList(list);
+  }
+
+  const handleaddclick=()=>{ 
+    setinputList([...inputList, { title:'', totalHours:''}]);
+  }
 
   return (
     <form className="create" onSubmit={handleSubmit}> 
@@ -97,18 +122,53 @@ const AddCourse = () => {
         value={description} 
       />
 
-      <label>Instructor's username:</label>
+      <label>Instructor's ID:</label>
       <input 
         type="text" 
         onChange={(e) => setInstructor(e.target.value)} 
         value={instructor} 
       />
-      <label>Course subtitles:</label>
-      <input 
-        type="text" 
-        onChange={(e) => setSubtitles(e.target.value)} 
-        value={subtitles} placeholder="please enter subtitles seperated by a comma"
-      />
+
+      <label>Currency:</label>
+            <input 
+              type="text" 
+              onChange={(e) => setCurrency(e.target.value)} 
+              value={currency} 
+            />
+      
+     <div className="row">
+       <div className="col-sm-12">
+         <h5 className="mt-3 mb-4 fw-bold">Add Subtitles : </h5>
+           
+            { 
+            inputList.map( (x,i)=>{
+              return(
+              <div className="row mb-3">
+                 <div class="form-group col-md-4">
+                 <label >Subtitle Name:</label>
+                  <input type="text"  name="title" class="form-control"  placeholder="Enter Subtitle" onChange={ e=>handleinputchange(e,i)} />
+               </div>
+               <div class="form-group col-md-4">
+               <label >Total Hours :</label>
+                  <input type="Number"  name="totalHours" class="form-control"   placeholder="Enter TotalHours" onChange={ e=>handleinputchange(e,i) }/>
+               </div>
+               <div class="form-group col-md-2 mt-4">
+               {
+                  inputList.length!==1 &&
+                  <button  className="btn btn-danger mx-1" onClick={()=> handleremove(i)}>Remove</button>
+               }
+               { inputList.length-1===i &&
+               <button  className="btn btn-success" onClick={ handleaddclick}>Add More</button>
+               }
+               </div>
+            </div>
+              );
+             } )} 
+
+               
+       </div>
+     </div>
+    
 
       <button>Add Course</button>
       {error && <div className="error">{error}</div>}

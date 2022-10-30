@@ -35,27 +35,23 @@ const AllCourses = (chooseC) => {
   useEffect(() => {
     sendRequest().then((data) => setCourses(data.courses));
     if(chooseCopr.chooseC=='CorpTrainee'){
-      console.log("ok")
       setShowText(false);
     }
     
   }, []);
   const handleSubmitPrice = (e) => {
-    console.log(price)
     e.preventDefault();
     setClearFilter(true);
     setChoose('Price')
 
   };
   const handleSubmitRating = (e) => {
-    console.log(rating);
     e.preventDefault();
     setClearFilter(true);
     setChoose('Rating')
 
   };
   const handleSubmitSearch = (e) => {
-    console.log(search);
     e.preventDefault();
     setClearFilter(true);
     setChoose('Search')
@@ -80,7 +76,6 @@ const AllCourses = (chooseC) => {
     
   }, []);
   const handleChange = (event) =>{
-    console.log(event.target.value);
     setFilterResult(event.target.value);
    // setToggled(false);
     setClearFilter(true);
@@ -189,7 +184,7 @@ const Text = () =><div>
   <p>{filterResult}</p>
   <div>
       {choose==="Subject" && <FilterSubject
-      subject={filterResult}/>  }
+      subject={filterResult} show={chooseCopr.chooseC}/>  }
   </div> 
   <div>
   {choose==="Price" && <FilterPrice
@@ -197,16 +192,17 @@ const Text = () =><div>
   </div>
   <div>
   {choose==="Rating" && <FilterRating
-      rating={rating}/>  }
+      rating={rating} show={chooseCopr.chooseC}/>  }
   </div>
   <div>
   {choose==="Search" && <SearchCourse
-      search={search}/>  }
+      search={search} show={chooseCopr.chooseC}/>  }
   </div>
   <div>
     {choose==="Both" && <FilterBoth
     subject={subject2}
-    rating={rating2}/>}
+    rating={rating2}
+    show={chooseCopr.chooseC}/>}
   </div>
   {filter&&<Button onClick={clearFilter}>Clear Filter</Button>}   
   </React.Fragment>

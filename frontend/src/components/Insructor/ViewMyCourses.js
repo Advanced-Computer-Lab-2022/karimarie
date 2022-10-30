@@ -26,7 +26,6 @@ const ViewMyCourses = () => {
         
     //   }, []);
       const HandleSubmit = (e) => {
-        console.log(instructor);
         e.preventDefault();
         setChoose('getCourses');
         

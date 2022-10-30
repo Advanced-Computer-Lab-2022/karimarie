@@ -46,7 +46,7 @@ const instLogin=async(req,res,next)=>{
 //       return res.status(404).json({message:error.message})}
 // }
 const createCourse=async (req,res,next)=>{     
-   const{title,price,instructor, totalHours, subject, description,subtitles}=req.body
+   const{title,price,instructor, totalHours, subject, description,subtitles,currency}=req.body
    let course;
    try{
        course =new courseTable({
@@ -56,6 +56,7 @@ const createCourse=async (req,res,next)=>{
            subject:subject, 
            description:description, 
            instructor:instructor,
+           currency:currency,
            subtitles:subtitles
        })
        await course.save();
@@ -81,9 +82,10 @@ const createCourse=async (req,res,next)=>{
 
 const getMyCourses=async (req,res) => {
    let myCourses={};
-   if(req.params.instructor){
-       myCourses= {instructor: req.params.instructor} 
+   if(req.params.id){
+       myCourses= {instructor: req.params.id} 
    }
+   console.log(myCourses)
    const resultList= await courseTable.find(myCourses).populate('instructor');
    if(!resultList){
        return res.status(404).json({error :'Invalid Input'});
@@ -114,15 +116,14 @@ const filterMyCPrice =async (req,res) => {
 }
 
 const searchInstCourse = async (req, res) =>{
-   //console.log("dakhalt");
-   const resultListTitle= await courseTable.find({instructor: req.params.instructor,title: req.params.search});
-   const resultListSubject= await courseTable.find({instructor: req.params.instructor,subject: req.params.search});
+   const resultListTitle= await courseTable.find({instructor: req.params.instructor, title: { $regex: req.params.search , $options:'i'}});
+   const resultListSubject= await courseTable.find({instructor: req.params.instructor, subject: { $regex: req.params.search , $options:'i'}});
    if(!resultListTitle || !resultListSubject){
        return res.status(404).json({error :'Invalid Input'});
    }
    let searchResult=[...resultListTitle, ...resultListSubject];
    res.send(searchResult);
-   //console.log(searchResult);
+   
 
 }
 

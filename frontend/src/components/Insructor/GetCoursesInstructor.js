@@ -11,7 +11,6 @@ const GetCoursesInstructor = ({instructorID}) => {
           .get(`http://localhost:2000/instructor/instCourses/${instructorID}`)
           .catch((err) => console.log(err));
           const data = await res.data;
-            console.log(data);
           return data;
       };
       useEffect(() => {

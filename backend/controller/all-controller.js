@@ -102,11 +102,11 @@ const searchCourse = async (req, res) => {
           course.instructor.userName.includes(req.params.key)
         ) || [];
 
-      let keyCourses = await courseTable.find({
+        let keyCourses = await courseTable.find({
         $or: [
-          { title: { $regex: req.params.key } },
+          { title: { $regex: req.params.key,$options:'i' } },
           {
-            subject: { $regex: req.params.key },
+            subject: { $regex: req.params.key ,$options:'i'},
           },
         ],
       });

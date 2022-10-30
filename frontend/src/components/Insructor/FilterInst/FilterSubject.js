@@ -12,7 +12,6 @@ const FilterSubject = ({subject,instructor}) => {
           .get(`http://localhost:2000/instructor/filterMySub/${instructor}/${subject}`)
           .catch((err) => console.log(err));
           const data = await res.data;
-          console.log(data);
           return data;
       };
       useEffect(() => {

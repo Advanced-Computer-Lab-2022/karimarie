@@ -4,7 +4,7 @@ import React from 'react'
 import { useEffect } from "react";
 import axios from "axios";
 import AllCourses2 from '../AllCourses2';
-const FilterBoth = ({subject,rating}) => {
+const FilterBoth = ({subject,rating,show}) => {
     const [courses, setCourses] = useState([]);
     const sendRequest = async () => {
    console.log({subject})
@@ -17,12 +17,11 @@ const FilterBoth = ({subject,rating}) => {
       };
       useEffect(() => {
         sendRequest().then((data) => setCourses(data.resultList));
-        console.log("hi",courses)
         
       }, []);
   return (
     <React.Fragment>
-       {courses &&
+       {show!=='CorpTrainee' && courses &&
       courses.map((courses) => (
         <AllCourses2
           title={courses.title}
@@ -32,6 +31,16 @@ const FilterBoth = ({subject,rating}) => {
         />
         
       ))}
+
+    {show==='CorpTrainee' && courses &&
+        courses.map((courses) => (
+            <AllCourses2
+            title={courses.title}
+            totalHours={courses.totalHours}
+            rating={courses.rating}
+            />
+            
+        ))}
     </React.Fragment>
   )
 }

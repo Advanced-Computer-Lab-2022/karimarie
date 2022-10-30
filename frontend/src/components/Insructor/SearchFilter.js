@@ -34,7 +34,6 @@ const SearchFilter = () => {
     
   // }, []);
   const handleSubmitPrice = (e) => {
-    console.log(instructor)
     e.preventDefault();
     setClearFilter(true);
     setChoose('Price')
@@ -42,8 +41,6 @@ const SearchFilter = () => {
   };
   
   const handleSubmitSearch = (e) => {
-    console.log(search);
-    console.log(instructor1);
     e.preventDefault();
     setClearFilter(true);
     setChoose('Search')
@@ -64,10 +61,9 @@ const SearchFilter = () => {
     
   }, []);
   const handleChange = (event) =>{
-    console.log(event.target.value);
     setFilterResult(event.target.value);
    // setToggled(false);
-    setClearFilter(true);
+    //setClearFilter(true);
     
     
    

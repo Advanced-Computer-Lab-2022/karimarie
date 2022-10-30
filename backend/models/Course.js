@@ -36,10 +36,21 @@ const coursesSchema = new Schema({
     type: String,
     required: isMyFieldRequired,
   },
-  subtitles: {
-    type: String,
-    required: isMyFieldRequired,
-  },
+  subtitles: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      Video: {
+        type: String,
+      },
+      totalHours: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
   numStudents: {
     type: Number,
     default: 0,

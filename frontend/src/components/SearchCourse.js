@@ -4,7 +4,7 @@ import React from 'react'
 import { useEffect } from "react";
 import axios from "axios";
 import AllCourses2 from './AllCourses2';
-const SearchCourse = ({search}) => {
+const SearchCourse = ({search,show}) => {
     const [courses, setCourses] = useState([]);
         const sendRequest = async () => {
             const res = await axios
@@ -15,21 +15,31 @@ const SearchCourse = ({search}) => {
           };
         useEffect(() => {
             sendRequest().then((data) => setCourses(data));
-            console.log(courses)
           }, []);
       
    
    
   return (
     <React.Fragment>
-       {courses &&
+       { show!=='CorpTrainee' && courses &&
       courses.map((courses) => (
         <AllCourses2
           title={courses.title}
           price={courses.price}
           totalHours={courses.totalHours}
+          rating={courses.rating}
         />
       ))}
+
+      { show==='CorpTrainee' && courses &&
+            courses.map((courses) => (
+              <AllCourses2
+                title={courses.title}
+                totalHours={courses.totalHours}
+                rating={courses.rating}
+              />
+            ))}
+      
     </React.Fragment>
    
   )

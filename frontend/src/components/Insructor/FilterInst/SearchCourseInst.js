@@ -12,13 +12,10 @@ const SearchCourseInst = ({instructor,search}) => {
             .get(`http://localhost:2000/instructor/searchTitle/${instructor}/${search}`)
             .catch((err) => console.log(err));
             const data = await res.data;
-            console.log(data)
-            console.log(instructor+"hhhhhhh"+search)
             return data;
           };
         useEffect(() => {
             sendRequest().then((data) => setCourses(data));
-           // console.log(courses)
           }, []);
       
    

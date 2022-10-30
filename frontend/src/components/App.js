@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {BrowserRouter} from 'react-router-dom';
 import {Route,Routes} from 'react-router-dom';
-import Header from './Header'
 import AllCourses from './AllCourses'
 import Choose from './Choose';
 import AddInstructor from './Admin/AddInstructor';
@@ -10,6 +9,7 @@ import InstructorHome from '../pages/InstructorHome';
 import CorpTraineeHome from '../pages/CorpTraineeHome';
 import FilterPrice from './Filter/FilterPrice';
 import CourseDetails from '../pages/CourseDetails';
+
 const App = () => {
   return <React.Fragment>
     {/* <header>
@@ -17,12 +17,13 @@ const App = () => {
     </header> */}
     <main>
       <Routes>
-        <Route path="/" element={<Choose/>}/>
+        <Route path="/" element={<Fragment> <Choose/> <AllCourses/></Fragment>}/>
         <Route path="/Home" element={<AllCourses/>}/>
         <Route path="/AdminHome" element={<AdminHome/>}/>
        // <Route path="/InstructorHome" element={<InstructorHome/>}/>
         <Route path="/CorpTraineeHome" element={<CorpTraineeHome/>}/>
         <Route path="/myCourse/:id" element={<CourseDetails/>} />
+        <Route path="/course/:id" element={<CourseDetails/>} />
       </Routes>
     </main>
   </React.Fragment>
