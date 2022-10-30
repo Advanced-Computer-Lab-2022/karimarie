@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
   const [showText, setShowText] = useState(true);
   const [showTitleOnly,setShowTitleOnly]=useState(false);//ana mesh instructor 3ayz yeshoof 7agto bas
-  
+  const [currencyP,setCurrencyP]=useState('')
   const country=localStorage.getItem("country");
   const [newPrice,setNewPrice]= useState('')
   useEffect(() => {
@@ -18,7 +18,7 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
   
   const navigate = useNavigate();
   const [idF,setCourseId]=useState()
-  const Price = () => <div>price : {price}</div>;
+  const Price = () => <div>price : {newPrice}{currencyP}</div>;
   const Title=()=> <div> Title:{title}</div>
   const TotalHours=()=> <div> Total Hours:{totalHours}</div>
   const Rating=()=> <div>Rating:{rating}</div>
@@ -27,14 +27,17 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
             if(currency==="Egypt"){
             const x= price
             setNewPrice(x)
+            setCurrencyP('EGP')
           }
           if(currency==="Europe"){
             const x= price*23
             setNewPrice(x)
+            setCurrencyP('EURO')
           }
           if(currency==="USA"){
             const x= price*20
             setNewPrice(x)
+            setCurrencyP('DOLLAR')
           }
         }
 
@@ -42,28 +45,35 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
           if(currency==="Egypt"){
           const x= price*0.043
           setNewPrice(x)
+          setCurrencyP('EGP')
         }
         if(currency==="Europe"){
           const x= price
           setNewPrice(x)
+          setCurrencyP('EURO')
         }
         if(currency==="USA"){
           const x= price
           setNewPrice(x)
+          setCurrencyP('DOLLAR')
+
         }
       }
       if (country==="USA"){
         if(currency==="Egypt"){
         const x= price*0.043
         setNewPrice(x)
+        setCurrencyP('EGP')
       }
       if(currency==="Europe"){
         const x= price
         setNewPrice(x)
+        setCurrencyP('EURO')
       }
       if(currency==="USA"){
         const x= price
         setNewPrice(x)
+        setCurrencyP('DOLLAR')
       }
       }
 
@@ -97,9 +107,6 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
         </Typography>
         <Typography variant="body2" color="text.secondary">
         {showTitleOnly ? null:  <TotalHours />}  
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-         {newPrice}
         </Typography>
 
        

@@ -46,7 +46,7 @@ function CourseDetails() {
              Course Subject : {Course.subject}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Course Price  {Course.price}
+            Course Price : {Course.price} {Course.currency}
             </Typography>
             {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {Course.subtitles}
