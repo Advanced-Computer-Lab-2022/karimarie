@@ -27,6 +27,7 @@ const FilterSubject = ({subject,show}) => {
           title={courses.title}
           totalHours={courses.totalHours}
           rating={courses.rating}
+          currency={courses.currency}
         />
       ))}
       {show!=='CorpTrainee' && courses &&
@@ -36,6 +37,7 @@ const FilterSubject = ({subject,show}) => {
           price={courses.price}
           totalHours={courses.totalHours}
           rating={courses.rating}
+          currency={courses.currency}
         />
         
       ))}

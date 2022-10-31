@@ -15,24 +15,26 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
       setShowTitleOnly(true); //ana instructor 3ayz yeshoof only his titles
     }
   }, []);
-  
-  const navigate = useNavigate();
-  const [idF,setCourseId]=useState()
   const Price = () => <div>price : {newPrice} {currencyP}</div>;
   const Title=()=> <div> Title:{title}</div>
   const TotalHours=()=> <div> Total Hours:{totalHours}</div>
   const Rating=()=> <div>Rating:{rating}</div>
+
+  const navigate = useNavigate();
+  const [idF,setCourseId]=useState()
         useEffect(()=>{
           if (country==="Egypt"){
-            if(currency==="Egypt"){
-            const x= price
-            setNewPrice(x)
+         
+            if(currency==="EGP"){
+              console.log("aaaa")
+            setNewPrice(price)
+            console.log("d",price)
           }
-          if(currency==="Europe"){
+          if(currency==="EUR"){
             const x= price*23
             setNewPrice(x)
           }
-          if(currency==="USA"){
+          if(currency==="USD"){
             const x= price*20
             setNewPrice(x)
           }
@@ -40,30 +42,30 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
         }
 
         if (country==="Europe"){
-          if(currency==="Egypt"){
+          if(currency==="EGP"){
           const x= price*0.043
           setNewPrice(x)
         }
-        if(currency==="Europe"){
+        if(currency==="EUR"){
           const x= price
           setNewPrice(x)
         }
-        if(currency==="USA"){
+        if(currency==="USD"){
           const x= price
           setNewPrice(x)
         }
         setCurrencyP('EURO')
       }
       if (country==="USA"){
-        if(currency==="Egypt"){
+        if(currency==="EGP"){
         const x= price*0.043
         setNewPrice(x)
       }
-      if(currency==="Europe"){
+      if(currency==="EUR"){
         const x= price
         setNewPrice(x)
       }
-      if(currency==="USA"){
+      if(currency==="USD"){
         const x= price
         setNewPrice(x)
       }
@@ -71,6 +73,7 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
       }
 
       }, [newPrice])
+    
   return (
     <div>
        

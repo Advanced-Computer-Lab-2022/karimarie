@@ -31,6 +31,7 @@ const FilterRating = ({rating,show}) => {
           price={courses.price}
           totalHours={courses.totalHours}
           rating={courses.rating}
+          currency={courses.currency}
         />
       ))}
 
@@ -40,6 +41,7 @@ const FilterRating = ({rating,show}) => {
                 title={courses.title}
                 totalHours={courses.totalHours}
                 rating={courses.rating}
+                currency={courses.currency}
               />
               
             ))}
