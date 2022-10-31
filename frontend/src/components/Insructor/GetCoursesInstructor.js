@@ -22,7 +22,13 @@ const GetCoursesInstructor = ({instructorID}) => {
         {courses &&
           courses.map((courses) => (
             <AllCourses2
-              title={courses.title}
+            title={courses.title}
+            id={courses._id}
+            price={courses.price}
+            rating={courses.rating}
+            currency={courses.currency}
+            type="Instructor"
+            totalHours={courses.totalHours}
             />
           ))}
       </div>

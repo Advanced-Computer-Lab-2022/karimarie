@@ -16,13 +16,14 @@ const FilterSubject = ({subject,instructor}) => {
       };
       useEffect(() => {
         sendRequest().then((data) => setCourses(data));
-        
+        console.log(courses.title)
       }, []);
   return (
     <React.Fragment>
           {courses &&
       courses.map((courses) => (
         <AllCourses2
+          id={courses._id}
           title={courses.title}
           price={courses.price}
           totalHours={courses.totalHours}

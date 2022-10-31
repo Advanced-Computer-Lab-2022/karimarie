@@ -195,6 +195,9 @@ const clearFilter=()=>{
           title={courses.title}
           totalHours={courses.totalHours}
           rating={courses.rating}
+          price={courses.price}
+          currency={courses.currency}
+          type="CorpTrainee"
           
           
         />

@@ -25,6 +25,7 @@ const FilterPrice = ({instructor,price,currencyFilter}) => {
        {courses &&
       courses.map((courses) => (
         <AllCourses2
+          id={courses._id}
           title={courses.title}
           price={courses.price}
           totalHours={courses.totalHours}

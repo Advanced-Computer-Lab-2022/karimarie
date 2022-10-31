@@ -25,11 +25,13 @@ const SearchCourseInst = ({instructor,search}) => {
        {courses &&
       courses.map((courses) => (
         <AllCourses2
+          id={courses._id}
           title={courses.title}
           price={courses.price}
           totalHours={courses.totalHours}
           rating={courses.rating}
           currency={courses.currency}
+          type="Instructor"
         />
       ))}
     </React.Fragment>

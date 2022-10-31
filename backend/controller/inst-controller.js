@@ -57,7 +57,8 @@ const createCourse=async (req,res,next)=>{
            description:description, 
            instructor:instructor,
            currency:currency,
-           subtitles:subtitles
+           subtitles:subtitles,
+           rating : "2"
        })
        await course.save();
       //  const x=course.id;

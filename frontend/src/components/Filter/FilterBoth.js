@@ -24,6 +24,7 @@ const FilterBoth = ({subject,rating,show}) => {
        {show!=='CorpTrainee' && courses &&
       courses.map((courses) => (
         <AllCourses2
+          id={courses._id}
           title={courses.title}
           price={courses.price}
           totalHours={courses.totalHours}
@@ -36,9 +37,13 @@ const FilterBoth = ({subject,rating,show}) => {
     {show==='CorpTrainee' && courses &&
         courses.map((courses) => (
             <AllCourses2
+            id={courses._id}
             title={courses.title}
             totalHours={courses.totalHours}
             rating={courses.rating}
+            price={courses.title}
+            currency={courses.currency}
+            type="CorpTrainee"
             />
             
         ))}

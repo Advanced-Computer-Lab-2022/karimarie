@@ -1,18 +1,18 @@
 import React, { useState,useEffect } from 'react'
 import { Avatar,Box,Card,CardContent,CardHeader,CardMedia,IconButton,Typography, Button,CardActions } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
+const AllCourses2 = ({id,title,price,totalHours,rating,currency,type}) => {
   const [showText, setShowText] = useState(true);
   const [showTitleOnly,setShowTitleOnly]=useState(false);//ana mesh instructor 3ayz yeshoof 7agto bas
   const [currencyP,setCurrencyP]=useState('')
   const country=localStorage.getItem("country");
   const [newPrice,setNewPrice]= useState('')
   useEffect(() => {
-    if(!price){
-      setShowText(false); 
-     }
-     if(!price&&!totalHours&&!rating&&!currency){
+     if(type=='Instructor'){
       setShowTitleOnly(true); //ana instructor 3ayz yeshoof only his titles
+    }
+    if(type=="CorpTrainee"){
+      setShowText(false); 
     }
   }, []);
   const navigate = useNavigate();
@@ -68,8 +68,8 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
       }
       setCurrencyP('USD')
       }
-
       },[newPrice])
+      
   return (
     <div>
        
