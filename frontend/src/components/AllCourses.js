@@ -13,7 +13,7 @@ const AllCourses = (chooseC) => {
   const [filter, setClearFilter] = useState(false);
   const [subjectList, setSubjectList] = useState([]);//list of subjects
   const [filterResult,setFilterResult]=useState();
-  const [price,setPrice]=useState();
+  const [price,setPrice]=useState('');
   const [rating,setRating]=useState();
   const [search,setSearch]=useState();
   const [temp,setTemp]=useState();
@@ -93,15 +93,7 @@ const clearFilter=()=>{
   setClearFilter(false);
   setChoose('All')
 };
-const Text = () =>
-<form className="create" onSubmit={handleSubmitPrice} > 
-      <h3>Filter by Price</h3>
-      <input 
-        type="Number" 
-        onChange={(e) => setPrice(e.target.value)} 
-        value={price}
-      /> <button >Filter</button>
-  </form>
+
 
   
   return (
@@ -116,7 +108,16 @@ const Text = () =>
 
           </select> 
           
-          {showText ? <Text/> : null}
+          {showText ? <form className="create" onSubmit={handleSubmitPrice} > 
+      <h3>Filter by Price</h3>
+      <input 
+        type="Number" 
+        name='price'
+        value={price}
+        onChange={(e) => setPrice(e.target.value)} 
+      />
+       <button >Filter</button>
+  </form> : null}
 
           
 
