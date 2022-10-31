@@ -101,9 +101,9 @@ const AddCourse = () => {
           setCurrency(selectedCurr );
         }}
       >
-        <option value="Egypt">EGP</option>
-        <option value="USA">DOLLAR</option>
-        <option value="Europe">EUR</option>
+        <option value="EGP">EGP</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
       </select>
 
       <label>Total Hours:</label>

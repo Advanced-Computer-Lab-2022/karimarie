@@ -36,6 +36,7 @@ const FilterSubject = ({subject,show}) => {
           price={courses.price}
           totalHours={courses.totalHours}
           rating={courses.rating}
+          currency={courses.currency}
         />
         
       ))}

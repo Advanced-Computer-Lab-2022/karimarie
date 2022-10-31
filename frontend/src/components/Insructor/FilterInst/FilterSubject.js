@@ -27,6 +27,7 @@ const FilterSubject = ({subject,instructor}) => {
           price={courses.price}
           totalHours={courses.totalHours}
           rating={courses.rating}
+          currency={courses.currency}
         />
       ))}
       <p>hey</p>

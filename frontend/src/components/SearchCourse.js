@@ -27,6 +27,7 @@ const SearchCourse = ({search,show}) => {
           price={courses.price}
           totalHours={courses.totalHours}
           rating={courses.rating}
+          currency={courses.currency}
         />
       ))}
 

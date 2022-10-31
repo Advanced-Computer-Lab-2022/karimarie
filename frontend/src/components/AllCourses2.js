@@ -15,7 +15,6 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
       setShowTitleOnly(true); //ana instructor 3ayz yeshoof only his titles
     }
   }, []);
-  
   const navigate = useNavigate();
   const [idF,setCourseId]=useState()
   const Price = () => <div>price : {newPrice} {currencyP}</div>;
@@ -24,53 +23,53 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
   const Rating=()=> <div>Rating:{rating}</div>
         useEffect(()=>{
           if (country==="Egypt"){
-            if(currency==="Egypt"){
-            const x= price
-            setNewPrice(x)
+            if(currency==="EGP"){
+            //const x= price
+            setNewPrice(price)
           }
-          if(currency==="Europe"){
+          if(currency==="EUR"){
             const x= price*23
             setNewPrice(x)
           }
-          if(currency==="USA"){
+          if(currency==="USD"){
             const x= price*20
             setNewPrice(x)
           }
           setCurrencyP('EGP')
         }
 
-        if (country==="Europe"){
-          if(currency==="Egypt"){
+        else if (country==="Europe"){
+          if(currency==="EGP"){
           const x= price*0.043
           setNewPrice(x)
         }
-        if(currency==="Europe"){
+        if(currency==="EUR"){
           const x= price
           setNewPrice(x)
         }
-        if(currency==="USA"){
+        if(currency==="USD"){
           const x= price
           setNewPrice(x)
         }
-        setCurrencyP('EURO')
+        setCurrencyP('EUR')
       }
-      if (country==="USA"){
-        if(currency==="Egypt"){
+      else if (country==="USA"){
+        if(currency==="EGP"){
         const x= price*0.043
         setNewPrice(x)
       }
-      if(currency==="Europe"){
+      if(currency==="EUR"){
         const x= price
         setNewPrice(x)
       }
-      if(currency==="USA"){
+      if(currency==="USD"){
         const x= price
         setNewPrice(x)
       }
-      setCurrencyP('DOLLAR')
+      setCurrencyP('USD')
       }
 
-      }, [newPrice])
+      },[newPrice])
   return (
     <div>
        

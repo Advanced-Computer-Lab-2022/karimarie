@@ -28,6 +28,7 @@ const FilterPrice = ({instructor,price}) => {
           price={courses.price}
           totalHours={courses.totalHours}
           rating={courses.rating}
+          currency={courses.currency}
         />
       ))}
     </React.Fragment>

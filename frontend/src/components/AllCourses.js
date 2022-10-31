@@ -43,6 +43,7 @@ const AllCourses = (chooseC) => {
     e.preventDefault();
     setClearFilter(true);
     setChoose('Price')
+    console.log(price)
 
   };
   const handleSubmitRating = (e) => {
@@ -92,7 +93,7 @@ const clearFilter=()=>{
   setClearFilter(false);
   setChoose('All')
 };
-const Text = () =><div>
+const Text = () =>
 <form className="create" onSubmit={handleSubmitPrice} > 
       <h3>Filter by Price</h3>
       <input 
@@ -101,7 +102,7 @@ const Text = () =><div>
         value={price}
       /> <button >Filter</button>
   </form>
-</div>
+
   
   return (
     <React.Fragment>
@@ -115,7 +116,7 @@ const Text = () =><div>
 
           </select> 
           
-          {showText ? <Text /> : null}
+          {showText ? <Text/> : null}
 
           
 
