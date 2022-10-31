@@ -21,6 +21,20 @@ const SearchFilter = () => {
   const [search,setSearch]=useState();
  
   const [choose,setChoose]=useState('');
+  const country=localStorage.getItem("country");
+  const [currencyFilter,setCurrencyFilter]= useState('')
+  useEffect(()=>{
+          if (country==="Egypt"){
+            setCurrencyFilter('EGP')
+        }
+        else if (country==="Europe"){
+            setCurrencyFilter('EUR')
+      }
+      else if (country==="USA"){
+            setCurrencyFilter('USD')
+      }
+      },[])
+
   // const sendRequest = async () => {
   //   const res = await axios
   //     .get("http://localhost:2000/instructor/instCourses/:id")
@@ -111,6 +125,7 @@ const handleSubmitSubject=(e)=>{
       <h3>Filter by Price</h3>
       <input 
         type="text" 
+        placeholder={`Enter Price in ${currencyFilter}`}
         onChange={(e) => setPrice(e.target.value)} 
         value={price}
       /> 
@@ -164,7 +179,7 @@ const handleSubmitSubject=(e)=>{
   </div> 
   <div>
   {choose==="Price" && <FilterPrice
-      price={price} instructor={instructor}/>  }
+      price={price} instructor={instructor} currencyFilter={currencyFilter}/>  }
   </div>
   
   <div>

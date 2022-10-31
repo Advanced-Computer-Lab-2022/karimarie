@@ -51,14 +51,43 @@ const getFilterSubject=async (req,res) => {
 const postFilterPrice=async (req,res) => {
   //console.log("aaaaaaaaa")
    let Pfilter={};
+   let currencyFilter=req.body.currency.currencyFilter;
+   let priceFilter=req.body.price.price;
    let priceList;
    if(req.body.price){
        Pfilter= {price: req.body.price}
    }
    try{
-    priceList= await courseTable.find({price: {$lte:req.body.price.price}}).populate('price');
-    console.log(priceList);
-    return res.status(200).json({priceList})
+    const egpCourses=await courseTable.find({currency:"EGP"})
+    const usdCourses=await courseTable.find({currency:"USD"})
+    const eurCourses=await courseTable.find({currency:"EUR"})
+    if(currencyFilter=="EGP"){
+      usdCourses.map((x)=>{
+        x.price=x.price*23
+        x.currency=currencyFilter
+      })
+      eurCourses.map((x)=>{
+        x.price=x.price*23
+        x.currency=currencyFilter
+      })
+    }
+    if(currencyFilter=="USD"){
+      egpCourses.map((x)=>{
+        x.price=x.price*0.043
+        x.currency=currencyFilter
+      })
+    }
+    if(currencyFilter=="EUR"){
+      egpCourses.map((x)=>{
+        x.price=x.price*0.043
+        x.currency=currencyFilter
+      })
+    }
+    let searchResult=[...egpCourses, ...eurCourses,...usdCourses];
+    console.log(searchResult)
+     priceList = searchResult.filter(function (el){
+      return el.price <=priceFilter });
+      return res.status(200).json({ priceList });
    }
    catch(err){ res.status(404).json({err: err.message})}
 }

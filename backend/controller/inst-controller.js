@@ -103,16 +103,42 @@ const filterMyCSubject =async (req,res) => {
    }
    res.send(resultList);
 }
-
 const filterMyCPrice =async (req,res) => {
    //console.log("hiuuuuuu")
-   const resultList= await courseTable.find({instructor: req.params.instructor,price: {$lte:req.params.price}});
-   
-   if(!resultList){
-       return res.status(404).json({error :'Invalid Input'});
+   let currencyFilter=req.params.currencyFilter;
+   let priceFilter=req.params.price;
+   try{
+    const egpCourses=await courseTable.find({instructor: req.params.instructor, currency:"EGP"})
+    const usdCourses=await courseTable.find({instructor: req.params.instructor,currency:"USD"})
+    const eurCourses=await courseTable.find({instructor: req.params.instructor,currency:"EUR"})
+    if(currencyFilter=="EGP"){
+      usdCourses.map((x)=>{
+        x.price=x.price*23
+        x.currency=currencyFilter
+      })
+      eurCourses.map((x)=>{
+        x.price=x.price*23
+        x.currency=currencyFilter
+      })
+    }
+    if(currencyFilter=="USD"){
+      egpCourses.map((x)=>{
+        x.price=x.price*0.043
+        x.currency=currencyFilter
+      })
+    }
+    if(currencyFilter=="EUR"){
+      egpCourses.map((x)=>{
+        x.price=x.price*0.043
+        x.currency=currencyFilter
+      })
+    }
+    let searchResult=[...egpCourses, ...eurCourses,...usdCourses];
+    var priceList = searchResult.filter(function (el){
+    return el.price <=priceFilter });
+    return res.status(200).json({ priceList });
    }
-   
-   res.send(resultList);
+   catch(err){ res.status(404).json({err: err.message})}
 }
 
 const searchInstCourse = async (req, res) =>{

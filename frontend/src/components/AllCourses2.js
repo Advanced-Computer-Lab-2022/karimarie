@@ -32,7 +32,7 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency}) => {
             setNewPrice(x)
           }
           if(currency==="USD"){
-            const x= price*20
+            const x= price*23
             setNewPrice(x)
           }
           setCurrencyP('EGP')

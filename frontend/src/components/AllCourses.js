@@ -23,6 +23,22 @@ const AllCourses = (chooseC) => {
   const [subject2,setSubject2]=useState();
   const[chooseCopr,setChooseC]=useState(chooseC)
   const [showText, setShowText] = useState(true);
+  
+  const country=localStorage.getItem("country");
+  const [currencyFilter,setCurrencyFilter]= useState('')
+  useEffect(()=>{
+          if (country==="Egypt"){
+            setCurrencyFilter('EGP')
+        }
+        else if (country==="Europe"){
+            setCurrencyFilter('EUR')
+      }
+      else if (country==="USA"){
+            setCurrencyFilter('USD')
+      }
+      },[])
+     
+
 
   const sendRequest = async () => {
     const res = await axios
@@ -43,7 +59,6 @@ const AllCourses = (chooseC) => {
     e.preventDefault();
     setClearFilter(true);
     setChoose('Price')
-    console.log(price)
 
   };
   const handleSubmitRating = (e) => {
@@ -114,6 +129,7 @@ const clearFilter=()=>{
         type="Number" 
         name='price'
         value={price}
+        placeholder={`Enter Price in ${currencyFilter}`}
         onChange={(e) => setPrice(e.target.value)} 
       />
        <button >Filter</button>
@@ -191,7 +207,7 @@ const clearFilter=()=>{
   </div> 
   <div>
   {choose==="Price" && <FilterPrice
-      price={price}/>  }
+      price={price} currencyFilter={currencyFilter}/>  }
   </div>
   <div>
   {choose==="Rating" && <FilterRating

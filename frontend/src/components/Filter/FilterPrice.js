@@ -4,12 +4,13 @@ import React from 'react'
 import { useEffect } from "react";
 import axios from "axios";
 import AllCourses2 from '../AllCourses2';
-const FilterPrice = ({price}) => {
+const FilterPrice = ({price,currencyFilter}) => {
     const [courses, setCourses] = useState([]);
         const sendRequest = async () => {
             const res = await axios
             .post("http://localhost:2000/filterP", {
-              price:{price}
+              price:{price},
+              currency:{currencyFilter}
             })
             .catch((err) => console.log(err));
             const data = await res.data;

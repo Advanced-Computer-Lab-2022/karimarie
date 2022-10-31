@@ -6,7 +6,7 @@ const {createCourse,getMyCourses,filterMyCPrice,filterMyCSubject,searchInstCours
 //instRouter.post("/search",searchCourse)
 instRouter.post("/addCourse",createCourse)
 instRouter.get('/instCourses/:id',getMyCourses);
-instRouter.get('/filterMyPrice/:instructor/:price',filterMyCPrice);
+instRouter.get('/filterMyPrice/:instructor/:price/:currencyFilter',filterMyCPrice);
 instRouter.get('/filterMySub/:instructor/:subject',filterMyCSubject);
 instRouter.get('/searchTitle/:instructor/:search',searchInstCourse);
 module.exports=instRouter;
