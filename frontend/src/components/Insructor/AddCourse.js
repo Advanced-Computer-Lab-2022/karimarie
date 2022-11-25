@@ -16,6 +16,7 @@ const AddCourse = () => {
   const [subtitles, setSubtitles] = useState('')
   const [error, setError] = useState(null)
   const [currency, setCurrency] = useState('EGP')
+  const [preview,setPreview]=useState('')
 
   const sendRequest = async () => {
     const res = await axios
@@ -43,7 +44,8 @@ const AddCourse = () => {
         description:description,
         instructor:instructor,
         subtitles:inputList,
-        currency:currency
+        currency:currency,
+        preview:preview
       })
       .catch((err) => console.log(err));
     const data = await res.data;
@@ -56,8 +58,7 @@ const AddCourse = () => {
   };
 
 
-  const [inputList, setinputList]= useState([{title:'', totalHours:''}]);
-
+  const [inputList, setinputList]= useState([{ title:'', Video:'',totalHours:'',shortDescrip:''}]);
   const handleinputchange=(e, index)=>{
     const {name, value}= e.target;
     const list= [...inputList];
@@ -73,7 +74,7 @@ const AddCourse = () => {
   }
 
   const handleaddclick=()=>{ 
-    setinputList([...inputList, { title:'', totalHours:''}]);
+    setinputList([...inputList, { title:'', Video:'',totalHours:'',shortDescrip:''}]);
   }
 
   return (
@@ -85,6 +86,13 @@ const AddCourse = () => {
         type="text" 
         onChange={(e) => setTitle(e.target.value)} 
         value={title}
+      />
+
+      <label>Preview:</label>
+        <input 
+        type="text" 
+        onChange={(e) => setPreview(e.target.value)} 
+        value={preview}
       />
 
       <label>Price:</label>
@@ -158,6 +166,14 @@ const AddCourse = () => {
                <div class="form-group col-md-4">
                <label >Total Hours :</label>
                   <input type="Number"  name="totalHours" class="form-control"   placeholder="Enter TotalHours" onChange={ e=>handleinputchange(e,i) }/>
+               </div>
+               <div class="form-group col-md-4">
+               <label >Video  :</label>
+                  <input type="text"  name="Video" class="form-control"   placeholder="Enter Video" onChange={ e=>handleinputchange(e,i) }/>
+               </div>
+               <div class="form-group col-md-4">
+               <label >Short Description  :</label>
+                  <input type="text"  name="shortDescrip" class="form-control"   placeholder="Enter shortDescrip" onChange={ e=>handleinputchange(e,i) }/>
                </div>
                <div class="form-group col-md-2 mt-4">
                {

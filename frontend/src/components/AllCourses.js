@@ -23,19 +23,24 @@ const AllCourses = (chooseC) => {
   const [subject2,setSubject2]=useState();
   const[chooseCopr,setChooseC]=useState(chooseC)
   const [showText, setShowText] = useState(true);
-  
-  const country=localStorage.getItem("country");
   const [currencyFilter,setCurrencyFilter]= useState('')
+
+  const country=localStorage.getItem("country");
+  const currencySelected=localStorage.getItem("currency")
+ 
   useEffect(()=>{
-          if (country==="Egypt"){
-            setCurrencyFilter('EGP')
-        }
-        else if (country==="Europe"){
-            setCurrencyFilter('EUR')
-      }
-      else if (country==="USA"){
-            setCurrencyFilter('USD')
-      }
+      //     if ((country.localeCompare('Egypt'))==0){
+      //       //console.log("ok")
+      //       setCurrencyFilter('EGP')
+      //   }
+      //   else if (country==="Europe"){
+      //       setCurrencyFilter('EUR')
+      // }
+      // else if (country==="USA"){
+      //       setCurrencyFilter('USD')
+      // }
+      setCurrencyFilter(currencySelected);
+      
       },[])
      
 

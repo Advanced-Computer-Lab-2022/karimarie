@@ -23,17 +23,17 @@ const SearchFilter = () => {
   const [choose,setChoose]=useState('');
   const country=localStorage.getItem("country");
   const [currencyFilter,setCurrencyFilter]= useState('')
-  useEffect(()=>{
-          if (country==="Egypt"){
-            setCurrencyFilter('EGP')
-        }
-        else if (country==="Europe"){
-            setCurrencyFilter('EUR')
-      }
-      else if (country==="USA"){
-            setCurrencyFilter('USD')
-      }
-      },[])
+  // useEffect(()=>{
+  //         if (country==="Egypt"){
+  //           setCurrencyFilter('EGP')
+  //       }
+  //       else if (country==="Europe"){
+  //           setCurrencyFilter('EUR')
+  //     }
+  //     else if (country==="USA"){
+  //           setCurrencyFilter('USD')
+  //     }
+  //     },[])
 
   // const sendRequest = async () => {
   //   const res = await axios

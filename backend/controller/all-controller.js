@@ -1,6 +1,10 @@
 const instTable=require("../models/Instructor");
 const courseTable=require("../models/Course");
 const subjectTable=require("../models/Subject")
+const instructorReviews=require("../models/instructorReviews")
+const traineeTable=require("../models/Trainee")
+const examTable=require("../models/Exam")
+const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 const getAllCourses = async (req, res) => {
   console.log("as")
     let courses;
@@ -48,46 +52,35 @@ const getFilterSubject=async (req,res) => {
   
 
 }
+
+
 const postFilterPrice=async (req,res) => {
-  //console.log("aaaaaaaaa")
-   let Pfilter={};
+ 
+  
+  let Pfilter={};
    let currencyFilter=req.body.currency.currencyFilter;
    let priceFilter=req.body.price.price;
-   let priceList;
+   
    if(req.body.price){
        Pfilter= {price: req.body.price}
    }
    try{
-    const egpCourses=await courseTable.find({currency:"EGP"})
-    const usdCourses=await courseTable.find({currency:"USD"})
-    const eurCourses=await courseTable.find({currency:"EUR"})
-    if(currencyFilter=="EGP"){
-      usdCourses.map((x)=>{
-        x.price=x.price*23
-        x.currency=currencyFilter
-      })
-      eurCourses.map((x)=>{
-        x.price=x.price*23
-        x.currency=currencyFilter
-      })
-    }
-    if(currencyFilter=="USD"){
-      egpCourses.map((x)=>{
-        x.price=x.price*0.043
-        x.currency=currencyFilter
-      })
-    }
-    if(currencyFilter=="EUR"){
-      egpCourses.map((x)=>{
-        x.price=x.price*0.043
-        x.currency=currencyFilter
-      })
-    }
-    let searchResult=[...egpCourses, ...eurCourses,...usdCourses];
-    console.log(searchResult)
-     priceList = searchResult.filter(function (el){
+    const courses= await courseTable.find();
+    await Promise.all(courses.map( async (course)=>{
+      const fromCurrency=course.currency
+      const toCurrency=currencyFilter
+      const base_URL='https://api.exchangerate.host/latest'
+      const res1= await axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then( res1=>res1.data);
+      const exchangeRate=res1.rates[toCurrency];
+      course.price=course.price*exchangeRate;
+      course.currency=currencyFilter;
+    }))
+
+      const priceList =  courses.filter(function (el){
       return el.price <=priceFilter });
       return res.status(200).json({ priceList });
+    
+     
    }
    catch(err){ res.status(404).json({err: err.message})}
 }
@@ -154,4 +147,123 @@ const filterRatingSubject=async (req,res) => {
   catch(err){  return res.status(404).json({error :err.message});}
 };
 
-  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject}
+const addInstructorReview = async (req, res) => {
+  const instructor = await instTable.findById(req.params.id);
+  let myreviews={};
+   if(req.params.id){
+       myreviews= {instructor: req.params.id} 
+
+   }
+  
+try{
+  let data = {
+      instructor: req.params.id,
+      rating: req.body.rating.rating,
+      description: req.body.description.description
+  }
+  const review = await instructorReviews.create(data)
+
+  const instructorReview= await instructorReviews.find(myreviews);
+  console.log(instructorReview);
+  console.log('hi')
+  const length= instructorReview.length
+  if(length!=0){
+  instructor.rating =
+  instructorReview.reduce((acc, item) => item.rating + acc, 0) /length
+  await instructor.save()
+  console.log(instructor.rating);
+  }
+  res.status(200).send(review)
+
+}
+catch(err){
+  console.log(err)
+  return res.status(404).json({message:err.message})
+}
+  
+
+}
+
+require('dotenv').config();
+const noString="http://localhost:3000/forgetpasswordAll"
+const sgMail=require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+function sendMailAll(){
+const msg= {
+  to: 'karimankamal15@gmail.com', // Change to your recipient
+  from: 'karimankamal15@gmail.com', // Change to your verified sender
+  subject: 'Password',
+  text: 'Follow this link for changing the password: http://localhost:3000/forgetpasswordAll',
+  
+}
+
+sgMail.send(msg)
+  .then((response) => {
+    console.log(response[0].headers)
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+}
+
+const changepasswordAll = async (req, res) => {
+  const id = req.body.id;
+  const password = req.body.password;
+  const idperson = await traineeTable.findById(id);
+  await res.status(200).json(idperson);
+  
+    await traineeTable.findByIdAndUpdate(
+      id,
+      {
+        password: password,
+      },
+      { new: true }
+    );
+    await res.status(200).json(idperson);
+  
+};
+  
+const getByIdCourseDiscount = async (req, res, next) => {
+  //console.log("s")
+ 
+  const id = req.params.id;
+  console.log(id)
+  let course;
+  try {
+    course = await courseTable.findById(id)
+    course.save
+    const expirationDate=new Date(course.expirationTime).getTime()
+    const currentdate=new Date().getTime()
+    console.log(expirationDate)
+    console.log(currentdate)
+    if(expirationDate<currentdate){
+      console.log("hi")
+      const { originalPrice } = await courseTable
+          .findOne({ _id: id })
+          .select("originalPrice")
+          .exec();
+      await courseTable.findByIdAndUpdate(
+        id,
+        {
+          expirationTime: "",
+           price: originalPrice
+        },
+        { new: true }
+      );
+    }
+    return res.status(200).json({ course });
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
+  }
+};
+const getExamSolution= async (req, res) => {
+  try {
+    //const courseId=req.params.courseId;
+    const exam = await examTable.find({CourseId: req.params.CourseId,QuizNumber: req.params.QuizNumber});
+    return res.status(200).json({ exam });
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
+  }
+}
+
+  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution}

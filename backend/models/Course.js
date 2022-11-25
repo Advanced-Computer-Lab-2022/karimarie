@@ -49,6 +49,9 @@ const coursesSchema = new Schema({
         type: Number,
         required: true,
       },
+      shortDescrip: {
+        type: String
+      },
     },
   ],
   numStudents: {
@@ -56,6 +59,25 @@ const coursesSchema = new Schema({
     default: 0,
     min: 0,
   },
+  rating:{
+    type: Number
+  },
+  numReviews:{
+    type:Number
+  },
+  discount: {
+    type: Number,
+  },
+  originalPrice: {
+    type: Number,
+  },
+
+  expirationTime: {
+    type: String,
+  },
+  preview:{
+    type:String
+  }
 });
 
 function isMyFieldRequired() {
