@@ -164,14 +164,11 @@ try{
   const review = await instructorReviews.create(data)
 
   const instructorReview= await instructorReviews.find(myreviews);
-  console.log(instructorReview);
-  console.log('hi')
   const length= instructorReview.length
   if(length!=0){
   instructor.rating =
   instructorReview.reduce((acc, item) => item.rating + acc, 0) /length
   await instructor.save()
-  console.log(instructor.rating);
   }
   res.status(200).send(review)
 
@@ -265,5 +262,27 @@ const getExamSolution= async (req, res) => {
     return res.status(404).json({ message: err.message });
   }
 }
+const login = async (req, res) => {
+  // TODO: Login the user
+  const username=req.body.name;
+  const password=req.body.password;
+  const user= await userModel.findOne({name : req.body.name})
+  const x= bcrypt.compare(password, user.password)
+      // if (error){
+      //   // handle error
+      //   return res.status(400).json({ error: error.message })
+      // }
+      if (x) {
+        // Send JWT
+        const token = createToken(user.name);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        return res.status(200).json({ msg: "Login success" })
 
-  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution}
+      } else {
+        // response is OutgoingMessage object that server response http request
+        return res.json({success: false, message: 'passwords do not match'});
+      }
+    ;
+}
+
+  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
