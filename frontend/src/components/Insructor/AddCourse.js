@@ -45,7 +45,8 @@ const AddCourse = () => {
         instructor:instructor,
         subtitles:inputList,
         currency:currency,
-        preview:preview
+        preview:preview,
+        originalPrice:price
       })
       .catch((err) => console.log(err));
     const data = await res.data;

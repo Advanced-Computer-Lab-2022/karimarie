@@ -259,7 +259,7 @@ const getByIdCourseDiscount = async (req, res, next) => {
 const getExamSolution= async (req, res) => {
   try {
     //const courseId=req.params.courseId;
-    const exam = await examTable.find({CourseId: req.params.CourseId,QuizNumber: req.params.QuizNumber});
+    const exam = await examTable.find({CourseId: req.params.CourseId});
     return res.status(200).json({ exam });
   } catch (err) {
     return res.status(404).json({ message: err.message });

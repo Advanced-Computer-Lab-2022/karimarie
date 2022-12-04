@@ -8,6 +8,7 @@ import ViewMyCourses from '../components/Insructor/ViewMyCourses';
 import ViewMyRatings from '../components/Insructor/ViewMyRatings';
 import EditProfile from '../components/Insructor/Editprofile'
 import ForgetInstructor from '../components/ForgetInstructor'
+import CreateExam from '../components/Insructor/CreateExam';
 
 const InstructorHome = () => {
     const [active,isActive]=useState("");
@@ -19,6 +20,7 @@ const InstructorHome = () => {
      <Box>
         <Tabs>
           <Tab label="Add Course" display="flex" sx={{marginLeft:'45px'}} onClick={()=>isActive("AddCourse")}/> 
+          <Tab label="Create Exam" display="flex" sx={{marginLeft:'45px'}} onClick={()=>isActive("CreateExam")}/>
           <Tab label="Filter/Search" display="flex" sx={{marginLeft:'45px'}} onClick={()=>isActive("Filter/Search")}/> 
           <Tab label="View My Courses" display="flex" sx={{marginLeft:'45px'}} onClick={()=>isActive("ViewMyCourses")}/> 
           <Tab label="View My Ratings/Reviews" display="flex" sx={{marginLeft:'45px'}} onClick={()=>isActive("ViewMyratings")}/> 
@@ -37,6 +39,7 @@ const InstructorHome = () => {
     {active==="ViewMyratings" && <ViewMyRatings/>}
     {active==="EditProfile" && <EditProfile/>}
     {active==="Forget" && <ForgetInstructor/>}
+    {active==="CreateExam" && <CreateExam/>}
 
     </React.Fragment>
 

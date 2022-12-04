@@ -13,6 +13,6 @@ const {getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filter
  allRouter.get("/sendMailAll",sendMailAll);
  allRouter.post("/changepasswordAll",changepasswordAll);
  allRouter.get("/getByidCoursedic/:id",getByIdCourseDiscount);
- allRouter.get('/getExamSol/:CourseId/:QuizNumber',getExamSolution);
+ allRouter.get('/getExamSol/:CourseId',getExamSolution);
 // allRouter.get("/home/:id",viewAcourse)
  module.exports=allRouter 

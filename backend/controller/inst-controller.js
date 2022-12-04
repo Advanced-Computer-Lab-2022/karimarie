@@ -61,7 +61,8 @@ const createCourse=async (req,res,next)=>{
           currency:currency,
           subtitles:subtitles,
           rating:rating,
-          preview:preview
+          preview:preview,
+          originalPrice:price
       })
       await course.save();
       return res.status(201).json({course:course})
@@ -238,7 +239,7 @@ sgMail.send(msg)
 }
 
 const createExam = async (req,res) =>{
-  console.log(req.body.Content.options)
+  console.log(req.body.Content)
   let exam;
   try{
      exam =new examTable({

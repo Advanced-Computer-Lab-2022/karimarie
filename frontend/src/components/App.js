@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/course/:id/:newPrice/:currencyP/:type" element={<CourseDetails/>} />
         <Route path="/forgetpasswordInstructor" element={<ForgetPasswordInstructor/>} />
         <Route path="/forgetpasswordAll" element={<ForgetPasswordAll/>} />
-        <Route path="/myExam/:CourseId/:QuizNumber" element={<McqQuiz/>} />
+        <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
 
       </Routes>
     </main>

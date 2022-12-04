@@ -34,7 +34,7 @@ sendRequest2().then((data) => setCountries(data))
     },[]);
     const [value,setValue]=useState('');
     const options=useMemo(()=> countryList().getData(),[])
-    // const options2=countries.map(country=>country.name)
+    
      
     //console.log(options)
     const ChangeHandler=(e)=>{
@@ -48,8 +48,8 @@ sendRequest2().then((data) => setCountries(data))
     const navigate = useNavigate();
   
     const setC=(newTxt,x1)=>{
-      // console.log(x1[0])
-      // console.log(newTxt[0])
+      console.log(x1[0])
+      console.log(newTxt[0])
    localStorage.setItem("country",newTxt[0]);
 
    localStorage.setItem("currency",x1[0])

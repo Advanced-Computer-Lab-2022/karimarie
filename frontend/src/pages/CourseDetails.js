@@ -6,6 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Subtitles from '../components/Subtitles';
 
 function CourseDetails() {
   const id = useParams().id;
@@ -20,11 +21,21 @@ function CourseDetails() {
   const [expirationTime, setExpirationTime] = useState("");
   const [newPriceAfter, setNewPriceAfter] = useState(0);
   const [newExpAfter, setExpAfter] = useState("");
+  const [subtitles, setSubtitles] = useState([]);
+  const [discountapplicable,ifdiscount]=useState(0);
+  const [exam,isExamAvailable]=useState(false);
   // const [expirationTime1, setExpirationTime1] = useState("");
-
+ 
   const sendRequest = async () => {
     const res = await axios
       .get(`http://localhost:2000/getByid/${id}`)
+      .catch((err) => console.log(err));
+    const data = await res.data;
+    return data;
+  };
+  const sendRequest2 = async () => {
+    const res = await axios
+      .get(`http://localhost:2000/getExamSol/${id}`)
       .catch((err) => console.log(err));
     const data = await res.data;
     return data;
@@ -40,16 +51,23 @@ function CourseDetails() {
       .catch((err) => console.log(err));
     // console.log("ana khalast el method");
     const data2 = await res.data;
-    console.log(data2);
 
     return data2;
   };
   useEffect(() => {
-    sendRequest().then((data) => setCourses(data.course));
+    sendRequest().then((data) => {setCourses(data.course) 
+      if((data.course.discount)){
+    ifdiscount(data.course.discount)}});
+    setSubtitles(Course.subtitles)
+   sendRequest2().then((data)=>{
+    if(data.exam.toString().localeCompare([])===0){
+      isExamAvailable(false)
+    }else {
+      isExamAvailable(true)
+    }
+   })
+
   }, []);
-  // useEffect(() => {
-  //   sendReq().then((data) => setDiscounts(data));
-  // }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
     sendReq().then((data2) => {
@@ -74,6 +92,7 @@ function CourseDetails() {
     // setExpirationTime("");
     // setDiscounts("");
   };
+  
  
   const PriceAfterDiscount = () => (
     <div> Course Price after discount :{newPriceAfter} {currencyP}</div>
@@ -96,7 +115,7 @@ function CourseDetails() {
           Course Subject : {Course.subject}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Course Price : {newPrice} {currencyP}
+          Course Price : {newPrice} {currencyP} ({discountapplicable}%  Discount Applicable)
         </Typography>
         {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {Course.subtitles}
@@ -114,6 +133,17 @@ function CourseDetails() {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {showText ? <ExpirationdateafterDiscount /> : null}
         </Typography>
+        {Course.subtitles &&
+           Course.subtitles.map((subtitles) => (
+        <Subtitles
+          title= {subtitles.title}
+          Video={subtitles.Video}
+          totalHours={subtitles.totalHours}
+          shortDescription={subtitles.shortDescrip}
+          subtitleID={subtitles._id}
+          type={type}
+        />
+      ))}
       </CardContent>
       <CardActions>
         <Button size="small">Learn More</Button>
@@ -140,9 +170,8 @@ function CourseDetails() {
       {type==='CorpTrainee' && <div class="ratio ratio-16x9">
       <iframe src={Course.preview} title="YouTube video" allowfullscreen></iframe>
     </div>}
-
-      {type==='CorpTrainee' &&
-      <a href={`/myExam/${Course._id}/2`} > Solve Exam</a>}
+      {type==='CorpTrainee' && exam &&
+      <a href={`/myExam/${Course._id}`} > Solve Exam</a>}
     </Card>
   );
 }
