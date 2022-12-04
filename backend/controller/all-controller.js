@@ -5,6 +5,8 @@ const instructorReviews=require("../models/instructorReviews")
 const traineeTable=require("../models/Trainee")
 const examTable=require("../models/Exam")
 const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const getAllCourses = async (req, res) => {
   console.log("as")
     let courses;
@@ -262,11 +264,39 @@ const getExamSolution= async (req, res) => {
     return res.status(404).json({ message: err.message });
   }
 }
+// const login = async (req, res) => {
+//   // TODO: Login the user
+//   const username=req.body.name;
+//   const password=req.body.password;
+//   const user= await userModel.findOne({name : req.body.name})
+//   const x= bcrypt.compare(password, user.password)
+//       // if (error){
+//       //   // handle error
+//       //   return res.status(400).json({ error: error.message })
+//       // }
+//       if (x) {
+//         // Send JWT
+//         const token = createToken(user.name);
+//         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+//         return res.status(200).json({ msg: "Login success" })
+
+//       } else {
+//         // response is OutgoingMessage object that server response http request
+//         return res.json({success: false, message: 'passwords do not match'});
+//       }
+//     ;
+// }
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (name) => {
+    return jwt.sign({ name }, 'supersecret', {
+        expiresIn: maxAge
+    });
+};
 const login = async (req, res) => {
   // TODO: Login the user
-  const username=req.body.name;
+  const username=req.body.userName;
   const password=req.body.password;
-  const user= await userModel.findOne({name : req.body.name})
+  const user= await instTable.findOne({userName :username})
   const x= bcrypt.compare(password, user.password)
       // if (error){
       //   // handle error
@@ -274,15 +304,14 @@ const login = async (req, res) => {
       // }
       if (x) {
         // Send JWT
-        const token = createToken(user.name);
+        const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
         return res.status(200).json({ msg: "Login success" })
 
       } else {
         // response is OutgoingMessage object that server response http request
         return res.json({success: false, message: 'passwords do not match'});
-      }
-    ;
+      }
+    ;
 }
-
   module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
