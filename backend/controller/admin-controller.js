@@ -1,6 +1,8 @@
 const instTable=require("../models/Instructor");
 const traineeTable=require("../models/Trainee");
 const adminTable=require("../models/Admin");
+const requestsTable=require("../models/Requests")
+
 const getAllInst=async(req,res,next)=>{
     let inst;
     try{
@@ -71,5 +73,14 @@ const addAdmin=async (req,res,next)=>{
     
     
  }
+ const viewReq=async(req,res)=>{ //hayraga3ly array esmo req kol index fe object equivalant to a row in the table
+    try{
+        let req=await requestsTable.find({});
+        return res.status(201).json({req})
+
+    }
+    catch(error){        return res.status(404).json(error.message)
+}
+ }
  
-module.exports={getAllInst,addInst,addCorpTrainee,addAdmin};
+module.exports={getAllInst,addInst,addCorpTrainee,addAdmin,viewReq};

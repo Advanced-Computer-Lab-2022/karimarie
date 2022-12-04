@@ -2,6 +2,8 @@ const instTable=require("../models/Instructor");
 const courseTable=require("../models/Course");
 const subjectTable=require("../models/Subject")
 const courseReviews=require("../models/coursesReviews")
+const requestsTable=require("../models/Requests")
+const traineeTable=require("../models/Trainee")
 const getAllCourses = async (req, res) => {
   console.log("as")
     let courses;
@@ -89,5 +91,38 @@ const getAllCourses = async (req, res) => {
     
   
   }
-  
-  module.exports={getAllCourses,addCourseReview}
+  const reqAccess=async(req,res)=>{
+    const {corpId,courses}=req.body;
+    console.log(courses[0].courseId);
+    try{
+      let c=await courseTable.findById(courses[0].courseId);
+      let i=await instTable.findById(c.instructor);
+      let ct=await traineeTable.findById(corpId);
+      let instructorName=(i.firstName).concat(" ", i.lastName);
+      let corpTraineeName=(ct.firstName).concat(" ", ct.lastName);
+      let item={courseId:courses[0].courseId,courseName:c.title,courseInstructor:instructorName,status:false};
+  if(requestsTable.findOne({"corpId":corpId}).count() > 0){
+        console.log("la2eito")
+        let req= await requestsTable.updateOne(
+          {
+            corpId: corpId,
+          
+          },
+          { $push: { "courses" : item} }
+       )
+       return res.status(200).json({req});
+    }
+     else{
+        console.log("not found")
+        let req={
+          corpId:corpId,
+             corpName:corpTraineeName,
+              courses:item
+           }
+           const x = await requestsTable.create(req);
+          return res.status(201).json({x})
+      }
+    }
+    catch(err){ return res.status(404).json({message:err.message})}
+  }
+  module.exports={getAllCourses,addCourseReview,reqAccess}
