@@ -1,0 +1,11 @@
+.container {
+    display: inline-flex;
+    justify-content: left;
+    margin-block: 6rem;
+   overflow-x: hidden;
+   width: 1515px;
+    gap: 2rem;
+
+  }
+  
+  

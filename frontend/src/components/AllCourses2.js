@@ -12,7 +12,6 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency,type}) => {
   const currencySelected=localStorage.getItem("currency");
   const [newPrice,setNewPrice]= useState('')
   const [Expired,isExpired]=useState('');
-  console.log(type)
   useEffect(() => {
      if(type=='Instructor'){
       setShowTitleOnly(true); //ana instructor 3ayz yeshoof only his titles
@@ -27,7 +26,6 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency,type}) => {
       .get(`http://localhost:2000/getByidCoursedic/${id}`)
       .catch((err) => console.log(err));
       const data = await res.data;
-      console.log(data)
       return data;
   };
   useEffect(() => {
@@ -41,8 +39,6 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency,type}) => {
   const Title=()=> <div> Title:{title}</div>
   const TotalHours=()=> <div> Total Hours:{totalHours}</div>
   const Rating=()=> <div>Rating:{rating}</div>
-  console.log(currency);
-  console.log(currencySelected);
 
 
   const base_URL='https://api.exchangerate.host/latest'
@@ -51,7 +47,6 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency,type}) => {
   const [toCurrency,setToCurrency]=useState('')
   const [amount,setAmount]=useState(1);
   const [exchangeRate,setExchanheRate]=useState('')
-  console.log(exchangeRate);
   const sendRequest = async () => {
       const res = await axios
         .get(base_URL)
@@ -76,7 +71,6 @@ const AllCourses2 = ({id,title,price,totalHours,rating,currency,type}) => {
   
  
 
-          console.log(price*exchangeRate+"jjjj");
           useEffect(()=>{
           setNewPrice(price*exchangeRate);
           setCurrencyP(currencySelected);

@@ -8,7 +8,6 @@ const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/late
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const getAllCourses = async (req, res) => {
-  console.log("as")
     let courses;
     try{
      courses = await courseTable.find({});
@@ -25,16 +24,48 @@ const getAllCourses = async (req, res) => {
     }
     catch(error){res.status(404).json({error:error.message}) }
   }
-// const viewAcourse=async(req,res,next)=>{
-//     const id=req.params.id;
-//     let course;
-//     try{
-//        course=courseTable.findById(id)
-//        return res.status(200).json({course})
-//     }
-//     catch(error){return res.status(400).json({error:error.message})}
-//  } // view details of a single course by pressing on it
+const postFilterAll=async(req,res)=>{
+    let currencyFilter=req.body.currency;
+   let priceFilter=req.body.price;
+   let subjectFilter=req.body.subject;
+   let ratingFilter=req.body.rating;
+   try{
+    if(priceFilter){
+      const courses= await courseTable.find();
+      await Promise.all(courses.map( async (course)=>{
+        const fromCurrency=course.currency
+        const toCurrency=currencyFilter
+        const base_URL='https://api.exchangerate.host/latest'
+        const res1= await axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then( res1=>res1.data);
+        const exchangeRate=res1.rates[toCurrency];
+        course.price=course.price*exchangeRate;
+        course.currency=currencyFilter;
+      }))
+      let priceList =  courses.filter(function (el){
+        return el.price <=priceFilter});
+      if(subjectFilter){
+        priceList=priceList.filter(function (el){
+          return el.subject ==subjectFilter});
+      }
+      if(ratingFilter){
+        priceList=priceList.filter(function (el){
+        return el.rating ==ratingFilter});
+      }
+      return res.status(200).json({ priceList });
+    }else if(ratingFilter && subjectFilter){
+    const resultList= await courseTable.find({rating: ratingFilter,subject: subjectFilter});    
+    return res.status(200).json({resultList})
+  }else if(ratingFilter){
+    const resultList= await courseTable.find({rating: ratingFilter});    
+    return res.status(200).json({resultList})
+  }else if(subjectFilter){
+    const resultList= await courseTable.find({subject: subjectFilter});    
+    return res.status(200).json({resultList})
 
+  }
+  }
+  catch(err){  return res.status(404).json({error :err.message});}
+}
 const getFilterSubject=async (req,res) => {
   //console.log("aaaaaaaaa")
   console.log(req.params.subject)
@@ -143,7 +174,6 @@ const filterRatingSubject=async (req,res) => {
   
   try{
     const resultList= await courseTable.find({rating: req.params.rating,subject: req.params.subject});
-    console.log( req.params.rating+""+req.params.subject)
     return res.status(200).json({resultList})
   }
   catch(err){  return res.status(404).json({error :err.message});}
@@ -264,28 +294,7 @@ const getExamSolution= async (req, res) => {
     return res.status(404).json({ message: err.message });
   }
 }
-// const login = async (req, res) => {
-//   // TODO: Login the user
-//   const username=req.body.name;
-//   const password=req.body.password;
-//   const user= await userModel.findOne({name : req.body.name})
-//   const x= bcrypt.compare(password, user.password)
-//       // if (error){
-//       //   // handle error
-//       //   return res.status(400).json({ error: error.message })
-//       // }
-//       if (x) {
-//         // Send JWT
-//         const token = createToken(user.name);
-//         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-//         return res.status(200).json({ msg: "Login success" })
 
-//       } else {
-//         // response is OutgoingMessage object that server response http request
-//         return res.json({success: false, message: 'passwords do not match'});
-//       }
-//     ;
-// }
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (name) => {
     return jwt.sign({ name }, 'supersecret', {
@@ -314,4 +323,4 @@ const login = async (req, res) => {
       }
     ;
 }
-  module.exports={getAllCourses,getSubjects,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+  module.exports={getAllCourses,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}

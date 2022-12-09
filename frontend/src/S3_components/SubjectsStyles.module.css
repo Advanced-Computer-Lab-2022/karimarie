@@ -1,0 +1,51 @@
+.subjects {
+    padding: 0 0 100px 0;
+    position: relative;
+
+  }
+  .skillbx {
+      width:800px;
+    background: #151515;
+    box-sizing: border-box;
+    border-radius: 60px;
+    text-align: center;
+    padding: 10px 10px;
+    margin-top: -60px;
+    
+  }
+  .skill h2 {
+      font-size: 30px;
+      font-weight: 700;
+      color: #91c86c;
+
+  }
+  .skill p {
+      color: #91c86c;
+      font-size: 18px;
+      letter-spacing: 0.8px;
+      line-height: 1.5em;
+      margin: 14px 0 75px 0;
+  }
+  .skillslider {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    color: #91c86c;
+
+  }
+  .astext {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+    color: #91c86c;
+
+}
+  .backgroundimageleft {
+    top: 28%;
+    position: absolute;
+    bottom: 0;
+    width: 40%;
+    z-index: -4;
+  }

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 import {AppBar, Typography,Toolbar, Button,Box, Tabs,Tab} from '@mui/material'
-import LocaleCurrency from 'locale-currency'
+//import LocaleCurrency from 'locale-currency'
 import axios from "axios";
 
   

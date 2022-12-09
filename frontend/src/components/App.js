@@ -15,6 +15,9 @@ import ForgetPasswordInstructor from '../pages/ForgetPasswordInstructor';
 import ForgetPass from '../components/ForgetPass';
 import ForgetPasswordAll from '../pages/ForgetPasswordAll';
 import McqQuiz from './Insructor/Quiz/McqQuiz';
+import Login from '../pages/Login';
+import CourseCard from '../S3_components/CourseCard';
+import HomePage from '../S3_components/HomePage';
 const App = () => {
   console.log('hooo')
   return <React.Fragment>
@@ -23,7 +26,7 @@ const App = () => {
     </header> */}
     <main>
       <Routes>
-        <Route path="/" element={<Countries/>}/>
+        <Route path="/" element={<HomePage/>}/>
         <Route path="/Choose" element={<Fragment> <Choose/> <AllCourses/></Fragment>}/>
         <Route path="/Home" element={<AllCourses/>}/>
         <Route path="/AdminHome" element={<AdminHome/>}/>
@@ -33,7 +36,7 @@ const App = () => {
         <Route path="/forgetpasswordInstructor" element={<ForgetPasswordInstructor/>} />
         <Route path="/forgetpasswordAll" element={<ForgetPasswordAll/>} />
         <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
-
+        <Route path="/dropdownCountry" element={<Countries/>} />
       </Routes>
     </main>
   </React.Fragment>

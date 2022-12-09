@@ -9,8 +9,8 @@ const FilterPrice = ({price,currencyFilter}) => {
         const sendRequest = async () => {
             const res = await axios
             .post("http://localhost:2000/filterP", {
-              price:{price},
-              currency:{currencyFilter}
+              price:price,
+              currency:currencyFilter
             })
             .catch((err) => console.log(err));
             const data = await res.data;
