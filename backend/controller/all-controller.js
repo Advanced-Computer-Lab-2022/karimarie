@@ -8,10 +8,10 @@ const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/late
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const getAllCourses = async (req, res) => {
-    let courses;
+    let priceList;
     try{
-     courses = await courseTable.find({});
-     return res.status(200).json({courses})
+     priceList = await courseTable.find({});
+     return res.status(200).json({priceList})
     }
     catch(error){res.status(404).json({error:error.message}) }
   }
@@ -29,6 +29,7 @@ const postFilterAll=async(req,res)=>{
    let priceFilter=req.body.price;
    let subjectFilter=req.body.subject;
    let ratingFilter=req.body.rating;
+   let priceList=[]
    try{
     if(priceFilter){
       const courses= await courseTable.find();
@@ -53,14 +54,14 @@ const postFilterAll=async(req,res)=>{
       }
       return res.status(200).json({ priceList });
     }else if(ratingFilter && subjectFilter){
-    const resultList= await courseTable.find({rating: ratingFilter,subject: subjectFilter});    
-    return res.status(200).json({resultList})
+      priceList= await courseTable.find({rating: ratingFilter,subject: subjectFilter});    
+    return res.status(200).json({priceList})
   }else if(ratingFilter){
-    const resultList= await courseTable.find({rating: ratingFilter});    
-    return res.status(200).json({resultList})
+    priceList= await courseTable.find({rating: ratingFilter});    
+    return res.status(200).json({priceList})
   }else if(subjectFilter){
-    const resultList= await courseTable.find({subject: subjectFilter});    
-    return res.status(200).json({resultList})
+    priceList= await courseTable.find({subject: subjectFilter});    
+    return res.status(200).json({priceList})
 
   }
   }
@@ -165,8 +166,8 @@ const searchCourse = async (req, res) => {
           },
         ],
       });
-      let searchResult=[...instructorCourses, ...keyCourses];
-      res.send(searchResult);
+      let priceList=[...instructorCourses, ...keyCourses];
+      res.send({priceList});
     });
 };
 

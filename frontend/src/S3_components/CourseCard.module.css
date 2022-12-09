@@ -100,13 +100,15 @@ img {
   padding: 1rem;
 }
 .starimage{
-  color: gray;
+  color: yellow;
+  display: flex;
   margin-top: -80px;
   margin-left: -15px;
 }
 .cardfooter2 p{
   color: gray;
   margin-top: -80px;
+  margin-left: 2px;
   font-size: 1rem;
 }
 .cardfooter3 {

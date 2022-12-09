@@ -54,7 +54,7 @@ const AllCourses = (chooseC) => {
       return data;
   };
   useEffect(() => {
-    sendRequest().then((data) => setCourses(data.courses));
+    sendRequest().then((data) => setCourses(data.priceList));
     if(chooseCopr.chooseC=='CorpTrainee'){
       setShowText(false);
     }

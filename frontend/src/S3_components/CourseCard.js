@@ -5,11 +5,11 @@ import c from "../S3_components/CourseCard.module.css"
 import clock from "../S3_components/clock.png"
 import priceTag from "../S3_components/priceTag.png"
 import star from "../S3_components/star.png"
+import  Rating from '@mui/material/Rating';
 const CourseCard=({id,title,totalHours,rating,price,currency,type,subject,description}) =>{
 
-  console.log(id)
   const [newPrice,setNewPrice]= useState('')
-
+  const [ratingCurrent,isRating]= useState('')
   const country=localStorage.getItem("country");
   const currencySelected=localStorage.getItem("currency")
   if(country==="" && currencySelected===""){
@@ -37,7 +37,11 @@ const CourseCard=({id,title,totalHours,rating,price,currency,type,subject,descri
       setToCurrency(currencySelected)
       setExchanheRate(data.rates[toCurrency])}
       )
-    
+      if(rating){
+        isRating(rating);
+      }else {
+        isRating("No Ratings Yet")
+      }
       
  },[])
  useEffect(()=>{
@@ -75,8 +79,9 @@ return (
     <p>{newPrice} {currencySelected}</p>
     </div>
     <div class={c.cardfooter2}>
-    <img src={star} alt="card__image" class={c.starimage} width="20"/>
-    <p>{rating}</p>
+    <Rating name="read-only" value={rating}  defaultValue={rating} precision={0.5} class={c.starimage} width="20" readOnly />
+    {/* <img src={star} alt="card__image" class={c.starimage} width="20"/> */}
+    <p> {ratingCurrent}</p>
     </div>
     </div>
   </div>

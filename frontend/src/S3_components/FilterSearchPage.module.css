@@ -1,0 +1,80 @@
+.sorry{
+    padding: 2rem;
+}
+.sorry p{
+    font-weight: 400px;
+    font-size: large;
+}
+.container {
+    margin-top: 80px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  row-gap: 15px;
+  padding-left: 15px;
+
+  }
+
+
+/* CSS */
+.button79 {
+  backface-visibility: hidden;
+  background: #17cf97;
+  border: 0;
+  border-radius: .375rem;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular,Helvetica,sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+  padding: 1rem 1.25rem;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transform: translateZ(0) scale(1);
+  transition: transform .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 35px;
+  margin-top: 60px;
+}
+
+.button79:disabled {
+  color: #787878;
+  cursor: auto;
+}
+
+.button79:not(:disabled):hover {
+  transform: scale(1.05);
+}
+
+.button79:not(:disabled):hover:active {
+  transform: scale(1.05) translateY(.125rem);
+}
+
+.button79:focus {
+  outline: 0 solid transparent;
+}
+
+.button79:focus:before {
+  border-width: .125rem;
+  content: "";
+  left: calc(-1*.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1*.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+.button79:focus:not(:focus-visible) {
+  outline: 0 solid transparent;
+}
+
+.button79:not(:disabled):active {
+  transform: translateY(.125rem);
+}

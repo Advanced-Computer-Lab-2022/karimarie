@@ -18,6 +18,7 @@ import McqQuiz from './Insructor/Quiz/McqQuiz';
 import Login from '../pages/Login';
 import CourseCard from '../S3_components/CourseCard';
 import HomePage from '../S3_components/HomePage';
+import FilterSearchPage from '../S3_components/FilterSearchPage';
 const App = () => {
   console.log('hooo')
   return <React.Fragment>
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/forgetpasswordAll" element={<ForgetPasswordAll/>} />
         <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
         <Route path="/dropdownCountry" element={<Countries/>} />
+        <Route path="/FilterSearchPage" element={<FilterSearchPage/>} />
       </Routes>
     </main>
   </React.Fragment>

@@ -60,7 +60,7 @@ const createCourse=async (req,res,next)=>{
           instructor:instructor,
           currency:currency,
           subtitles:subtitles,
-          rating:-1,
+          rating:rating,
           preview:preview,
           originalPrice:price
       })

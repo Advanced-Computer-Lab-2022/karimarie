@@ -3,7 +3,8 @@ import 'react-multi-carousel/lib/styles.css';
 import SubjectsStyles from "../S3_components/SubjectsStyles.module.css"
 import { useState } from 'react';
  const Subjects = () => {
-    const [subjectvalue,setsubjectValue]=useState();
+  const [subjectvalue,setsubjectValue]=useState();
+  
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -23,7 +24,6 @@ import { useState } from 'react';
       items: 1
     }
   };
-  console.log(subjectvalue)
   return (
     <section className={SubjectsStyles.skill} id="skills">
         <div className={SubjectsStyles.container}>
