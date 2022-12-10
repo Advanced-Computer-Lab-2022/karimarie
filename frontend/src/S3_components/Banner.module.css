@@ -1,9 +1,11 @@
 .banner {
     padding: 100px 0 50px 0;
     background-color: whitesmoke;
-    
+    height: 450px;
     background-position: top center;
-    background-size: cover;
+    /* background-size: cover; */
+    overflow-x: hidden;
+    overflow-y: hidden;
     background-repeat: no-repeat;
   }
   .banner h1 {
@@ -40,7 +42,7 @@
     line-height: 1;
   }
   .banner button:hover svg {
-    color: #91c86c;
+    color: #17cf97;
     margin-left: 25px;
   }
   .banner img {

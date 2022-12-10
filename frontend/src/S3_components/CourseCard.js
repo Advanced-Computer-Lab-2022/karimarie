@@ -38,9 +38,9 @@ const CourseCard=({id,title,totalHours,rating,price,currency,type,subject,descri
       setExchanheRate(data.rates[toCurrency])}
       )
       if(rating){
-        isRating(rating);
+        isRating(Math.ceil((rating)*100)/100);
       }else {
-        isRating("No Ratings Yet")
+        isRating("")
       }
       
  },[])
@@ -53,8 +53,7 @@ const CourseCard=({id,title,totalHours,rating,price,currency,type,subject,descri
  
 
           useEffect(()=>{
-          setNewPrice((price)*exchangeRate);
-    
+          setNewPrice(Math.ceil((price)*exchangeRate*100)/100)
       },[exchangeRate])
 return (
     <React.Fragment>
@@ -79,7 +78,7 @@ return (
     <p>{newPrice} {currencySelected}</p>
     </div>
     <div class={c.cardfooter2}>
-    <Rating name="read-only" value={rating}  defaultValue={rating} precision={0.5} class={c.starimage} width="20" readOnly />
+    <Rating name="read-only"  defaultValue={rating} precision={0.5} class={c.starimage} width="20" readOnly />
     {/* <img src={star} alt="card__image" class={c.starimage} width="20"/> */}
     <p> {ratingCurrent}</p>
     </div>

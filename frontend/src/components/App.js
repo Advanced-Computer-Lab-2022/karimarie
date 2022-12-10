@@ -15,10 +15,11 @@ import ForgetPasswordInstructor from '../pages/ForgetPasswordInstructor';
 import ForgetPass from '../components/ForgetPass';
 import ForgetPasswordAll from '../pages/ForgetPasswordAll';
 import McqQuiz from './Insructor/Quiz/McqQuiz';
-import Login from '../pages/Login';
 import CourseCard from '../S3_components/CourseCard';
 import HomePage from '../S3_components/HomePage';
 import FilterSearchPage from '../S3_components/FilterSearchPage';
+import SignUp from '../S3_components/SignUp';
+import Login from '../S3_components/Login';
 const App = () => {
   console.log('hooo')
   return <React.Fragment>
@@ -39,6 +40,9 @@ const App = () => {
         <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
         <Route path="/dropdownCountry" element={<Countries/>} />
         <Route path="/FilterSearchPage" element={<FilterSearchPage/>} />
+        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/login" element={<Login/>} />
+
       </Routes>
     </main>
   </React.Fragment>

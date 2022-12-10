@@ -31,11 +31,11 @@ img {
   min-width: 250px;
   height: 300px;
   overflow: hidden;
-  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1); */
   border-radius: 1em;
   display:block;
- 
-  background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+  background-color: whitesmoke;
+  /* background: linear-gradient(to right, #FFFFFF, #ECE9E6); */
 }
 
 .cardbody {

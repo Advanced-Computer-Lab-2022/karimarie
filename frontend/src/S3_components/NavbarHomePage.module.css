@@ -31,14 +31,12 @@ nav{
     color: #fff;
     transition: 0.3s ease-in-out;
 }
-#navbar li a:hover,
-#navbar li a.active
+#navbar li a:hover
 {
     color: #17cf97;
 }
 
-#navbar li a:hover::after,
-#navbar li a.active::after{
+#navbar li a:hover::after{
 content:"";
 width:30%;
 height:2px;
@@ -322,6 +320,7 @@ border:none;
   pointer-events: painted;  
 }
 .inputsearch{
+  font-family: 'Inter';
   width: 300px;
   border-radius: 0px;
   background-color: transparent;

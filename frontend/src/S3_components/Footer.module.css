@@ -1,0 +1,39 @@
+.main{
+    display: flex;
+    background-color: #1b2430;
+    
+    height: 32vh;
+    
+}
+.stills{
+    color: #fff;
+    padding-left: 150px;
+    padding-top: 50px;
+   
+
+
+}
+.stills2{
+    color: #fff;
+    padding-left: 250px;
+    padding-top: 50px;
+
+
+}
+.stills3{
+    color: #fff;
+    padding-left: 280px;
+    padding-top: 50px;
+
+
+}
+.logo{
+    margin-top: 150px;
+    padding:5px;
+
+}
+.copyright{
+    color: #fff;
+    padding-left: 70px;
+    padding-top: 170px;
+}

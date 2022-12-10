@@ -1,0 +1,170 @@
+.first1{
+    width:500px;
+    height:500px;
+    margin-top:100px;
+    margin-left: 350px;
+    box-shadow:0 0 0 1px rgba(14,41,57,0.12),0 2px 5px rgba(14,41,57,0.44),inset 0 -1px 2px rgba(14,41,57,0.15);
+    float:none;
+    padding:10px 50px 0;
+    background:linear-gradient(#1b2430,#1b2430);
+    border:1px solid #17cf97;
+    border-radius:30px ;
+    }
+    .first1 h3 {
+        font-size: 35px;
+        font-weight: 600;
+        margin-left: 140px;
+        margin-top: 20px;
+        color: rgb(255 255 255 / 96%);  
+    }
+  
+                         
+            .button1,
+            .first1 input {
+              border: 0;
+              width: 100%;
+              height: 60px;
+              background: transparent;
+              font-family: inherit;
+              font-size: 16px;
+              outline: none;
+            }
+  
+  
+  
+   
+  
+            .textbox > .underline {
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              width: 100%;
+              height: 2px;
+              background: #17cf97;
+              transform: scaleX(0);
+              transition: 0.35s;
+            }
+            
+  
+                        .textbox {
+                          position: relative;
+                          margin-top: 50px;
+                        }
+                        
+                        .textbox span {
+                          position: absolute;
+                          top: 50%;
+                          translate: 0 -50%;
+                          left: 0;
+                          font-size: 22px;
+                          pointer-events: none;
+                          color: #17cf97;
+                        }
+                        
+                        .textbox input {
+                          height: 60px;
+                          width: 400px;
+                          padding-left: 34px;
+                          background: transparent;
+                          border: 0;
+                          outline: none;
+                          border-bottom: 2px solid #2e2a33;
+                          color: rgba(255, 255, 255, 0.96);
+                          font-family: "Euclid Circular A";
+                          font-size: 16px;
+                        }
+                        
+                        :is(input:focus, input:valid) ~ label {
+                          translate: -40px -40px;
+                          scale: 0.875;
+                        }
+                        
+                        .first1 input:focus ~ label {
+                          color: #17cf97;
+                        }
+                        
+                 
+                        :is(.first1 input:focus, .first1 input:valid) ~ span {
+                          color: #17cf97;
+                        }
+                       .textbox >:is(.first1 input:focus, .first1 input:valid) ~ .underline {
+                          transform: scaleX(1);
+                        }
+                        .textbox label {
+                          position: absolute;
+                          top: 50%;
+                          left: 36px;
+                          translate: 0 -50%;
+                          color: #ffffff;
+                          pointer-events: none;
+                          transition: 0.4s;
+                        }
+                        
+                  
+                   
+         
+        .button1 {
+          display: inline-block;
+          border-radius: 26px;
+          background-color: #17ae81;
+          border:1px solid #010b0e;
+          color: #FFFFFF;
+          text-align: center;
+          font-size: 25px;
+          padding: 10px;
+          width:300px;
+          height:50px;
+          transition: all 0.5s;
+          cursor: pointer;
+          margin-top: 50px;
+          margin-bottom:-100px;
+          margin-left:100px;
+        }
+        
+        .button1 span {
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: 0.5s;
+          padding-bottom:500px;
+          
+        }
+        
+      .button1 span:after {
+          content: '\00bb';
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          right: -20px;
+          transition: 0.5s;
+        }
+        
+        .button1:hover span {
+          padding-right: 25px;
+        }
+        
+      .button1:hover span:after {
+          opacity: 1;
+          right: 0;
+        }
+        .first1 p {
+          margin-left:180px ;
+          margin-top:40px;
+          color: #778395;
+        }
+        
+        .first1 p > a {
+          color: #17cf97;
+          text-decoration: none;
+        }
+  
+        /* .form p1 {
+          margin-left:140px ;
+          padding-top:1000px;
+          color: #778395;
+        }
+        
+        .form p1 > a {
+          color: #17cf97;
+          text-decoration: none;
+        } */

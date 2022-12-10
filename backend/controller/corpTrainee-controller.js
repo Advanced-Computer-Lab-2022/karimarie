@@ -53,33 +53,23 @@ const getAllCourses = async (req, res) => {
    
     const course = await courseTable.findById(req.params.course);
     let myreviews={};
-     if(req.params.id){
+     if(req.params.course){
          myreviews= {course: req.params.course} 
      }
-     console.log(req.body.rating) 
-     console.log(req.body.description) 
-     console.log(req.params.course) 
-     console.log(course) 
-
-
-
   try{
     let data = {
         rating: req.body.rating,
         description: req.body.description,
-        course: req.params.id
+        course: req.params.course
     }
-    const review = await courseReviews.create(data)
-  
+    
+    const review = await courseReviews.create(data);
+    review.save();
     const courseReview= await courseReviews.find(myreviews);
-    console.log(courseReviews);
-    console.log('hi')
-    const length= courseReviews.length
+    const length= courseReview.length
     if(length!=0){
-      
-    course.rating =courseReview.reduce((acc, item) => item.rating + acc, 0) /length
+    course.rating =(courseReview.reduce((acc, item) => item.rating + acc, 0)) /length
     await course.save()
-    console.log(course.rating);
     }
     res.status(200).send(review)
   

@@ -1,11 +1,78 @@
 .container {
-    display: inline-flex;
+    display: block;
     justify-content: left;
     margin-block: 6rem;
    overflow-x: hidden;
-   width: 1515px;
+   width: 1375px;
+   padding : 2rem;
+   height: 400px;
+   left:300px;
+   background-color: white;
+   top:450px;
+   margin-top: 70px;
     gap: 2rem;
-
   }
-  
+  .container2 {
+    display: block;
+    justify-content: left;
+    margin-block: 6rem;
+   overflow-x: hidden;
+   width: 1375px;
+   padding : 2rem;
+   height: 400px;
+   left:300px;
+   background-color: white;
+   top:-50px;
+   margin-top: -90px;
+    gap: 2rem;
+  }
+
+  .mostpopular{
+    position: absolute;
+    width: 679px;
+    height: 49px;
+    left: 51px;
+    top: 550px;
+    margin-top: 200px;
+    margin-bottom: 20px;
+    margin-left: 4px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+color:black;
+    text-align: left;
+  }
+
+  .arrow{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    left: 300px;
+    top: 759px;
+  }
+  .toppopular{
+    position: absolute;
+    width: 679px;
+    height: 49px;
+    left: 51px;
+    top: 950px;
+    margin-top: 200px;
+    margin-bottom: 20px;
+    margin-left: 4px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    color:black;
+    text-align: left;
+  }
+  .arrow2{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    left: 250px;
+    top: 1159px;
+  }
+
   

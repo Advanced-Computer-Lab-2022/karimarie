@@ -19,10 +19,10 @@ const RateCourse = () => {
         setCourse('')
          setReview('')
          setRating('')
-        console.log(rating);
         console.log(description);
         console.log(course)
     }
+    console.log(rating);
     const sendRequest = async () => {
         if(course!=''){
                 const res = await axios

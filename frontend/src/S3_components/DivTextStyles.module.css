@@ -1,0 +1,28 @@
+.maintext{
+    position: absolute;
+    width: 679px;
+    height: 49px;
+    left: 51px;
+    top: 550px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 58px;
+
+}
+.secondarytext{
+    position: absolute;
+    width: 1095px;
+    height: 48px;
+    left: 51px;
+    top: 600px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 27px;
+    line-height: 33px;
+    
+    color: grey;
+}

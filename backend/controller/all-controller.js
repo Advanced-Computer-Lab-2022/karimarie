@@ -180,6 +180,25 @@ const filterRatingSubject=async (req,res) => {
   catch(err){  return res.status(404).json({error :err.message});}
 };
 
+const setprice = async (req, res) => {
+  const price = req.body.newPrice;
+  const id = req.body.id;
+  console.log(price)
+console.log(id)
+  if (id) {
+    const finalres = await courseTable.findByIdAndUpdate(
+      id,
+      {
+        $set : {newPrice: price}
+      },
+      { new: true }
+    );
+    await res.status(200).json(finalres);
+  } else {
+    res.status(400).json({ error: "couldn't" });
+  }
+};
+
 const addInstructorReview = async (req, res) => {
   const instructor = await instTable.findById(req.params.id);
   let myreviews={};
@@ -324,4 +343,4 @@ const login = async (req, res) => {
       }
     ;
 }
-  module.exports={getAllCourses,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+  module.exports={getAllCourses,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,setprice,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}

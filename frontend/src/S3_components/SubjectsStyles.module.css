@@ -3,9 +3,13 @@
     position: relative;
 
   }
+  .container{
+    margin-left:290px;
+    margin-top:180px;
+  }
   .skillbx {
       width:800px;
-    background: #151515;
+    background: #1b2430;
     box-sizing: border-box;
     border-radius: 60px;
     text-align: center;
@@ -14,13 +18,13 @@
     
   }
   .skill h2 {
-      font-size: 30px;
+      font-size: 20px;
       font-weight: 700;
-      color: #91c86c;
+      color: #17cf97;
 
   }
   .skill p {
-      color: #91c86c;
+      color: #17cf97;
       font-size: 18px;
       letter-spacing: 0.8px;
       line-height: 1.5em;
@@ -30,7 +34,7 @@
     width: 80%;
     margin: 0 auto;
     position: relative;
-    color: #91c86c;
+    color: #17cf97;
 
   }
   .astext {
@@ -39,7 +43,7 @@
     margin:0;
     padding:0;
     cursor: pointer;
-    color: #91c86c;
+    color: #17cf97;
 
 }
   .backgroundimageleft {
