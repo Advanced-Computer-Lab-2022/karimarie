@@ -78,9 +78,9 @@ return (
     <p>{newPrice} {currencySelected}</p>
     </div>
     <div class={c.cardfooter2}>
-    <Rating name="read-only"  defaultValue={rating} precision={0.5} class={c.starimage} width="20" readOnly />
+    <Rating name="read-only"  defaultValue={rating} precision={0.5} className={c.starimage} width="20" readOnly />
     {/* <img src={star} alt="card__image" class={c.starimage} width="20"/> */}
-    <p> {ratingCurrent}</p>
+    <p className={c.ratingnum}> {ratingCurrent}</p>
     </div>
     </div>
   </div>

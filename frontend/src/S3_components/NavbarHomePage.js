@@ -14,7 +14,7 @@ import FilterSearchPage from "./FilterSearchPage";
 import searchIcon from "../S3_components/searchIcon.png"
 import { useNavigate } from "react-router-dom";
 
-function NavbarHomePage(){
+function NavbarHomePage(isactive){
     const [dropDown,isDropDown]=useState(false);
     const [gender,isGender]=useState(false);
     const [showfilter,isShowFilter]=useState(false);
@@ -24,7 +24,6 @@ function NavbarHomePage(){
     const [filterResult,setFilterResult]=useState('');
     const currencyFilter=localStorage.getItem("currency");
     const [search,setSearch]=useState();
-
     const showDropDown = (e) => {
         e.preventDefault();
          isDropDown(true);
@@ -126,24 +125,16 @@ function NavbarHomePage(){
           };
           const handleSearch2=(e)=>{
             if(e.key==="Enter"){
-              
-            
-            console.log(search);
             e.preventDefault()
               searchCourse().then((data) => {           
-              console.log(data)
               let x=JSON.stringify(data.priceList)
               window.location.href=`FilterSearchPage?courses=${x}`
             }
               )
             }}
             const handleSearch=(e)=>{
-             
-              
-              console.log(search);
               e.preventDefault()
                 searchCourse().then((data) => {           
-                console.log(data)
                 let x=JSON.stringify(data.priceList)
                 window.location.href=`FilterSearchPage?courses=${x}`
               }
@@ -184,8 +175,8 @@ function NavbarHomePage(){
 <ul id={NavbarStyles.navbar}>
     <li><button onClick={showFilter} title="Filter" className={NavbarStyles.buttonFilter}><img src={filterIcon} alt="card__image" width="40"></img>
             </button></li>
-    <li><a className={NavbarStyles.active} href="/signup">Sign Up</a></li>
-    <li><a href="/login">Login</a></li>
+    <li><a  style={{ color: isactive.isactive === "true" ? "#17cf97" : null }}href="/signup">Sign Up</a></li>
+    <li><a style={{ color: isactive.isactive === "false" ? "#17cf97" : null }}href="/login">Login</a></li>
     <li><button onClick={showDropDown}><img src={language} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
     <li><button onClick={showGender}><img src={genderIcon} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
 </ul>
@@ -234,32 +225,7 @@ function NavbarHomePage(){
             </div>
 
             }
-      {/* {showfilter && <div className={NavbarStyles.shadearea}>
-      <div className={NavbarStyles.modalcontainer}>
-            <form className='form-group' onSubmit={handleFilter}>   
-           <h6>Price Filter:</h6>
-                  <input 
-                type="Number" 
-                name='price'
-                value={price}
-                placeholder={`Enter Price in ${currencyFilter}`}
-                onChange={(e) => setPrice(e.target.value)} 
-              />
-                <br></br>
-            <h6>Rating Filter:</h6>
-            <Rating
-                name="write"   
-                precision={0.5}
-                defaultValue={0}
-                onChange={(e) => setRating(e.target.value)} 
-                value={rating}
-                />
-                <br></br>
-                <button className='btn btn-success btn-md'>Submit</button>
-            </form>
-            </div>
-            <button className={NavbarStyles.deleteicon} onClick={()=>isShowFilter(false)}><img src={closeButton} alt="card__image" width="24"></img></button>
-        </div>} */}
+      
                           { showfilter && <div className={NavbarStyles.shadearea}>
                   <div className={NavbarStyles.modalcontainer}>
           <div className={NavbarStyles.rectangle}> <h4 className={NavbarStyles.rectangleText}>Filter our Courses </h4>       

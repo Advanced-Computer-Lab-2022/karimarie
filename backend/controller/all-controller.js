@@ -7,7 +7,10 @@ const examTable=require("../models/Exam")
 const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 const getAllCourses = async (req, res) => {
+  
+ 
     let priceList;
     try{
      priceList = await courseTable.find({});
@@ -147,7 +150,6 @@ const filterRating=async (req,res) => {
 };
 
 const searchCourse = async (req, res) => {
-  //console.log("Input", req.params.key);
   await courseTable
     .find()
     .populate("instructor", "userName")
@@ -180,24 +182,7 @@ const filterRatingSubject=async (req,res) => {
   catch(err){  return res.status(404).json({error :err.message});}
 };
 
-const setprice = async (req, res) => {
-  const price = req.body.newPrice;
-  const id = req.body.id;
-  console.log(price)
-console.log(id)
-  if (id) {
-    const finalres = await courseTable.findByIdAndUpdate(
-      id,
-      {
-        $set : {newPrice: price}
-      },
-      { new: true }
-    );
-    await res.status(200).json(finalres);
-  } else {
-    res.status(400).json({ error: "couldn't" });
-  }
-};
+
 
 const addInstructorReview = async (req, res) => {
   const instructor = await instTable.findById(req.params.id);
@@ -326,16 +311,13 @@ const login = async (req, res) => {
   const username=req.body.userName;
   const password=req.body.password;
   const user= await instTable.findOne({userName :username})
-  const x= bcrypt.compare(password, user.password)
-      // if (error){
-      //   // handle error
-      //   return res.status(400).json({ error: error.message })
-      // }
-      if (x) {
+  // const x= bcrypt.compare(password, user.password)
+      if (user) {
         // Send JWT
         const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
         return res.status(200).json({ msg: "Login success" })
+ 
 
       } else {
         // response is OutgoingMessage object that server response http request
@@ -343,4 +325,4 @@ const login = async (req, res) => {
       }
     ;
 }
-  module.exports={getAllCourses,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,setprice,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+  module.exports={getAllCourses,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}

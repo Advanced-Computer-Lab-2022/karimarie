@@ -3,7 +3,13 @@ const mongoose = require('mongoose');
 const app=express();
 app.use(express.json())
 const cors = require('cors')
-app.use(cors())
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+const corsOptions ={
+  origin:true, 
+  credentials:true,            //access-control-allow-credentials:true
+}
+app.use(cors(corsOptions));
 const port = process.env.PORT || "2000";
 const MongoURI = 'mongodb+srv://networks:user123@cluster0.pvjwiid.mongodb.net/?retryWrites=true&w=majority' ;
 //IMPORTING MODELS

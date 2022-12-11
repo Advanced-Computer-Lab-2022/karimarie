@@ -1,12 +1,15 @@
 import SignUpcss from "../S3_components/SignUp.module.css";
 import NavbarHomePage from "./NavbarHomePage";
 import React from "react";
+import { useState } from "react";
 import "material-icons/iconfont/material-icons.css"
 //lama tigy te3mely backend hewar el label hayezbot be handle change
 function SignUp() {
+    const [SignUp,isSignUp]=useState("true")
   return (
     <React.Fragment>
-        <NavbarHomePage></NavbarHomePage>
+        <NavbarHomePage
+        isactive={SignUp}></NavbarHomePage>
     <div className={SignUpcss.first1} id="first">
       <div className={SignUpcss.behindtext}>
         <div className={SignUpcss.behindtext1}>

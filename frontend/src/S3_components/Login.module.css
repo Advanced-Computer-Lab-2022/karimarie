@@ -1,8 +1,13 @@
+.containerLogin{
+  width: 100%;
+  height: 100%;
+  background-color: whitesmoke;
+}
 .first1{
     width:500px;
     height:500px;
-    margin-top:100px;
-    margin-left: 350px;
+    margin-top:50px;
+    margin-left: 450px;
     box-shadow:0 0 0 1px rgba(14,41,57,0.12),0 2px 5px rgba(14,41,57,0.44),inset 0 -1px 2px rgba(14,41,57,0.15);
     float:none;
     padding:10px 50px 0;
@@ -13,13 +18,13 @@
     .first1 h3 {
         font-size: 35px;
         font-weight: 600;
-        margin-left: 140px;
+        margin-left: 95px;
         margin-top: 20px;
         color: rgb(255 255 255 / 96%);  
     }
   
                          
-            .button1,
+            .button12,
             .first1 input {
               border: 0;
               width: 100%;
@@ -103,7 +108,7 @@
                   
                    
          
-        .button1 {
+        .button12 {
           display: inline-block;
           border-radius: 26px;
           background-color: #17ae81;
@@ -112,41 +117,36 @@
           text-align: center;
           font-size: 25px;
           padding: 10px;
-          width:300px;
+          width:150px;
           height:50px;
           transition: all 0.5s;
           cursor: pointer;
-          margin-top: 50px;
+          margin-top: 30px;
           margin-bottom:-100px;
-          margin-left:100px;
+          margin-left:130px;
         }
         
-        .button1 span {
-          cursor: pointer;
-          display: inline-block;
-          position: relative;
-          transition: 0.5s;
-          padding-bottom:500px;
-          
+         .button12 span {
+         display: inline-block;
+         padding-left: -2px;          
         }
         
-      .button1 span:after {
+      .button12 span:after {
           content: '\00bb';
-          position: absolute;
           opacity: 0;
           top: 0;
           right: -20px;
           transition: 0.5s;
         }
         
-        .button1:hover span {
-          padding-right: 25px;
-        }
+        .button12:hover span {
+          padding-right: 25px; 
+         } 
         
-      .button1:hover span:after {
+       .button12:hover span:after {
           opacity: 1;
-          right: 0;
-        }
+          left: 2px;
+        } 
         .first1 p {
           margin-left:180px ;
           margin-top:40px;
@@ -158,13 +158,17 @@
           text-decoration: none;
         }
   
-        /* .form p1 {
-          margin-left:140px ;
-          padding-top:1000px;
+        .hello  {
+          margin-left:-50px ;
+          margin-top: -15px;
+          display: inline-block;
           color: #778395;
         }
-        
-        .form p1 > a {
+        .hrefSign{
+         margin-left: -80px;
+         margin-top: -30px;
+        }
+        .hello > a {
           color: #17cf97;
           text-decoration: none;
-        } */
+        }

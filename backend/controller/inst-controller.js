@@ -4,6 +4,7 @@ const instructorReviews=require("../models/instructorReviews")
 const mongoose=require('mongoose');
 const toId=mongoose.Types.ObjectId
 const examTable=require("../models/Exam");
+const jwt =require('jsonwebtoken')
 const getAllInst=async(req,res,next)=>{
         let inst;
         try{
@@ -18,35 +19,7 @@ const getAllInst=async(req,res,next)=>{
         return res.status(200).json({inst:inst})
 
 }
-const instLogin=async(req,res,next)=>{
-   const{userName,password}=req.body;
-   let existingInst;
-   try{
-      existingInst=await instTable.findOne({userName});
-    }
-    catch(err){
-       console.log(err);
-    }
-    if(!inst){
-       return res.status(404).json({message:"no"})
-    }
-    
-}
 
-// const searchCourse=async(req,res,next)=>{
-//    let course;
-//    const{input}=req.body
-//    try{
-//       console.log(input)
-//       course = courseTable.find({'title':input})
-      
-//       return res.status(200).json({inst})
-      
-//    }
-//    catch(error){  
-//       console.log("Error")
-//       return res.status(404).json({message:error.message})}
-// }
 const createCourse=async (req,res,next)=>{     
   const{title,price,instructor, totalHours, subject, description,subtitles,currency,rating,preview}=req.body
   let course;
@@ -76,6 +49,18 @@ const createCourse=async (req,res,next)=>{
 }
 
 const getMyCourses=async (req,res) => {
+  if (req.cookies.jwt) {
+    jwt.verify(req.cookies.jwt, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        // console.log('You are not logged in.');
+        // res send status 401 you are not logged in
+        res.status(401).json({message:"You are not logged in."})
+        // res.redirect('/login');
+      } else {
+        console.log(decodedToken.name);
+      }
+    });
+  }
    let myCourses={};
    if(req.params.id){
        myCourses= {instructor: req.params.id} 
@@ -149,7 +134,6 @@ const getInstructorReviews =  async (req, res) => {
 const getById = async (req, res, next) => {
    //console.log("s")
    const id = req.params.id;
-   console.log(id)
    let course;
    try {
      inst = await instTable.findById(id);
