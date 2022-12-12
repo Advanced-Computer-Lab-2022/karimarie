@@ -41,6 +41,9 @@ const instructorSchema = new Schema({
   },
   numReviews:{
     type:Number
+  },
+  token:{
+    type:String
   }
 });
 const Instructor = mongoose.model("Instructor", instructorSchema);

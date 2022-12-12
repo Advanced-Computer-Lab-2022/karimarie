@@ -5,6 +5,7 @@ import CourseCard from './CourseCard';
 import h from "../S3_components/HomePage.module.css"
 import { Carousel } from 'react-responsive-carousel';
 import NavbarHomePage from './NavbarHomePage';
+import NavBarStyles from "../S3_components/NavbarHomePage.module.css"
 import Banner from './Banner';
 import DivText from './DivText';
 import Subjects from './Subjects';
@@ -62,6 +63,7 @@ var settings = {
   return(
     <React.Fragment>
         <div>
+          
         <NavbarHomePage></NavbarHomePage>
         <Banner></Banner>
         <DivText/>

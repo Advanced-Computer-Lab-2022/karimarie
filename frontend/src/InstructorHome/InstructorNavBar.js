@@ -8,13 +8,13 @@ import {Box} from '@mui/material'
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Rating from '@mui/material/Rating';
-import genderIcon from "../S3_components/genderIcon.png"
 import Slider from "@mui/material/Slider";
-import FilterSearchPage from "./FilterSearchPage";
+import profileIcon from "./userIcon.png"
+//rt FilterSearchPage from "./FilterSearchPage";
 import searchIcon from "../S3_components/searchIcon.png"
 import { useNavigate } from "react-router-dom";
 
-function NavbarHomePage(isactive){
+function InstructorNavBar(isactive){
     const [dropDown,isDropDown]=useState(false);
     const [gender,isGender]=useState(false);
     const [showfilter,isShowFilter]=useState(false);
@@ -24,17 +24,17 @@ function NavbarHomePage(isactive){
     const [filterResult,setFilterResult]=useState('');
     const currencyFilter=localStorage.getItem("currency");
     const [search,setSearch]=useState();
+    const [logout,isLogOut]=useState(false);
+    const showLogout=(e)=>{
+        isDropDown(false);
+        isShowFilter(false);
+        isLogOut(true);
+    }
     const showDropDown = (e) => {
         e.preventDefault();
          isDropDown(true);
          isShowFilter(false);
          isGender(false);
-      };
-      const showGender = (e) => {
-        e.preventDefault();
-         isDropDown(false);
-         isShowFilter(false);
-         isGender(true);
       };
       const showFilter = (e) => {
         e.preventDefault();
@@ -108,6 +108,11 @@ function NavbarHomePage(isactive){
             setRating('');
 
           }
+          const navigateTo=(e)=>{
+            e.preventDefault()
+            window.location.href="http://localhost:3000/profile"
+
+          }
         const searchCourse = async () => {
           if(search){
             const res = await axios
@@ -156,6 +161,18 @@ function NavbarHomePage(isactive){
               setFilterResult(event.target.value);
             
           }
+          const getLogout = async () => {
+            const res = await axios
+              .get("http://localhost:2000/logout")
+              .catch((err) => console.log(err));
+              const data = await res.data;
+              return data;
+          };
+          const handleLogout=()=>{
+            getLogout();
+            localStorage.setItem("token","")
+            window.location.href="/";
+          }
           
          
     return(
@@ -173,13 +190,12 @@ function NavbarHomePage(isactive){
 
 <div class={NavbarStyles.list}>
 <ul id={NavbarStyles.navbar}>
-  
     <li><button onClick={showFilter} title="Filter" className={NavbarStyles.buttonFilter}><img src={filterIcon} alt="card__image" width="40"></img>
             </button></li>
-    <li><a  style={{ color: isactive.isactive === "true" ? "#17cf97" : null }}href="/signup">Sign Up</a></li>
-    <li><a style={{ color: isactive.isactive === "false" ? "#17cf97" : null }}href="/login">Login</a></li>
+    <li><a  style={{ color: isactive.isactive === "true" ? "#17cf97" : null }}href>View </a></li>
+    <li><a href onClick={showLogout}style={{ color: isactive.isactive === "false" ? "#17cf97" : null }}>Logout</a></li>
     <li><button onClick={showDropDown}><img src={language} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
-    <li><button onClick={showGender}><img src={genderIcon} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
+    <li><button onClick={navigateTo}><img src={profileIcon} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
 </ul>
 </div>
 <div className={NavbarStyles.searchbox}>
@@ -207,26 +223,20 @@ function NavbarHomePage(isactive){
             </div>
 
             }
-        {gender && <div className={NavbarStyles.shadearea}>
-            <div class={NavbarStyles.country}>
+        {logout&& <div className={NavbarStyles.shadearea}>
+        <div className={NavbarStyles.logoutcontainer}>
+        <h3 className={NavbarStyles.logouttext1}>You are attempting to log out!</h3>
+        <h6 className={NavbarStyles.logouttext2}>Are you sure?</h6>
+        <button className={NavbarStyles.surebutton} onClick={handleLogout}>Yes,I'm Sure</button>
+        <a className={NavbarStyles.notext}href="/InstructorHomePage">No,I changed my mind</a>
+        </div>
+
+        </div>
         
-        <button class={NavbarStyles.closeButton} onClick={()=>isGender(false)}><img src={closeButton} alt="card__image" width="24"></img></button>
-        <div class={NavbarStyles.forms}>
-        <label for="countries" >Select a Gender :</label>
-            <Box width="250px">
-            <form action="" className={NavbarStyles.gender}>
-            <input type="radio" name="gender" value="male"/> Male<br/>
-            <input type="radio" name="gender" value="female"/> Female<br/>
-            <input type="radio" name="gender" value="other"/> Other
-            <button>Submit</button>
-
-          </form>
-            </Box>
-  </div>    </div>
-            </div>
-
-            }
-      
+            
+        
+        }
+    
                           { showfilter && <div className={NavbarStyles.shadearea}>
                   <div className={NavbarStyles.modalcontainer}>
           <div className={NavbarStyles.rectangle}> <h4 className={NavbarStyles.rectangleText}>Filter our Courses </h4>       
@@ -275,4 +285,4 @@ function NavbarHomePage(isactive){
         </>
     )
 }
-export default NavbarHomePage
+export default InstructorNavBar

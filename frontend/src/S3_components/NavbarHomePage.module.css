@@ -73,6 +73,7 @@ left:20px;
     border-style: solid;
     border:1px solid black;
     position: absolute;
+    z-index: 2;
     top: 20%;
     left: 32%;
   width: 400px;
@@ -127,7 +128,7 @@ left:20px;
 .shadearea{
     width: 100vw;
     height: 100vh;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.7);
@@ -139,33 +140,6 @@ left:20px;
 .buttonFilter{
     margin-left: -100px;
 }  
-/* .modalcontainer{
-    width: 300px;
-    height: auto;
-    padding: 20px;
-    background-color: #fff;
-    position: relative;
-    border-radius: 20px;
-
-  }  
-.deleteicon{
-    background-color: #fff;
-    width: 30px;
-    height: 20px;
-    border-radius: 60px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(0, 0, 0);
-    font-size: 12px;
-    font-weight: 600;
-    position: absolute;
-    top: 3px;
-    right: 10px;
-    cursor: pointer;
-
-  } */
 
   .modalcontainer{
     width: 300px;
@@ -174,7 +148,7 @@ left:20px;
     background: #FFFFFF;
     position: relative;
     border-radius: 40px 40px 40px 40px;
-
+    z-index: 2;
   }
   
   .rectangle{
@@ -331,4 +305,72 @@ border:none;
   margin-top: 20px;
   margin-left: -40px;
   width: 150px;
+}
+.logoutcontainer{
+  position: relative;
+  width: 600px;
+  height: 330px;
+padding: 20px;
+  background: #FFFFFF;
+  position: relative;
+  border-radius: 40px 40px 40px 40px;
+
+}
+.logouttext1{
+  position: absolute;
+  width: 675px;
+  height: 115px;
+  left: -30px;
+  top: 55px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+}
+.logouttext2{
+  position: absolute;
+width: 438px;
+height: 48px;
+left: 90px;
+top: 120px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 100;
+font-size: 32px;
+line-height: 39px;
+text-align: center;
+
+}
+.surebutton{
+  position: absolute;
+
+width: 120px;
+height: 40px;
+left: 130px;
+top: 230px;
+background: #17cf97 ;
+color: white;
+border:none;
+border-radius: 40px 40px 40px 40px;
+}
+
+.notext{
+  position: absolute;
+  width: 235px;
+  height: 25px;
+  left: 250px;
+  top: 240px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 15px;
+  line-height: -80px;
+  /* identical to box height */
+  
+  text-align: center;
 }

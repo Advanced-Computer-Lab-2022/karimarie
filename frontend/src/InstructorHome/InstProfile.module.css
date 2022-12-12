@@ -1,0 +1,340 @@
+.all{
+    z-index: -1;
+    position: relative;
+}
+
+
+.firsttitle{
+    position: relative;
+    width: 152px;
+    height: 21px;
+    left: 240px;
+    top: 153px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: rgba(140, 140, 140, 0.94);    
+}
+.name{
+    position: absolute;
+width: 260px;
+height: 38px;
+left: 220px;
+top: 174px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 900;
+font-size: 40px;
+line-height: 48px;
+text-align: center;
+
+color: #000000;
+
+}
+.shortdescription{
+    position: absolute;
+width: 645px;
+height: 24px;
+left: 190px;
+top: 225px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 24px;
+text-align: center;
+
+color: #000000;
+}
+.totalstudents{
+    position: absolute;
+    width: 146px;
+    height: 17px;
+    left: 220px;
+    top: 309px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    
+    color: #8C8C8C;
+    
+}
+.totalstudentsnumber{
+    position: absolute;
+    width: 101px;
+    height: 35px;
+    left: 238px;
+    top: 338px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    
+    color: #000000;
+    
+}
+.totalreviews{
+    position: absolute;
+    width: 146px;
+    height: 15px;
+    left: 380px;
+    top: 309px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    
+    color: #8C8C8C;
+    
+}
+.totalreviewsnumber{
+    position: absolute;
+    width: 101px;
+    height: 35px;
+    left: 400px;
+    top: 338px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    
+    color: #000000;
+}
+.averagerating{
+    position: absolute;
+width: 146px;
+height: 15px;
+left: 539px;
+top: 308px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+
+color: #8C8C8C;
+
+}
+.averageratingnumber{
+    position: absolute;
+    width: 101px;
+    height: 35px;
+    left: 560px;
+    top: 338px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    
+    color: #000000;
+    
+}
+.aboutme{
+    position: absolute;
+    width: 146px;
+    height: 17px;
+    left: 226px;
+    top: 423px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    
+    color: #000000; 
+}
+.aboutmetext{
+    position: absolute;
+width: 673px;
+height: 311px;
+left: 247px;
+top: 466px;
+text-indent: 4ch;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+
+color: #000000;
+
+}
+.image{
+
+position: absolute;
+width: 203px;
+height: 180px;
+left: 1100px;
+top: 160px;
+border-radius: 50%;
+}
+.changepassword {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+    position: absolute;
+left: 1100px;
+top: 360px;
+width: 203px;
+height: 40px;
+font-weight: 500;
+  }
+  .editicon{
+    position: absolute;
+    width: 24px;
+    height: 23px;
+    left: 360px;
+    top: 425px;
+  }
+  .editbutton{
+    background-color: white;
+    width: 0.2px;
+    height: 0.2px;
+  }
+  .shadearea{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modalcontainer{
+    width: 500px;
+    height: 350px;
+    padding: 20px;
+    background: #FFFFFF;
+    position: relative;
+    border-radius: 40px 40px 40px 40px;
+
+  }
+  .editbiotext{
+    position: absolute;
+    width: 231px;
+    height: 45px;
+    left: 134px;
+    top: 41px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 20px;
+    text-align: center;
+    
+    color: black;
+    
+  }
+  .closeedit{
+    background: #fff;
+    border: none;
+    float: right;
+    padding-right: 0.7rem;
+    padding-top: 0.1rem;
+   
+  }
+  .edittextfield{
+    position: absolute;
+  width:400px;
+    height: 160px;
+    left: 50px;
+    top: 100px;
+  }
+  .submiteditbutton{
+    position: absolute;
+    width: 100px;
+    height: 48px;
+    left: 199px;
+    top: 280px;
+    border-radius: 40px 40px 40px 40px;
+    background: #17cf97;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 44px;
+    text-align: center;
+    border:black;
+
+    color: #FFFFFF;
+    
+  }
+  .changepass{
+  position: absolute;
+    left:76px;
+    top:25px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 20px;
+    text-align: right;
+    
+    color: black;
+  }
+  .passtextfield2{
+    position: absolute;
+    top:190px;
+    left:-60px;
+  }
+  .confirmpass{
+    position: absolute;
+    top:175px;
+    left:185px;
+  }
+  .passtextfield1{
+    position: absolute;
+    top:80px;
+    left:130px;
+  }
+  .newpass{
+    position: absolute;
+    top:65px;
+    left:190px;
+  }
+  .submitpassbutton{
+    position: absolute;
+    width: 100px;
+    height: 48px;
+    left: 210px;
+    top: 285px;
+    border-radius: 40px 40px 40px 40px;
+    background: #17cf97;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 44px;
+    text-align: center;
+    border:black;
+    color: #FFFFFF;
+  }

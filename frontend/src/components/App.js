@@ -20,6 +20,9 @@ import HomePage from '../S3_components/HomePage';
 import FilterSearchPage from '../S3_components/FilterSearchPage';
 import SignUp from '../S3_components/SignUp';
 import Login from '../S3_components/Login';
+import InstructorHomePage from '../InstructorHome/InstructorHomePage';
+import ForgetPassword from '../S3_components/ForgetPassword';
+import InstProfile from '../InstructorHome/InstProfile';
 const App = () => {
   console.log('hooo')
   return <React.Fragment>
@@ -42,7 +45,9 @@ const App = () => {
         <Route path="/FilterSearchPage" element={<FilterSearchPage/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<Login/>} />
-
+        <Route path="/InstructorHomePage" element={<InstructorHomePage/>} />
+        <Route path="/ForgetPassword" element={<ForgetPassword/>} />
+        <Route path="/profile" element={<InstProfile/>} />
       </Routes>
     </main>
   </React.Fragment>

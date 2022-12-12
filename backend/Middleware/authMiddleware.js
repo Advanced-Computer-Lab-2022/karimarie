@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 const requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
-    
+  const token = req;
+    console.log(token)
   // check json web token exists & is verified
   if (token) {
     jwt.verify(token, 'supersecret', (err, decodedToken) => {

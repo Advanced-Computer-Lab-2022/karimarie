@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "epress": "^0.0.1-security",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "git": "^0.1.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.7",

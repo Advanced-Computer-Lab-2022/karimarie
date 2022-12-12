@@ -3,20 +3,6 @@ const traineeTable=require("../models/Trainee");
 const adminTable=require("../models/Admin");
 const requestsTable=require("../models/Requests")
 
-const getAllInst=async(req,res,next)=>{
-    let inst;
-    try{
-      inst=await instTable.find();
-    }
-    catch(err){
-       console.log(err);
-    }
-    if(!inst){
-       return res.status(404).json({message:"no"})
-    }
-    return res.status(200).json({inst:inst})
-}
-
 const addInst=async (req,res,next)=>{
     const{firstName,lastName,userName,password}=req.body
     let inst;
@@ -28,11 +14,20 @@ const addInst=async (req,res,next)=>{
             password
         })
         await inst.save();
-        return res.status(201).json({inst})
+        return res.json({success: true, message: 'Successfully Added!'});
     }
     catch(error){
         //console.log(error)
-        return res.status(400).json({error: error.message})
+        instTable.find({userName:req.body.userName},function(err,person){
+            if(err){
+                return res.json({success: false, message: 'DataBase Error,Please Wait!'});
+
+            }
+            else{
+                return res.json({success: false, message: 'Username already taken!'});
+
+            }
+        })
     }        
 }
 
@@ -51,10 +46,21 @@ const addCorpTrainee=async (req,res,next)=>{
 
     })
         await corpTrainee.save();
-        return res.status(201).json({corpTrainee});
-}
+        return res.json({success: true, message: 'Successfully Added!'});
+    }
 catch(error){
-    return res.status(400).json({error:error.message})
+    traineeTable.find({userName:req.body.userName},function(err,person){
+        if(err){
+            
+            return res.json({success: false, message: 'DataBase Error,Please Wait!'});
+
+        }
+        else{
+            console.log("ddd")
+            return res.json({success: false, message: 'Username already taken!'});
+
+        }
+    })
 }
 }
 const addAdmin=async (req,res,next)=>{
@@ -67,12 +73,22 @@ const addAdmin=async (req,res,next)=>{
              password
          })
          await adm.save();
-         return res.status(201).json({adm})
-     }
-     catch(err){ return res.status(404).json({message:"no"})}
+         return res.json({success: true, message: 'Successfully Added!'});
+        }
+     catch(err){
+         adminTable.find({userName:req.body.userName},function(err,person){
+        if(err){
+            return res.json({success: false, message: 'DataBase Error,Please Wait!'});
+
+        }
+        else{
+            return res.json({success: false, message: 'Username already taken!'});
+
+        }
+    })}
     
     
- }
+}
  const viewReq=async(req,res)=>{ //hayraga3ly array esmo req kol index fe object equivalant to a row in the table
     try{
         let req=await requestsTable.find({});

@@ -5,11 +5,34 @@ app.use(express.json())
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+const session = require('express-session')
 const corsOptions ={
-  origin:true, 
+  origin:"http://localhost:3000", 
   credentials:true,            //access-control-allow-credentials:true
 }
+
 app.use(cors(corsOptions));
+app.use(express.urlencoded({extended: false}))
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+    'Access-Control-Expose-Headers', "Set-Cookie"
+  );
+  next();
+});
+app.use(session({
+  resave:false,
+  saveUninitialized:false,
+  secret:"supersecret",
+  cookie:{
+    maxAge:1000*60*60,
+    sameSite:"none",
+    secure:true,
+  }
+}))
+app.set("trust proxy", 1);
 const port = process.env.PORT || "2000";
 const MongoURI = 'mongodb+srv://networks:user123@cluster0.pvjwiid.mongodb.net/?retryWrites=true&w=majority' ;
 //IMPORTING MODELS

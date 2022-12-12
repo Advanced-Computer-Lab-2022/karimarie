@@ -49,23 +49,25 @@ const createCourse=async (req,res,next)=>{
 }
 
 const getMyCourses=async (req,res) => {
-  if (req.cookies.jwt) {
-    jwt.verify(req.cookies.jwt, 'supersecret', (err, decodedToken) => {
+  var decodeID="";
+  console.log(req.params.token)
+  if (req.params.token) {
+    jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
       if (err) {
         // console.log('You are not logged in.');
         // res send status 401 you are not logged in
         res.status(401).json({message:"You are not logged in."})
         // res.redirect('/login');
       } else {
-        console.log(decodedToken.name);
+        decodeID=decodedToken.name;
+        
       }
     });
   }
    let myCourses={};
-   if(req.params.id){
-       myCourses= {instructor: req.params.id} 
+   if(decodeID){
+       myCourses= {instructor: decodeID} 
    }
-   //console.log(myCourses)
    const resultList= await courseTable.find(myCourses).populate('instructor');
    if(!resultList){
        return res.status(404).json({error :'Invalid Input'});

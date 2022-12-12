@@ -4,9 +4,11 @@ const subjectTable=require("../models/Subject")
 const instructorReviews=require("../models/instructorReviews")
 const traineeTable=require("../models/Trainee")
 const examTable=require("../models/Exam")
+const adminTable=require("../models/Admin");
 const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 
 const getAllCourses = async (req, res) => {
   
@@ -162,7 +164,7 @@ const searchCourse = async (req, res) => {
 
         let keyCourses = await courseTable.find({
         $or: [
-          { title: { $regex: req.params.key,$options:'i' } },
+          { title: { $regex: req.params.key ,$options:'i' } },
           {
             subject: { $regex: req.params.key ,$options:'i'},
           },
@@ -310,19 +312,46 @@ const login = async (req, res) => {
   // TODO: Login the user
   const username=req.body.userName;
   const password=req.body.password;
-  const user= await instTable.findOne({userName :username})
+  const userInst= await instTable.findOne({userName :username})
+  const userTrainee= await traineeTable.findOne({userName :username})
+  const userAdmin= await adminTable.findOne({userName :username})
   // const x= bcrypt.compare(password, user.password)
-      if (user) {
+      
         // Send JWT
-        const token = createToken(user._id);
+        var user="";
+        if(userInst){
+          user=userInst
+          const token = createToken(user._id);
+          await instTable.findByIdAndUpdate(
+            userInst._id,
+            {
+              token: token,
+            },
+            { new: true }
+          );
+          res.status(200).cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+          
+           return res.status(200).json({ token , msg:"Instructor"})
+        }
+        if(userTrainee){
+          user=userTrainee
+          const token = createToken(user._id);
+        res.status(200).cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        return res.status(200).json({token, msg: "Trainee" })
+        }
+        if(userAdmin){
+          user=userAdmin
+          const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({ msg: "Login success" })
- 
-
-      } else {
+        return res.status(200).json({token, msg: "Admin" })
+        }
+       else {
         // response is OutgoingMessage object that server response http request
-        return res.json({success: false, message: 'passwords do not match'});
+        return res.json({success: false, msg: 'no'});
       }
     ;
 }
-  module.exports={getAllCourses,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+const logout = async (req, res) => {
+  return res.cookie("jwt","",{httpOnly:true,maxAge:1});
+}
+  module.exports={getAllCourses,logout,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
