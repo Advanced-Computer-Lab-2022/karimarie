@@ -128,7 +128,7 @@ function NavbarHomePage(isactive){
             e.preventDefault()
               searchCourse().then((data) => {           
               let x=JSON.stringify(data.priceList)
-              window.location.href=`FilterSearchPage?courses=${x}`
+              window.location.href=`FilterSearchPage?type=Guest&courses=${x}`
             }
               )
             }}
@@ -136,7 +136,7 @@ function NavbarHomePage(isactive){
               e.preventDefault()
                 searchCourse().then((data) => {           
                 let x=JSON.stringify(data.priceList)
-                window.location.href=`FilterSearchPage?courses=${x}`
+                window.location.href=`FilterSearchPage?type=Guest&courses=${x}`
               }
                 )
               }
@@ -184,7 +184,9 @@ function NavbarHomePage(isactive){
 </div>
 <div className={NavbarStyles.searchbox}>
 
-    <button className={NavbarStyles.btnsearch} onClick={handleSearch}><i class="fas fa-search"><img src={searchIcon} alt="card__image" ></img></i></button>
+    <button className={NavbarStyles.btnsearch} onClick={handleSearch}><i class="fas fa-search">
+      {/* <img src={searchIcon} alt="card__image" ></img> */}
+      </i></button>
     <input type="text" className={NavbarStyles.inputsearch}  onKeyPress={handleSearch2} value={search} onChange={(e) => setSearch(e.target.value)} 
  placeholder="Type to Search..."></input>
   </div>

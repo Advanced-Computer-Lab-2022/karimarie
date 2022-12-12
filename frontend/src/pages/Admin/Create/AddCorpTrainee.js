@@ -15,19 +15,20 @@ const AddCorpTrainee = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     sendRequest()
-      .then((data) =>{setErrorM(data.message);setError(data.success);})
-      console.log(error);
-      if(!error){
-        IsShowError(true);
-      }
-      if(error){
-        IsShowError(false)
-        setFirstName('')
-        setLastname('')
-        setUserName('')
-        setPassword('')
-        setEmail('')
-      }
+      .then((data) =>{setErrorM(data.message);setError(data.success);
+        if(!data.message){
+          IsShowError(true);
+        }
+        if(data.message){
+          IsShowError(true)
+          setFirstName('')
+          setLastname('')
+          setUserName('')
+          setPassword('')
+          setEmail('')
+        }
+      })
+      
     
   }
     const sendRequest = async () => {
@@ -79,7 +80,7 @@ const AddCorpTrainee = () => {
         value={password}  ></input>
     </div>
  
-    <button className={x.b}>Create Corporate Trainee!</button>
+    <button className={x.b}>Create Corporate Trainee</button>
     </div>
     </div>
     </form>

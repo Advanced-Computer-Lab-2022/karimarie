@@ -1,7 +1,8 @@
 .all{
-    z-index: -1;
+    z-index: 1;
     position: relative;
 }
+
 
 
 .firsttitle{
@@ -23,7 +24,7 @@
     position: absolute;
 width: 260px;
 height: 38px;
-left: 220px;
+left: 150px;
 top: 174px;
 
 font-family: 'Inter';
@@ -191,7 +192,7 @@ position: absolute;
 width: 203px;
 height: 180px;
 left: 1100px;
-top: 160px;
+top: 110px;
 border-radius: 50%;
 }
 .changepassword {
@@ -200,10 +201,33 @@ border-radius: 50%;
     border: 2px solid #4CAF50; /* Green */
     position: absolute;
 left: 1100px;
-top: 360px;
+top: 300px;
 width: 203px;
 height: 40px;
 font-weight: 500;
+  }
+  .changeEmail {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+    position: absolute;
+left: 1100px;
+top: 350px;
+width: 203px;
+height: 40px;
+font-weight: 500;
+  }
+  .ViewRatings{
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+    position: absolute;
+left: 1100px;
+top: 400px;
+width: 203px;
+height: 40px;
+font-weight: 500;
+  
   }
   .editicon{
     position: absolute;
@@ -235,6 +259,7 @@ font-weight: 500;
     background: #FFFFFF;
     position: relative;
     border-radius: 40px 40px 40px 40px;
+    z-index: 2;
 
   }
   .editbiotext{
@@ -254,6 +279,22 @@ font-weight: 500;
     color: black;
     
   }
+  .editemailtext{
+    position: absolute;
+    width: 331px;
+    /* height: 45px; */
+    left: 84px;
+    top: 41px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 20px;
+    text-align: center;
+    
+    color: black;
+  }
   .closeedit{
     background: #fff;
     border: none;
@@ -268,6 +309,13 @@ font-weight: 500;
     height: 160px;
     left: 50px;
     top: 100px;
+  }
+  .editemailfield{
+    position: absolute;
+  width:400px;
+    height: 50px;
+    left: 50px;
+    top: 150px;
   }
   .submiteditbutton{
     position: absolute;
@@ -291,11 +339,11 @@ font-weight: 500;
   .changepass{
   position: absolute;
     left:76px;
-    top:25px;
+    top:40px;
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 800;
-    font-size: 36px;
+    font-weight: 600;
+    font-size: 34px;
     line-height: 20px;
     text-align: right;
     
@@ -303,8 +351,8 @@ font-weight: 500;
   }
   .passtextfield2{
     position: absolute;
-    top:190px;
-    left:-60px;
+    top:200px;
+    left:130px;
   }
   .confirmpass{
     position: absolute;
@@ -313,19 +361,19 @@ font-weight: 500;
   }
   .passtextfield1{
     position: absolute;
-    top:80px;
+    top:110px;
     left:130px;
   }
   .newpass{
     position: absolute;
-    top:65px;
+    top:85px;
     left:190px;
   }
   .submitpassbutton{
     position: absolute;
     width: 100px;
     height: 48px;
-    left: 210px;
+    left: 190px;
     top: 285px;
     border-radius: 40px 40px 40px 40px;
     background: #17cf97;
@@ -338,3 +386,110 @@ font-weight: 500;
     border:black;
     color: #FFFFFF;
   }
+
+  .ViewCourses{
+    background-color: whitesmoke;
+    position: relative;
+    width: 700px;
+    height: 140px;
+    margin-top: 1px;
+    margin-left: -2px;
+  }
+  .ViewCourses2{
+    background-color: whitesmoke;
+    margin-top: 650px;
+    position: relative;
+    width: 700px;
+    height: 100%;
+    margin-left: 250px;
+  }
+  .ViewCourses2 p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin-left: -530px;
+    color: #000000; 
+  }
+  .courseimg{
+    margin-top: 40px;
+    margin-left: 10px;
+    height: 140px;
+    position: relative;
+  }
+  .ViewCourses h2{
+    margin-left: 160px;
+    margin-top: -130px;
+    font-size: 16px;
+  }
+  .ViewCourses p{
+    margin-left: -290px;
+    margin-top: -30px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  .ViewCourses i{
+    margin-left: 160px;
+    margin-top: 5px;
+  }
+  .starimage1{
+    margin-left: 250px;
+    margin-top: -190px;
+  }
+  .rat{
+    margin-top: 9px;
+    margin-left: -69px;
+  }
+  .rat p{
+    font-weight: 400;
+
+  }
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+.searchC {
+  width: 100%;
+  position: relative;
+  height: 36px;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #17cf97;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #17cf97;
+}
+
+.searchButtonC {
+  width: 40px;
+  /* height: 36px; */
+  border: 1px solid #17cf97;
+  background: #17cf97;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 60%;
+  position: absolute;
+ margin-left: 210px;
+ margin-top: -20px;
+  transform: translate(-50%, -50%);
+}
+ 

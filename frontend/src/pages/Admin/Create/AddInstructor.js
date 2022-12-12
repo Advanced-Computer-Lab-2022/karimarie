@@ -28,17 +28,19 @@ const AddInstructor = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     sendRequest()
-      .then((data) =>{setErrorM(data.message);setError(data.success);})
-      if(!error){
-        IsShowError(true);
-      }
-      if(error){
-        IsShowError(false);
-        setFirstName('')
-        setLastname('')
-        setUserName('')
-        setPassword('')
-      }
+      .then((data) =>{setErrorM(data.message);setError(data.success);
+        if(!data.succes){
+          IsShowError(true);
+        }
+        if(data.success){
+          IsShowError(true);
+          setFirstName('')
+          setLastname('')
+          setUserName('')
+          setPassword('')
+        }
+      })
+      
 
      
   };
@@ -70,7 +72,7 @@ const SuccMessage = () => (
     <input className={x.textt}  placeholder="Password"required onChange={(e) => setPassword(e.target.value)} 
         value={password}  ></input>
     </div>
-    <button className={x.b}>Create Instructor!</button>
+    <button className={x.b}>Create Instructor</button>
     </div>
     </div>
     </form>

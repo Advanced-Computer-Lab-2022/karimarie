@@ -11,9 +11,9 @@ instRouter.get('/filterMyPrice/:instructor/:price/:currencyFilter',filterMyCPric
 instRouter.get('/filterMySub/:instructor/:subject',filterMyCSubject);
 instRouter.get('/searchTitle/:instructor/:search',searchInstCourse);
 instRouter.get("/getInstructorReviews/:id",getInstructorReviews)
-instRouter.get("/getByid/:id",getById)
-instRouter.post("/editbio/:id",editbio)
-instRouter.post("/editemail/:id",editemail)
+instRouter.get("/getByid/:token",getById)
+instRouter.post("/editbio/:token",editbio)
+instRouter.post("/editemail/:token",editemail)
 instRouter.post("/changepasswordInstructor",changepasswordInstructor)
 instRouter.get("/sendMailInstructor",sendMailInstructor)
 instRouter.post('/createExam',createExam);

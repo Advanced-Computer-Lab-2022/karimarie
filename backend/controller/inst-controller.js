@@ -50,25 +50,22 @@ const createCourse=async (req,res,next)=>{
 
 const getMyCourses=async (req,res) => {
   var decodeID="";
+  var resultList="";
   console.log(req.params.token)
   if (req.params.token) {
     jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
       if (err) {
-        // console.log('You are not logged in.');
-        // res send status 401 you are not logged in
         res.status(401).json({message:"You are not logged in."})
-        // res.redirect('/login');
       } else {
-        decodeID=decodedToken.name;
-        
+        decodeID=decodedToken.name; 
       }
     });
   }
-   let myCourses={};
-   if(decodeID){
-       myCourses= {instructor: decodeID} 
-   }
-   const resultList= await courseTable.find(myCourses).populate('instructor');
+  let myCourses={};
+  if(decodeID){
+      myCourses= {instructor: decodeID} 
+      resultList=  await courseTable.find(myCourses).populate('instructor');
+  }
    if(!resultList){
        return res.status(404).json({error :'Invalid Input'});
    }
@@ -135,10 +132,19 @@ const getInstructorReviews =  async (req, res) => {
 
 const getById = async (req, res, next) => {
    //console.log("s")
-   const id = req.params.id;
-   let course;
+   const id = req.params.token;
+   var decodeID="";
+   if(req.params.token){
+    jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name;
+      }
+    });
+   }
    try {
-     inst = await instTable.findById(id);
+     inst = await instTable.findById(decodeID);
      inst.save()
      return res.status(200).json({ inst });
    } catch (err) {
@@ -147,30 +153,52 @@ const getById = async (req, res, next) => {
  };
 
  const editbio = async (req, res) => {
-   const instid = req.params.id;
-   const { biography } = req.body;
- 
-   if (instid) {
-     const finalres = await instTable.findByIdAndUpdate(
-       instid,
-       {
-         biography: biography,
-       },
-       { new: true }
-     );
-     await res.status(200).json(finalres);
-   } else {
+  var decodeID="";
+  var finalres=""
+  if (req.params.token) {
+    jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name;
+      }
+    });
+  }
+  const { biography } = req.body;
+        if(decodeID){
+          console.log("ok")
+           finalres =  await instTable.findByIdAndUpdate(
+            String(decodeID),
+            {
+              biography: biography,
+            },
+            { new: true }
+          );
+        }
+   if(finalres){
+    await res.status(200).json(finalres);
+
+   }
+    else {
      res.status(400).json({ error: "couldn't" });
    }
  };
 
  const editemail = async (req, res) => {
-   const instid = req.params.id;
+  var decodeID="";
    const { email } = req.body;
- 
-   if (instid) {
+   if (req.params.token) {
+    jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name;
+      }
+    });
+  }
+   if (decodeID) {
      const finalres = await instTable.findByIdAndUpdate(
-       instid,
+       decodeID,
        {
          email: email,
        },

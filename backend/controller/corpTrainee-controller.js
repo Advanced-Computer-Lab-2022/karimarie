@@ -14,40 +14,7 @@ const getAllCourses = async (req, res) => {
     catch(error){res.status(404).json({error:error.message}) }
   }
 
-  // const addCourseReview = async (req, res) => {
-  //   const course = await courseTable.findById(req.params.id);
-  //   let myreviews={};
-  //    if(req.params.id){
-  //        myreviews= {course: req.params.id} 
-  //    }
-  // try{
-  //   console.log("tryyyyy")
-  //   let data = {
-  //       rating: req.body.rating,
-  //       description: req.body.description,
-  //       course: req.params.course
-  //   }
-   
-  //   const review = await courseReviews.create(data)
   
-  //   const courseReview= await courseReviews.find(req.params.id);
-  //   //console.log(instructorReview);
-    
-  //   const length= courseReview.length
-  //   if(length!=0){
-  //   course.rating =courseReview.reduce((acc, item) => item.rating + acc, 0) /length
-  //   await course.save()
-  //   console.log(course.rating);
-  //   }
-  //   res.status(200).send(review)
-  
-  // }
-  // catch(err){
-  //   console.log(err)
-  //   return res.status(404).json({message:err.message})
-  // }
-  
-  // }
 
   const addCourseReview = async (req, res) => {
    
@@ -68,7 +35,7 @@ const getAllCourses = async (req, res) => {
     const courseReview= await courseReviews.find(myreviews);
     const length= courseReview.length
     if(length!=0){
-    course.rating =(courseReview.reduce((acc, item) => item.rating + acc, 0)) /length
+    course.rating =Math.ceil(((courseReview.reduce((acc, item) => item.rating + acc, 0)) /length)*10)/10
     await course.save()
     }
     res.status(200).send(review)

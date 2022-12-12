@@ -205,8 +205,7 @@ try{
   const instructorReview= await instructorReviews.find(myreviews);
   const length= instructorReview.length
   if(length!=0){
-  instructor.rating =
-  instructorReview.reduce((acc, item) => item.rating + acc, 0) /length
+  instructor.rating =Math.ceil((instructorReview.reduce((acc, item) => item.rating + acc, 0) /length)*10)/10
   await instructor.save()
   }
   res.status(200).send(review)
@@ -322,13 +321,6 @@ const login = async (req, res) => {
         if(userInst){
           user=userInst
           const token = createToken(user._id);
-          await instTable.findByIdAndUpdate(
-            userInst._id,
-            {
-              token: token,
-            },
-            { new: true }
-          );
           res.status(200).cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
           
            return res.status(200).json({ token , msg:"Instructor"})

@@ -21,8 +21,9 @@ function Login() {
       },{withCredentials: true, credentials: 'include'})
       
       .catch((err) => console.log(err));
+      console.log(res.data.msg)
       return res.data;
-      // message=res.data.msg;
+      
     };
     const handleLogin=(e)=>{
         e.preventDefault();
@@ -33,7 +34,14 @@ function Login() {
           isShowText(false);
           localStorage.setItem("token",data.token)
           window.location.href="/InstructorHomePage"
-        }})
+        }
+        else if(data.msg.localeCompare("Admin")===0) {
+          isShowText(false);
+          localStorage.setItem("token",data.token)
+          window.location.href="/hii"
+        }
+        
+      })
 
     }
   return (

@@ -188,13 +188,15 @@ bodyy{
 }
 .img{
   width: 32px;
-  height: 22px;
+  height: 30px;
   padding-top: 6px;
+  display: inline-flex;
   
 }
 
-.span{
+.span1{
   margin-left: 12px;
+  display: inline-flex;
 }
 .reportsNum{
   margin-left: 22px;

@@ -22,15 +22,17 @@ const AddAdmin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     sendRequest()
-      .then((data) =>{setErrorM(data.message);setError(data.success);})
-      if(!error){
-        IsShowError(true);
-      }
-      if(error){
-        IsShowError(false)
-        setUserName('')
-        setPassword('')
-      }
+      .then((data) =>{setErrorM(data.message);setError(data.success);
+        if(!data.message){
+          IsShowError(true);
+        }
+        if(data.message){
+          IsShowError(true)
+          setUserName('')
+          setPassword('')
+        }
+      })
+      
   };
   const SuccMessage = () => (
     <div  className={error ? x.yay : x.error}>{errorM}</div>  
@@ -52,7 +54,7 @@ const AddAdmin = () => {
     <input className={x.textt} required placeholder="Password" onChange={(e) => setPassword(e.target.value)} 
         value={password}  ></input>
     </div>
-    <button className={x.b}>Create Admin!</button>
+    <button className={x.b}>Create Admin</button>
     </div>
     </div>
     </form>

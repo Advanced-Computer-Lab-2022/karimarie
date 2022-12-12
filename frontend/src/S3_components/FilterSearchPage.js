@@ -11,13 +11,24 @@ import f from "../S3_components/FilterSearchPage.module.css"
 const FilterSearchPage=()=>{
     const params = new URLSearchParams(window.location.search);
     const x = params.get('courses');
+    const type=params.get('type')
     const [courses,setCourses]=useState(JSON.parse(x));
+    const handleClearNavigate=()=>{
+      if(type==="Instructor"){
+        window.location.href='/InstructorHomePage'
+      }
+      if(type==="Admin"){
+        window.location.href='/Start'
+      }
+      if(type==="Guest"){
+        window.location.href='/'
+      }
+    }
   return(
     <React.Fragment>
         <div>
         <NavbarHomePage></NavbarHomePage>
-          <button className={f.button79} onClick={()=>{window.location.href=`/ `
-}}>Clear Filter</button>
+          <button className={f.button79} onClick={handleClearNavigate}>Clear Filter</button>
          <div class={f.container}>
 
         {courses.length!==0 && courses.map((courses)=>(<CourseCard

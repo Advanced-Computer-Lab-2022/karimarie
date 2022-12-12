@@ -93,20 +93,20 @@ const Start = () => {
       <div className={l.totCourses}>
         <p className={l.numberOf}>Number Of Courses</p>
         <img   src={require('../Admin/encyclopedia.png')}  className={l.img}/>
-        <span className={l.span}>12</span>
+        <span className={l.span1}>12</span>
 
       </div>
       <div className={l.totInst}>
         <p className={l.numberOf}>Number Of Instructors</p>
         <img   src={require('../Admin/instructor.png')} className={l.img}/>
-        <span className={l.span}>12</span>
+        <span className={l.span1}>12</span>
 
         </div>
       <div className={l.totTrainees}>
         <div className={l.x}>
         <p className={l.numberOf}>Number Of Trainees</p>
         <img src={require('../Admin/job.png')} className={l.img}></img>
-        <span className={l.span}>12</span>
+        <span className={l.span1}>12</span>
         </div>
       </div>
     

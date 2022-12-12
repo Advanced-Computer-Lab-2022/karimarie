@@ -20,6 +20,14 @@ const getAllInst=async(req,res,next)=>{
 const addInst=async (req,res,next)=>{
     const{firstName,lastName,userName,password}=req.body
     let inst;
+    let x= await adminTable.findOne({userName:req.body.userName})
+    let y= await traineeTable.findOne({userName:req.body.userName})
+    if(x){
+        return res.json({success: false, message: 'Username already taken!'});
+    }
+    else  if(y){
+        return res.json({success: false, message: 'Username already taken!'});
+    }else {
     try{
         inst =new instTable({
             firstName,
@@ -44,11 +52,20 @@ const addInst=async (req,res,next)=>{
         })
     }        
 }
+}
 
 const addCorpTrainee=async (req,res,next)=>{
     const {firstName,lastName,userName,password,email}=req.body;
     const type="corporate trainee";
     let corpTrainee;
+    let x= await adminTable.findOne({userName:req.body.userName})
+    let y= await instTable.findOne({userName:req.body.userName})
+    if(x){
+        return res.json({success: false, message: 'Username already taken!'});
+    }
+    else  if(y){
+        return res.json({success: false, message: 'Username already taken!'});
+    }else {
     try{
         corpTrainee=new traineeTable({
         firstName:firstName,
@@ -70,17 +87,26 @@ catch(error){
 
         }
         else{
-            console.log("ddd")
             return res.json({success: false, message: 'Username already taken!'});
 
         }
+    
     })
-}
+    
+}}
 }
 const addAdmin=async (req,res,next)=>{
     
      const{userName,password}=req.body
      let adm;
+     let x= await instTable.findOne({userName:req.body.userName})
+     let y= await traineeTable.findOne({userName:req.body.userName}) 
+     if(x){
+        return res.json({success: false, message: 'Username already taken!'});
+    }
+    else  if(y){
+        return res.json({success: false, message: 'Username already taken!'});
+    }else {
      try{
          adm =new adminTable({
              userName,
@@ -100,7 +126,7 @@ const addAdmin=async (req,res,next)=>{
 
         }
     })}
-    
+}
     
 }
  const viewReq=async(req,res)=>{ //hayraga3ly array esmo req kol index fe object equivalant to a row in the table
