@@ -3,8 +3,6 @@ import {BrowserRouter} from 'react-router-dom';
 import {Route,Routes} from 'react-router-dom';
 import AllCourses from './AllCourses'
 import Choose from './Choose';
-import AddInstructor from './Admin/AddInstructor';
-import AdminHome from '../pages/AdminHome';
 import InstructorHome from '../pages/InstructorHome';
 import CorpTraineeHome from '../pages/CorpTraineeHome';
 import FilterPrice from './Filter/FilterPrice';
@@ -23,6 +21,7 @@ import Login from '../S3_components/Login';
 import InstructorHomePage from '../InstructorHome/InstructorHomePage';
 import ForgetPassword from '../S3_components/ForgetPassword';
 import InstProfile from '../InstructorHome/InstProfile';
+import Start from '../pages/Admin/Start';
 const App = () => {
   console.log('hooo')
   return <React.Fragment>
@@ -34,7 +33,6 @@ const App = () => {
         <Route path="/" element={<HomePage/>}/>
         <Route path="/Choose" element={<Fragment> <Choose/> <AllCourses/></Fragment>}/>
         <Route path="/Home" element={<AllCourses/>}/>
-        <Route path="/AdminHome" element={<AdminHome/>}/>
        // <Route path="/InstructorHome" element={<InstructorHome/>}/>
         <Route path="/CorpTraineeHome" element={<CorpTraineeHome/>}/>
         <Route path="/course/:id/:newPrice/:currencyP/:type" element={<CourseDetails/>} />
@@ -48,6 +46,7 @@ const App = () => {
         <Route path="/InstructorHomePage" element={<InstructorHomePage/>} />
         <Route path="/ForgetPassword" element={<ForgetPassword/>} />
         <Route path="/profile" element={<InstProfile/>} />
+        <Route path="/hii" element={<Start/>} />
       </Routes>
     </main>
   </React.Fragment>

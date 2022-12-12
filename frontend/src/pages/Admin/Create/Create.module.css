@@ -1,0 +1,99 @@
+.box{
+    display:flex ;
+    flex-direction: column;
+    /* border:thin groove #17cf97; */
+    width: 370px;
+    height: 290px;
+    margin-top: 53px;
+}
+x.icon{
+    margin-left: 12px;
+}
+.iconn{
+    position:absolute;
+    /* margin-left: 69px; */
+    padding-top: 17px;
+    padding-left: 36px;
+}
+.textt{
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    width: 180px;
+    margin-top: 9px;
+    margin-left: 65px;
+    display: inline;
+}
+textt:focus{
+    color: #212529;
+    background-color: #ffffff;
+    border-color: #17cf97;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #17cf97;
+    }
+          
+.label{
+    font-size: 18px;
+    font-weight: 500;
+    color: #17cf97;
+}
+
+.b{
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    padding: 5px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    vertical-align: middle;
+    border: 1px solid;
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #17cf99;
+    border-color: #1b1f2326;
+    box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+    transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    /* transition-property: color, background-color, border-color; */
+    /* width: 26px; */
+    margin-top: 23px;
+    margin-left: 220px;
+    }
+   b :hover {
+        background-color: #2c974b;
+        border-color: #1b1f2326;
+        transition-duration: 0.1s;
+    }
+
+.error{
+    font-weight: bold;
+    margin-left: 65px;
+    border: 1px solid;
+    margin: 10px 0px;
+    padding: 15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color:black;
+    background-color: #FFBABA;
+    background-image: url('https://i.imgur.com/GnyDvKN.png');
+}
+.yay{
+    font-weight: bold;
+    margin-left: 65px;
+    border: 1px solid;
+    margin: 10px 0px;
+    padding: 15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color:black;
+    background-color:#DFF2BF;
+	background-image: url('https://i.imgur.com/Q9BGTuy.png');}
+

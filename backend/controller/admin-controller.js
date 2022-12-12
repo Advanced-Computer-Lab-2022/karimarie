@@ -3,6 +3,20 @@ const traineeTable=require("../models/Trainee");
 const adminTable=require("../models/Admin");
 const requestsTable=require("../models/Requests")
 
+const getAllInst=async(req,res,next)=>{
+    let inst;
+    try{
+      inst=await instTable.find();
+    }
+    catch(err){
+       console.log(err);
+    }
+    if(!inst){
+       return res.status(404).json({message:"no"})
+    }
+    return res.status(200).json({inst:inst})
+}
+
 const addInst=async (req,res,next)=>{
     const{firstName,lastName,userName,password}=req.body
     let inst;
