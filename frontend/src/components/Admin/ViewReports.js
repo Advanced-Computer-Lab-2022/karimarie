@@ -12,6 +12,7 @@ const ViewReports = () => {
         console.log(choiceSelect)
         
     }
+
   return (
    <React.Fragment>
         <h2 className={x.title}>Reports</h2>
