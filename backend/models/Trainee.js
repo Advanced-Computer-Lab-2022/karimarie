@@ -33,6 +33,9 @@ const traineeSchema=new Schema({
     }],
     type:{
         type:String
+    },
+    money:{
+        type:Number
     }
 });
 const Trainee = mongoose.model('Trainee', traineeSchema);

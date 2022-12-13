@@ -4,6 +4,7 @@ const subjectTable=require("../models/Subject")
 const courseReviews=require("../models/coursesReviews")
 const requestsTable=require("../models/Requests")
 const traineeTable=require("../models/Trainee")
+const refundReqTable=require("../models/RefundReq")
 const getAllCourses = async (req, res) => {
   console.log("as")
     let courses;
@@ -115,4 +116,28 @@ const getAllCourses = async (req, res) => {
     }
     catch(err){ return res.status(404).json({message:err.message})}
   }
-  module.exports={getAllCourses,addCourseReview,reqAccess}
+const refundRequest=async(req,res)=>{
+  const{traineeId,courseId}=req.body
+  console.log(traineeId);
+
+  try{
+    let courseName= await courseTable.findById(courseId).select("title").exec();
+    let coursePrice= await courseTable.findById(courseId);
+    let traineeName=await traineeTable.findById(traineeId);
+    let data={
+      traineeId: traineeId,
+      courseId: courseId,
+      courseName:courseName.title,
+      traineeName:traineeName.userName,
+      amount: coursePrice.price
+    }
+    const req = await refundReqTable.create(data);
+    req.save();
+
+    return res.status(404).json(req)
+  }
+  catch(error){      return res.status(404).json({message:error.message})
+
+}
+}
+  module.exports={getAllCourses,addCourseReview,reqAccess,refundRequest}

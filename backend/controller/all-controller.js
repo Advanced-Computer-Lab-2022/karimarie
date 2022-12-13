@@ -8,6 +8,7 @@ const adminTable=require("../models/Admin");
 const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const problemTable = require("../models/Problem");
 
 
 const getAllCourses = async (req, res) => {
@@ -354,4 +355,29 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
   return res.cookie("jwt","",{httpOnly:true,maxAge:1});
 }
-  module.exports={getAllCourses,logout,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+const reportProblem= async (req, res) => {
+  const{ReportById,ReportByName,ReportByType,CourseId,Report,Type}=req.body
+   let problem;
+   try{
+    let c=await courseTable.findById(CourseId);
+    console.log(c);
+       problem =new problemTable({
+        ReportById:ReportById,
+        ReportByName:ReportByName,
+        ReportByType:ReportByType,
+        CourseId:CourseId,
+        CourseName:c.title,
+        Type:Type,
+        Report:Report,
+        Status:"Unseen"
+       })
+       await problem.save();
+  return res.status(201).json({problem:problem})
+     }
+ catch(err){
+     console.log(err)
+     return res.status(404).json({message:err.message})
+ }
+ }
+  module.exports={getAllCourses,logout,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login,
+    reportProblem}

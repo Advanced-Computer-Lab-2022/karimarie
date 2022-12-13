@@ -22,6 +22,7 @@ import InstructorHomePage from '../InstructorHome/InstructorHomePage';
 import ForgetPassword from '../S3_components/ForgetPassword';
 import InstProfile from '../InstructorHome/InstProfile';
 import Start from '../pages/Admin/Start';
+import CR from './Admin/CR';
 const App = () => {
   console.log('hooo')
   return <React.Fragment>
@@ -47,6 +48,8 @@ const App = () => {
         <Route path="/ForgetPassword" element={<ForgetPassword/>} />
         <Route path="/profile" element={<InstProfile/>} />
         <Route path="/hii" element={<Start/>} />
+        <Route path="/bye" element={<CR/>} />
+
       </Routes>
     </main>
   </React.Fragment>

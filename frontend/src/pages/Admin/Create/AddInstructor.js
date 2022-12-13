@@ -28,17 +28,21 @@ const AddInstructor = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     sendRequest()
-      .then((data) =>{setErrorM(data.message);setError(data.success);})
-      if(!error){
-        IsShowError(true);
-      }
-      if(error){
-        IsShowError(false);
-        setFirstName('')
-        setLastname('')
-        setUserName('')
-        setPassword('')
-      }
+      .then((data) =>{setErrorM(data.message);setError(data.success);console.log(data.success);
+        if(!data.success){
+          IsShowError(true);
+        }
+        if(data.success){
+          console.log("hhhh")
+          IsShowError(true);
+          setFirstName('')
+          setLastname('')
+          setUserName('')
+          setPassword('')
+        }
+  }
+      )
+      console.log(error);
 
      
   };

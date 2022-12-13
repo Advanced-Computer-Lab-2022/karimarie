@@ -17,11 +17,12 @@ const AddCorpTrainee = () => {
     sendRequest()
       .then((data) =>{setErrorM(data.message);setError(data.success);})
       console.log(error);
+      IsShowError(true);
+
       if(!error){
-        IsShowError(true);
       }
       if(error){
-        IsShowError(false)
+        // IsShowError(false)
         setFirstName('')
         setLastname('')
         setUserName('')
