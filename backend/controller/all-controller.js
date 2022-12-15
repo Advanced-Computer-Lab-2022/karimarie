@@ -356,11 +356,24 @@ const logout = async (req, res) => {
   return res.cookie("jwt","",{httpOnly:true,maxAge:1});
 }
 const reportProblem= async (req, res) => {
-  const{ReportById,ReportByName,ReportByType,CourseId,Report,Type}=req.body
+  const{ReportById,CourseId,Report,Type}=req.body
    let problem;
+   let ReportByName;
+   let ReportByType;
    try{
+    console.log(ReportById);
+    let ifInst=await instTable.findById(ReportById);
+    let ifTrainee=await traineeTable.findById(ReportById);
+    console.log(ifInst)
+    if(ifInst==null){
+     ReportByName=ifTrainee.userName;
+     ReportByType=ifTrainee.type;
+    }
+    else{
+      ReportByName=ifInst.userName;
+      ReportByType="Instructor"
+    }
     let c=await courseTable.findById(CourseId);
-    console.log(c);
        problem =new problemTable({
         ReportById:ReportById,
         ReportByName:ReportByName,
@@ -375,7 +388,7 @@ const reportProblem= async (req, res) => {
   return res.status(201).json({problem:problem})
      }
  catch(err){
-     console.log(err)
+  
      return res.status(404).json({message:err.message})
  }
  }

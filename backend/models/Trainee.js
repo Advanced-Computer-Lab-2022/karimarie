@@ -36,6 +36,9 @@ const traineeSchema=new Schema({
     },
     money:{
         type:Number
+    },
+    corporateName:{
+        type:String
     }
 });
 const Trainee = mongoose.model('Trainee', traineeSchema);

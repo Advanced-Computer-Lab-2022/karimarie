@@ -5,6 +5,7 @@ const requestsTable=require("../models/Requests")
 const refundReqTable=require("../models/RefundReq");
 const RefundReq = require("../models/RefundReq");
 const problemTable = require("../models/Problem");
+const courseTable=require("../models/Course");
 const getAllInst=async(req,res,next)=>{
     let inst;
     try{
@@ -48,7 +49,7 @@ const addInst=async (req,res,next)=>{
 }
 
 const addCorpTrainee=async (req,res,next)=>{
-    const {firstName,lastName,userName,password,email}=req.body;
+    const {firstName,lastName,userName,password,email,corporateName}=req.body;
     const type="corporate trainee";
     let corpTrainee;
     try{
@@ -59,10 +60,14 @@ const addCorpTrainee=async (req,res,next)=>{
         password:password,
         email:email,
         type:type,
-        money:0
+        money:0,
+        corporateName:corporateName
 
     })
+    console.log(corporateName);
         await corpTrainee.save();
+       let x= await traineeTable.countDocuments( { firstName: "Nada" } )
+       console.log(x);
         return res.json({success: true, message: 'Successfully Added!'});
     }
 catch(error){
@@ -116,41 +121,25 @@ const addAdmin=async (req,res,next)=>{
 }
  }
 const giveCourse=async(req,res)=>{
-    const {id,answer,courseId,objId}=req.body;
+    const {id,answer}=req.body;
+   console.log(answer);
     try{
+      
         let x=await requestsTable.findById(id);
-        if(answer){
+       let m=x._id;
+        let course=await courseTable.findById(x.courses);
+        let idd=course._id;
+        if(answer.localeCompare('true')==0){
             let trainee= await traineeTable.findOneAndUpdate(
                 {
                     _id: x.corpId
                 
                 },
-                { $push: { "courses" : courseId} }
+                { $push: { "courses" : idd} }
              )
-             let req=await requestsTable.findOneAndUpdate(
-                {
-                    _id:id
-                },
-                { $pull: { courses: { _id: objId } } },
-             )
-          
-      
-
         }
-//         let t=await traineeTable.findById(x.traineeId);
-//         let newm=x.amount+t.money;
-//         console.log(newm);
-// let xx=     await   traineeTable.findOneAndUpdate(
-//             { _id: x.traineeId },
-//             { $set:
-//                {
-//                  money: newm,
-//                }
-//             },  { new: true }
-//          )
-//          let del=await refundReqTable.findByIdAndDelete(id);
-//          console.log("hey")
-//          return res.json({success: true, message: 'Successfuly Refunded!'});
+        requestsTable.findByIdAndRemove(articleId);
+        return res.status(200).json({ course });
 
     }
     catch(error){
@@ -267,4 +256,4 @@ const editReport = async (req, res) => {
    }
 };
 
-module.exports={getAllInst,addInst,addCorpTrainee,addAdmin,viewReq,viewRefundReq,returnMoney,getReports,editReport};
+module.exports={getAllInst,addInst,addCorpTrainee,addAdmin,viewReq,viewRefundReq,returnMoney,getReports,editReport,giveCourse};
