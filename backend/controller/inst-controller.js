@@ -5,6 +5,8 @@ const mongoose=require('mongoose');
 const toId=mongoose.Types.ObjectId
 const examTable=require("../models/Exam");
 const jwt =require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 const getAllInst=async(req,res,next)=>{
         let inst;
         try{
@@ -20,9 +22,21 @@ const getAllInst=async(req,res,next)=>{
 
 }
 
-const createCourse=async (req,res,next)=>{     
-  const{title,price,instructor, totalHours, subject, description,subtitles,currency,rating,preview}=req.body
+const createCourse=async (req,res,next)=>{    
+  var decodeID="";
+  if (req.body.instructor) {
+    jwt.verify(req.body.instructor, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name; 
+      }
+    });
+  }
+  const{title,price, totalHours, subject, description,subtitles,currency,rating,preview}=req.body
   let course;
+  console.log(decodeID)
+  console.log(req.body)
   try{
       course =new courseTable({
           title:title,
@@ -30,7 +44,7 @@ const createCourse=async (req,res,next)=>{
           totalHours:totalHours, 
           subject:subject, 
           description:description, 
-          instructor:instructor,
+          instructor:decodeID,
           currency:currency,
           subtitles:subtitles,
           rating:rating,
@@ -47,7 +61,19 @@ const createCourse=async (req,res,next)=>{
   }
 
 }
+const getMyCourses2=async (req,res) => {
+  let myCourses={};
+  if(req.params.id){
+      myCourses= {instructor: req.params.id} 
+  }
+  //console.log(myCourses)
+  const resultList= await courseTable.find(myCourses).populate('instructor');
+  if(!resultList){
+      return res.status(404).json({error :'Invalid Input'});
+  }
+  res.send(resultList);
 
+}
 const getMyCourses=async (req,res) => {
   var decodeID="";
   var resultList="";
@@ -71,6 +97,58 @@ const getMyCourses=async (req,res) => {
    }
    res.send(resultList);
 
+}
+const postFilterInstructor=async(req,res)=>{
+  let currencyFilter=req.body.currency;
+ let priceFilter=req.body.price;
+ let subjectFilter=req.body.subject;
+ let ratingFilter=req.body.rating;
+ let priceList=[]
+ if (req.params.token) {
+  jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+    if (err) {
+      res.status(401).json({message:"You are not logged in."})
+    } else {
+      decodeID=decodedToken.name; 
+    }
+  });
+}
+ try{
+  if(priceFilter){
+    const courses= await courseTable.find({instructor:decodeID});
+    await Promise.all(courses.map( async (course)=>{
+      const fromCurrency=course.currency
+      const toCurrency=currencyFilter
+      const base_URL='https://api.exchangerate.host/latest'
+      const res1= await axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then( res1=>res1.data);
+      const exchangeRate=res1.rates[toCurrency];
+      course.price=course.price*exchangeRate;
+      course.currency=currencyFilter;
+    }))
+    let priceList =  courses.filter(function (el){
+      return el.price <=priceFilter});
+    if(subjectFilter){
+      priceList=priceList.filter(function (el){
+        return el.subject ==subjectFilter});
+    }
+    if(ratingFilter){
+      priceList=priceList.filter(function (el){
+      return el.rating ==ratingFilter});
+    }
+    return res.status(200).json({ priceList });
+  }else if(ratingFilter && subjectFilter){
+    priceList= await courseTable.find({rating: ratingFilter,subject: subjectFilter});    
+  return res.status(200).json({priceList})
+}else if(ratingFilter){
+  priceList= await courseTable.find({rating: ratingFilter});    
+  return res.status(200).json({priceList})
+}else if(subjectFilter){
+  priceList= await courseTable.find({subject: subjectFilter});    
+  return res.status(200).json({priceList})
+
+}
+}
+catch(err){  return res.status(404).json({error :err.message});}
 }
 
 const filterMyCSubject =async (req,res) => {
@@ -107,29 +185,64 @@ const filterMyCPrice =async (req,res) => {
 }
 
 const searchInstCourse = async (req, res) =>{
-   const resultListTitle= await courseTable.find({instructor: req.params.instructor, title: { $regex: req.params.search , $options:'i'}});
-   const resultListSubject= await courseTable.find({instructor: req.params.instructor, subject: { $regex: req.params.search , $options:'i'}});
+  var decodeID="";
+  if (req.params.token) {
+    jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name; 
+      }
+    });
+  }
+  if(decodeID){
+   const resultListTitle= await courseTable.find({instructor: decodeID, title: { $regex: req.params.search , $options:'i'}});
+   const resultListSubject= await courseTable.find({instructor: decodeID, subject: { $regex: req.params.search , $options:'i'}});
    if(!resultListTitle || !resultListSubject){
        return res.status(404).json({error :'Invalid Input'});
    }
    let searchResult=[...resultListTitle, ...resultListSubject];
    res.send(searchResult);
+  }
    
 
 }
 
 const getInstructorReviews =  async (req, res) => {
    let reviews;
+   var decodeID="";
+   if (req.params.token) {
+    jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name; 
+      }
+    });
+  }
    try{
-    reviews= await instructorReviews.find({instructor:req.params.id});
+    if(decodeID){
+    reviews= await instructorReviews.find({instructor:decodeID});}
    }
    catch(err){
       console.log(err);
    }
+   console.log(reviews)
    return res.status(200).json({reviews:reviews})
 
 }
-
+const getById2 = async (req, res, next) => {
+  //console.log("s")
+  const id = req.params.id;
+  let course;
+  try {
+    inst = await instTable.findById(id);
+    inst.save()
+    return res.status(200).json({ inst });
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
+  }
+};
 const getById = async (req, res, next) => {
    //console.log("s")
    const id = req.params.token;
@@ -166,7 +279,6 @@ const getById = async (req, res, next) => {
   }
   const { biography } = req.body;
         if(decodeID){
-          console.log("ok")
            finalres =  await instTable.findByIdAndUpdate(
             String(decodeID),
             {
@@ -183,7 +295,40 @@ const getById = async (req, res, next) => {
      res.status(400).json({ error: "couldn't" });
    }
  };
+ const editPassword = async (req, res) => {
+  
+  var decodeID="";
+  var finalres=""
+  if (req.params.token) {
+    jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name;
+      }
+    });
+  }
+  const { password } = req.body;
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(password, salt);
+        if(decodeID){
+           finalres =  await instTable.findByIdAndUpdate(
+            String(decodeID),
+            {
+              password: hashedPassword,
+              firstTime :false
+            },
+            { new: true }
+          );
+        }
+   if(finalres){
+    await res.status(200).json(finalres);
 
+   }
+    else {
+     res.status(400).json({ error: "couldn't" });
+   }
+ };
  const editemail = async (req, res) => {
   var decodeID="";
    const { email } = req.body;
@@ -198,7 +343,7 @@ const getById = async (req, res, next) => {
   }
    if (decodeID) {
      const finalres = await instTable.findByIdAndUpdate(
-       decodeID,
+       String(decodeID),
        {
          email: email,
        },
@@ -234,7 +379,6 @@ require('dotenv').config();
 const sgMail=require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 function sendMailInstructor(){
-  console.log("dakhaltt")
 const msg= {
   to: 'karimankamal15@gmail.com', // Change to your recipient
   from: 'karimankamal15@gmail.com', // Change to your verified sender
@@ -253,7 +397,6 @@ sgMail.send(msg)
 }
 
 const createExam = async (req,res) =>{
-  console.log(req.body.Content)
   let exam;
   try{
      exam =new examTable({
@@ -292,7 +435,6 @@ const adddiscount = async (req, res) => {
       { new: true }
     );
     // await res.status(200).json(finalres);
-    console.log(finalres);
     if (discount && expirationTime) {
       //  console.log("ana fel ifff");
       const { price } = await courseTable
@@ -334,4 +476,15 @@ const adddiscount = async (req, res) => {
   } else res.status(400).json({ error: "couldn't" });
 };
 
-module.exports={getAllInst,createCourse,getMyCourses,filterMyCSubject,filterMyCPrice,searchInstCourse,getInstructorReviews,getById,editbio,editemail,changepasswordInstructor,sendMailInstructor,createExam,adddiscount};
+const getInstructorReviews2 =  async (req, res) => {
+  let reviews;
+  try{
+   reviews= await instructorReviews.find({instructor:req.params.id});
+  }
+  catch(err){
+     console.log(err);
+  }
+  return res.status(200).json({reviews:reviews})
+
+}
+module.exports={getAllInst,postFilterInstructor,getMyCourses2,getInstructorReviews2,editPassword,getById2,createCourse,getMyCourses,filterMyCSubject,filterMyCPrice,searchInstCourse,getInstructorReviews,getById,editbio,editemail,changepasswordInstructor,sendMailInstructor,createExam,adddiscount};

@@ -63,9 +63,8 @@ var settings = {
   return(
     <React.Fragment>
         <div>
-          
-        <NavbarHomePage></NavbarHomePage>
-        <Banner></Banner>
+       <NavbarHomePage></NavbarHomePage>
+     <Banner></Banner>
         <DivText/>
         <Subjects></Subjects>
         <div>

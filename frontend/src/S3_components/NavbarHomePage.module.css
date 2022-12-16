@@ -73,7 +73,7 @@ left:20px;
     border-style: solid;
     border:1px solid black;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     top: 20%;
     left: 32%;
   width: 400px;
@@ -148,7 +148,7 @@ left:20px;
     background: #FFFFFF;
     position: relative;
     border-radius: 40px 40px 40px 40px;
-    z-index: 2;
+    z-index: 3;
   }
   
   .rectangle{
@@ -314,7 +314,7 @@ padding: 20px;
   background: #FFFFFF;
   position: relative;
   border-radius: 40px 40px 40px 40px;
-  z-index: 2;
+  z-index: 3;
 
 }
 .logouttext1{

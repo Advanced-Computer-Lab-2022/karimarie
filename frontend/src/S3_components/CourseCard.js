@@ -7,7 +7,7 @@ import priceTag from "../S3_components/priceTag.png"
 import star from "../S3_components/star.png"
 import  Rating from '@mui/material/Rating';
 const CourseCard=({id,title,totalHours,rating,price,currency,type,subject,description}) =>{
-
+  const [newPrice1,setNewPrice1]= useState('')
   const [newPrice,setNewPrice]= useState('')
   const [ratingCurrent,isRating]= useState('')
   const country=localStorage.getItem("country");
@@ -60,6 +60,7 @@ return (
            
          {type==='Guest' && 
 <div class={c.card}>
+<a href={`/course/${id}/${newPrice}/${currencySelected}/${type}`} className={c.ref}>
     <div class={c.cardheader}>
       <img src="https://source.unsplash.com/600x400/?food" alt="card__image" class={c.cardimage} width="600"/>
       </div>
@@ -75,7 +76,7 @@ return (
     </div>
     <div class={c.cardfooter3}>
     <img src={priceTag} alt="card__image" class={c.priceimage} width="20"/>
-    <p>{newPrice} {currencySelected}</p>
+    {newPrice!==0 && <p>{newPrice} {currencySelected}</p>} {newPrice===0 && <p>FREE</p>}
     </div>
     <div class={c.cardfooter2}>
     <Rating name="read-only"  defaultValue={rating} precision={0.5} className={c.starimage} width="20" readOnly />
@@ -83,6 +84,7 @@ return (
     <p className={c.ratingnum}> {ratingCurrent}</p>
     </div>
     </div>
+    </a>
   </div>
   }
  

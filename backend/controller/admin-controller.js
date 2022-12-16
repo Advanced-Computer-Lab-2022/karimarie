@@ -2,6 +2,7 @@ const instTable=require("../models/Instructor");
 const traineeTable=require("../models/Trainee");
 const adminTable=require("../models/Admin");
 const requestsTable=require("../models/Requests")
+const bcrypt = require('bcrypt')
 
 const getAllInst=async(req,res,next)=>{
     let inst;
@@ -29,12 +30,10 @@ const addInst=async (req,res,next)=>{
         return res.json({success: false, message: 'Username already taken!'});
     }else {
     try{
-        inst =new instTable({
-            firstName,
-            lastName,
-            userName,
-            password
-        })
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        console.log(hashedPassword)
+        const inst = await instTable.create({ firstName: firstName, lastName: lastName, password: hashedPassword ,userName:userName});
         await inst.save();
         return res.json({success: true, message: 'Successfully Added!'});
     }
@@ -67,15 +66,10 @@ const addCorpTrainee=async (req,res,next)=>{
         return res.json({success: false, message: 'Username already taken!'});
     }else {
     try{
-        corpTrainee=new traineeTable({
-        firstName:firstName,
-        lastName:lastName,
-        userName:userName,
-        password:password,
-        email:email,
-        type:type
-
-    })
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        const corpTrainee = await traineeTable.create({ firstName: firstName, lastName: lastName, password: hashedPassword ,userName:userName,email:email,type:type});
+       
         await corpTrainee.save();
         return res.json({success: true, message: 'Successfully Added!'});
     }
@@ -108,10 +102,9 @@ const addAdmin=async (req,res,next)=>{
         return res.json({success: false, message: 'Username already taken!'});
     }else {
      try{
-         adm =new adminTable({
-             userName,
-             password
-         })
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        const adm = await adminTable.create({ password: hashedPassword ,userName:userName});
          await adm.save();
          return res.json({success: true, message: 'Successfully Added!'});
         }

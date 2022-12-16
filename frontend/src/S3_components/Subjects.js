@@ -26,7 +26,7 @@ import { useState } from 'react';
   };
   return (
     <section className={SubjectsStyles.skill} id="skills">
-        <div className={SubjectsStyles.container}>
+        <div className={SubjectsStyles.containerS}>
             <div className="row">
                 <div className="col-12">
                     <div className={SubjectsStyles.skillbx}>

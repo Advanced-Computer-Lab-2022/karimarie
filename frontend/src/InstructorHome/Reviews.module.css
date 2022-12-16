@@ -1,0 +1,75 @@
+.containerrx{
+    background-color: lightgray;
+    position: relative;
+    width: 700px;
+    height: 140px;
+    margin-left: 50px;
+    margin-top: 10px;
+ 
+} 
+.rating{
+    position: absolute;
+width: 278px;
+height: 55px;
+left: 290px;
+top: 17px;
+z-index: 2;
+}
+
+.name{
+    position: absolute;
+width: 247px;
+height: 32px;
+left: -26px;
+top: -99px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 28px;
+line-height: 39px;
+text-align: center;
+z-index: 2;
+color: #000000;
+
+
+}
+
+.type{
+    position: absolute;
+    width: 130px;
+    height: 23px;
+    margin-left: 200px;
+    margin-top: -87px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    z-index: 2;
+    color: #000000;
+    
+}
+.move{
+    position: relative; 
+    left: 240px;
+    top: 147px;
+    z-index: 2;
+}
+.review{
+    position: absolute;
+    width: 700px;
+    height: 23px;
+    left: 10px;
+    margin-top: 35px;
+    z-index: 2;
+}
+.quot{
+    position: absolute;
+    height:60px;
+    width:60px;
+    top:100px;
+    left:600px;
+    z-index: 2;
+}

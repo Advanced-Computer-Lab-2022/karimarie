@@ -8,6 +8,7 @@ import NavbarHomePage from './NavbarHomePage';
 import { Navigate, useParams } from "react-router-dom";
 import CourseDetails from '../pages/CourseDetails';
 import f from "../S3_components/FilterSearchPage.module.css"
+import InstructorNavBar from '../InstructorHome/InstructorNavBar';
 const FilterSearchPage=()=>{
     const params = new URLSearchParams(window.location.search);
     const x = params.get('courses');
@@ -18,7 +19,7 @@ const FilterSearchPage=()=>{
         window.location.href='/InstructorHomePage'
       }
       if(type==="Admin"){
-        window.location.href='/Start'
+        window.location.href='/hii'
       }
       if(type==="Guest"){
         window.location.href='/'
@@ -27,7 +28,9 @@ const FilterSearchPage=()=>{
   return(
     <React.Fragment>
         <div>
-        <NavbarHomePage></NavbarHomePage>
+       {type==="Guest" && <NavbarHomePage></NavbarHomePage>}
+       {type==="Instructor" && <InstructorNavBar/>}
+       {/* {type==="Admin" && <NavbarHomePage/>} */}
           <button className={f.button79} onClick={handleClearNavigate}>Clear Filter</button>
          <div class={f.container}>
 

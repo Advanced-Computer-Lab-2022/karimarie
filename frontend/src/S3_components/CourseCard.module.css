@@ -129,3 +129,28 @@ padding-left:110px;
 .cardfooter3 p{
   color: gray;
 }
+
+.ref:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.ref:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.ref:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ref:active {
+  color:black;
+  background-color: transparent;
+  text-decoration: none;
+}

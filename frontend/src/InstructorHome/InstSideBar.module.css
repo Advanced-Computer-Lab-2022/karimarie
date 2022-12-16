@@ -6,14 +6,15 @@
      list-style: none;
      text-decoration: none;
      font-family: 'Josefin Sans', sans-serif;
-     margin-top:-92px;
+     /* margin-top:-118px; */
   }
   
   .wrapper{
      background-color:#17cf97;
  
     display: flex;
-    position: static;
+
+    /* position: static; */
   }
   .iconn{
     color: white;
@@ -24,7 +25,7 @@
   }
   .wrapper .sidebar{
     width: 180px;
-    height: 556px;
+    height: 100%;
     /* background: #4b4276;  */
    
     padding: 0px 0px;
@@ -32,7 +33,8 @@
     /* margin-top: 15px; */
     /* border-radius: 8px; */
     border-right: #4b4276;
-    margin-top: 92px;
+    
+    /* margin-top: 5px; */
     position: absolute;
     /* background-color:#CBEDD5; */
     background-color:#17cf97;
@@ -85,4 +87,8 @@
     color: #fff;
     list-style: none;
     text-decoration: none;
+  }
+  .subj{
+    margin-left: 130px;
+    margin-top: -20px;
   }

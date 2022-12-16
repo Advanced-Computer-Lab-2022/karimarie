@@ -42,9 +42,8 @@ const instructorSchema = new Schema({
   numReviews:{
     type:Number
   },
-  token:{
-    type:String
-  }
+  firstTime:{
+    type:Boolean,default:true,}
 });
 const Instructor = mongoose.model("Instructor", instructorSchema);
 module.exports = Instructor;

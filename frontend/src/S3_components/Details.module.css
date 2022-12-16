@@ -1,0 +1,213 @@
+ @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+}
+ 
+.main9e{
+    margin-left:20px;
+    margin-bottom: 10px;
+}
+
+
+
+.sectione{
+    width: 600px;
+    box-shadow: 0 5px 10px #3334;
+
+}
+
+.summarye{
+    padding: 15px;
+    background:#17cf97 ;
+    color: #fff;
+    border: 1px solid #444;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    height: auto;
+}
+.detailse{width: 100%;
+height: 100%;}
+.insidee{
+    padding:20px;
+    background: white;
+}
+.summarye::after{
+    content:'+';
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size: 30px;
+    color: #fff;
+    transition: .2s linear;
+}
+
+.detailse[open] summarye::after{
+    transform: rotate(135deg);
+}
+
+
+
+.titlee {
+    font-size: clamp(26px, 5vw, 40px);
+    color: #1b2430;
+    margin-bottom: 30px;
+}
+
+.wholee{
+    background: #1b2430;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: #fff;
+    padding-top:20px;
+    padding-left:30px;
+}
+.previewe{
+    position:absolute;
+    background-color: #fff;
+    margin-left: 650px;
+    top: 190px;
+    left: 160px;
+    width: 300px;
+    border: 1px solid #1b2430;
+}
+
+.buttonAe {
+    background-color: #17cf97;
+    background-image: linear-gradient(#17cf97, #17cf97);
+    border: 1px solid #17cf97;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-family: -apple-system,".SFNSDisplay-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 17px;
+    line-height: 100%;
+    margin: 0;
+    outline: 0;
+    padding: 11px 15px 12px;
+    text-align: center;
+    transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 300px;
+  }
+  
+  .buttonAe:hover {
+    box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+    text-decoration: none;
+    transition-duration: .15s, .15s;
+  }
+  
+  .buttonAe:active {
+    box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+  }
+  
+  .buttonAe:disabled {
+    cursor: not-allowed;
+    opacity: .6;
+  }
+  
+  .buttonAe:disabled:active {
+    pointer-events: none;
+  }
+  
+  .buttonAe:disabled:hover {
+    box-shadow: none;
+  }
+ 
+.priceX{
+    color: #1b2430;
+    padding-top: 7px;
+}
+
+.vide{
+    height: 250px;
+}
+
+
+.tie{
+    width: 700px;
+}
+.tie2{
+width: 700px;
+font-size: 18px;
+font-weight: 400px;
+}
+.tagbrown1 {
+    background: #92d4e4;
+    background-color: #92d4e4;
+    color: #fff;
+    width: 150px;
+    text-align: center;
+    align-self: flex-start;
+    padding: .25em .75em;
+    border-radius: 1em;
+    font-size: .75rem;
+  }
+
+.al{
+margin-top: -26px;
+margin-left: 17px;
+}
+.al2{
+    margin-left: 17px;
+    margin-top: -20px;
+}
+.CourseReviews{
+    width: 600px;
+    height: auto;
+    margin-left: 20px;
+    background-color: lightgray;
+    margin-top: 100px;
+    /* display: inline-block; */
+}
+.rattt{
+    display: inline-flex;
+    border-bottom: 5px solid gainsboro;
+    background-color: #fff;
+    width: 600px;
+
+}
+.rattt p{
+    font-size: 20px;
+    margin-top: 5px;
+    font-weight: 800;
+}
+.noo{
+    color: gray;
+}
+.contR{
+    border-bottom: 5px solid gainsboro;
+    /* border-style: outset; */
+    margin-top:10px;
+}
+.quot1{
+    margin-left: 550px;
+}
+.allalll{
+    position: relative;
+    z-index: -1;
+}
+.all{
+    background-color: whitesmoke;
+    height: 400px;
+}
+.CourseReviews2{
+    width: 600px;
+    height: auto;
+    margin-left: 250px;
+    background-color: lightgray;
+    margin-top: 100px;
+    /* display: inline-block; */
+}

@@ -23,8 +23,9 @@ import ForgetPassword from '../S3_components/ForgetPassword';
 import InstProfile from '../InstructorHome/InstProfile';
 import Start from '../pages/Admin/Start';
 import ViewReviewsInst from "../InstructorHome/ViewReviewsInst"
+import ShowCourseDetails from '../S3_components/ShowCourseDetails';
+import GetInstProfile from "../S3_components/GetInstProfile"
 const App = () => {
-  console.log('hooo')
   return <React.Fragment>
     {/* <header>
       <Header/>
@@ -36,7 +37,7 @@ const App = () => {
         <Route path="/Home" element={<AllCourses/>}/>
        // <Route path="/InstructorHome" element={<InstructorHome/>}/>
         <Route path="/CorpTraineeHome" element={<CorpTraineeHome/>}/>
-        <Route path="/course/:id/:newPrice/:currencyP/:type" element={<CourseDetails/>} />
+        <Route path="/course/:id/:newPrice/:currencyP/:type" element={<ShowCourseDetails/>} />
         <Route path="/forgetpasswordInstructor" element={<ForgetPasswordInstructor/>} />
         <Route path="/forgetpasswordAll" element={<ForgetPasswordAll/>} />
         <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/InstructorHomePage" element={<InstructorHomePage/>} />
         <Route path="/ForgetPassword" element={<ForgetPassword/>} />
         <Route path="/profile" element={<InstProfile/>} />
+        <Route path="/instprofile/:id" element={<GetInstProfile/>} />
         <Route path="/hii" element={<Start/>} />
         <Route path="/ViewMyRatings" element={<ViewReviewsInst/>} />
       </Routes>

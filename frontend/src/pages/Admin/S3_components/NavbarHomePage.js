@@ -107,7 +107,7 @@ const getAll=async()=>{
           e.preventDefault()
             filterAll().then((data) => {           
             let x=JSON.stringify(data.priceList)
-            window.location.href=`FilterSearchPage?courses=${x}`
+            window.location.href=`FilterSearchPage?type=Admin&courses=${x}`
           }
             )
             isShowFilter(false);
@@ -179,6 +179,8 @@ const getAll=async()=>{
           const handleLogout=()=>{
             getLogout();
             localStorage.setItem("token","")
+            localStorage.setItem("currency","")
+            localStorage.setItem("country","")
             window.location.href="/";
           }
           

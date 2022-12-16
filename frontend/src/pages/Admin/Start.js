@@ -10,57 +10,12 @@ import AddCorpTrainee from './Create/AddCorpTrainee';
 import ViewReq from '../../components/Admin/ViewReq';
 import ViewReports from '../../components/Admin/ViewReports';
 import ViewRefundReq from '../../components/Admin/ViewRefundReq';
+import DefinePromotion from "../../components/Admin/DefinePromotion"
 const Start = () => {
 
-  const data = [
-    {
-      name: "Page A",
-      uv: 8000,
-      // pv: 400,
-      amt: 2400
-    },
-    {
-      name: "Page B",
-      uv: 8000,
-      amt: 3210
-    },
-    {
-      name: "Page C",
-      uv: 8000,
-      // pv: 9800,
-      amt: 2290
-    },
-    {
-      name: "Page D",
-      uv: 8780,
-      // pv: 3908,
-      amt: 2000
-    },
-    {
-      name: "Page E",
-      uv: 8000,
-      // pv: 4800,
-      amt: 2181
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      // pv: 3800,
-      amt: 2500
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      // pv: 4300,
-      amt: 2100
-    }
-  ];
+  
     const [active,isActive]=useState("");
     const [choose,setChoose]=useState('home');
-    const handleClick = (e) => {
-        console.log(choose);
-    
-      };
   return (
     <React.Fragment className={l.all}>
     
@@ -70,11 +25,12 @@ const Start = () => {
     <div className={l.sidebar}>
         
         <ul>
-            <li className={l.listI}><button onClick={() => {setChoose('create');handleClick(); }} 
+            <li className={l.listI}><button onClick={() => {setChoose('create')}} 
             className={l.anc}><i class="fas fa-user" style={{color:"white"}}></i><p className={l.text}>Create User</p></button></li>
             <li className={l.listI}><button className={l.anc} onClick={()=>setChoose("creq")}><i className={["fas fa-address-card", l.iconn].join(' ')} style={{color:"white"}}></i><p className={l.text}>Course Requests</p></button></li>
             <li className={l.listI}><button className={l.anc} onClick={()=>setChoose("viewReports")}><i className={["fas fa-project-diagram", l.iconn].join(' ')} style={{color:"white"}}></i><p className={l.text}>View Reports</p></button></li>
             <li className={l.listI}><button className={l.anc} onClick={()=>setChoose("RefundRequests")}><i className={["far fa-money-bill-alt", l.iconn].join(' ')} style={{color:"white"}} ></i><p className={l.text}>Refund Requests</p></button></li>
+            <li className={l.listI}><button className={l.anc} onClick={()=>{setChoose("DefinePromotion")}}><i className={["far fa-money-bill-alt", l.iconn].join(' ')} style={{color:"white"}} ></i><p className={l.text}>Define Promotion</p></button></li>
             <li className={l.listI}><button className={l.anc}><i class="fas fa-address-book" style={{color:"white"}}></i><p className={l.text}>Contact</p></button></li>
             <li className={l.listI}><button className={l.anc}><i class="fas fa-map-pin" style={{color:"white"}}></i><p className={l.text}>Map</p></button></li>
         </ul> 
@@ -150,6 +106,7 @@ const Start = () => {
 {choose==='creq'&& <ViewReq/>}
 {choose==="viewReports"&& <ViewReports/>}
 {choose==="RefundRequests"&& <ViewRefundReq/>}
+{choose==="DefinePromotion" && <DefinePromotion/>}
 </div>
 </React.Fragment>
 

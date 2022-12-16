@@ -100,7 +100,7 @@ function NavbarHomePage(isactive){
           e.preventDefault()
             filterAll().then((data) => {           
             let x=JSON.stringify(data.priceList)
-            window.location.href=`FilterSearchPage?courses=${x}`
+            window.location.href=`FilterSearchPage?type=Guest&courses=${x}`
           }
             )
             isShowFilter(false);

@@ -8,6 +8,7 @@ const adminTable=require("../models/Admin");
 const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const courseReviews=require("../models/coursesReviews")
 
 
 const getAllCourses = async (req, res) => {
@@ -126,7 +127,6 @@ const postFilterPrice=async (req,res) => {
 const getById = async (req, res, next) => {
   //console.log("s")
   const id = req.params.id;
-  console.log(id)
   let course;
   try {
     course = await courseTable.findById(id);
@@ -309,41 +309,82 @@ const createToken = (name) => {
 };
 const login = async (req, res) => {
   // TODO: Login the user
-  const username=req.body.userName;
-  const password=req.body.password;
-  const userInst= await instTable.findOne({userName :username})
-  const userTrainee= await traineeTable.findOne({userName :username})
-  const userAdmin= await adminTable.findOne({userName :username})
-  // const x= bcrypt.compare(password, user.password)
-      
-        // Send JWT
-        var user="";
-        if(userInst){
-          user=userInst
-          const token = createToken(user._id);
-          res.status(200).cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
-          
-           return res.status(200).json({ token , msg:"Instructor"})
-        }
-        if(userTrainee){
-          user=userTrainee
-          const token = createToken(user._id);
-        res.status(200).cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
-        return res.status(200).json({token, msg: "Trainee" })
-        }
-        if(userAdmin){
-          user=userAdmin
-          const token = createToken(user._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({token, msg: "Admin" })
-        }
-       else {
-        // response is OutgoingMessage object that server response http request
-        return res.json({success: false, msg: 'no'});
-      }
-    ;
-}
+  const username = req.body.userName;
+  const password = req.body.password;
+    var user = "";
+  const userX= await instTable.findOne({userName : req.body.userName})
+  const userTrainee = await traineeTable.findOne({ userName: username});
+  const userAdmin = await adminTable.findOne({ userName: username});
+
+  if(userX){
+  const ok= await bcrypt.compare(password, userX.password);
+      if (ok) {
+    const { firstTime } = await instTable
+      .findOne({ userName: username })
+      .select("firstTime")
+      .exec();
+    user = userX;
+    const token = createToken(user._id);
+    res
+      .status(200)
+      .cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    if (firstTime) {
+      console.log("ana fel firstTime");
+      console.log(username);
+      return res.status(200).json({ token, msg: "InstructorfirstTime" });
+    } else {
+      console.log("ana fel else");
+      return res.status(200).json({ token, msg: "Instructor" });
+    }
+      }
+      else {
+        return res.json({ success: false, msg: "no" });
+
+      }
+    }else if(userTrainee){
+        const ok= await bcrypt.compare(password, userX.password);
+        if(ok){
+
+
+
+
+
+
+                user = userTrainee;
+        const token = createToken(user._id);
+        res
+          .status(200)
+          .cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+        return res.status(200).json({ token, msg: "Trainee" });
+       
+      }
+
+    }else if(userAdmin){
+      user = userAdmin;
+        const token = createToken(user._id);
+        res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+        return res.status(200).json({ token, msg: "Admin" });
+    }else {
+      return res.json({ success: false, msg: "no" });
+    }
+
+  
+  
+};
 const logout = async (req, res) => {
   return res.cookie("jwt","",{httpOnly:true,maxAge:1});
 }
-  module.exports={getAllCourses,logout,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+
+const getCourseReviews =  async (req, res) => {
+  let reviews;
+  try{
+    if(req.params.id!=="undefined"){
+   reviews= await courseReviews.find({course:req.params.id});}
+  }
+  catch(err){
+     console.log(err);
+  }
+  return res.status(200).json({reviews:reviews})
+
+}
+  module.exports={getAllCourses,logout,getSubjects,postFilterAll,getCourseReviews,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}

@@ -53,6 +53,22 @@ text-align: center;
 
 color: #000000;
 }
+.emaill{
+    position: absolute;
+width: 645px;
+height: 24px;
+left: 20px;
+top: 255px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 24px;
+text-align: center;
+
+color: #000000;
+}
 .totalstudents{
     position: absolute;
     width: 146px;
@@ -259,7 +275,7 @@ font-weight: 500;
     background: #FFFFFF;
     position: relative;
     border-radius: 40px 40px 40px 40px;
-    z-index: 2;
+    z-index: 3;
 
   }
   .editbiotext{
@@ -299,6 +315,18 @@ font-weight: 500;
     background: #fff;
     border: none;
     float: right;
+    padding-right: 0.7rem;
+    padding-top: 0.1rem;
+   
+  }
+  .closeeditXX{
+    background: whitesmoke;
+    border: none;
+    float: right;
+    position: absolute;
+    z-index: 3;
+    margin-left: 750px;
+    margin-top: 10px;
     padding-right: 0.7rem;
     padding-top: 0.1rem;
    
@@ -350,9 +378,9 @@ font-weight: 500;
     color: black;
   }
   .passtextfield2{
-    position: absolute;
-    top:200px;
-    left:130px;
+    position: fixed;
+    top:180px;
+    left:-110px;
   }
   .confirmpass{
     position: absolute;
@@ -360,21 +388,37 @@ font-weight: 500;
     left:185px;
   }
   .passtextfield1{
-    position: absolute;
-    top:110px;
-    left:130px;
+    position: fixed;
+    top:90px;
+    left:110px;
   }
   .newpass{
     position: absolute;
     top:85px;
     left:190px;
   }
+  .message{
+    margin-top:190px;
+    margin-left: 90px;
+    color: red;
+    position: fixed;
+  }
+  .closeedit2{
+    background: #fff;
+    border: none;
+    float: right;
+    margin-top:-45px;
+    padding-right: 0.7rem;
+    padding-top: 0.1rem;
+   
+  }
+  
   .submitpassbutton{
     position: absolute;
     width: 100px;
     height: 48px;
     left: 190px;
-    top: 285px;
+    top: 295px;
     border-radius: 40px 40px 40px 40px;
     background: #17cf97;
     font-family: 'Inter';
@@ -395,9 +439,13 @@ font-weight: 500;
     margin-top: 1px;
     margin-left: -2px;
   }
+  .ViewCourses span{
+    margin-left: 160px;
+  }
   .ViewCourses2{
     background-color: whitesmoke;
-    margin-top: 650px;
+    /* margin-top: 650px; */
+    margin-top: 600px;
     position: relative;
     width: 700px;
     height: 100%;
@@ -411,6 +459,7 @@ font-weight: 500;
     line-height: 29px;
     text-align: center;
     margin-left: -530px;
+    z-index: 2;
     color: #000000; 
   }
   .courseimg{
@@ -421,9 +470,10 @@ font-weight: 500;
   }
   .ViewCourses h2{
     margin-left: 160px;
-    margin-top: -130px;
+    margin-top: -139px;
     font-size: 16px;
   }
+
   .ViewCourses p{
     margin-left: -290px;
     margin-top: -30px;
@@ -435,40 +485,39 @@ font-weight: 500;
     margin-top: 5px;
   }
   .starimage1{
-    margin-left: 250px;
-    margin-top: -190px;
+    margin-left: 185px;
+    margin-top: -23px;
   }
   .rat{
-    margin-top: 9px;
-    margin-left: -69px;
+   margin-top: 20px;
+   margin-left: -70px;
+   font-weight: 400;
   }
-  .rat p{
-    font-weight: 400;
-
-  }
+  
+  
   @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 
 .searchC {
-  width: 100%;
+  width: 50%;
   position: relative;
   height: 36px;
   display: flex;
 }
 
 .searchTerm {
-  width: 100%;
+  width: 350px;
   border: 3px solid #17cf97;
   border-right: none;
   padding: 5px;
-  height: 20px;
+  height: 28px;
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #9DBFAF;
 }
 
 .searchTerm:focus{
-  color: #17cf97;
+  color: #000000;
 }
 
 .searchButtonC {
@@ -481,15 +530,169 @@ font-weight: 500;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
+  position: absolute;
+  margin-left: -37px;
+  top:25px
 }
+
+.filterButtonC {
+    width: 40px;
+    /* height: 36px; */
+    border: 1px solid #17cf97;
+    background: #17cf97;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    position: relative;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 23px;
+  }
 
 
 /*Resize the wrap to see the search bar change!*/
 .wrap{
-  width: 60%;
+  /* width: 60%; */
+  width: 10px;
   position: absolute;
- margin-left: 210px;
- margin-top: -20px;
+ margin-left: 10px;
+ margin-top: -30px;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
+
+ .pricee{
+    margin-left: 155px;
+    margin-top: -3px;
+ }
+ .priceetext{
+    margin-left: 28px;
+    margin-top: 5px;
+ }
+ .FFF{
+    margin-left: -300px;
+    top: -120px;
+    position: relative;
+    background-color: whitesmoke;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+    z-index: 5;
+    height: 100%;
+ }
  
+ .shadearea2{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .please{
+    margin-left: -400px;
+    margin-top: 10px;
+  }
+  .button7 {
+    backface-visibility: hidden;
+    background: #17cf97;
+    border: 0;
+    border-radius: .375rem;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Circular,Helvetica,sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    line-height: 0.2;
+    padding: 1rem 1.25rem;
+    position: absolute;
+    text-align: center;
+    width: 140px;
+    text-decoration: none;
+    transform: translateZ(0) scale(1);
+    transition: transform .2s;
+    user-select: none;
+    height: 30px;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-left: 455px;
+    margin-top: 5px;
+  }
+  
+  .button7:disabled {
+    color: #787878;
+    cursor: auto;
+  }
+  
+  .button7:not(:disabled):hover {
+    transform: scale(1.05);
+  }
+  
+  .button7:not(:disabled):hover:active {
+    transform: scale(1.05) translateY(.125rem);
+  }
+  
+  .button7:focus {
+    outline: 0 solid transparent;
+  }
+  
+  .button7:focus:before {
+    border-width: .125rem;
+    content: "";
+    left: calc(-1*.375rem);
+    pointer-events: none;
+    position: absolute;
+    top: calc(-1*.375rem);
+    transition: border-radius;
+    user-select: none;
+  }
+  
+  .button7:focus:not(:focus-visible) {
+    outline: 0 solid transparent;
+  }
+  
+  .button79:not(:disabled):active {
+    transform: translateY(.125rem);
+  }
+ .ViewRatingsi{
+
+    /* width: 60%; */
+    
+    width: 800px;
+    background-color: whitesmoke;
+   margin-left: 710px;
+   margin-top: -520px;
+      display: grid;
+      position: relative;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+ 
+ }
+ .ref:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.ref:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.ref:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ref:active {
+  color:black;
+  background-color: transparent;
+  text-decoration: none;
+}

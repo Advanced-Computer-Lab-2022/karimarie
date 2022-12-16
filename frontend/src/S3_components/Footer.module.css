@@ -1,7 +1,8 @@
 .main{
     display: flex;
     background-color: #1b2430;
-    
+    margin-top: 20px;
+    position: relative;
     height: 32vh;
     
 }

@@ -10,6 +10,7 @@ function SignUp() {
     <React.Fragment>
         <NavbarHomePage
         isactive={SignUp}></NavbarHomePage>
+   
     <div className={SignUpcss.first1} id="first">
       <div className={SignUpcss.behindtext}>
         <div className={SignUpcss.behindtext1}>
@@ -17,75 +18,92 @@ function SignUp() {
         </div>
       </div>
 
-      <form method="post" action="" className={SignUpcss.form} id="main">
+      <form name="myForm" method="post" action="" className={SignUpcss.form}>
         <div class={SignUpcss.textbox}>
-          <input type="text" required />
+          <input type="text" name="firstname" required />
           <label>First Name</label>
           <span class="material-icons-outlined"> account_circle </span>
           <div className={SignUpcss.underline} />
         </div>
         <div class={SignUpcss.textbox}>
-          <input type="text" required />
+          <input type="text" name="lastname" required />
           <label>Last Name</label>
           <span class="material-icons-outlined"> account_circle </span>
           <div className={SignUpcss.underline} />
         </div>
 
         <div class={SignUpcss.textbox}>
-          <input type="text" required />
+          <input type="email" name="email" required />
           <label>Email</label>
           <span class="material-icons-outlined"> mail </span>
           <div className={SignUpcss.underline} />
         </div>
         <div class={SignUpcss.textbox}>
-          <input type="text" required />
+          <input type="text" name="username" required />
           <label>UserName</label>
           <span class="material-icons-outlined"> account_circle </span>
           <div className={SignUpcss.underline} />
         </div>
         <div class={SignUpcss.textbox}>
-          <input type="text" required />
+          <input type="password" name="password" required />
           <label>Password</label>
           <span class="material-icons-outlined"> key </span>
           <div className={SignUpcss.underline} />
         </div>
-
+        <div class={SignUpcss.textbox}></div>
         <div class={SignUpcss.gender}>
           <span class="material-icons-outlined"> perm_identity </span>
           <label>Gender</label>
         </div>
-
-        <div class={SignUpcss.item}>
-          <div class={SignUpcss.checkboxrect}>
-            <input type="checkbox" id="checkbox-rect" name="check" />
-            <label for="checkbox-rect">Male</label>
+        <form class={SignUpcss.formflex}>
+          <div class={SignUpcss.formrow}>
+            <input
+              type="radio"
+              name="gender"
+              id="Male"
+              class={SignUpcss.forminput}
+              required
+            />
+            <label for="Male" class={SignUpcss.formlabel}>
+              Male
+            </label>
           </div>
-          <div class={SignUpcss.checkboxrect1}>
-            <input type="checkbox" id="checkbox-rect1" name="check" />
-            <label for="checkbox-rect1">Female</label>
+          <div class={SignUpcss.formrow}>
+            <input
+              type="radio"
+              name="gender"
+              id="Female"
+              class={SignUpcss.forminput}
+              required
+            />
+            <label for="Female" class={SignUpcss.formlabel}>
+              Female
+            </label>
           </div>
-        </div>
+        </form>
 
         <div>
           <label class={SignUpcss.switch1}>
-            <input type="checkbox" />
+            <input type="checkbox" required />
             <span class={SignUpcss.slider}></span>
           </label>
           <text class={SignUpcss.textp}>
-            Send me special offers, personalized recommendations.
+            I accept the
+            <a href="#"> terms and conditions </a>
           </text>
         </div>
 
-        <button class={SignUpcss.button1}>
+        <button class={SignUpcss.button1} onclick="SignUp()">
           <span>Join Now </span>
         </button>
 
         <p>
           Already have an account?
-          <a href="/login"> Login here</a>
+          <a href="#"> Login here</a>
         </p>
       </form>
     </div>
+ 
     </React.Fragment>
   );
 }
