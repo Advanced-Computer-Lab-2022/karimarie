@@ -7,6 +7,7 @@ import axios from "axios";
 import NavbarHomePage from '../../S3_components/NavbarHomePage';
 import { color } from '@mui/system';
 import { StepContext } from '@mui/material';
+import {Box} from '@mui/material'
 
 const Watch = () => {
     const [xx,setX]=useState([1,2,3,4]);
@@ -22,6 +23,10 @@ const Watch = () => {
     const [title2,setTitle2]=useState('');
     const [preview,setPreview]=useState('');
     const [descrip,setDescrip]=useState('');
+    const [gender,isGender]=useState(false);
+    //report part
+    const [reportText,setReportText]=useState('');
+    const [reportType,setReportType]=useState('')
     const sendRequest = async () => {
         const res = await axios
           .get(`http://localhost:2000/getById/${id}`) 
@@ -35,10 +40,21 @@ const Watch = () => {
        
         
       }, []);
-      const c=()=>{
-        console.log("hey");
-      }
-      console.log(preview);
+      const reportNow=async()=>{
+        console.log(reportType);
+        const res = await axios
+          .post(`http://localhost:2000/reportProblem`,{
+            ReportById:"639b3cb9b925a46e7a60ac97",
+            CourseId:"639b49734f35d4c8004accfd",
+            Type:reportType,
+            Report:reportText
+          }) 
+          .catch((err) => console.log(err));
+          const data = await res.data;
+          return data;
+      };
+      
+    
     return (
    <React.Fragment >
         <NavbarHomePage></NavbarHomePage>
@@ -54,7 +70,7 @@ const Watch = () => {
           <div className={x.xx}>
         <a className={x.active} style={{"background-color" : green ? "#17cf97" : "#1b2430"}} onClick={()=>{setGreen(true)}} >Description</a>
         <a className={x.active} style={{"background-color" : green ? "#1b2430" :"#17cf97" }} onClick={()=>{setGreen(false)}} >Notes</a>
-        <a className={x.report} style={{"color" : "white" }} ><p>Report a Problem</p></a>
+        <a className={x.report} style={{"color" : "white" }} onClick={()=>{isGender(true)}}><p>Report a Problem</p></a>
 
         </div>
         </div>
@@ -62,7 +78,26 @@ const Watch = () => {
       <textarea rows="10" cols="112" id="message" name="message" className={x.notes }onChange={(e)=>setText(e.target.value)}>{text}</textarea>
       <button className={x.b}>Download Notes</button>
       </div>}
-     
+      {gender && <div className={x.shadearea}>
+            <div class={x.country}>
+        <h3 className={x.r}>Report a problem:</h3>
+        <button class={x.closeButton} onClick={()=>isGender(false)}></button>
+        <div class={x.forms}>
+            <Box className={x.reportbox} width="250px">
+            <select className={x.select} id="language" onChange={(e) => setReportType(e.target.value)}  >
+            <option value="c" selected="selected" hidden><p className={x.c} >Problem Type</p></option>  
+            <option className={x.createO}value="Technical">Technical</option>
+            <option className={x.createO}value="Financial">Financial</option>
+            <option className={x.createO}value="Others">Others</option>
+          </select>
+          <textarea rows="7" cols="47 " id="message" name="message"placeholder='Problem Description' className={x.notess }onChange={(e)=>setReportText(e.target.value)}></textarea>
+          <button className={x.b2} onClick={()=>{reportNow();isGender(false)}}>Report</button>
+
+            </Box>
+  </div>    </div>
+            </div>
+
+            }
        
         </div>
 

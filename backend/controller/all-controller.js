@@ -368,12 +368,15 @@ const reportProblem= async (req, res) => {
     if(ifInst==null){
      ReportByName=ifTrainee.userName;
      ReportByType=ifTrainee.type;
+     console.log("hey")
     }
     else{
       ReportByName=ifInst.userName;
       ReportByType="Instructor"
+      console.log("bey")
     }
     let c=await courseTable.findById(CourseId);
+    console.log(c);
        problem =new problemTable({
         ReportById:ReportById,
         ReportByName:ReportByName,
@@ -384,7 +387,10 @@ const reportProblem= async (req, res) => {
         Report:Report,
         Status:"Unseen"
        })
+       console.log(problem)
        await problem.save();
+      
+      
   return res.status(201).json({problem:problem})
      }
  catch(err){
@@ -392,5 +398,20 @@ const reportProblem= async (req, res) => {
      return res.status(404).json({message:err.message})
  }
  }
+const seeMyReports=async(req,res)=>{
+  const id=req.params.id;
+  console.log(id)
+  console.log("hey")
+  try{
+    let reports=await problemTable.find({ReportById:id});
+    console.log(reports)
+    return res.status(200).json({ reports });
+
+  }
+  catch(error){
+    return res.status(404).json({ error:error.message });
+
+  }
+}
   module.exports={getAllCourses,logout,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login,
-    reportProblem}
+    reportProblem,seeMyReports}

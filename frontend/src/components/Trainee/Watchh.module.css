@@ -203,3 +203,96 @@
         font-size: 2px;
     }
 
+    .shadearea{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .country{
+        border-style: solid;
+        border:1px solid black;
+        position: absolute;
+        z-index: 2;
+        top: 20%;
+        left: 32%;
+      width: 400px;
+      height: 250px;
+      background-color: #fff;
+      font-family: 'Ek Mukta';
+      font-weight: 600;
+      letter-spacing: 0px;
+    }
+    .closeButton{
+        background: #fff;
+        border: none;
+        float: right;
+        padding-right: 1rem;
+        padding-top: 1rem;
+    }
+    .forms {
+        align-items:center;
+        position: relative;
+        /* top:10%; */
+        margin-left: 10px;
+        width: 18rem;
+        margin-top: 4px;
+        
+      }
+    .forms label{
+        font-family: 'sans-serif';
+        font-size: large;
+        color: #1b2430;
+        margin-left: 45%;
+    }
+    .gender{
+        margin-left:160px;
+        margin-top: 2px;
+        font-weight: 400;
+    }
+    .gender button{
+        margin-top: 20px;
+        width: 60px;
+        height:25px;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 5rem;
+        background: #17cf97;
+    }
+    .select{
+        margin-left: 124px;
+        margin-top: 16px;
+    }
+    .r{
+        margin-left: 125px;
+        margin-top: 14px;
+    }
+    .notess{
+        margin-top: 12px;
+    }
+    .b2{
+        display: inline-block;
+        outline: 0;
+        cursor: pointer;
+        padding: 5px 16px;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 5px;
+        vertical-align: middle;
+        border: 1px solid;
+        border-radius: 6px;
+        color: #ffffff;
+        background-color: #17cf99;
+        border-color: #1b1f2326;
+        box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+        transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        /* transition-property: color, background-color, border-color; */
+        /* width: 26px; */
+   
+    
+    }

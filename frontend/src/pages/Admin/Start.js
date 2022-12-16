@@ -10,51 +10,11 @@ import AddCorpTrainee from './Create/AddCorpTrainee';
 import ViewReq from '../../components/Admin/ViewReq';
 import ViewReports from '../../components/Admin/ViewReports';
 import ViewRefundReq from '../../components/Admin/ViewRefundReq';
+import graduated from "./graduated.png"
+import instructors from "./instructors.png"
+import admin from "./setting.png"
 const Start = () => {
 
-  const data = [
-    {
-      name: "Page A",
-      uv: 8000,
-      // pv: 400,
-      amt: 2400
-    },
-    {
-      name: "Page B",
-      uv: 8000,
-      amt: 3210
-    },
-    {
-      name: "Page C",
-      uv: 8000,
-      // pv: 9800,
-      amt: 2290
-    },
-    {
-      name: "Page D",
-      uv: 8780,
-      // pv: 3908,
-      amt: 2000
-    },
-    {
-      name: "Page E",
-      uv: 8000,
-      // pv: 4800,
-      amt: 2181
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      // pv: 3800,
-      amt: 2500
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      // pv: 4300,
-      amt: 2100
-    }
-  ];
     const [active,isActive]=useState("");
     const [choose,setChoose]=useState('home');
     const handleClick = (e) => {
@@ -62,13 +22,12 @@ const Start = () => {
     
       };
   return (
-    <React.Fragment className={l.all}>
+    <React.Fragment>
     
    <React.Fragment>
    <body className={l.bodyy}>
     <div className={l.wrapper} style={{display:"inline"}}>
     <div className={l.sidebar}>
-        
         <ul>
             <li className={l.listI}><button onClick={() => {setChoose('create');handleClick(); }} 
             className={l.anc}><i class="fas fa-user" style={{color:"white"}}></i><p className={l.text}>Create User</p></button></li>
@@ -88,46 +47,49 @@ const Start = () => {
 {choose=='home'&&
 <React.Fragment>
 <div className={l.analytics}>
-    <h3 className={l.analH}>Today's Analytics</h3>
-    <div className={l.analRight}>
-      <div className={l.totCourses}>
-        <p className={l.numberOf}>Number Of Courses</p>
-        <img   src={require('../Admin/encyclopedia.png')}  className={l.img}/>
-        <span className={l.span}>12</span>
-
+   <div className={l.cards}>
+   <div className={l.card}>
+      <div className={l.box}>
+        <h1>2194</h1>
+        <h3>Students</h3>
       </div>
-      <div className={l.totInst}>
-        <p className={l.numberOf}>Number Of Instructors</p>
-        <img   src={require('../Admin/instructor.png')} className={l.img}/>
-        <span className={l.span}>12</span>
-
-        </div>
-      <div className={l.totTrainees}>
-        <div className={l.x}>
-        <p className={l.numberOf}>Number Of Trainees</p>
-        <img src={require('../Admin/job.png')} className={l.img}></img>
-        <span className={l.span}>12</span>
-        </div>
+      <div className={l.iconcase}>
+        <img className={l.image}src={graduated}></img>
       </div>
-    
+   </div>
+   <div className={l.card}>
+      <div className={l.box}>
+        <h1>2194</h1>
+        <h3>Instructors</h3>
+      </div>
+      <div className={l.iconcase}>
+        <img className={l.image}src={instructors}></img>
+      </div>
+   </div>
+   <div className={l.card}>
+      <div className={l.box}>
+        <h1 className={l.hhh}>2194</h1>
+        <h3 className={l.hhh}>Admins</h3>
+      </div>
+      <div className={l.iconcase}>
+        <img className={l.image}src={admin}></img>
+      </div>
+   </div>
+   </div>
+   <div className={l.content2}>
+    <div className={l.repo}>
+    <div className={l.title}>
+      <h4>Reported Problems</h4>
+      <a class="btn">View All</a>
     </div>
-  </div>
-<div className={l.reportsNum}>
-    <div className={l.repWhite}><p className={l.rep}>Reports</p> <button className={l.button1} role="button">Resolve</button>
-</div>
-    <div className={l.blue}>
-      <div className={[l.totR, l.r].join(' ')}><p className={l.RepText}>Total Reports</p> <p className={l.repNum}>369</p></div>
-      <div className={[l.totTech, l.r].join(' ')}><p className={l.RepText}>Technical Reports</p><p className={l.repNum}>39</p></div>
-      <div className={[l.totFin, l.r].join(' ')}><p className={l.RepText}>Financial Reports</p><p className={l.repNum}>46</p></div>
-      <div className={[l.totOther, l.r].join(' ')}><p className={l.RepText}>Other Reports</p><p className={l.repNum}>172</p></div>
-      
     </div>
-  </div>
-<div className={l.chart}>
-
-{/* <BarChart width={450} height={400} data={data}>
-      <Bar dataKey="uv" fill="#8884d8" options={{}} />
-    </BarChart> */}
+    <div className={l.refunds}>
+    <div className={l.title}>
+      <h4>Refund Requests</h4>
+      <a class="btn">View All</a>
+    </div>
+    </div>
+   </div>
 </div>
 </React.Fragment>
 }
