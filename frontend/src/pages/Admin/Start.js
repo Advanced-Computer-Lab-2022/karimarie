@@ -13,6 +13,11 @@ import ViewRefundReq from '../../components/Admin/ViewRefundReq';
 import graduated from "./graduated.png"
 import instructors from "./instructors.png"
 import admin from "./setting.png"
+import {Chart as ChartJs, Tooltip, Title, ArcElement, Legend} from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+ChartJs.register(
+  Tooltip, Title, ArcElement, Legend
+);
 const Start = () => {
 
     const [active,isActive]=useState("");
@@ -51,7 +56,7 @@ const Start = () => {
    <div className={l.card}>
       <div className={l.box}>
         <h1>2194</h1>
-        <h3>Students</h3>
+        <h3 className={l.hhh}>Students</h3>
       </div>
       <div className={l.iconcase}>
         <img className={l.image}src={graduated}></img>
@@ -59,8 +64,8 @@ const Start = () => {
    </div>
    <div className={l.card}>
       <div className={l.box}>
-        <h1>2194</h1>
-        <h3>Instructors</h3>
+        <h1 >2194</h1>
+        <h3 className={l.hhh}>Instructors</h3>
       </div>
       <div className={l.iconcase}>
         <img className={l.image}src={instructors}></img>
@@ -68,7 +73,7 @@ const Start = () => {
    </div>
    <div className={l.card}>
       <div className={l.box}>
-        <h1 className={l.hhh}>2194</h1>
+        <h1 className={l.hhha}>2194</h1>
         <h3 className={l.hhh}>Admins</h3>
       </div>
       <div className={l.iconcase}>
@@ -79,15 +84,36 @@ const Start = () => {
    <div className={l.content2}>
     <div className={l.repo}>
     <div className={l.title}>
-      <h4>Reported Problems</h4>
-      <a class="btn">View All</a>
+      <h2>Reports</h2>
+      <button className={l.button3} role="button">View All</button>
+     
     </div>
+ 
+   
     </div>
-    <div className={l.refunds}>
+    <div className={l.ccc}>
     <div className={l.title}>
-      <h4>Refund Requests</h4>
-      <a class="btn">View All</a>
+      <h2>Courses</h2>
+      <button className={l.button3} role="button">View All</button>
     </div>
+    <table className={l.tablee}>
+      <tr>
+        <th className={l.thh}>Name</th>
+        <th className={l.thh}>Number of Students</th>
+      </tr>
+      <tr>
+        <td className={l.tdd}>Introduction to programming</td>
+        <td className={l.tdd}>145 Students</td>
+      </tr>
+      <tr>
+        <td className={l.tdd}>Digital Media Of Graphics</td>
+        <td className={l.tdd}>139 Students</td>
+      </tr>
+      <tr>
+        <td className={l.tdd}>Communication of networks</td>
+        <td className={l.tdd}>125 Students</td>
+      </tr>
+    </table>
     </div>
    </div>
 </div>

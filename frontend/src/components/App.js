@@ -26,6 +26,7 @@ import CR from './Admin/CR';
 import Watch from './Trainee/Watch';
 import TandC from './TandC';
 import ViewMyReports from './ViewMyReports';
+import Notif from './Notif';
 const App = () => {
   console.log('hooo')
   return <React.Fragment>
@@ -54,6 +55,8 @@ const App = () => {
         <Route path="/bye" element={<Watch/>} />
         <Route path="/b" element={<TandC/>} />
         <Route path="/bb" element={<ViewMyReports/>} />
+        <Route path="/mcq" element={<McqQuiz/>} />
+        <Route path="/notif" element={<Notif/>} />
 
 
       </Routes>

@@ -99,7 +99,10 @@
 
 }
 
-
+.ex{
+    /* background-color: #17cf97; */
+    /* padding-top: 1px; */
+}
 .topnav {
     background-color: #1b2430;
     overflow: hidden;
@@ -155,7 +158,8 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 200;
-    font-size: 17px;
+    font-size: 34px;
+    color: #17cf97;
     /* background-color: rebeccapurple; */
 }
 .bigTitle{
@@ -200,7 +204,7 @@
     
     }
     .a{
-        font-size: 2px;
+        font-size: 16px;
     }
 
     .shadearea{

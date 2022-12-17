@@ -56,6 +56,7 @@ useEffect(() => {
         const data = await res.data;
         setX(id);
         return data;
+        
     };
      
   return (

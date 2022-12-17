@@ -3,9 +3,10 @@ const traineeTable=require("../models/Trainee");
 const adminTable=require("../models/Admin");
 const requestsTable=require("../models/Requests")
 const refundReqTable=require("../models/RefundReq");
-const RefundReq = require("../models/RefundReq");
 const problemTable = require("../models/Problem");
 const courseTable=require("../models/Course");
+const notificationsTable=require("../models/Notification")
+
 const getAllInst=async(req,res,next)=>{
     let inst;
     try{
@@ -122,14 +123,17 @@ const addAdmin=async (req,res,next)=>{
  }
 const giveCourse=async(req,res)=>{
     const {id,answer}=req.body;
-   console.log(answer);
+    console.log(id);
+    console.log(answer)
+    let ans="Not Accepted";
     try{
       
         let x=await requestsTable.findById(id);
-       let m=x._id;
         let course=await courseTable.findById(x.courses);
+        console.log(course);
         let idd=course._id;
         if(answer.localeCompare('true')==0){
+            console.log("fff")
             let trainee= await traineeTable.findOneAndUpdate(
                 {
                     _id: x.corpId
@@ -137,12 +141,34 @@ const giveCourse=async(req,res)=>{
                 },
                 { $push: { "courses" : idd} }
              )
+             ans="Accepted"
         }
-        requestsTable.findByIdAndRemove(articleId);
-        return res.status(200).json({ course });
+        console.log(ans)
+        try{
+            // const noti=await notificationsTable.create({
+            //     userId:x.corpId,
+            //     type:"Course Requested",
+            //     message: `Your request of the course: ${x.courseName} has been ${ans}!`
+            // })
+            let noti;
+            noti= new notificationsTable({
+                userId:x.corpId,
+                type:"Course Requested",
+                message: `Your request of the course: ${x.courseName} has been  ${ans}!`
+            }) 
+            await noti.save();
+   
+            console.log(noti)
+    
+        }
+        catch(error){  return res.status(404).json(error.message)}
+        let del=await requestsTable.findByIdAndDelete(id);
+
+        return res.status(200).json({ del });
 
     }
     catch(error){
+        console.log("dd")
         return res.status(404).json(error.message)
     }
 
@@ -212,6 +238,14 @@ let xx=     await   traineeTable.findOneAndUpdate(
             },  { new: true }
          )
          let del=await refundReqTable.findByIdAndDelete(id);
+         let noti;
+         noti= new notificationsTable({
+             userId:x.traineeId,
+             type:"refund",
+             message: `An amount of ${newm} has been refunded to your wallet for the  course  ${x.courseName}`
+         }) 
+         await noti.save();
+
          console.log("hey")
          return res.json({success: true, message: 'Successfuly Refunded!'});
 

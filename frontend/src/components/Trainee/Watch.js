@@ -8,16 +8,17 @@ import NavbarHomePage from '../../S3_components/NavbarHomePage';
 import { color } from '@mui/system';
 import { StepContext } from '@mui/material';
 import {Box} from '@mui/material'
+import McqQuiz from '../Insructor/Quiz/McqQuiz';
 
 const Watch = () => {
     const [xx,setX]=useState([1,2,3,4]);
     const [course,setCourse]=useState([])
-    const [id,setId]=useState('639b49734f35d4c8004accfd')
+    const [id,setId]=useState('639cd36479af2c8db6177f85')
     const [video,setVideo]=useState();
     const [green,setGreen]=useState(true);
     const [showD,setShowD]=useState('')
     const [text,setText]=useState('')
-
+    const [vid,isVideo]=useState(true);
     //el asamy el habaynha 
     const [title,setTitle]=useState('');
     const [title2,setTitle2]=useState('');
@@ -27,6 +28,10 @@ const Watch = () => {
     //report part
     const [reportText,setReportText]=useState('');
     const [reportType,setReportType]=useState('')
+    //exam
+    const [exam,setShowExam]=useState(false);
+    const [CourseId,setCourseId]=useState('')
+    const [title222,seTitlenum2]=useState()
     const sendRequest = async () => {
         const res = await axios
           .get(`http://localhost:2000/getById/${id}`) 
@@ -53,8 +58,21 @@ const Watch = () => {
           const data = await res.data;
           return data;
       };
-      
-    
+      const downloadMe=()=>{
+        console.log(text);
+        const element=document.createElement('a');
+        const file=new Blob([text],{
+          type:"text/plain;charset-utf-8"
+        });
+        element.href=URL.createObjectURL(file);
+        element.download="NewDocument.txt";
+        document.body.appendChild(element);
+        element.click();
+      }
+    const callExam=(CourseId)=>{
+      console.log(CourseId)
+    }
+   
     return (
    <React.Fragment >
         <NavbarHomePage></NavbarHomePage>
@@ -64,7 +82,9 @@ const Watch = () => {
         <h2 className={x.bigTitle}>>{title2}</h2>
         <div className={x.box}>
           <h2 className={x.h}>{title}</h2>
-         <div className={x.video}><iframe src={preview} width="710px" height="410px" title="YouTube video" allowfullscreen></iframe></div> 
+  
+       {vid ?  <div className={x.video}><iframe src={preview} width="710px" height="410px" title="YouTube video" allowfullscreen></iframe></div>:<div className={x.ex}><McqQuiz  CourseId={CourseId} /> </div>}
+      //  {!isVideo&&<div>hey</div>}
         </div>
         <div className={x.topnav}>
           <div className={x.xx}>
@@ -76,7 +96,7 @@ const Watch = () => {
         </div>
         {green ? <div className={x.desc} >{descrip}</div>:<div className={x.notesBox}> <h3 className={x.notesH}>Notes:</h3>
       <textarea rows="10" cols="112" id="message" name="message" className={x.notes }onChange={(e)=>setText(e.target.value)}>{text}</textarea>
-      <button className={x.b}>Download Notes</button>
+      <button className={x.b} onClick={downloadMe}>Download Notes</button>
       </div>}
       {gender && <div className={x.shadearea}>
             <div class={x.country}>
@@ -110,16 +130,9 @@ const Watch = () => {
                 </summary>
                 <p className={x.inside}>
                     <div className={x.gowa}>
-                        {/* <ul>
-                            <li><div className={x.dli}><p className={x.text}>Hey</p></div></li>
-                            <li><div className={x.dli}><p className={x.text}>Hey</p></div></li>
-    
-                        </ul> */}
-                       {/* <div className={x.div1}><button className={x.b}>Hey</button></div>
-                       <div className={x.div2}><button className={x.b}>Hey</button></div> */}
-                     <div className={x.div1}> <a className={x.a} onClick={()=>{setPreview(req.Video);setTitle(req.title);setDescrip(req.shortDescrip)}} >Start Session</a> </div>
+                     <div className={x.div1}> <a className={x.a} onClick={()=>{setPreview(req.Video);setTitle(req.title);setDescrip(req.shortDescrip);isVideo(true)}} >Start Session</a> </div>
                      
-                     <div className={x.div2}> <a className={x.a} onClick={()=>{setGreen(false)}} >Solve Exam</a> </div>
+                     <div className={x.div2}> <a className={x.a} onClick={()=>{setGreen(false);setTitle("Exam "+req.title);callExam(req._id);setCourseId(req._id);isVideo(false); console.log(vid); seTitlenum2(req.title)}} >Solve Exam</a> </div>
                      </div>
                 </p>
             </details>

@@ -7,9 +7,9 @@ const {getAllInst,addInst,addCorpTrainee,addAdmin,viewReq,viewRefundReq,returnMo
     adminRouter.post("/addCorpTrainee",addCorpTrainee)
     adminRouter.post("/addAdmin",addAdmin)
     adminRouter.get("/viewReq",viewReq);
+    adminRouter.post("/giveCourse",giveCourse);
     adminRouter.get("/viewRefundReq",viewRefundReq);
     adminRouter.post("/returnMoney",returnMoney);
     adminRouter.get("/getReports",getReports);
     adminRouter.post("/editReport",editReport);
-    adminRouter.post("/giveCourse",giveCourse);
     module.exports=adminRouter;

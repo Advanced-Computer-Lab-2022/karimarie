@@ -9,8 +9,7 @@ const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/late
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const problemTable = require("../models/Problem");
-
-
+const notificationsTable=require("../models/Notification")
 const getAllCourses = async (req, res) => {
   
  
@@ -413,5 +412,18 @@ const seeMyReports=async(req,res)=>{
 
   }
 }
+const getMyNotification=async(req,res)=>{
+  let resultList;
+    const userId=req.params.userId;
+    console.log(userId);
+    console.log("hey")
+    resultList= await notificationsTable.find({userId:userId})
+    if(resultList){
+      console.log(resultList)
+      console.log("hey")
+    res.status(200).json({resultList })
+    
+    }
+  }
   module.exports={getAllCourses,logout,getSubjects,postFilterAll,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login,
-    reportProblem,seeMyReports}
+    reportProblem,seeMyReports,getMyNotification}

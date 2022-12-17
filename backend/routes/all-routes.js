@@ -2,7 +2,7 @@ const express=require('express');
 const allRouter=express.Router();
 const {getAllCourses,getSubjects,getFilterSubject,logout,postFilterPrice,postFilterAll,getById,filterRating,
     searchCourse,getExamSolution,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,
-    getByIdCourseDiscount,login,reportProblem,seeMyReports}=require("../controller/all-controller")
+    getByIdCourseDiscount,login,reportProblem,seeMyReports,getMyNotification}=require("../controller/all-controller")
 
  allRouter.get("/home",getAllCourses);
  allRouter.get("/subjects",getSubjects);
@@ -22,6 +22,6 @@ const {getAllCourses,getSubjects,getFilterSubject,logout,postFilterPrice,postFil
  allRouter.get('/logout', logout)
  allRouter.post('/reportProblem', reportProblem)
  allRouter.get('/seeMyReports/:id', seeMyReports)
-
+ allRouter.get('/getMyNotification/:userId', getMyNotification)
 // allRouter.get("/home/:id",viewAcourse)
  module.exports=allRouter 
