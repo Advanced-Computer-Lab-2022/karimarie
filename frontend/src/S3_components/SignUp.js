@@ -41,6 +41,7 @@ function SignUp() {
   };
 
   const handleSignUp = (e) => {
+    e.preventDefault();
     if (document.getElementById("male").checked) {
       setGender("male");
     } else if (document.getElementById("female").checked) {
@@ -184,7 +185,7 @@ function SignUp() {
               <label>Password</label>
               <span class="material-icons-outlined"> key </span>
               <div className={Logincss.show2}>
-      <button className={Logincss.btnn} type="button" onClick={togglePassword}>
+      <button className={Logincss.btnn}  role="button"onClick={togglePassword}>
           { passwordType==="password"? <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-eye-slash" viewBox="0 0 16 16">
   <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
   <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
@@ -232,7 +233,7 @@ function SignUp() {
               </label>
             </div>
 
-            <button class={SignUpcss.button1} type="submit" onClick={handleSignUp}>
+            <button className={SignUpcss.button1} role="Submit" onClick={handleSignUp}>
               <span>Join Now </span>
             </button>
             <p>
@@ -255,11 +256,11 @@ function SignUp() {
                 The username you have picked is already in use
               </div>
             )}
-            {/* {ShowText3 && (
+            {ShowText3 && (
               <div class={SignUpcss.message4}>
                 Please fill the missing fields{" "}
               </div>
-            )} */}
+            )}
           </form>
         </div>
       </div>
