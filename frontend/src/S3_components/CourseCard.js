@@ -46,7 +46,9 @@ const CourseCard=({id,title,totalHours,rating,price,priceafter,currency,type,typ
       }
       
  },[])
+
  useEffect(()=>{
+  
   if(fromCurrency!=null && toCurrency!=null){
  const res= axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then(
       res=>res.data).then(data => setExchanheRate(data.rates[toCurrency]))}}

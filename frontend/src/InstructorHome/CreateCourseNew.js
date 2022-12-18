@@ -504,7 +504,6 @@ const [showExam,isExam]=useState(false);
             </div> 
           </div>}
             </div>}
-    <Footer></Footer>
     
     </React.Fragment>
 

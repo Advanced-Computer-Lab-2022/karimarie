@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Subtitles from '../components/Subtitles';
 import det from './Details.module.css'
-import Rating from '@mui/material/Rating';
+// import Rating from '@mui/material/Rating';
 import NavbarHomePage from "./NavbarHomePage";
 import novideo from "./novideo.png"
 import emptystar from "../InstructorHome/emptystar.png"
@@ -18,6 +18,10 @@ import { TextField } from "@mui/material";
 import closeIcon from "../S3_components/closeButton.png";
 import TraineeNavbar from "../TraineeHome/TraineeNavbar";
 import cc from '../InstructorHome/CreateCourse.module.css'
+import x from "../TraineeHome/Watchh.module.css";
+import {Box} from '@mui/material'
+import { Rating } from 'react-simple-star-rating'
+
 
 
 
@@ -192,7 +196,26 @@ const ShowCourseDetails=()=> {
         issendmessage(true);}
 
       }
-      console.log(sendmessageC)
+
+      const [reportText,setReportText]=useState('');
+    const [reportType,setReportType]=useState('')
+    const reportNow=async()=>{
+      console.log(reportType);
+      const res = await axios
+        .post(`http://localhost:2000/reportProblem`,{
+          ReportById:localStorage.getItem("token"),
+          CourseId:Course._id,
+          Type:reportType,
+          Report:reportText
+        }) 
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        return data;
+    };
+      const [gender,isGender]=useState(false)
+      const reportProblem=()=>{
+        isGender(true)
+      }
      return(
       <React.Fragment>
        {type2==="Guest" && <NavbarHomePage></NavbarHomePage>}
@@ -211,7 +234,7 @@ const ShowCourseDetails=()=> {
            </div>
         </Typography>
         <Typography sx={{ mb: 1.5 }}   >
-      {type==="Guest" &&  <a href={`/instprofile/${Course.instructor}`}>
+      {type==="Guest" &&  <a href={`/instprofile/${Course.instructor}/${localStorage.getItem("userType")}`}>
           Instructor: {instructorTable.inst.userName}
           </a>}
         {type==="Instructor" && <a href={`/profile`}>
@@ -227,10 +250,13 @@ const ShowCourseDetails=()=> {
 <div className={det.al}>{Course.totalHours} Hours</div>
         </Typography>
         <Typography variant="body2">
-           <Rating className={det.readOnlye} value={Course.rating} precision={0.5} readOnly />
+           <Rating size="25" className={det.readOnlye} allowFraction="true" initialValue={Course.rating} precision={0.5} readonly="true" />
            <br />
          
         </Typography>
+        <div>
+        {type==="Instructor" &&  <button class={det.buttonAee} onClick={reportProblem}>Report A Problem</button>}
+        </div>
 
       
      
@@ -288,9 +314,11 @@ const ShowCourseDetails=()=> {
     {reviewsC.map((review)=>(
             <div className={det.contR}>
             <Rating
-            readOnly
+            readonly="true"
+            allowFraction="true"
+            size="25"
             className={det.rating}
-            value={review.rating}></Rating>
+            initialValue={review.rating}></Rating>
             <div className={det.move}>
             <p className={det.name}>Eliane Fares </p>
             </div>
@@ -365,6 +393,27 @@ const ShowCourseDetails=()=> {
                 
             </div> 
           </div>}
+
+          {gender && <div className={x.shadearea}>
+            <div class={x.country}>
+        <h3 className={x.r}>Report a problem:</h3>
+        <button class={x.closeButton} onClick={()=>isGender(false)}>  <img src={closeIcon} width="20"></img></button>
+        <div class={x.forms}>
+            <Box className={x.reportbox} width="250px">
+            <select className={x.select} id="language" onChange={(e) => setReportType(e.target.value)}  >
+            <option value="c" selected="selected" hidden><p className={x.c} >Problem Type</p></option>  
+            <option className={x.createO}value="Technical">Technical</option>
+            <option className={x.createO}value="Financial">Financial</option>
+            <option className={x.createO}value="Others">Others</option>
+          </select>
+          <textarea rows="7" cols="47 " id="message" name="message"placeholder='Problem Description' className={x.notess }onChange={(e)=>setReportText(e.target.value)}></textarea>
+          <button className={x.b2} onClick={()=>{reportNow();isGender(false)}}>Report</button>
+
+            </Box>
+  </div>    </div>
+            </div>
+
+            }
 </div>}
 </React.Fragment>
      )

@@ -78,12 +78,12 @@ const ViewMyCourses = ({id,title,totalHours,rating,price,priceafter,currency,typ
              <p>{ratingCurrent}</p>
              </div>
              {ratingCurrent===0?  <div><img src={emptystar} alt="card__image" class={inst.starimage1} width="16"/></div>: <div><img src={star} alt="card__image" class={inst.starimage1} width="20"/></div>}
-             <div className={inst.pricee}>
+            {type2!=="CorpTrainee" && <div className={inst.pricee}>
              <img src={priceTag} alt="card__image" class={c.priceimage} width="20"/>
-             </div>
-             {newPrice===0 &&  <div className={inst.priceetext}><p>FREE</p></div>}
-            {newPrice!==0  && newPrice===pricediscount && <div className={inst.priceetext}><p>{newPrice} {currencySelected}</p></div >}
-            {newPrice!==0  && newPrice!==pricediscount && <div><div  className={inst.priceetext1}><p>{newPrice} {currencySelected}</p></div><div className={inst.priceetext11}><p >{pricediscount} {currencySelected}</p></div></div> }
+             </div>}
+             {type2!=="CorpTrainee" && newPrice===0 &&  <div className={inst.priceetext}><p>FREE</p></div>}
+            {type2!=="CorpTrainee" && newPrice!==0  && newPrice===pricediscount && <div className={inst.priceetext}><p>{newPrice} {currencySelected}</p></div >}
+            {type2!=="CorpTrainee" && newPrice!==0  && newPrice!==pricediscount && <div><div  className={inst.priceetext1}><p>{newPrice} {currencySelected}</p></div><div className={inst.priceetext11}><p >{pricediscount} {currencySelected}</p></div></div> }
              </a>
               </div>
     </React.Fragment>

@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const courseReviews=require("../models/coursesReviews")
 const notificationsTable=require("../models/Notification")
+const problemTable=require("../models/Problem")
 
 const getAllCourses = async (req, res) => {
   
@@ -194,8 +195,8 @@ const addInstructorReview = async (req, res) => {
 try{
   let data = {
       instructor: req.params.id,
-      rating: req.body.rating.rating,
-      description: req.body.description.description
+      rating: req.body.rating,
+      description: req.body.description
   }
   const review = await instructorReviews.create(data)
 
@@ -514,11 +515,25 @@ const reportProblem= async (req, res) => {
  }
  }
 const seeMyReports=async(req,res)=>{
+
+  var decodeID="";
+  if(req.params.id){
+   jwt.verify(req.params.id, 'supersecret', (err, decodedToken) => {
+     if (err) {
+       res.status(401).json({message:"You are not logged in."})
+     } else {
+       decodeID=decodedToken.name;
+     }
+   });
+  }
+
+
   const id=req.params.id;
   console.log(id)
   console.log("hey")
+  console.log(decodeID)
   try{
-    let reports=await problemTable.find({ReportById:id});
+    let reports=await problemTable.find({ReportById:decodeID});
     console.log(reports)
     return res.status(200).json({ reports });
 
@@ -528,4 +543,62 @@ const seeMyReports=async(req,res)=>{
 
   }
 }
-  module.exports={getAllCourses,logout,getSubjects,postFilterAll,getCourseReviews,seeMyReports,reportProblem,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+const followUp=async(req,res)=>{
+  const {id,followUp}=req.body;
+  console.log(id);
+  console.log(followUp);
+  try{
+    let isfound=await problemTable.findById(id);
+    console.log(isfound.Report);
+    console.log(isfound.FollowUp);
+    if(isfound.FollowUp){
+      return res.json({success: false, message: 'no'});
+
+    }
+    else{
+      console.log("d")
+    
+
+   let x=await problemTable.findByIdAndUpdate( id,
+    {
+      FollowUp: followUp,
+    },
+    { new: true });
+    console.log(x);
+    return res.json({success: true, message: 'Successfuly requested'});
+  }
+  }
+  catch(err){ return res.status(404).json({message:err.message})}
+}
+const checkfoll=async(req,res)=>{
+  const {id,followUp}=req.body;
+  try{
+    let isfound=await problemTable.findById(id);
+  console.log(isfound.Report);
+  console.log(isfound.FollowUp);
+  if(isfound.FollowUp){
+    return res.json({success: false, message: 'no'});
+
+  }
+  else{
+    return res.json({success: false, message: 'yes'});
+  }
+}
+  catch(err){ return res.status(404).json({message:err.message})}
+  
+  
+}
+const getMyNotification=async(req,res)=>{
+  let resultList;
+    const userId=req.params.userId;
+    console.log(userId);
+    console.log("hey")
+    resultList= await notificationsTable.find({userId:userId})
+    if(resultList){
+      console.log(resultList)
+      console.log("hey")
+    res.status(200).json({resultList })
+    
+    }
+  }
+  module.exports={getAllCourses,logout,getSubjects,checkfoll,followUp,getMyNotification,postFilterAll,getCourseReviews,seeMyReports,reportProblem,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}

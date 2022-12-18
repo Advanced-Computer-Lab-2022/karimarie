@@ -29,6 +29,7 @@ import TraineeHomePage from "../TraineeHome/TraineeHomePage"
 import ForgetPasswordForm from '../S3_components/ForgetPasswordForm';
 import Watch from '../TraineeHome/Watch';
 import VMyCourses from '../TraineeHome/VMyCourses';
+import ViewMyReports from '../TraineeHome/ViewMyReports';
 
 const App = () => {
   return <React.Fragment>
@@ -54,14 +55,14 @@ const App = () => {
         <Route path="/TraineeHomePage" element={<TraineeHomePage/>} />
         <Route path="/ForgetPassword" element={<ForgetPassword/>} />
         <Route path="/profile" element={<InstProfile/>} />
-        <Route path="/instprofile/:id" element={<GetInstProfile/>} />
+        <Route path="/instprofile/:id/:userType" element={<GetInstProfile/>} />
         <Route path="/hii" element={<Start/>} />
         <Route path="/ViewMyRatings" element={<ViewReviewsInst/>} />
         <Route path="/Trainee" element={<TraineeHomePage/>} />
         <Route path="/forgetpasswordform/:id" element={<ForgetPasswordForm/>} />
-        <Route path="/Bye/:id" element={<Watch/>} />
+        <Route path="/Bye/:id/:instructor" element={<Watch/>} />
         <Route path="/Mycourses" element={<VMyCourses/>} />
-
+        <Route path="/viewMyR/:id" element={<ViewMyReports/>} />
       </Routes>
     </main>
   </React.Fragment>

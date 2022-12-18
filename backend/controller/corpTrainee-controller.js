@@ -22,7 +22,6 @@ const getAllCourses = async (req, res) => {
   
 
   const addCourseReview = async (req, res) => {
-   
     const course = await courseTable.findById(req.params.course);
     let myreviews={};
      if(req.params.course){
@@ -34,7 +33,6 @@ const getAllCourses = async (req, res) => {
         description: req.body.description,
         course: req.params.course
     }
-    
     const review = await courseReviews.create(data);
     review.save();
     const courseReview= await courseReviews.find(myreviews);

@@ -30,7 +30,10 @@ const ProblemSchema=new Schema({
      },
      Status:{
         type:String
-     } 
+     } ,
+     FollowUp:{
+        type:String
+     }
    
  
  });

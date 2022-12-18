@@ -14,6 +14,8 @@ import searchIcon from "../S3_components/searchIcon.png"
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Nav from "./TraineeNavbar.module.css"
+import userIcon from "../InstructorHome/userIcon.png"
+import inst from "../InstructorHome/InstProfile.module.css"
 
 
 function TraineeNavbar(isactive){
@@ -171,6 +173,46 @@ function TraineeNavbar(isactive){
             window.location.href="/";
           }
           
+
+          const[Password,isShowPassword]=useState(false);  
+          const [newpassword,setnewpassword]=useState('');
+          const [confirmpassword,setconfirmpassword]=useState('');
+          const [sendmessage,issendmessage]=useState(false)
+          const [sendmessage2,issendmessage2]=useState(false)
+          const decodeID=String(localStorage.getItem("token"))
+
+          const editpassword = async () => {
+            const res = await axios
+            .post(`http://localhost:2000/corpTrainee/editpassword/${decodeID}`, {
+              password : newpassword
+            })
+            .catch((err) => console.log(err));
+        
+          };  
+          const changePassword=()=>{
+            if(newpassword!==confirmpassword){
+                issendmessage(true);
+                issendmessage2(false);
+            }else if(newpassword.length<7){
+              issendmessage2(true);
+              issendmessage(false)
+            }
+            else {
+                issendmessage(false)
+                issendmessage2(false)
+                hidePass(false);
+                editpassword();
+            }
+            
+    
+          }
+          const hidePass=(e)=>{
+            isShowPassword(false);
+            issendmessage(false)
+            setnewpassword("")
+            issendmessage2(false);
+            setconfirmpassword("")
+         }
          
     return(
         <>
@@ -192,7 +234,15 @@ function TraineeNavbar(isactive){
     <li><a  style={{ color: isactive.isactive === "true" ? "#17cf97" : null }}href="/Mycourses">View My Courses </a></li>
     <li><a href onClick={showLogout}style={{ color: isactive.isactive === "false" ? "#17cf97" : null }}>Logout</a></li>
     <li><button onClick={showDropDown}><img src={language} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
-    {/* <li><button onClick={navigateTo}><img src={profileIcon} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li> */}
+    <div className={Nav.dropdown}>
+    <button className={Nav.dropbt}><img src={userIcon}></img></button>
+    <div className={Nav.dropdowncontent}>
+      <a href="#" className={Nav.hr}>Wallet</a>
+      <a href={`/viewMyR/${localStorage.getItem("token")}`}  className={Nav.hr}>Reports</a>
+      <a onClick={()=>{isShowPassword(true);console.log("h")}} className={Nav.hr}>Change Password</a>
+  </div>
+
+</div>
 </ul>
 </div>
 <div className={NavbarStyles.searchbox}>
@@ -280,6 +330,24 @@ function TraineeNavbar(isactive){
               </div>
 
           }
+          {Password &&<div className={Nav.mo}><div className={inst.shadearea}> 
+            <div className={inst.modalcontainer}>
+            <p className={inst.changepass}>Change Your Password</p>
+            <p className={inst.newpass}>New Password:</p>
+            <TextField className={inst.passtextfield1} type="password"  required value={newpassword} onChange={(e) => setnewpassword(e.target.value)} ></TextField>
+            
+            <p className={inst.confirmpass}>Confirm Password:</p>
+            <TextField className={inst.passtextfield2} type="password" required value={confirmpassword} onChange={(e) => setconfirmpassword(e.target.value)} ></TextField>
+          {sendmessage && <div className={inst.message2}><p className={inst.message}>Those passwords didn't match. Try Again </p></div>}
+            {sendmessage2 && <div className={inst.message}><p>Your password should be at least 8 characters</p></div>}
+            <button className={inst.submitpassbutton} onClick={changePassword}>Submit</button>
+            <button onClick={hidePass} className={inst.closeedit2} ><i className={["fa fa-times", ].join(' ')}aria-hidden="true"></i></button>
+            {/* <button className={x.bbb} onClick={()=>{isGender(false);}}><i className={["fa fa-times", x.iconn].join(' ')}aria-hidden="true"></i></button> */}
+
+                </div>
+                </div>
+                </div> 
+                }
         </>
     )
 }

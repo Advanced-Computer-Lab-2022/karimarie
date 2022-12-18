@@ -16,6 +16,7 @@ const Watch = () => {
     const [xx,setX]=useState([1,2,3,4]);
     const [course,setCourse]=useState([])
     const id=useParams().id
+    const instructor=useParams().instructor
     const [video,setVideo]=useState();
     const [green,setGreen]=useState(true);
     const [showD,setShowD]=useState('')
@@ -34,6 +35,7 @@ const Watch = () => {
     const [exam,setShowExam]=useState(false);
     const [CourseId,setCourseId]=useState('')
     const [title222,seTitlenum2]=useState()
+    const [inst,setinst]=useState('')
     const sendRequest = async () => {
         const res = await axios
           .get(`http://localhost:2000/getById/${id}`) 
@@ -44,9 +46,16 @@ const Watch = () => {
       };
       useEffect(() => {
         sendRequest().then((data) => {setCourse(data.course);setTitle2(data.course.title);setPreview(data.course.preview);setDescrip(data.course.description)});
-       
+        sendReq().then((data)=>setinst(data))
         
       }, []);
+      const sendReq=async ()=>{
+        const res2 = await axios
+                      .get(`http://localhost:2000/instructor/getByid2/${instructor}`)
+                      .catch((err) => console.log(err));
+        const data=res2.data.inst;
+        return data;
+      }
       const reportNow=async()=>{
         console.log(reportType);
         const res = await axios
@@ -86,14 +95,17 @@ const Watch = () => {
           <h2 className={x.h}>{title}</h2>
   
        {vid ?  <div className={x.video}><iframe src={preview} width="710px" height="410px" title="YouTube video" allowfullscreen></iframe></div>:<div className={x.ex}><McqQuiz  CourseId={CourseId} /> </div>}
-        {!isVideo&&<div>hey</div>}
+        {!vid&&<div>hey</div>}
         </div>
         <div className={x.topnav}>
           <div className={x.xx}>
+            <div className={x.moveee}>
         <a className={x.active} style={{"background-color" : green ? "#17cf97" : "#1b2430"}} onClick={()=>{setGreen(true)}} >Description</a>
-        <a className={x.active} style={{"background-color" : green ? "#1b2430" :"#17cf97" }} onClick={()=>{setGreen(false)}} >Notes</a>
-        <a className={x.report} style={{"background-color" : gender? null: "#1b2430"}} onClick={()=>{isGender(true);setGreen()}}>Report a Problem</a>
-
+        <a className={x.active} style={{"background-color" : green ? "#1b2430" :"#17cf97" }} onClick={()=>{setGreen(false)}} >Notes</a></div>
+        <div className={x.movee}>
+        <a className={x.report} style={{"background-color" : gender? "#17cf97": "#1b2430"}} onClick={()=>{window.location.href=`/instprofile/${inst._id}/${localStorage.getItem("userType")}`;isGender(false)}}>By {inst.userName}</a>
+        <a className={x.report} style={{"background-color" : gender? "#1b2430": "#17cf97"}} onClick={()=>{isGender(true)}}>Report a Problem</a>
+        </div>
         </div>
         </div>
         {green ? <div className={x.desc} >{descrip}</div>:<div className={x.notesBox}> <h3 className={x.notesH}>Notes:</h3>

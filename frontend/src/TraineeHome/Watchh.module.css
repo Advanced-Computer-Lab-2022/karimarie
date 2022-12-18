@@ -12,10 +12,11 @@
     width: 315.2px;
     /* margin: 5px; */
     box-shadow: 0 5px 10px #3334;
+    margin-left: 37px;
     /* margin-left: 998.2px;      */
     /* height: 670px; */
     /* height: 500px; */
-    background-color: #17cf97;
+    background-color: white;
 
 
 }
@@ -114,6 +115,7 @@
 .topnav {
     background-color: #1b2430;
     overflow: hidden;
+    width: 1065px;
   }
   
   /* Style the links inside the navigation bar */
@@ -131,13 +133,22 @@
     background-color:rebeccapurple;
     color:#EF9A53;
   }
+  .moveee{
+    margin-left: 150px;
+  }
   .report:hover {
     background-color:rebeccapurple;
     color: #EF9A53;
   }
+  .movee{
+    float: right;
+    margin-left:120px;
+  }
+  
+  
   
  .xx{
-    padding-left:40%;
+    padding-left:25%;
  }
 .notesBox{
     margin-left: 95px;
@@ -197,7 +208,7 @@
     border: 1px solid;
     border-radius: 6px;
     color: #ffffff;
-    background-color: #17cf99;
+    /* background-color: #17cf99; */
     border-color: #1b1f2326;
     box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
     transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);

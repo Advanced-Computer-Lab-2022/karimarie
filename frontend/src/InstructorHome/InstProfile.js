@@ -21,6 +21,12 @@ import Reviews from './Reviews'
 import r from "./Reviews.module.css"
 import InstSideBar from './InstSideBar'
 import Footer from "../S3_components/Footer"
+import det from "../S3_components/Details.module.css"
+import {Box} from '@mui/material'
+import emptystar from "../InstructorHome/emptystar.png"
+import quotationIcon from "../InstructorHome/quotation (1).png"
+import star from "../S3_components/star.png"
+import x from "../TraineeHome/Watchh.module.css";
 
 const InstProfile = () => {
     const[Edit,isShowEdit]=useState(false);
@@ -227,10 +233,11 @@ const InstProfile = () => {
           .get(`http://localhost:2000/instructor/getInstructorReviews/${localStorage.getItem("token")}`)
           .catch((err) => console.log(err));
           const data = await res.data;
+          console.log(data)
           return data;
       };
       const getReviews=()=>{
-        isReviews(true);
+        // isReviews(true);
         
       }
       const [newpassword,setnewpassword]=useState('');
@@ -263,6 +270,7 @@ const InstProfile = () => {
         
 
       }
+    
      
   
     return (
@@ -441,17 +449,33 @@ const InstProfile = () => {
         />
            )}
         </div>}
-        <div className={inst.ViewRatingsi}>
-          {Reviews1 && reviewsInst &&
-           reviewsInst.map((review)=>
-            <Reviews review={review.description} rating={review.rating}/>
-          )}
-                   {Reviews1 && <button onClick={hideEdit} className={inst.closeeditXX}  ><img src={closeIcon} ></img></button>}
-           </div>
+        <div className={inst.instrating}>
+        {reviewsInst && <div className={det.CourseReviews}>
+    <div className={det.rattt}>
+        {reviewsInst.length===0?  <div><img src={emptystar} alt="card__image" class={det.starimage1} width="40"/></div>: <div><img src={star} alt="card__image" class={det.starimage1} width="40"/></div>}
+        {reviewsInst.length===0?<p className={det.noo}>No Ratings Yet.</p> : <p>{Instructor.rating} course rating . {reviewsInst.length} ratings</p>}
+    </div>
+    {reviewsInst.map((review)=>(
+            <div className={det.contR}>
+            <Rating
+            readOnly
+            className={det.rating}
+            value={review.rating}></Rating>
+            <div className={det.move}>
+            <p className={det.name}>Eliane Fares </p>
+            </div>
+            <p className={det.review}>{review.description}
+             </p>
+             <img className={det.quot1} src={quotationIcon}></img>
+             </div>
+        ))}
+</div>}
+</div>
+
             <img src="https://source.unsplash.com/600x400/?food" alt="card__image" className={inst.image} width="600"/>    
             <button className={inst.changepassword} onClick={showPassword}>Change Password</button>
             <button className={inst.changeEmail} onClick={showEmail}>Change My Email</button>
-            <button className={inst.ViewRatings} onClick={getReviews}>View My Reviews</button>
+            <button className={inst.ViewRatings} onClick={getReviews}>View My Balance</button>
             {Edit&& <div className={inst.shadearea}> 
             <div className={inst.modalcontainer}>
                 <p className={inst.editbiotext}>Edit Your Bio</p>

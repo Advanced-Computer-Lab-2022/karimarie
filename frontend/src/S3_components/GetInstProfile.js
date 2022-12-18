@@ -27,6 +27,7 @@ import emptystar from "../InstructorHome/emptystar.png"
 const GetInstProfile = () => {
     const id = useParams().id;
     console.log(id);
+    const userType=useParams().userType
     const [Instructor,setInstructor]=useState("");
     const [rating,setRating]=useState("");
     const getInstructor = async () => {
@@ -118,11 +119,13 @@ const GetInstProfile = () => {
          title={courses.title}
         //  totalHours={courses.totalHours}
          rating={courses.rating}
-         price={courses.price}
+         price={courses.originalPrice}
+         priceafter={courses.price}
          Instructor={Instructor.userName}
          currency={courses.currency}
          subject={courses.subject}
          type="Guest"
+         type2={userType}
         />
            )}
            

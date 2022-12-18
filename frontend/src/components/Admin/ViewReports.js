@@ -5,6 +5,7 @@ import axios from "axios";
 
 const ViewReports = () => {
     const [backgC,setBackgC]=useState("red");
+    const [count,setcount]=useState(0)
     const [stateShow,setStateShow]=useState("Unseen");
     const [currency, setCurrency] = useState('Action')
     const [m,setM]=useState([1,2,3,5]);
@@ -26,6 +27,7 @@ const ViewReports = () => {
         .catch((err) => console.log(err));
         const data = await res.data;
         setX(id);
+        setcount(count+1);
         return data;
 
         
@@ -50,7 +52,7 @@ const ViewReports = () => {
       );
      
       
-    }, [xx]);
+    }, [count]);
    
   // console.log(reports[0].ReportByName);
   return (
@@ -79,6 +81,9 @@ const ViewReports = () => {
       </div>
       <div className={x.cell}>
         Action
+      </div>
+      <div className={x.cell}>
+        User FollowUp
       </div>
     </div>
     
@@ -118,6 +123,9 @@ const ViewReports = () => {
 </select>
 
 
+</div>
+<div className={x.cell} >
+{req.FollowUp}
 </div>
 </div>
    ))} 
