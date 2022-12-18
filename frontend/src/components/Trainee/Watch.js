@@ -121,10 +121,10 @@ const Watch = () => {
        
         </div>
 
-        <section className={x.section}>
+        <section className={x.section11}>
     {course.subtitles&&course.subtitles.map((req,i) =>(
-                <details className={x.details}>
-                <summary className={x.summary}>
+                <details className={x.detailsxs}>
+                <summary className={x.summary11}>
                     Lesson {i+1}: {req.title}
                     <div className={x.clockdiv}><i className="fa fa-clock-o fa-xs m" aria-hidden="true"></i> {req.totalHours} hrs</div>
                 </summary>

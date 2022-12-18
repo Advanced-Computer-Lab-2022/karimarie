@@ -296,6 +296,8 @@ const getExamSolution= async (req, res) => {
   try {
     //const courseId=req.params.courseId;
     const exam = await examTable.find({CourseId: req.params.CourseId});
+    console.log( req.params.CourseId);
+    console.log(exam);
     return res.status(200).json({ exam });
   } catch (err) {
     return res.status(404).json({ message: err.message });

@@ -12,10 +12,10 @@ const McqQuiz = (CourseId) => {
     console.log(CourseId)
     const sendRequest = async () => {
         const res = await axios
-          .get(`http://localhost:2000/getExamSol/${CourseId}`)
+          .get(`http://localhost:2000/getExamSol/${CourseId.CourseId}`)
           .catch((err) => console.log(err));
           const data = await res.data;
-          
+          console.log(data);
           return data;
       };
       useEffect(() => {
