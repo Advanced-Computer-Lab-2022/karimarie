@@ -1,0 +1,298 @@
+.maindiv{
+    position: absolute;
+    width: 1386px;
+    height: 412px;
+    /* left: -1px; */
+    left:5px;
+    top: 90px;
+    
+    background: #D7CECE;
+    border-radius: 0px 0px 30px 30px;
+
+}
+.mycards{
+    position: absolute;
+width: 225px;
+height: 45px;
+left: 80px;
+top: 20px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 36px;
+line-height: 44px;
+text-align: center;
+
+color: #000000;
+
+}
+.addmore{
+    position: absolute;
+width: 60px;
+height: 60px;
+left: 149px;
+top: 99px;
+
+background: #FFFFFF;
+border: 1px dashed #000000;
+
+}
+.card{
+
+
+    position: absolute;
+    width: 276px;
+    height: 173px;
+    left: 302px;
+    top: 95px;
+    
+    background: #1020B1;
+    mix-blend-mode: hard-light;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    }
+    .cardnumber{
+        position: absolute;
+        width: 229px;
+        height: 25px;
+        left: 25px;
+        top: 83px;
+        
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 24px;
+        /* identical to box height */
+        
+        text-align: center;
+        
+        color: #FFFFFF;
+        
+            }
+        .expirydate{
+
+
+                position: absolute;
+                width: 74px;
+                height: 7px;
+                left: 20px;
+                top: 120px;
+                
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 100;
+                font-size: 11px;
+                line-height: 13px;
+                text-align: center;
+                
+                color: #FFFFFF;
+                }
+
+                .expirydatetext{
+
+
+                    position: absolute;
+                    width: 36px;
+                    height: 8px;
+                    left: 35px;
+                    top: 137px;
+                    
+                    font-family: 'Inter';
+                    font-style: normal;
+                    font-weight: 100;
+                    font-size: 11px;
+                    line-height: 13px;
+                    text-align: center;
+                    
+                    color: #FFFFFF;
+                }
+                .cvv{
+
+
+                    position: absolute;
+                    width: 74px;
+                    height: 11px;
+                    left: 170px;
+                    top: 120px;
+                    
+                    font-family: 'Inter';
+                    font-style: normal;
+                    font-weight: 100;
+                    font-size: 11px;
+                    line-height: 13px;
+                    text-align: center;
+                    
+                    color: #FFFFFF;
+                    }
+                    .cvvtext{
+
+
+                        position: absolute;
+                        width: 36px;
+                        height: 8px;
+                        left: 190px;
+                        top: 136px;
+                        
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 100;
+                        font-size: 11px;
+                        line-height: 13px;
+                        text-align: center;
+                        
+                        color: #FFFFFF;
+                        }
+                        .line{
+                        position: absolute;
+                        width: 303.01px;
+                        height: 0px;
+                        left: 320px;
+                        top: 110px;
+                        
+                        border: 1px solid #000000;
+                        transform: rotate(89.62deg);
+                        }
+                        .balance{
+                            position: absolute;
+width: 173px;
+height: 30px;
+left: 700px;
+top: -70px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 36px;
+line-height: 44px;
+text-align: center;
+
+color: #000000;
+
+
+                        }
+
+                        .balancenumber{
+                            position: absolute;
+                            width: 400px;
+                            height: 71px;
+                            left: 640px;
+                            top: -30px;
+                            
+                            font-family: 'Inter';
+                            font-style: normal;
+                            font-weight: 900;
+                            font-size: 50px;
+                            line-height: 80px;
+                            text-align: center;
+                            
+                            color: #1b2430;                            
+
+    }
+    .numberslist{
+        position: absolute;
+        top:640px;
+        left:500px;
+        display:flex;
+        align-items:center;
+        list-style:none;      
+    }
+    .list{
+        padding-left: 13px;
+        padding-right: 13px;
+        color: #110f0f;                            
+
+    }
+    .b1{
+        position: absolute;
+width: 23px;
+height: 184px;
+left: 544px;
+top: 450px;
+
+background: #1020B1;
+border-radius: 40px;
+
+    }
+    .b2{
+        position: absolute;
+width: 23px;
+height: 50px;
+left: 592px;
+top: 580px;
+
+background: #D9D9D9;
+border-radius: 40px;
+    }
+    .b3{position: absolute;
+        width: 23px;
+        height: 134px;
+        left: 645px;
+        top: 500px;
+        
+        background: #1020B1;
+        border-radius: 40px;
+    }
+    .b4{
+        position: absolute;
+width: 23px;
+height: 205px;
+left: 693px;
+top: 432px;
+
+background: #17CF97;
+border-radius: 40px;
+    }
+    .b5{
+        position: absolute;
+width: 23px;
+height: 107px;
+left: 740px;
+top: 528px;
+background: #D9D9D9;
+border-radius: 40px;
+    }
+    .b6{
+        position: absolute;
+width: 23px;
+height: 159px;
+left: 790px;
+top: 478px;
+
+background: #1020B1;
+border-radius: 40px;
+    }
+    .b7{
+        position: absolute;
+width: 23px;
+height: 189px;
+left: 840px;
+top: 450px;
+
+background: #1020B1;
+border-radius: 40px;
+
+    }
+    .date{
+        position: absolute;
+width: 229px;
+height: 30px;
+left: 513px;
+top: 680px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 29px;
+text-align: center;
+
+color: #000000;
+
+    }
+    .graph{
+        position: absolute;
+        left:400px;
+        top:-300px;
+    }

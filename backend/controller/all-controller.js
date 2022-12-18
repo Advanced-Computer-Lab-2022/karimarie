@@ -196,7 +196,8 @@ try{
   let data = {
       instructor: req.params.id,
       rating: req.body.rating,
-      description: req.body.description
+      description: req.body.description,
+      userName:req.body.userName
   }
   const review = await instructorReviews.create(data)
 
@@ -401,9 +402,13 @@ const login = async (req, res) => {
 
       }
     }else if(userTrainee){
+      console.log(userTrainee)
+      console.log(password)
+      
         const ok= await bcrypt.compare(password, userTrainee.password);
         if(ok){
-
+          
+                console.log("ok")
                 user = userTrainee;
                 const token = createToken(user._id);
                 res
@@ -601,4 +606,21 @@ const getMyNotification=async(req,res)=>{
     
     }
   }
-  module.exports={getAllCourses,logout,getSubjects,checkfoll,followUp,getMyNotification,postFilterAll,getCourseReviews,seeMyReports,reportProblem,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+  const exchangecurr=async (req,res) => {
+    let balance= req.body.balance;
+    const curr=req.body.curr;
+  try{
+        const fromCurrency="EGP"
+        const toCurrency=curr
+        const base_URL='https://api.exchangerate.host/latest'
+        const res1= await axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then( res1=>res1.data);
+        const exchangeRate=res1.rates[toCurrency];
+        balance=balance*exchangeRate;
+  }
+  catch(err){ res.status(404).json({err: err.message})}
+  
+  
+        return res.status(200).json({ balance });
+  
+  }
+  module.exports={getAllCourses,logout,getSubjects,exchangecurr,checkfoll,followUp,getMyNotification,postFilterAll,getCourseReviews,seeMyReports,reportProblem,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}

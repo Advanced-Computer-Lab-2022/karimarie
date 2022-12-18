@@ -153,3 +153,21 @@ color:black;
     position: relative;
     z-index: 11;
   }
+  .moo{
+    position: absolute;
+    margin-left: 860px;
+  }
+  .movel{
+    position: absolute;
+    z-index: 3;
+    margin-left: -500px;
+    margin-top: -20px;
+  }
+  .see{
+    margin-left: 350px;
+    margin-top: 50px;
+  }
+  .see1{
+    margin-left: 350px;
+    margin-top: 70px;
+  }

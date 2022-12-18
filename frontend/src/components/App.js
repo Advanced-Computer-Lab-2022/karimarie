@@ -30,6 +30,9 @@ import ForgetPasswordForm from '../S3_components/ForgetPasswordForm';
 import Watch from '../TraineeHome/Watch';
 import VMyCourses from '../TraineeHome/VMyCourses';
 import ViewMyReports from '../TraineeHome/ViewMyReports';
+import TermsConditions from '../S3_components/TermsConditions';
+import Contract from '../S3_components/Contract';
+import PayCredit from "../TraineeHome/PayCredit";
 
 const App = () => {
   return <React.Fragment>
@@ -63,6 +66,9 @@ const App = () => {
         <Route path="/Bye/:id/:instructor" element={<Watch/>} />
         <Route path="/Mycourses" element={<VMyCourses/>} />
         <Route path="/viewMyR/:id" element={<ViewMyReports/>} />
+        <Route path="/Terms&Conditions" element={<TermsConditions/>} />
+        <Route path="/Contract" element={<Contract/>} />
+        <Route path="/PayCredit/:id/:currencyPrice" element={<PayCredit />} />
       </Routes>
     </main>
   </React.Fragment>

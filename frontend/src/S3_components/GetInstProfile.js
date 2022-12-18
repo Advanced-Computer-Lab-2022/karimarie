@@ -143,7 +143,7 @@ const GetInstProfile = () => {
             className={det.rating}
             value={review.rating}></Rating>
             <div className={det.move}>
-            <p className={det.name}>Eliane Fares </p>
+            <p className={det.name}>{review.userName} </p>
             </div>
             <p className={det.review}>{review.description}
              </p>

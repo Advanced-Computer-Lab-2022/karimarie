@@ -284,3 +284,21 @@
     z-index: 2;
 
   }
+  .movete{
+    margin-top: -490px;
+    width: 100vw;
+    margin-left: -470px;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .moveR{
+    margin-top: -700px;
+    margin-left: 90px;
+  }

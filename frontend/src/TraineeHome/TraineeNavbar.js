@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Nav from "./TraineeNavbar.module.css"
 import userIcon from "../InstructorHome/userIcon.png"
+import Logincss from "../S3_components/Login.module.css"
 import inst from "../InstructorHome/InstProfile.module.css"
 
 
@@ -213,7 +214,24 @@ function TraineeNavbar(isactive){
             issendmessage2(false);
             setconfirmpassword("")
          }
-         
+         const[passwordType,setPasswordType]=useState("password")
+         const togglePassword =()=>{
+          if(passwordType==="password")
+          {
+           setPasswordType("text")
+           return;
+          }
+          setPasswordType("password")
+        }
+        const[passwordType1,setPasswordType1]=useState("password")
+        const togglePassword1 =()=>{
+         if(passwordType1==="password")
+         {
+          setPasswordType1("text")
+          return;
+         }
+         setPasswordType1("password")
+       }
     return(
         <>
         
@@ -228,23 +246,25 @@ function TraineeNavbar(isactive){
 </a>
 
 <div class={NavbarStyles.list}>
+  <div className={Nav.movel}>
 <ul id={NavbarStyles.navbar}>
     <li><button onClick={showFilter} title="Filter" className={NavbarStyles.buttonFilter}><img src={filterIcon} alt="card__image" width="40"></img>
             </button></li>
     <li><a  style={{ color: isactive.isactive === "true" ? "#17cf97" : null }}href="/Mycourses">View My Courses </a></li>
     <li><a href onClick={showLogout}style={{ color: isactive.isactive === "false" ? "#17cf97" : null }}>Logout</a></li>
-    <li><button onClick={showDropDown}><img src={language} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
     <div className={Nav.dropdown}>
-    <button className={Nav.dropbt}><img src={userIcon}></img></button>
+    <button className={Nav.dropbt}><img src={userIcon} width="40"></img></button>
     <div className={Nav.dropdowncontent}>
       <a href="#" className={Nav.hr}>Wallet</a>
       <a href={`/viewMyR/${localStorage.getItem("token")}`}  className={Nav.hr}>Reports</a>
       <a onClick={()=>{isShowPassword(true);console.log("h")}} className={Nav.hr}>Change Password</a>
   </div>
-
 </div>
+<li><button onClick={showDropDown}><img src={language} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
 </ul>
 </div>
+</div>
+<div className={Nav.moo}>
 <div className={NavbarStyles.searchbox}>
 
     <button className={NavbarStyles.btnsearch} onClick={handleSearch}><i class="fas fa-search">
@@ -252,7 +272,7 @@ function TraineeNavbar(isactive){
       </i></button>
     <input type="text" className={NavbarStyles.inputsearch}  onKeyPress={handleSearch2} value={search} onChange={(e) => setSearch(e.target.value)} 
  placeholder="Type to Search..."></input>
-  </div>
+  </div></div>
         </nav>
         {dropDown && <div className={NavbarStyles.shadearea}>
             <div class={NavbarStyles.country}>
@@ -334,16 +354,39 @@ function TraineeNavbar(isactive){
             <div className={inst.modalcontainer}>
             <p className={inst.changepass}>Change Your Password</p>
             <p className={inst.newpass}>New Password:</p>
-            <TextField className={inst.passtextfield1} type="password"  required value={newpassword} onChange={(e) => setnewpassword(e.target.value)} ></TextField>
-            
+            <TextField className={inst.passtextfield1} type={passwordType}  required value={newpassword} onChange={(e) => setnewpassword(e.target.value)} ></TextField>
+           
             <p className={inst.confirmpass}>Confirm Password:</p>
-            <TextField className={inst.passtextfield2} type="password" required value={confirmpassword} onChange={(e) => setconfirmpassword(e.target.value)} ></TextField>
+            <TextField className={inst.passtextfield2} type={passwordType1} required value={confirmpassword} onChange={(e) => setconfirmpassword(e.target.value)} ></TextField>
           {sendmessage && <div className={inst.message2}><p className={inst.message}>Those passwords didn't match. Try Again </p></div>}
             {sendmessage2 && <div className={inst.message}><p>Your password should be at least 8 characters</p></div>}
             <button className={inst.submitpassbutton} onClick={changePassword}>Submit</button>
             <button onClick={hidePass} className={inst.closeedit2} ><i className={["fa fa-times", ].join(' ')}aria-hidden="true"></i></button>
             {/* <button className={x.bbb} onClick={()=>{isGender(false);}}><i className={["fa fa-times", x.iconn].join(' ')}aria-hidden="true"></i></button> */}
-
+            <div className={Nav.see}>
+            <button  onClick={togglePassword}>
+          { passwordType==="password"? <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+  <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+  <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+  <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+</svg> :<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+</svg> }
+          </button>
+          </div>
+          <div className={Nav.see1}>
+            <button  onClick={togglePassword1}>
+          { passwordType1==="password"? <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+  <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+  <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+  <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+</svg> :<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+</svg> }
+          </button>
+          </div>
                 </div>
                 </div>
                 </div> 

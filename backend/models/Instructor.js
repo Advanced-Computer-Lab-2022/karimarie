@@ -43,7 +43,11 @@ const instructorSchema = new Schema({
     type:Number
   },
   firstTime:{
-    type:Boolean,default:true,}
+    type:Boolean,default:true,},
+  balance:{
+    type:Number,
+    default:0
+  }
 });
 const Instructor = mongoose.model("Instructor", instructorSchema);
 module.exports = Instructor;

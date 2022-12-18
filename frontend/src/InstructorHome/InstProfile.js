@@ -27,6 +27,7 @@ import emptystar from "../InstructorHome/emptystar.png"
 import quotationIcon from "../InstructorHome/quotation (1).png"
 import star from "../S3_components/star.png"
 import x from "../TraineeHome/Watchh.module.css";
+import InstBalancePage from './InstBalancePage'
 
 const InstProfile = () => {
     const[Edit,isShowEdit]=useState(false);
@@ -270,6 +271,30 @@ const InstProfile = () => {
         
 
       }
+      const[passwordType,setPasswordType]=useState("password")
+      const togglePassword =()=>{
+       if(passwordType==="password")
+       {
+        setPasswordType("text")
+        return;
+       }
+       setPasswordType("password")
+     }
+     const[passwordType1,setPasswordType1]=useState("password")
+     const togglePassword1 =()=>{
+      if(passwordType1==="password")
+      {
+       setPasswordType1("text")
+       return;
+      }
+      setPasswordType1("password")
+    }
+    const[page,isshowPage]=useState(true)
+    const[balance,isShowbalance]=useState(false)
+    const renderBalancePage=(e)=>{
+      isShowbalance(true);
+      isshowPage(false);
+    console.log(Instructor.balance)}
     
      
   
@@ -278,6 +303,7 @@ const InstProfile = () => {
         <div className={inst.allall}>
           
             <InstructorNavBar></InstructorNavBar>
+            {page&& 
             <div className={inst.all}>
             <p className={inst.firsttitle}>INSTRUCTOR</p>
             <p className={inst.name}>{Instructor.userName}</p>
@@ -462,7 +488,7 @@ const InstProfile = () => {
             className={det.rating}
             value={review.rating}></Rating>
             <div className={det.move}>
-            <p className={det.name}>Eliane Fares </p>
+            <p className={det.name}>{review.userName} </p>
             </div>
             <p className={det.review}>{review.description}
              </p>
@@ -475,7 +501,7 @@ const InstProfile = () => {
             <img src="https://source.unsplash.com/600x400/?food" alt="card__image" className={inst.image} width="600"/>    
             <button className={inst.changepassword} onClick={showPassword}>Change Password</button>
             <button className={inst.changeEmail} onClick={showEmail}>Change My Email</button>
-            <button className={inst.ViewRatings} onClick={getReviews}>View My Balance</button>
+            <button className={inst.ViewRatings} onClick={renderBalancePage}>View My Balance</button>
             {Edit&& <div className={inst.shadearea}> 
             <div className={inst.modalcontainer}>
                 <p className={inst.editbiotext}>Edit Your Bio</p>
@@ -503,20 +529,47 @@ const InstProfile = () => {
             <div className={inst.modalcontainer}>
             <p className={inst.changepass}>Change Your Password</p>
             <p className={inst.newpass}>New Password:</p>
-            <TextField className={inst.passtextfield1} type="password"  required value={newpassword} onChange={(e) => setnewpassword(e.target.value)} ></TextField>
+            <TextField className={inst.passtextfield1} type={passwordType}  required value={newpassword} onChange={(e) => setnewpassword(e.target.value)} ></TextField>
             
             <p className={inst.confirmpass}>Confirm Password:</p>
-            <TextField className={inst.passtextfield2} type="password" required value={confirmpassword} onChange={(e) => setconfirmpassword(e.target.value)} ></TextField>
+            <TextField className={inst.passtextfield2} type={passwordType1} required value={confirmpassword} onChange={(e) => setconfirmpassword(e.target.value)} ></TextField>
           {sendmessage && <div className={inst.message2}><p className={inst.message}>Those passwords didn't match. Try Again </p></div>}
             {sendmessage2 && <div className={inst.message}><p>Your password should be at least 8 characters</p></div>}
             <button className={inst.submitpassbutton} onClick={changePassword}>Submit</button>
             <button onClick={hidePass} className={inst.closeedit2} ><img src={closeIcon} ></img></button>
-
+            <div className={inst.see2}>
+            <button  onClick={togglePassword}>
+          { passwordType==="password"? <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+  <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+  <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+  <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+</svg> :<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+</svg> }
+          </button>
+          </div>
+          <div className={inst.see1}>
+            <button  onClick={togglePassword1}>
+          { passwordType1==="password"? <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+  <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+  <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+  <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+</svg> :<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+</svg> }
+          </button>
+          </div>
                 </div>
+                
                 </div>
+                
                 }
                  
-                </div>
+                </div>}
+                {balance  && <InstBalancePage
+              instbalance={Instructor.balance}/>}
              
         </div>
          </React.Fragment>

@@ -45,11 +45,12 @@ const VMyCourses = () => {
        
     }
      const addReview = async (courseid) => {
-        if(id!=''){
+        if(courseid!=''){
                 const res = await axios
                 .post(`http://localhost:2000/corpTrainee/addCourseReview/${courseid}`, {
                   rating:rating,
-                  description:description
+                  description:description,
+                  userName: trainee.firstName.concat(" ",trainee.lastName)
                 })
                 .catch((err) => console.log(err));
                 
@@ -61,7 +62,8 @@ const VMyCourses = () => {
                     const res = await axios
                     .post(`http://localhost:2000/addInstructorReview/${instid}`, {
                       rating:ratingInst,
-                      description:descriptionInst
+                      description:descriptionInst,
+                      userName: trainee.firstName.concat(" ",trainee.lastName)
                     })
                     .catch((err) => console.log(err));
                     
@@ -110,10 +112,11 @@ const VMyCourses = () => {
           const [finalarray,setfinal]=useState([])
           const [interarray,setinter]=useState([])
           const [instids,setinstids]=useState([])
+          const [trainee,setTrainee]=useState('')
           const [count,setcount]=useState(1)
           useEffect(() => {
             
-            getCourses().then((data) => { setMyCourses(data.trainee.courses); getActual(data.trainee.courses)
+            getCourses().then((data) => { setMyCourses(data.trainee.courses); getActual(data.trainee.courses) ; setTrainee(data.trainee)
           })
           
         }, []);
@@ -163,7 +166,7 @@ const VMyCourses = () => {
     <React.Fragment>
 		<TraineeNavbar/>
 		<div className={x.title}>
-          <h6 className={x.mostpopular}>My Courses</h6>
+          <h6 className={x.mostpopular}>My Courses ({finalarray.length})</h6>
 		  </div>
 		<div className={x.bodyy}>
 	

@@ -31,7 +31,8 @@ const getAllCourses = async (req, res) => {
     let data = {
         rating: req.body.rating,
         description: req.body.description,
-        course: req.params.course
+        course: req.params.course,
+        userName:req.body.userName
     }
     const review = await courseReviews.create(data);
     review.save();
@@ -199,4 +200,160 @@ const getTrainee = async (req, res, next) => {
     return res.status(404).json({ message: err.message });
   }
 };
-  module.exports={getAllCourses,addCourseReview,refundRequest,reqAA,editPassword,getTrainee}
+const getById = async (req, res, next) => {
+  //console.log("s")
+  const id = req.params.token;
+  var decodeID="";
+  if(req.params.token){
+   jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+     if (err) {
+       res.status(401).json({message:"You are not logged in."})
+     } else {
+       decodeID=decodedToken.name;
+     }
+   });
+  }
+  try {
+    inst = await traineeTable.findById(decodeID);
+    inst.save()
+    return res.status(200).json({ inst });
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
+  }
+};
+
+const payForCourseWallet = async (req, res, next) => {
+  const courseid = req.params.id;
+  const traineeid = req.params.id2;
+  const course = await courseTable.findById(courseid);
+  const trainee = await traineeTable.findById(traineeid);
+  const instructorId = course.instructor;
+
+  try {
+    const price = course.price;
+    const money = trainee.money;
+
+    if (money >= price) {
+      const finalamount = money - price;
+      const finalres = await traineeTable.findByIdAndUpdate(
+        traineeid,
+        {
+          money: finalamount,
+          $addToSet: { courses: courseid },
+        },
+        { new: true }
+      );
+
+      const myInstructor = await instTable.findById(instructorId);
+
+      const mybalance = myInstructor.balance;
+      // console.log(mybalance);
+      // console.log(price);
+      const remainingPrice = price - price * 0.1;
+      // console.log(remainingPrice);
+      const finalbalance = mybalance + remainingPrice;
+      // console.log("instructor's balance" + finalbalance);
+
+      const instructor = await instTable.findOneAndUpdate(
+        instructorId,
+        {
+          balance: finalbalance,
+        },
+        { new: true }
+      );
+      return res.status(201).json({ finalres });
+    } else {
+      return res.status(201).json({ message: "not enough money" });
+    }
+  } catch (err) {
+    return res.status(404).json({ message: "no" });
+  }
+};
+const axios = require("axios").create({
+  baseUrl: "https://api.exchangerate.host/latest",
+});
+const payForCourse = async (req, res, next) => {
+  const stripe = require("stripe")(
+    "sk_test_51MEI8aGdZfaXR0mrOiJlsqZbEV5ZJWJwWVyQ52kt1dlJPagOAkPNTUKlkozFJeheXehpkZgqL5nZpHtdr0twO32b00tw7DvIW3"
+  );
+  const { email, token ,studid} = req.body;
+  console.log(req.body);
+  // console.log(email);
+  // console.log("ana henaaaaaa");
+  var decodeID="";
+  if (studid) {
+    jwt.verify(studid, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name; 
+      }
+    });
+  }
+  console.log(decodeID)
+
+  const courseid = req.params.id;
+  const currencyprice = req.params.currencyPrice;
+  console.log("currency " + currencyprice);
+  const course = await courseTable.findById(courseid);
+  const price = course.price;
+
+  // console.log(email);
+  const trainee = await traineeTable.findOneAndUpdate(
+    { _id: decodeID },
+    { $addToSet: { courses: courseid } }
+  );
+  if(trainee.email!==email){
+    return res.status(200).json({message:"no"})
+  }else {
+
+  const instructorId = course.instructor;
+  // console.log("instructor's id " + instructorId);
+  const myInstructor = await instTable.findById(instructorId);
+
+  const mybalance = myInstructor.balance;
+  console.log(mybalance);
+  console.log(price);
+  const remainingPrice = price - price * 0.1;
+  const toCurrency = "EGP";
+  const base_URL = "https://api.exchangerate.host/latest";
+  const res1 = await axios
+    .get(`${base_URL}?base=${currencyprice}&symbols=${toCurrency}`)
+    .then((res1) => res1.data);
+  const exchangeRate = res1.rates[toCurrency];
+  console.log(remainingPrice);
+  console.log("exchangeRate " + exchangeRate);
+  const newPrice = remainingPrice * exchangeRate;
+  console.log(newPrice);
+
+  const finalbalance = mybalance + newPrice;
+  console.log("instructor's balance" + finalbalance);
+
+  const instructor = await instTable.findOneAndUpdate(
+    instructorId,
+    {
+      balance: finalbalance,
+    },
+    { new: true }
+  );
+  console.log("currency " + currencyprice);
+
+  stripe.customers
+    .create({
+      email: email,
+      source: token.id,
+      name: token.card.name,
+    })
+    .then((customer) => {
+      return stripe.charges.create({
+        amount: parseFloat(price) * 100,
+        description: `Payment for ${currencyprice} ${price}`,
+        currency: currencyprice,
+        customer: customer.id,
+      });
+    })
+    //el currency el mafrood tetbe3et men el params
+    .then((charge) => res.status(200).send(charge))
+    .catch((err) => console.log(err));}
+};
+  module.exports={getAllCourses,payForCourse,addCourseReview,refundRequest,reqAA,getById,payForCourseWallet,editPassword,getTrainee}

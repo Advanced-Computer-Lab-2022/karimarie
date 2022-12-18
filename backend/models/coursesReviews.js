@@ -11,6 +11,9 @@ const coursesreviewsSchema=new Schema({
     course:{
         type:mongoose.Schema.ObjectId,
         ref:"Course"
+    },
+    userName:{
+        type:String
     }
 });
 const coursesReviews = mongoose.model('coursesReviews', coursesreviewsSchema);

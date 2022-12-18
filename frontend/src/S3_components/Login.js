@@ -32,7 +32,6 @@ function Login() {
     const [showPass,isShowPass]=useState(false);
     const [datamessage,isdatamessage]=useState('');
     const handleLogin=(e)=>{
-        e.preventDefault();
         sendUser().then(data=>{
           console.log(data.msg)
         if(data.msg.localeCompare("no")===0){
@@ -62,6 +61,10 @@ function Login() {
           localStorage.setItem("userType","CorpTrainee")
           isdatamessage(data.msg);
           isShowPass(true);
+        }else if(data.msg.localeCompare("Trainee")===0){
+          localStorage.setItem("token",data.token)
+          localStorage.setItem("userType","Trainee")
+           window.location.href=`/Trainee` 
         }
         
       })
@@ -102,7 +105,8 @@ function Login() {
           issendmessage2(false)
           if(datamessage.localeCompare("InstructorfirstTime")===0){
           editpassword();
-          window.location.href="/InstructorHomePage"}
+          window.location.href="/Contract"
+        }
           if(datamessage.localeCompare("CorpTraineefirstTime")===0){
             console.log("ok")
             editpasswordTrainee();
@@ -223,7 +227,7 @@ function Login() {
       
       <div>
         <div>
-        <button className={Logincss.button12} onClick={handleLogin}>
+        <button className={Logincss.button12} type="submit" onClick={handleLogin}>
           <span>Login</span>
         </button>
         </div>

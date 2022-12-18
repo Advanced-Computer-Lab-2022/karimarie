@@ -4,6 +4,9 @@ const app=express();
 app.use(express.json())
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { check, validationResult } = require("express-validator");
 app.use(cookieParser());
 const session = require('express-session')
 const corsOptions ={
@@ -99,3 +102,105 @@ app.post("/subject",async (req,res)=>{
       return res.status(404).json({message:err.message})
   }
 })
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (name) => {
+  return jwt.sign({ name }, "supersecret", {
+    expiresIn: maxAge,
+  });
+};
+app.post(
+  "/signup",
+  check("password")
+    .isLength({
+      min: 5,
+      max: 25,
+    })
+    .withMessage(
+      "Password must be greater than 5 characters and less than 25 characters"
+    ),
+
+  async (req, res) => {
+    console.log("ana dakhalt");
+    const errors = validationResult(req);
+    console.log(errors);
+    // if (errors[0].body.msg === "Invalid value") {
+    //   return res.json({ success: false, msg: "Email already in use" });
+    // }
+    if (!errors.isEmpty()) {
+      console.log("ana fel errors");
+      console.log(errors.array());
+      return res.json({
+        success: false,
+        msg: "Password must be greater than 5 characters and less than 25 characters",
+      });
+    }
+    let adminusername = await adminTable.findOne({
+      userName: req.body.userName,
+    });
+    let traineeusername = await traineeTable.findOne({
+      userName: req.body.userName,
+    });
+    let instructorusername = await instTable.findOne({
+      userName: req.body.userName,
+    });
+    let traineeemail = await traineeTable.findOne({
+      email: req.body.email,
+    });
+    if (traineeemail) {
+      console.log("ana fel emAIL");
+      return res.json({
+        success: false,
+        msg: "Email entered is already taken",
+      });
+    }
+    if (adminusername) {
+      return res.json({ success: false, msg: "Username already taken!" });
+    } else if (traineeusername) {
+      console.log("ana fel traineeUsername");
+
+      return res.json({ success: false, msg: "Username already taken!" });
+    } else if (instructorusername) {
+      return res.json({ success: false, msg: "Username already taken!" });
+    } else {
+      const {
+        email,
+        password: plainTextPassword,
+        firstName,
+        lastName,
+        userName,
+        gender,
+      } = req.body;
+      console.log(plainTextPassword);
+      const salt = await bcrypt.genSalt();
+      //const password = await bcrypt.hash(plainTextPassword, salt);
+      
+      const hashedPassword = await bcrypt.hash(plainTextPassword, salt);
+
+      const type = "individual trainee";
+      const money = 0;
+
+      let Trainee;
+      try {
+        Trainee = await traineeTable.create({
+          email,
+          password:hashedPassword,
+          firstName,
+          lastName,
+          userName,
+          gender,
+          type,
+          money: money,
+        });
+        await Trainee.save();
+        const token = createToken(Trainee._id);
+        res
+          .status(200)
+          .cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+        return res.status(200).json({ token, msg: "Individual Trainee" });
+      } catch (error) {
+        console.log("errormessage" + error.message);
+        return res.status(400).json({ error: error.message });
+      }
+    }
+  }
+);

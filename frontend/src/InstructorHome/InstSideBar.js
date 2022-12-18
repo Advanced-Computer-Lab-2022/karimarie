@@ -9,8 +9,10 @@ import Slider from "react-slick";
 import h from "../S3_components/HomePage.module.css"
 import arrowIcon from "../S3_components/arrowIcon.png"
 import CreateCourseNew from './CreateCourseNew';
+import ViewMyR from './ViewMyR';
 const InstSideBar = () => {
     const [choose,setChoose]=useState("home");
+    const id=localStorage.getItem("token");
    const [showCreate,isShowCreate]=useState(false)
    const[courses,setCourses]= useState('');
    const [topRated,setTopRated]=useState('');
@@ -40,7 +42,6 @@ const InstSideBar = () => {
         if(choose==="CreateCourse"){
             console.log("okkkk")
            isShowCreate(true);
-
         }   
     
       };
@@ -54,13 +55,13 @@ const InstSideBar = () => {
         <ul>
             <li className={l.listI}><button onClick={() => {setChoose('CreateCourse');handleClick(); }} 
             className={l.anc}><i class="fas fa-user" style={{color:"white"}}></i><p className={l.text}>Create Course</p></button></li>
-            <li className={l.listI}><button className={l.anc} onClick={()=>setChoose("creq")}><i className={["fas fa-address-card", l.iconn].join(' ')} style={{color:"white"}}></i><p className={l.text}>Course Requests</p></button></li>
-            <li className={l.listI}><button className={l.anc} onClick={()=>setChoose("viewReports")}><i className={["fas fa-project-diagram", l.iconn].join(' ')} style={{color:"white"}}></i><p className={l.text}>View Reports</p></button></li>
+            <li className={l.listI}><button className={l.anc} onClick={()=>setChoose('viewReports')}><i className={["fas fa-project-diagram", l.iconn].join(' ')} style={{color:"white"}}></i><p className={l.text}>View Reports</p></button></li>
             <li className={l.listI}><button className={l.anc}><i class="fas fa-blog" style={{color:"white"}}></i><p className={l.text}>Blogs</p></button></li>
             <li className={l.listI}><button className={l.anc}><i class="fas fa-address-book" style={{color:"white"}}></i><p className={l.text}>Contact</p></button></li>
             <li className={l.listI}><button className={l.anc}><i class="fas fa-map-pin" style={{color:"white"}}></i><p className={l.text}>Map</p></button></li>
         </ul> 
     </div>
+    {choose==="viewReports"&& <ViewMyR id={id}/>}
     {choose==="CreateCourse" && <CreateCourseNew/>}
     {choose==="home" &&
     <div> 

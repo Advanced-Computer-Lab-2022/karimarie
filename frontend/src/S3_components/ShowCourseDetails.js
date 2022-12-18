@@ -216,6 +216,37 @@ const ShowCourseDetails=()=> {
       const reportProblem=()=>{
         isGender(true)
       }
+      var x=1;
+      const payCourse=()=>{
+        console.log("hi")
+        getCourses().then((data)=>{
+          console.log(data.trainee.courses)
+            data.trainee.courses.map((course)=>{
+              console.log(Course._id)
+              console.log(course._id)
+              if(course===Course._id){
+                console.log("ohhhh")
+                x=2;
+                settraineeC(true)
+              }
+            })
+            if(x===1){
+              window.location.href=`/PayCredit/${Course._id}/${Course.currency}`
+
+            }
+
+        }
+        )
+       
+      }
+      const [traineeC,settraineeC]=useState(false)
+      const getCourses = async () => {
+        const res = await axios
+          .get(`http://localhost:2000/corpTrainee/getTrainee/${localStorage.getItem("token")}`)
+          .catch((err) => console.log(err));
+          const data = await res.data;
+          return data;
+      };
      return(
       <React.Fragment>
        {type2==="Guest" && <NavbarHomePage></NavbarHomePage>}
@@ -277,6 +308,7 @@ const ShowCourseDetails=()=> {
         {type==="Guest" && type2==="Guest" && <div><button class={det.buttonAe}  onClick={()=>window.location.href="/signup"}>Buy Now</button><br></br></div>}
         {type==="Instructor" &&  <button class={det.buttonAe} onClick={addPromotion}>Add Promotion</button>}
         {type==="Guest" && type2==="CorpTrainee" && <button class={det.buttonAe} onClick={requestAccess}>Request Access</button>}
+        {type2==="Trainee" && <button class={det.buttonAe} onClick={payCourse}>Buy Now</button>}
 
         </div>
   
@@ -320,7 +352,7 @@ const ShowCourseDetails=()=> {
             className={det.rating}
             initialValue={review.rating}></Rating>
             <div className={det.move}>
-            <p className={det.name}>Eliane Fares </p>
+            <p className={det.name}>{review.userName} </p>
             </div>
             <p className={det.review}>{review.description}
              </p>
@@ -390,6 +422,13 @@ const ShowCourseDetails=()=> {
             <div className={cc.modalcontainerr}>
                 <p className={cc.editbiotext2}>A request has been sent before </p>
                 <button className={cc.submiteditbutton2} onClick={()=>issendmessageC(false)}>Ok</button>
+                
+            </div> 
+          </div>}
+          {traineeC && <div className={cc.shadearea}>
+            <div className={cc.modalcontainerr}>
+                <p className={cc.editbiotext2}>You have already purchased this course. </p>
+                <button className={cc.submiteditbutton2} onClick={()=>settraineeC(false)}>Ok</button>
                 
             </div> 
           </div>}
