@@ -1,0 +1,96 @@
+.shadearea{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modalcontainer{
+    width: 500px;
+    height: 350px;
+    padding: 20px;
+    background: #FFFFFF;
+    position: relative;
+    border-radius: 40px 40px 40px 40px;
+    z-index: 2;
+
+  }
+
+
+  .AddDiscounttext{
+    position: absolute;
+    width: 331px;
+    /* height: 45px; */
+    left: 84px;
+    top: 41px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 20px;
+    text-align: center;
+    
+    color: black;
+  }
+  .closepopup{
+    position: absolute;
+    background: #fff;
+    border: none;
+    float: right;
+    padding-right: 0.7rem;
+    padding-top: -100px;
+    top:30px;
+    left:460px
+   
+  }
+ 
+  .addDiscountField{
+    position: absolute;
+    width:400px;
+      height: 50px;
+      left: 50px;
+      top: 70px;
+      padding-bottom: 500px;
+  }
+  .addStartDateField{
+    position: absolute;
+  width:400px;
+    height: 50px;
+    left: 50px;
+    top: 90px;
+    padding-bottom: 500px;
+  }
+  .addExpiryDateField{
+    position: absolute;
+  width:400px;
+    height: 50px;
+    left: 50px;
+    top: 110px;
+    padding-bottom: 500px;
+  }
+  .submitadddiscountbutton{
+    position: absolute;
+    width: 100px;
+    height: 48px;
+    left: 199px;
+    top: 297px;
+    border-radius: 40px 40px 40px 40px;
+    background: #17cf97;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 44px;
+    text-align: center;
+    border:black;
+
+    color: #FFFFFF;
+    
+  }
+  
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);

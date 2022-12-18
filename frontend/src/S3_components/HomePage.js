@@ -19,13 +19,6 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Footer from './Footer';
 const HomePage=()=>{
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 2
-  };
   const[courses,setCourses]= useState('');
   const [topRated,setTopRated]=useState('');
   const [mostPop,setMostPop]=useState('');
@@ -78,11 +71,13 @@ var settings = {
          title={courses.title}
          totalHours={courses.totalHours}
          rating={courses.rating}
-         price={courses.price}
+         price={courses.originalPrice}
+         priceafter={courses.price}
          currency={courses.currency}
          subject={courses.subject}
          description={courses.description}
          type="Guest"
+         type2="Guest"
         />))}
          </Slider>
         </div>
@@ -97,11 +92,13 @@ var settings = {
          title={courses.title}
          totalHours={courses.totalHours}
          rating={courses.rating}
-         price={courses.price}
+         price={courses.originalPrice}
+         priceafter={courses.price}
          currency={courses.currency}
          subject={courses.subject}
          description={courses.description}
          type="Guest"
+         type2="Guest"
         />))}
          </Slider>
         </div>

@@ -9,7 +9,7 @@ const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/late
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const courseReviews=require("../models/coursesReviews")
-
+const notificationsTable=require("../models/Notification")
 
 const getAllCourses = async (req, res) => {
   
@@ -75,7 +75,6 @@ const postFilterAll=async(req,res)=>{
 }
 const getFilterSubject=async (req,res) => {
   //console.log("aaaaaaaaa")
-  console.log(req.params.subject)
   let filter={}
   let courseList;
   if(req.params.subject){
@@ -130,7 +129,6 @@ const getById = async (req, res, next) => {
   let course;
   try {
     course = await courseTable.findById(id);
-    course.save
     return res.status(200).json({ course });
   } catch (err) {
     return res.status(404).json({ message: err.message });
@@ -140,7 +138,6 @@ const getById = async (req, res, next) => {
 const filterRating=async (req,res) => {
 
   let Rfilter={}
-  console.log(req.params.rating)
   if(req.params.rating){
       Rfilter= {rating: req.params.rating} 
   }
@@ -220,59 +217,123 @@ catch(err){
 }
 
 require('dotenv').config();
-const noString="http://localhost:3000/forgetpasswordAll"
+const noString="http://localhost:3000/forgetpassword"
 const sgMail=require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-function sendMailAll(){
-const msg= {
-  to: 'karimankamal15@gmail.com', // Change to your recipient
-  from: 'karimankamal15@gmail.com', // Change to your verified sender
-  subject: 'Password',
-  text: 'Follow this link for changing the password: http://localhost:3000/forgetpasswordAll',
-  
+const sendMailAll= async (req, res) =>{
+  const email= req.body.email;
+const trainee= await traineeTable.findOne({email:email});
+const inst=await instTable.findOne({email:email});
+if(inst!==null){
+  const instid=inst.id;
+  await instTable.find({
+    email:email
+}).then(traineeTable => {
+    if (traineeTable.length > 0) {
+      const msg= {
+        to: email, // Change to your recipient
+        from: 'karimankamal15@gmail.com', // Change to your verified sender
+        templateId: 'd-848acb26180e466895a85ac0a7f6b703',
+        dynamicTemplateData: {
+          subject: 'Forget Password',
+          name: inst.firstName,
+          link: `http:localhost:3000/forgetpasswordform/${instid}`,
+        }, //`
+ 
+      }
+      sgMail.send(msg)
+        .then((response) => {
+          console.log(response[0].headers)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+        return res.status(200).json({msg : instid});
+    }
+    else{
+      return res.json({msg:"no"});
+    }
+});
 }
-
-sgMail.send(msg)
-  .then((response) => {
-    console.log(response[0].headers)
-  })
-  .catch((error) => {
-    console.error(error)
-  })
+else if(trainee!==null){
+  const traineeid=trainee.id;
+  await traineeTable.find({
+    email:email
+}).then(traineeTable => {
+    if (traineeTable.length > 0) {
+      const msg= {
+        to: email, // Change to your recipient
+        from: 'karimankamal15@gmail.com', // Change to your verified sender
+        templateId: 'd-848acb26180e466895a85ac0a7f6b703',
+        dynamicTemplateData: {
+          subject: 'Forget Password',
+          name: trainee.firstName,
+          link: `http:localhost:3000/forgetpasswordform/${traineeid}`,
+        }, //`
+ 
+      }
+      sgMail.send(msg)
+        .then((response) => {
+          console.log(response[0].headers)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+        return res.status(200).json({msg : traineeid});
+    }
+    else{
+      
+      return res.json({msg :"no"});
+    }
+});
 }
-
+else {
+  return res.json({msg :"no"});
+}
+}
 const changepasswordAll = async (req, res) => {
   const id = req.body.id;
   const password = req.body.password;
-  const idperson = await traineeTable.findById(id);
-  await res.status(200).json(idperson);
-  
-    await traineeTable.findByIdAndUpdate(
+  const idperson = await instTable.findById(id);
+  if (idperson) {
+    const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    await instTable.findByIdAndUpdate(
       id,
       {
-        password: password,
+        password: hashedPassword,
       },
       { new: true }
     );
-    await res.status(200).json(idperson);
-  
+    return res.status(200).json(id);
+  } else {
+    //  console.log("ana fel else");
+    const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+     await traineeTable.findByIdAndUpdate(
+      id,
+      {
+        password: hashedPassword,
+      },
+      { new: true }
+    );
+    return res.status(200).json(id);
+    // console.log(traineeresult);
+   // await res.status(200).json(traineeresult);
+  }
 };
   
 const getByIdCourseDiscount = async (req, res, next) => {
   //console.log("s")
  
   const id = req.params.id;
-  console.log(id)
   let course;
   try {
     course = await courseTable.findById(id)
     course.save
     const expirationDate=new Date(course.expirationTime).getTime()
     const currentdate=new Date().getTime()
-    console.log(expirationDate)
-    console.log(currentdate)
     if(expirationDate<currentdate){
-      console.log("hi")
       const { originalPrice } = await courseTable
           .findOne({ _id: id })
           .select("originalPrice")
@@ -329,11 +390,8 @@ const login = async (req, res) => {
       .status(200)
       .cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     if (firstTime) {
-      console.log("ana fel firstTime");
-      console.log(username);
       return res.status(200).json({ token, msg: "InstructorfirstTime" });
     } else {
-      console.log("ana fel else");
       return res.status(200).json({ token, msg: "Instructor" });
     }
       }
@@ -342,28 +400,43 @@ const login = async (req, res) => {
 
       }
     }else if(userTrainee){
-        const ok= await bcrypt.compare(password, userX.password);
+        const ok= await bcrypt.compare(password, userTrainee.password);
         if(ok){
 
-
-
-
-
-
                 user = userTrainee;
-        const token = createToken(user._id);
-        res
-          .status(200)
-          .cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({ token, msg: "Trainee" });
+                const token = createToken(user._id);
+                res
+                  .status(200)
+                  .cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+        if(user.type==="corporate trainee"){
+          const { firstTime } = await traineeTable
+          .findOne({ userName: username })
+          .select("firstTime")
+          .exec();
+          if(firstTime){
+            return res.status(200).json({ token, msg: "CorpTraineefirstTime" });
+          }
+          else {
+            return res.status(200).json({ token, msg: "CorpTrainee" });    
+          }
+        }
+          else {
+            return res.status(200).json({ token, msg: "Trainee" });
+          }
        
+      }else {
+        return res.json({ success: false, msg: "no" });
       }
 
     }else if(userAdmin){
-      user = userAdmin;
+      const ok= await bcrypt.compare(password, userAdmin.password);
+      if(ok){
+        user = userAdmin;
         const token = createToken(user._id);
         res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
         return res.status(200).json({ token, msg: "Admin" });
+      }
+     
     }else {
       return res.json({ success: false, msg: "no" });
     }
@@ -387,4 +460,72 @@ const getCourseReviews =  async (req, res) => {
   return res.status(200).json({reviews:reviews})
 
 }
-  module.exports={getAllCourses,logout,getSubjects,postFilterAll,getCourseReviews,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+const reportProblem= async (req, res) => {
+  var decodeID="";
+  if(req.body.ReportById){
+   jwt.verify(req.body.ReportById, 'supersecret', (err, decodedToken) => {
+     if (err) {
+       res.status(401).json({message:"You are not logged in."})
+     } else {
+       decodeID=decodedToken.name;
+     }
+   });
+  }
+  const{ReportById,CourseId,Report,Type}=req.body
+   let problem;
+   let ReportByName;
+   let ReportByType;
+   try{
+    console.log(decodeID);
+    let ifInst=await instTable.findById(decodeID);
+    let ifTrainee=await traineeTable.findById(decodeID);
+    console.log(ifInst)
+    if(ifInst==null){
+     ReportByName=ifTrainee.userName;
+     ReportByType=ifTrainee.type;
+     console.log("hey")
+    }
+    else{
+      ReportByName=ifInst.userName;
+      ReportByType="Instructor"
+      console.log("bey")
+    }
+    let c=await courseTable.findById(CourseId);
+    console.log(c);
+       problem =new problemTable({
+        ReportById:decodeID,
+        ReportByName:ReportByName,
+        ReportByType:ReportByType,
+        CourseId:CourseId,
+        CourseName:c.title,
+        Type:Type,
+        Report:Report,
+        Status:"Unseen"
+       })
+       console.log(problem)
+       await problem.save();
+      
+      
+  return res.status(201).json({problem:problem})
+     }
+ catch(err){
+  
+     return res.status(404).json({message:err.message})
+ }
+ }
+const seeMyReports=async(req,res)=>{
+  const id=req.params.id;
+  console.log(id)
+  console.log("hey")
+  try{
+    let reports=await problemTable.find({ReportById:id});
+    console.log(reports)
+    return res.status(200).json({ reports });
+
+  }
+  catch(error){
+    return res.status(404).json({ error:error.message });
+
+  }
+}
+  module.exports={getAllCourses,logout,getSubjects,postFilterAll,getCourseReviews,seeMyReports,reportProblem,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}

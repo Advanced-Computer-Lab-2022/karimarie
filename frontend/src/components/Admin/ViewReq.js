@@ -1,159 +1,125 @@
-import React, { useState } from 'react'
-import "./CReq.css" 
+import React from 'react'
+import det from "./CReq.module.css" 
 import t from "./t.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import x from "./CReq.module.css"
+
 const ViewReq = () => {
-    const [x,setX]=useState([{
-        "req": [
-            {
-                "_id": "63949a315c6d0a0c07d8363f",
-                "corpId": "639498eb27964b9ef949830b",
-                "corpName": "Eliane Fares",
-                "courses": [
-                    {
-                        "courseId": "639382e892ec0e4587946ae6",
-                        "courseName": "Dynamic Programming",
-                        "courseInstructor": "Dr.Ramy Younis",
-                        "status": false,
-                        "_id": "63949a315c6d0a0c07d83640"
-                    },
-                    {
-                        "courseId": "639382e892ec0e4587946ae6",
-                        "courseName": "Introduction To Physics",
-                        "courseInstructor": "Dr. Ahmed Ezzat",
-                        "status": false,
-                        "_id": "63949a535c6d0a0c07d8364e"
-                    },
-                    {
-                        "courseId": "639382e892ec0e4587946ae6",
-                        "courseName": "Introduction To Physics",
-                        "courseInstructor": "Dr. Ahmed Ezzat",
-                        "status": false,
-                        "_id": "63949a535c6d0a0c07d8364e"
-                    }
-                ],
-                "__v": 0
-            },
-            {
-                "_id": "63949a405c6d0a0c07d83646",
-                "corpId": "639498c827964b9ef9498305",
-                "corpName": "kariman Zeineldein",
-                "courses": [
-                    {
-                        "courseId": "639382e892ec0e4587946ae6",
-                        "courseName": "titlewer",
-                        "courseInstructor": "efeffwr hbdjhb",
-                        "status": false,
-                        "_id": "63949a405c6d0a0c07d83647"
-                    },
-                    {
-                        "courseId": "639382e892ec0e4587946ae6",
-                        "courseName": "titlePhywer",
-                        "courseInstructor": "efeffwr hbdjhb",
-                        "status": false,
-                        "_id": "63949a535c6d0a0c07d8364e"
-                    }
-                ],
-                "__v": 0
-            },
-            {
-                "_id": "63949a535c6d0a0c07d8364d",
-                "corpId": "639498d627964b9ef9498307",
-                "corpName": "kidiobhoifb skjdbs",
-                "courses": [
-                    {
-                        "courseId": "639382e892ec0e4587946ae6",
-                        "courseName": "titlewer",
-                        "courseInstructor": "efeffwr hbdjhb",
-                        "status": false,
-                        "_id": "63949a535c6d0a0c07d8364e"
-                    },
-                    {
-                        "courseId": "639382e892ec0e4587946ae6",
-                        "courseName": "titlePhywer",
-                        "courseInstructor": "efeffwr hbdjhb",
-                        "status": false,
-                        "_id": "63949a535c6d0a0c07d8364e"
-                    },
-                    {
-                        "courseId": "639382e892ec0e4587946ae6",
-                        "courseName": "titlePhywer",
-                        "courseInstructor": "efeffwr hbdjhb",
-                        "status": false,
-                        "_id": "63949a535c6d0a0c07d8364e"
-                    }
+const [requests,setRequests]=useState([]);
+const [r,setR]=useState([])
+const [b,setB]=useState()
+const sendRequest = async () => {
+    const res = await axios
+        .get("http://localhost:2000/admin/viewReq")
+        .catch((err) => console.log(err));
+        const data = await res.data;
 
-                ],
-                "__v": 0
+        return data;
+    };
+      const [xx,setX]=useState();
+      const SuccMessage = () => (
+        <div >errorM</div>  
+      ); 
+    console.log(xx)
+useEffect(() => {
+        console.log("ok")
+        sendRequest().then((data) => {
+            const result=data.req.sort((a,b)=>a.corporateName.localeCompare(b.corporateName))
+            let obj = result.reduce((res, curr) =>
+            {
+                if (res[curr.corporateName])
+                    res[curr.corporateName].push(curr);
+                else
+                    Object.assign(res, {[curr.corporateName]: [curr]});
+        
+                return res;
+            }, {});
+            console.log(obj)
+            let array=[]
+            for (var i = 0; i < Object.keys(obj).length; i++) {
+               array[i]=obj[Object.keys(obj)[i]]
+              // setR(...[obj[Object.keys(obj)[i]]])
+               console.log(array);
             }
-        ]
-    }])
-    console.log(x[0].req[0])
-    const [y,setY]=useState(x[0].req);
-    console.log(y[0].courses[0].courseName);
-    const [nada,setn]=useState([1,2,3,4,5,6,7])
+            setR(array)
+         
+        }
+        );
+        setB(true)
+        setR(r)
+   
+            }, [xx]);
+            console.log(r)
+ const pressButton=async (id,value)=>{
+        console.log(id);
+        console.log(value);
+        const res = await axios
+        .post("http://localhost:2000/admin/giveCourse",{
+            id:id,
+            answer:value
+        })
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        setX(id);
+        return data;
+        
+    };
   return (
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>01</title>
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
-        <link rel="stylesheet" href="./style.css" />
-    </head>
+ 
+<React.Fragment>
+    <h2 className={x.title}>Course Requests</h2>
 
-    <body>
-    <section class="container">
-    <div class="accordion">
-    <h2 class="title">Course Requests</h2>
-           
-        { y&&
-    y.map((req,i) => (
-        <article class="accordion-panel">
-            <input id={i} name="accordion" type="radio"   />
-            <label for={i}>
-            {req.corpName}
-                <i class="ri-add-line open"></i>
-                <i class="ri-subtract-line close"></i>
-            </label>
-            <div class="accordion-body">
-            <p class="accordion-answer">
-                {req.courses.map((c)=>(
-            <div class="success">
-                <div className='boxx b1'>
-                <p className="cname t hh">Course Name</p>
-                <p className="cname t">{c.courseName}</p>
-                </div>
-                <div className='boxx'>
-                <p className="cname t hh">Instructor</p>
-                <p className='cinst t'>{c.courseInstructor}</p>
-                </div>
-                <div className='boxx'>
-                <p className="cname t hh">Subject</p>
-                <p className="csubj t">Object Oriented programmingnnnnnnnnnnnnnnnnhhhhhhhhhhhhhhh</p>
-                </div>
-                <div className='boxx'>
-                <p className="cname t hh">Price</p>
-                <p className='cprice t'>49Egp</p>
-                </div>
-                {/* <button class="button-36" role="button">Button 36</button> */}
-                <div className='butt'>
-                <button class="button-10" role="button" style={{display:'block'}}>ACCEPT!</button>
-                <button class="button-11" role="button">Decline!</button>
-                </div>
-            </div>
-
-                ))}
-            </p>
+{r&& r.map((req,i) => (
+    <React.Fragment>
+        <div className={x.nnn}>
+            <h3>{req[i].corporateName}</h3>
+      <div className={x.table}>
+    
+      <div className={[x.row, x.header].join(' ')}>
+        <div className={x.cell}>
+          UserName
         </div>
+        <div className={x.cell}>
+         Course 
+        </div>
+        <div className={x.cell}>
+          Amount
+        </div>
+        <div className={x.cell}>
+          Action
+        </div>
+      </div>
+      
+     {r&&r[i].map((req2,i) => (
+  
+  <div className={x.row}>
+  <div className={x.cell} >
+   {req2.corpName}
+  </div>
+  <div className={x.cell} >
+  {req2.corpName}
+  </div>
+  <div className={x.cell} >
+      {req2.price} {req2.currency}
+  </div>
+  <div className={[x.cell, x.ch].join(' ')} >
+  <button  className={x.b10} value={true} onClick={(e)=>pressButton(req2._id,e.target.value)}>Accept</button>
+  <button  className={x.b11} value={false} onClick={(e)=>pressButton(req2._id,e.target.value)} >Decline</button>
 
-        </article>
-))}
-       
-    </div>
-    </section>
-    </body>
-</html>
+  
+  </div>
+  
+  
+  </div>
+  
+     ))} 
+        </div>
+      </div>
+      </React.Fragment>
+ ))}
+
+</React.Fragment>
   )
 }
 

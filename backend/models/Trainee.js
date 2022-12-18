@@ -33,7 +33,16 @@ const traineeSchema=new Schema({
     }],
     type:{
         type:String
-    }
+    },
+    firstTime:{
+        type:Boolean,default:true},
+    money:{
+            type:Number
+        },
+    corporateName:{
+            type:String
+        }
+    
 });
 const Trainee = mongoose.model('Trainee', traineeSchema);
 module.exports = Trainee;

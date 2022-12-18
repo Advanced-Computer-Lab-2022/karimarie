@@ -10,6 +10,7 @@ const AddCorpTrainee = () => {
   const [email, setEmail] = useState('') 
   const [error, setError] = useState(null)
   const[errorM,setErrorM]=useState("");
+  const [corpName, setcorpName] = useState('')
   const [showError,IsShowError]=useState(false);
 
   const handleSubmit = async (e) => {
@@ -23,6 +24,7 @@ const AddCorpTrainee = () => {
           IsShowError(true)
           setFirstName('')
           setLastname('')
+          setcorpName('')
           setUserName('')
           setPassword('')
           setEmail('')
@@ -38,7 +40,8 @@ const AddCorpTrainee = () => {
           lastName:lastName,
           userName:userName,
           password:password,
-          email:email
+          email:email,
+          corporateName:corpName
         })
         .catch((err) => console.log(err));
       const data = await res.data;
@@ -66,6 +69,12 @@ const AddCorpTrainee = () => {
     <i className={["material-icons-outlined", x.iconn].join(' ')} >email</i>{" "}
     <input className={x.textt} required placeholder="Email" type="email"  onChange={(e) => setEmail(e.target.value)} 
      value={email} 
+      ></input>
+    </div>
+    <div className={x.elem}>
+    <i className={["material-icons-outlined", x.iconn].join(' ')} >apartment</i>{" "}
+    <input className={x.textt} required placeholder="Corporate Name"   onChange={(e) => setcorpName(e.target.value)} 
+     value={corpName} 
       ></input>
     </div>
     <div className={x.elem}>

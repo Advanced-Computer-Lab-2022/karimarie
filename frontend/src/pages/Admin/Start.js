@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import React, { useState } from 'react'
 import {AppBar, Typography,Toolbar, Button,Box, Tabs,Tab} from '@mui/material'
 import {Link} from 'react-router-dom';
@@ -10,27 +9,31 @@ import AddCorpTrainee from './Create/AddCorpTrainee';
 import ViewReq from '../../components/Admin/ViewReq';
 import ViewReports from '../../components/Admin/ViewReports';
 import ViewRefundReq from '../../components/Admin/ViewRefundReq';
-import DefinePromotion from "../../components/Admin/DefinePromotion"
+import graduated from "./graduated.png"
+import instructors from "./instructors.png"
+import admin from "./setting.png"
+
 const Start = () => {
 
-  
     const [active,isActive]=useState("");
     const [choose,setChoose]=useState('home');
+    const handleClick = (e) => {
+        console.log(choose);
+    
+      };
   return (
-    <React.Fragment className={l.all}>
+    <React.Fragment>
     
    <React.Fragment>
    <body className={l.bodyy}>
     <div className={l.wrapper} style={{display:"inline"}}>
     <div className={l.sidebar}>
-        
         <ul>
-            <li className={l.listI}><button onClick={() => {setChoose('create')}} 
+            <li className={l.listI}><button onClick={() => {setChoose('create');handleClick(); }} 
             className={l.anc}><i class="fas fa-user" style={{color:"white"}}></i><p className={l.text}>Create User</p></button></li>
             <li className={l.listI}><button className={l.anc} onClick={()=>setChoose("creq")}><i className={["fas fa-address-card", l.iconn].join(' ')} style={{color:"white"}}></i><p className={l.text}>Course Requests</p></button></li>
             <li className={l.listI}><button className={l.anc} onClick={()=>setChoose("viewReports")}><i className={["fas fa-project-diagram", l.iconn].join(' ')} style={{color:"white"}}></i><p className={l.text}>View Reports</p></button></li>
             <li className={l.listI}><button className={l.anc} onClick={()=>setChoose("RefundRequests")}><i className={["far fa-money-bill-alt", l.iconn].join(' ')} style={{color:"white"}} ></i><p className={l.text}>Refund Requests</p></button></li>
-            <li className={l.listI}><button className={l.anc} onClick={()=>{setChoose("DefinePromotion")}}><i className={["far fa-money-bill-alt", l.iconn].join(' ')} style={{color:"white"}} ></i><p className={l.text}>Define Promotion</p></button></li>
             <li className={l.listI}><button className={l.anc}><i class="fas fa-address-book" style={{color:"white"}}></i><p className={l.text}>Contact</p></button></li>
             <li className={l.listI}><button className={l.anc}><i class="fas fa-map-pin" style={{color:"white"}}></i><p className={l.text}>Map</p></button></li>
         </ul> 
@@ -44,46 +47,70 @@ const Start = () => {
 {choose=='home'&&
 <React.Fragment>
 <div className={l.analytics}>
-    <h3 className={l.analH}>Today's Analytics</h3>
-    <div className={l.analRight}>
-      <div className={l.totCourses}>
-        <p className={l.numberOf}>Number Of Courses</p>
-        <img   src={require('../Admin/encyclopedia.png')}  className={l.img}/>
-        <span className={l.span1}>12</span>
-
+   <div className={l.cards}>
+   <div className={l.card}>
+      <div className={l.box}>
+        <h1>2194</h1>
+        <h3 className={l.hhh}>Students</h3>
       </div>
-      <div className={l.totInst}>
-        <p className={l.numberOf}>Number Of Instructors</p>
-        <img   src={require('../Admin/instructor.png')} className={l.img}/>
-        <span className={l.span1}>12</span>
-
-        </div>
-      <div className={l.totTrainees}>
-        <div className={l.x}>
-        <p className={l.numberOf}>Number Of Trainees</p>
-        <img src={require('../Admin/job.png')} className={l.img}></img>
-        <span className={l.span1}>12</span>
-        </div>
+      <div className={l.iconcase}>
+        <img className={l.image}src={graduated}></img>
       </div>
-    
+   </div>
+   <div className={l.card}>
+      <div className={l.box}>
+        <h1 >2194</h1>
+        <h3 className={l.hhh}>Instructors</h3>
+      </div>
+      <div className={l.iconcase}>
+        <img className={l.image}src={instructors}></img>
+      </div>
+   </div>
+   <div className={l.card}>
+      <div className={l.box}>
+        <h1 className={l.hhha}>2194</h1>
+        <h3 className={l.hhh}>Admins</h3>
+      </div>
+      <div className={l.iconcase}>
+        <img className={l.image}src={admin}></img>
+      </div>
+   </div>
+   </div>
+   <div className={l.content2}>
+    <div className={l.repo}>
+    <div className={l.title}>
+      <h2>Reports</h2>
+      <button className={l.button3} role="button">View All</button>
+     
     </div>
-  </div>
-<div className={l.reportsNum}>
-    <div className={l.repWhite}><p className={l.rep}>Reports</p> <button className={l.button1} role="button">Resolve</button>
-</div>
-    <div className={l.blue}>
-      <div className={[l.totR, l.r].join(' ')}><p className={l.RepText}>Total Reports</p> <p className={l.repNum}>369</p></div>
-      <div className={[l.totTech, l.r].join(' ')}><p className={l.RepText}>Technical Reports</p><p className={l.repNum}>39</p></div>
-      <div className={[l.totFin, l.r].join(' ')}><p className={l.RepText}>Financial Reports</p><p className={l.repNum}>46</p></div>
-      <div className={[l.totOther, l.r].join(' ')}><p className={l.RepText}>Other Reports</p><p className={l.repNum}>172</p></div>
-      
+ 
+   
     </div>
-  </div>
-<div className={l.chart}>
-
-{/* <BarChart width={450} height={400} data={data}>
-      <Bar dataKey="uv" fill="#8884d8" options={{}} />
-    </BarChart> */}
+    <div className={l.ccc}>
+    <div className={l.title}>
+      <h2>Courses</h2>
+      <button className={l.button3} role="button">View All</button>
+    </div>
+    <table className={l.tablee}>
+      <tr>
+        <th className={l.thh}>Name</th>
+        <th className={l.thh}>Number of Students</th>
+      </tr>
+      <tr>
+        <td className={l.tdd}>Introduction to programming</td>
+        <td className={l.tdd}>145 Students</td>
+      </tr>
+      <tr>
+        <td className={l.tdd}>Digital Media Of Graphics</td>
+        <td className={l.tdd}>139 Students</td>
+      </tr>
+      <tr>
+        <td className={l.tdd}>Communication of networks</td>
+        <td className={l.tdd}>125 Students</td>
+      </tr>
+    </table>
+    </div>
+   </div>
 </div>
 </React.Fragment>
 }
@@ -106,7 +133,6 @@ const Start = () => {
 {choose==='creq'&& <ViewReq/>}
 {choose==="viewReports"&& <ViewReports/>}
 {choose==="RefundRequests"&& <ViewRefundReq/>}
-{choose==="DefinePromotion" && <DefinePromotion/>}
 </div>
 </React.Fragment>
 

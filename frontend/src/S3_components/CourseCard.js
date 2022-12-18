@@ -6,9 +6,11 @@ import clock from "../S3_components/clock.png"
 import priceTag from "../S3_components/priceTag.png"
 import star from "../S3_components/star.png"
 import  Rating from '@mui/material/Rating';
-const CourseCard=({id,title,totalHours,rating,price,currency,type,subject,description}) =>{
+import { useParams } from 'react-router-dom';
+const CourseCard=({id,title,totalHours,rating,price,priceafter,currency,type,type2,subject,description}) =>{
   const [newPrice1,setNewPrice1]= useState('')
   const [newPrice,setNewPrice]= useState('')
+  const [pricediscount,setpricediscount]=useState('')
   const [ratingCurrent,isRating]= useState('')
   const country=localStorage.getItem("country");
   const currencySelected=localStorage.getItem("currency")
@@ -54,13 +56,14 @@ const CourseCard=({id,title,totalHours,rating,price,currency,type,subject,descri
 
           useEffect(()=>{
           setNewPrice(Math.ceil((price)*exchangeRate*100)/100)
+          setpricediscount(Math.ceil((priceafter)*exchangeRate*100)/100)
       },[exchangeRate])
 return (
     <React.Fragment>
            
          {type==='Guest' && 
 <div class={c.card}>
-<a href={`/course/${id}/${newPrice}/${currencySelected}/${type}`} className={c.ref}>
+<a href={`/course/${id}/${newPrice}/${currencySelected}/${type}/${type2}/${pricediscount}`} className={c.ref}>
     <div class={c.cardheader}>
       <img src="https://source.unsplash.com/600x400/?food" alt="card__image" class={c.cardimage} width="600"/>
       </div>
@@ -75,8 +78,10 @@ return (
     <p> {totalHours} Hours</p>  
     </div>
     <div class={c.cardfooter3}>
-    <img src={priceTag} alt="card__image" class={c.priceimage} width="20"/>
-    {newPrice!==0 && <p>{newPrice} {currencySelected}</p>} {newPrice===0 && <p>FREE</p>}
+   {type2!="CorpTrainee" && <img src={priceTag} alt="card__image" class={c.priceimage} width="20"/>}
+    {type2!=="CorpTrainee" && newPrice!==0  && newPrice!==pricediscount && <div><div  className={c.priceetext1}> <p>{newPrice} {currencySelected}</p></div><div className={c.priceetext11}><p >{pricediscount} {currencySelected}</p></div></div> }
+    {type2!=="CorpTrainee" && newPrice!==0 &&newPrice===pricediscount  && <p className={c.ppp}>{newPrice} {currencySelected}</p>}
+     {type2!=="CorpTrainee" && newPrice===0 && <p>FREE</p>}
     </div>
     <div class={c.cardfooter2}>
     <Rating name="read-only"  defaultValue={rating} precision={0.5} className={c.starimage} width="20" readOnly />
@@ -87,6 +92,7 @@ return (
     </a>
   </div>
   }
+  
  
     </React.Fragment>
     )

@@ -6,6 +6,7 @@ const toId=mongoose.Types.ObjectId
 const examTable=require("../models/Exam");
 const jwt =require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const notificationsTable=require("../models/Notification")
 const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 const getAllInst=async(req,res,next)=>{
         let inst;
@@ -399,7 +400,7 @@ sgMail.send(msg)
 const createExam = async (req,res) =>{
   let exam;
   try{
-     exam =new examTable({
+     exam =examTable.create({
         CourseId:req.body.CourseId ,
         QuizNumber: req.body.QuizNumber,
         Content :req.body.Content,
@@ -418,25 +419,23 @@ const createExam = async (req,res) =>{
 const adddiscount = async (req, res) => {
   //const myid = req.params.myid;
   const courseid = req.params.id;
-  const { discount, expirationTime } = req.body;
-
-  //console.log("ana henaaaa");
-  //console.log(courseid);
-  //console.log(discount);
-  // console.log("expirationnnn" + expirationTime);
-
-  if (courseid) {
-    const finalres = await courseTable.findByIdAndUpdate(
-      courseid,
-      {
-        discount: discount,
-        expirationTime: expirationTime,
-      },
-      { new: true }
-    );
-    // await res.status(200).json(finalres);
-    if (discount && expirationTime) {
-      //  console.log("ana fel ifff");
+  const { discount, expirationTime, startTime } = req.body;
+  if (courseid && discount && expirationTime && startTime) {
+    const endDate = new Date(expirationTime).toJSON().split("T")[0];
+    const startDate = new Date(startTime).toJSON().split("T")[0];
+    let currentDate1 = new Date();
+    let currentDate= currentDate1.toJSON().split("T")[0]// new Date().getTime() returns value in number
+    if (currentDate === startDate && currentDate <= endDate) {
+      const finalres = await courseTable.findByIdAndUpdate(
+        courseid,
+        {
+          discount: discount,
+          expirationTime: expirationTime,
+          startTime: startTime,
+          discountapplied:true
+        },
+        { new: true }
+      );
       const { price } = await courseTable
         .findOne({ _id: courseid })
         .select("price")
@@ -445,35 +444,47 @@ const adddiscount = async (req, res) => {
       const intermediatePrice = price;
       const totalPrice =
         intermediatePrice - intermediatePrice * (discount / 100);
-      const endDate = new Date(expirationTime);
-      let currentDate = new Date().getTime(); // new Date().getTime() returns value in number
 
-      //console.log(endDate, currentDate);
-     if (currentDate <= endDate) {
-        const updatedcourse = await courseTable.findByIdAndUpdate(
-          courseid,
-          { price: totalPrice },
-          { new: true }
-        );
-        await res.status(200).json(updatedcourse);
-      } else {
-        //console.log("ana fel elseeee");
-        const { originalPrice } = await courseTable
-          .findOne({ _id: courseid })
-          .select("originalPrice")
-          .exec();
-        //  console.log(originalPrice);
-        const updatedcourse1 = await courseTable.findByIdAndUpdate(
+    
+      const updatedcourse = await courseTable.findByIdAndUpdate(
+        courseid,
+        { price: totalPrice },
+        { new: true }
+      );
+      await res.status(200).json(updatedcourse);
+    } else {
+      if (currentDate < startDate) {
+        const finalres = await courseTable.findByIdAndUpdate(
           courseid,
           {
-            price: originalPrice,
+            discount: discount,
+            expirationTime: expirationTime,
+            startTime: startTime,
           },
           { new: true }
         );
-        await res.status(200).json(updatedcourse1);
+      } else {
+        if (currentDate > endDate) {
+          const { originalPrice } = await courseTable
+            .findOne({ _id: courseid })
+            .select("originalPrice")
+            .exec();
+          //  console.log(originalPrice);
+          const updatedcourse1 = await courseTable.findByIdAndUpdate(
+            courseid,
+            {
+              price: originalPrice,
+              discountapplied:false,
+              startTime:"",
+              expirationTime:""
+            },
+            { new: true }
+          );
+          await res.status(200).json(updatedcourse1);
+        }
       }
     }
-  } else res.status(400).json({ error: "couldn't" });
+  } else res.status(400).json({ error: " Invalid Data" });
 };
 
 const getInstructorReviews2 =  async (req, res) => {

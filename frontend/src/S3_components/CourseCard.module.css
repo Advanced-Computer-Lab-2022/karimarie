@@ -57,6 +57,7 @@ img {
   margin-bottom: 1em;
   margin-left: 0;
   margin-right: 0;
+  font-size: 10px;
   word-break: break-word; 
   hyphens: auto;
 }
@@ -74,7 +75,7 @@ img {
 }
 
 .cardbody h4 {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   text-transform: capitalize;
 } 
 .cardbottom{
@@ -119,14 +120,15 @@ padding-left:110px;
   font-size: 1rem;
 }
 .cardfooter3 {
-  display: flex; 
-  padding: 1rem;
+  display:inline-flex; 
+  /* padding: 1rem; */
   float: right;
   margin-top: -40px;
-  margin-left: -2px;
+  /* margin-left: -2px; */
 
 }
-.cardfooter3 p{
+
+.ppp{
   color: gray;
 }
 
@@ -154,3 +156,8 @@ padding-left:110px;
   background-color: transparent;
   text-decoration: none;
 }
+.priceetext1{
+  text-decoration: line-through;
+  /* margin-left: 70px; */
+}
+

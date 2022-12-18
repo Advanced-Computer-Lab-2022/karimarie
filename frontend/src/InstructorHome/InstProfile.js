@@ -356,11 +356,13 @@ const InstProfile = () => {
          title={courses.title}
         //  totalHours={courses.totalHours}
          rating={courses.rating}
-         price={courses.price}
+         price={courses.originalPrice}
+         priceafter={courses.price}
          Instructor={Instructor.userName}
          currency={courses.currency}
          subject={courses.subject}
          type="Instructor"
+         type2="Instructor"
         />
            )}
            
@@ -429,10 +431,13 @@ const InstProfile = () => {
          title={courses.title}
         //  totalHours={courses.totalHours}
          rating={courses.rating}
-         price={courses.price}
+         price={courses.originalPrice}
          Instructor={Instructor.userName}
+         priceafter={courses.price}
          currency={courses.currency}
          subject={courses.subject}
+         type="Instructor"
+         type2="Instructor"
         />
            )}
         </div>}

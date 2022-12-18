@@ -160,13 +160,13 @@
         }
   
         .hello  {
-          margin-left:-50px ;
+          margin-left:-65px ;
           margin-top: -6px;
           display: inline-block;
           color: #778395;
         }
         .hrefSign{
-         margin-left: -85px;
+         margin-left: -105px;
          margin-top: -27px;
         }
         .hello > a {
@@ -177,6 +177,7 @@
           color : red ;
           margin-top:-165px;
           margin-left: 40px;
+          font-size: 14px;
         }
         .myDiv{
           display: none;
@@ -195,9 +196,11 @@
             color: black;
           }
           .passtextfield21{
-            position: fixed;
-            top:180px;
-            left:-110px;
+            position: absolute;
+            /* top:350px;
+            left:580px; */
+            top:185px;
+            left:-110px
           }
           .confirmpass{
             position: absolute;
@@ -216,7 +219,7 @@
           }
           .message{
             margin-top:190px;
-            margin-left: 90px;
+            margin-left: 85px;
             color: red;
             position: fixed;
           }
@@ -269,11 +272,48 @@
             margin-left: 370px;
             margin-top: -60px;
             position: absolute;
-            /* background: #1b2430; */
+            background: #1b2430;
           }
           .btnn{
             background-color: #1b2430;
             border: none;
             margin-top: 30px;
           }
-       
+          .btnn1{
+            background-color: white;
+            border: none;
+            position: absolute;
+            z-index: 3;
+            margin-top: 110px;
+            margin-left: -70px;
+          }
+          .btnn2{
+            background-color: white;
+            border: none;
+            position: absolute;
+            z-index: 3;
+            margin-top: 210px;
+            margin-left: -70px;
+          }
+       .change{
+        position: absolute;
+        margin-top: 5px;
+        margin-left: 10px;
+       }
+       .change2{
+        position: absolute;
+        margin-top: 100px;
+        margin-left: 10px;
+       }
+       .message211{
+        margin-top:57px;
+        margin-left: 5px;
+        color: red;
+        position: fixed;
+      }
+      .message221{
+        margin-top:237px;
+        margin-left: 65px;
+        color: red;
+        position: fixed;
+      }

@@ -133,7 +133,7 @@ function InstructorNavBar(isactive){
             e.preventDefault()
               searchCourse().then((data) => {           
               let x=JSON.stringify(data.priceList)
-              window.location.href=`FilterSearchPage?type=Instructor&courses=${x}`
+              window.location.href=`/FilterSearchPage?type=Instructor&courses=${x}`
             }
               )
             }}
@@ -141,7 +141,7 @@ function InstructorNavBar(isactive){
               e.preventDefault()
                 searchCourse().then((data) => {           
                 let x=JSON.stringify(data.priceList)
-                window.location.href=`FilterSearchPage?type=Instructor&courses=${x}`
+                window.location.href=`/FilterSearchPage?type=Instructor&courses=${x}`
               }
                 )
               }

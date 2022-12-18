@@ -77,6 +77,12 @@ const coursesSchema = new Schema({
   },
   preview:{
     type:String
+  },
+  startTime:{
+    type:String
+  },
+  discountapplied:{
+    type:Boolean,default:false
   }
 });
 

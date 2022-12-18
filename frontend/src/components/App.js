@@ -25,6 +25,11 @@ import Start from '../pages/Admin/Start';
 import ViewReviewsInst from "../InstructorHome/ViewReviewsInst"
 import ShowCourseDetails from '../S3_components/ShowCourseDetails';
 import GetInstProfile from "../S3_components/GetInstProfile"
+import TraineeHomePage from "../TraineeHome/TraineeHomePage"
+import ForgetPasswordForm from '../S3_components/ForgetPasswordForm';
+import Watch from '../TraineeHome/Watch';
+import VMyCourses from '../TraineeHome/VMyCourses';
+
 const App = () => {
   return <React.Fragment>
     {/* <header>
@@ -37,7 +42,7 @@ const App = () => {
         <Route path="/Home" element={<AllCourses/>}/>
        // <Route path="/InstructorHome" element={<InstructorHome/>}/>
         <Route path="/CorpTraineeHome" element={<CorpTraineeHome/>}/>
-        <Route path="/course/:id/:newPrice/:currencyP/:type" element={<ShowCourseDetails/>} />
+        <Route path="/course/:id/:newPrice/:currencyP/:type/:type2/:priceafter" element={<ShowCourseDetails/>} />
         <Route path="/forgetpasswordInstructor" element={<ForgetPasswordInstructor/>} />
         <Route path="/forgetpasswordAll" element={<ForgetPasswordAll/>} />
         <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
@@ -46,11 +51,17 @@ const App = () => {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/InstructorHomePage" element={<InstructorHomePage/>} />
+        <Route path="/TraineeHomePage" element={<TraineeHomePage/>} />
         <Route path="/ForgetPassword" element={<ForgetPassword/>} />
         <Route path="/profile" element={<InstProfile/>} />
         <Route path="/instprofile/:id" element={<GetInstProfile/>} />
         <Route path="/hii" element={<Start/>} />
         <Route path="/ViewMyRatings" element={<ViewReviewsInst/>} />
+        <Route path="/Trainee" element={<TraineeHomePage/>} />
+        <Route path="/forgetpasswordform/:id" element={<ForgetPasswordForm/>} />
+        <Route path="/Bye/:id" element={<Watch/>} />
+        <Route path="/Mycourses" element={<VMyCourses/>} />
+
       </Routes>
     </main>
   </React.Fragment>

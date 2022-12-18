@@ -3,6 +3,11 @@ const traineeTable=require("../models/Trainee");
 const adminTable=require("../models/Admin");
 const requestsTable=require("../models/Requests")
 const bcrypt = require('bcrypt')
+const refundReqTable=require("../models/RefundReq")
+const notificationsTable=require("../models/Notification")
+const problemTable = require("../models/Problem");
+const courseTable=require("../models/Course");
+
 
 const getAllInst=async(req,res,next)=>{
     let inst;
@@ -32,7 +37,6 @@ const addInst=async (req,res,next)=>{
     try{
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        console.log(hashedPassword)
         const inst = await instTable.create({ firstName: firstName, lastName: lastName, password: hashedPassword ,userName:userName});
         await inst.save();
         return res.json({success: true, message: 'Successfully Added!'});
@@ -54,7 +58,7 @@ const addInst=async (req,res,next)=>{
 }
 
 const addCorpTrainee=async (req,res,next)=>{
-    const {firstName,lastName,userName,password,email}=req.body;
+    const {firstName,lastName,userName,password,email,corporateName}=req.body;
     const type="corporate trainee";
     let corpTrainee;
     let x= await adminTable.findOne({userName:req.body.userName})
@@ -68,7 +72,7 @@ const addCorpTrainee=async (req,res,next)=>{
     try{
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        const corpTrainee = await traineeTable.create({ firstName: firstName, lastName: lastName, password: hashedPassword ,userName:userName,email:email,type:type});
+        const corpTrainee = await traineeTable.create({ firstName: firstName, lastName: lastName, password: hashedPassword ,userName:userName,email:email,type:type,corporateName:corporateName});
        
         await corpTrainee.save();
         return res.json({success: true, message: 'Successfully Added!'});
@@ -128,8 +132,129 @@ const addAdmin=async (req,res,next)=>{
         return res.status(201).json({req})
 
     }
-    catch(error){        return res.status(404).json(error.message)
+    catch(error){      
+          return res.status(404).json(error.message)
 }
  }
+
+const viewRefundReq=async(req,res)=>{
+    try{
+        let list=await refundReqTable.find({});
+        return res.status(201).json({list})
+      
+    }
+    catch(error){
+        return res.json({success: false, message: 'Username already taken!'});
+
+    }
+  }
  
-module.exports={getAllInst,addInst,addCorpTrainee,addAdmin,viewReq};
+  const returnMoney=async(req,res)=>{
+    const {id}=req.body;
+    try{
+        let x=await refundReqTable.findById(id);
+        let t=await traineeTable.findById(x.traineeId);
+        let newm=x.amount+t.money;
+        console.log(newm);
+let xx=     await   traineeTable.findOneAndUpdate(
+            { _id: x.traineeId },
+            { $set:
+               {
+                 money: newm,
+               }
+            },  { new: true }
+         )
+         let del=await refundReqTable.findByIdAndDelete(id);
+         let noti;
+         noti= new notificationsTable({
+             userId:x.traineeId,
+             type:"refund",
+             message: `An amount of ${newm} has been refunded to your wallet for the  course  ${x.courseName}`
+         }) 
+         await noti.save();
+
+         return res.json({success: true, message: 'Successfuly Refunded!'});
+
+    }
+    catch(error){
+        return res.status(404).json(error.message)
+    }
+ }
+ const giveCourse=async(req,res)=>{
+    const {id,answer}=req.body;
+    let ans="Not Accepted";
+    try{
+      
+        let x=await requestsTable.findById(id);
+        let course=await courseTable.findById(x.courses);
+        let idd=course._id;
+        if(answer.localeCompare('true')==0){
+            let trainee= await traineeTable.findOneAndUpdate(
+                {
+                    _id: x.corpId
+                
+                },
+                { $push: { "courses" : idd} }
+             )
+             ans="Accepted"
+        }
+        try{
+            // const noti=await notificationsTable.create({
+            //     userId:x.corpId,
+            //     type:"Course Requested",
+            //     message: `Your request of the course: ${x.courseName} has been ${ans}!`
+            // })
+            let noti;
+            noti= new notificationsTable({
+                userId:x.corpId,
+                type:"Course Requested",
+                message: `Your request of the course: ${x.courseName} has been  ${ans}!`
+            }) 
+            await noti.save();
+   
+    
+        }
+        catch(error){  return res.status(404).json(error.message)}
+        let del=await requestsTable.findByIdAndDelete(id);
+
+        return res.status(200).json({ del });
+
+    }
+    catch(error){
+        return res.status(404).json(error.message)
+    }
+
+}
+const getReports= async (req, res) => {
+    try {
+      const report = await problemTable.find({});
+      return res.status(200).json({ report });
+    } catch (err) {
+      return res.status(404).json({ message: err.message });
+    }
+  }
+const editReport = async (req, res) => {
+    const probId = req.body.id;
+    const Status  = req.body.Status;
+    if (probId!="") {
+      const finalres = await problemTable.findByIdAndUpdate(
+        probId,
+        {
+          Status: Status,
+        },
+        { new: true }
+      );
+      await res.status(200).json(finalres);
+      if(Status=="Resolved"){
+        problemTable.findOneAndRemove({_id: probId}, req.body, function(err,data)
+{
+    if(!err){
+        console.log("Deleted");
+    }
+});
+      }
+    } else {
+      res.status(400).json({ error: "couldn't" });
+   }
+};
+module.exports={getAllInst,addInst,addCorpTrainee,returnMoney,getReports,editReport,viewRefundReq,addAdmin,viewReq,giveCourse};

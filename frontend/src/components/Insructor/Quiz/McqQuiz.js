@@ -1,19 +1,20 @@
 import { Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import  { useState,useRef } from "react";
-import "../Quiz/QuizTempCss.css";
-import logo from "../Quiz/letter-q.png";
+import x from "../Quiz/QuizTempCss.module.css";
 import {  useParams } from "react-router-dom";
 import axios from "axios";
-const McqQuiz = () => {
-    const CourseId = useParams().CourseId;
+const McqQuiz = (CourseId) => {
+    // const CourseId = useParams().CourseId;
     const[Questionbank,setQ]=useState([]);
+    // const [CourseId,setCourseId]=useState("639cd2bf79af2c8db6177f75")
+    console.log(CourseId)
     const sendRequest = async () => {
         const res = await axios
-          .get(`http://localhost:2000/getExamSol/${CourseId}`)
+          .get(`http://localhost:2000/getExamSol/${CourseId.CourseId}`)
           .catch((err) => console.log(err));
           const data = await res.data;
-          
+          console.log(data)
           return data;
       };
       useEffect(() => {
@@ -104,49 +105,51 @@ const McqQuiz = () => {
       return (
         <React.Fragment>
 
-        {start==="start"&&     <div class="box">
-               <h3 class="Title" text-align= "center">MCQ Quiz</h3>
-               <ol>
-                <li>Answers are saved after the submit</li>
-                <li>You cant return back to a question</li>
-                <li>It is advised to solve all questions</li>
-	
-                </ol>
+        {start==="start"&&     <div className={x.box}>
+        <div className={x.test}><h3 className={x.Title}>Rules</h3></div>
+        <div className={x.rule}>
+               <ol className={x.oll}>
+                <li><div className={x.suc}>Answers are saved after the submit </div></li>
+                <li><div className={x.suc}>Questions can only be solved in order</div></li>
+                <li><div className={x.suc}>It is advised to solve all questions</div></li>
+              </ol>
             <Button 
                onClick={()=>setStart("startQuiz")}
                 >Start</Button>
+            </div>
                 </div>}
-        {start==="startQuiz" &&<div class="box">
-               <span><img src={logo} className="Q" alt="Logo" width="23" height="23" display= "inline-block" /></span> <span>{currentQuestion+1}</span>/{Questionbank.length}
-               <h3 class="Title">{ Questionbank[currentQuestion].question}</h3>
-               <button class="Option1" 
+        {start==="startQuiz" &&<div className={x.box}>
+                <h2 className={x.qtag}>Question {currentQuestion+1}/{Questionbank.length}</h2>
+               <div className={x.test}><h3 className={x.Title}>{ Questionbank[currentQuestion].question}</h3></div>
+               <button className={x.Option1} 
                 value={1}
-                style={{backgroundColor: buttonSelected[0] ? 'blue':'white'}}
+                style={{backgroundColor: buttonSelected[0] ? '#17cf97':'white'}}
                 onClick={(e)=>handleAnswer(e.target.value,Questionbank[currentQuestion].correctAns)}
                 > {Questionbank[currentQuestion].choice1}</button>
-                 <button class="Option1" 
-                style={{backgroundColor: buttonSelected[1] ? 'blue':'white'}}
+                 <button className={x.Option1} 
+                style={{backgroundColor: buttonSelected[1] ? '#17cf97':'white'}}
                 value={2}
                 onClick={(e)=>handleAnswer(e.target.value,Questionbank[currentQuestion].correctAns)}
                 > {Questionbank[currentQuestion].choice2}</button>
-                 <button class="Option1" 
-                style={{backgroundColor: buttonSelected[2] ? 'blue':'white'}}
+                 <button className={x.Option1} 
+                style={{backgroundColor: buttonSelected[2] ? '#17cf97':'white'}}
                 value={3}
                 onClick={(e)=>handleAnswer(e.target.value,Questionbank[currentQuestion].correctAns)}
                 > {Questionbank[currentQuestion].choice3}</button>
-                  <button class="Option1" 
-                style={{backgroundColor: buttonSelected[3] ? 'blue':'white'}}
+                  <button className={x.Option1} 
+                style={{backgroundColor: buttonSelected[3] ? '#17cf97':'white'}}
                 value={4}
                 onClick={(e)=>handleAnswer(e.target.value,Questionbank[currentQuestion].correctAns)}
                 > {Questionbank[currentQuestion].choice4}</button>
-                <Button 
-                 onClick={()=>sub()}
-                >Submit</Button>
+                <button 
+                 onClick={()=>sub()} className={x.s}
+                >Submit</button>  
+                 {/* <button type="button" name="button" class="submit" id="submit" className={x.s}  onClick={()=>sub()}>Submit</button> */}
             </div> }
-        {start==="showAnswers"&& <div class="box">
-                <div>You have scored {score}out of{Questionbank.length}</div>
-               <span><img src={logo} className="Q" alt="Logo" width="23" height="23" display= "inline-block" /></span> <span>{currentQuestion2+1}</span>/{Questionbank.length}
-               <h3 class="Title">{Questionbank[currentQuestion2].question}</h3>
+        {start==="showAnswers"&& <div className={x.box}>
+                <div className={x.score}>You have scored {score} out of {Questionbank.length}</div>
+                <h2 className={x.qtag}>Question {currentQuestion2+1}/{Questionbank.length}</h2>
+                <div className={x.test}><h3 className={x.Title}>{ Questionbank[currentQuestion2].question}</h3></div>
                
                 {result.map((answer, index) => {
                     var select=0;
@@ -164,13 +167,13 @@ const McqQuiz = () => {
                     }       
           if((index+1).toString().localeCompare(Questionbank[currentQuestion2].correctAns.toString())===0){
             
-            return  <button class="Option1"  style={{backgroundColor: 'green'}}
+            return  <button className={x.Option1}   style={{backgroundColor: 'green'}}
              > {select}</button>
         }else if( ( answers[currentQuestion2]!==undefined && (answers[currentQuestion2]).toString().localeCompare(index+1)===0)){ 
-            return  <button class="Option1"  style={{backgroundColor: 'red'}}
+            return  <button className={x.Option1}   style={{backgroundColor: 'red'}}
             >{select}</button>      
         }else {
-            return  <button class="Option1" 
+            return  <button className={x.Option1} 
             >{select}</button> 
         }
           })}
@@ -178,6 +181,7 @@ const McqQuiz = () => {
                  onClick={()=>sub2()}
                 >Next</Button>}
             </div>}
+
        </React.Fragment>
     )
 }

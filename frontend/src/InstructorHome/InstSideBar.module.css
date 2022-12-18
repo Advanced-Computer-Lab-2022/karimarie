@@ -1,6 +1,6 @@
 .bodyy{
 
-    background-color:#17cf97;
+    /* background-color:#17cf97; */
  
      box-sizing: border-box;
      list-style: none;
@@ -30,7 +30,7 @@
    
     padding: 0px 0px;
     /* position: fixed; */
-    /* margin-top: 15px; */
+    /* margin-top: 18px; */
     /* border-radius: 8px; */
     border-right: #4b4276;
     
@@ -40,6 +40,7 @@
     background-color:#17cf97;
   
   }
+  
   
   .wrapper .sidebar h2{
     color: #fff;
@@ -91,4 +92,53 @@
   .subj{
     margin-left: 130px;
     margin-top: -20px;
+  }
+  .mostpopular1{
+    position: absolute;
+    width: 679px;
+    height: 49px;
+    left: 251px;
+    top: 130px;
+    margin-top: 200px;
+    margin-bottom: 20px;
+    margin-left: 4px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+color:black;
+    text-align: left;
+  }
+  .toppopular1{
+    position: absolute;
+    width: 679px;
+    height: 49px;
+    left: 251px;
+    top: 130px;
+    margin-top: 600px;
+    margin-bottom: 20px;
+    margin-left: 4px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+color:black;
+    text-align: left;
+  }
+  .arrow1{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    left: 500px;
+    top: 342px;
+  }
+  .arrow12{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    left: 450px;
+    top: 741px;
+  }
+  .movee{
+    margin-top: 100px;
   }

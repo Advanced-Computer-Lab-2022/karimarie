@@ -14,8 +14,10 @@ import { Rating } from '@mui/material';
 
 
 
-const ViewMyCourses = ({id,title,totalHours,rating,price,currency,type,Instructor,subject,description}) => {
+const ViewMyCourses = ({id,title,totalHours,rating,price,priceafter,currency,type,type2,Instructor,subject,description}) => {
+  console.log(priceafter)
     const [newPrice,setNewPrice]= useState('')
+    const [pricediscount,setpricediscount]=useState('')
     const [ratingCurrent,isRating]= useState('')
     const country=localStorage.getItem("country");
     const currencySelected=localStorage.getItem("currency")
@@ -61,11 +63,12 @@ const ViewMyCourses = ({id,title,totalHours,rating,price,currency,type,Instructo
   
             useEffect(()=>{
             setNewPrice(Math.ceil((price)*exchangeRate*100)/100)
+            setpricediscount(Math.ceil((priceafter)*exchangeRate*100)/100)
         },[exchangeRate])
     return(
         <React.Fragment>
        <div className={inst.ViewCourses}>
-       <a href={`/course/${id}/${newPrice}/${currency}/${type}`} className={inst.ref}>
+       <a href={`/course/${id}/${newPrice}/${currency}/${type}/${type2}/${pricediscount}`} className={inst.ref}>
              <img src="https://source.unsplash.com/600x400/?food" alt="card__image" className={inst.courseimg} width="140"/> 
              <div><h2>{title}</h2> 
              <span className={c.tagbrown}>{subject}</span>
@@ -78,7 +81,9 @@ const ViewMyCourses = ({id,title,totalHours,rating,price,currency,type,Instructo
              <div className={inst.pricee}>
              <img src={priceTag} alt="card__image" class={c.priceimage} width="20"/>
              </div>
-            {newPrice!==0 ?<div className={inst.priceetext}><p>{newPrice} {currencySelected}</p></div >: <div className={inst.priceetext}><p>FREE</p></div>}
+             {newPrice===0 &&  <div className={inst.priceetext}><p>FREE</p></div>}
+            {newPrice!==0  && newPrice===pricediscount && <div className={inst.priceetext}><p>{newPrice} {currencySelected}</p></div >}
+            {newPrice!==0  && newPrice!==pricediscount && <div><div  className={inst.priceetext1}><p>{newPrice} {currencySelected}</p></div><div className={inst.priceetext11}><p >{pricediscount} {currencySelected}</p></div></div> }
              </a>
               </div>
     </React.Fragment>

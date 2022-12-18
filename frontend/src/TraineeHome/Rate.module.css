@@ -1,0 +1,115 @@
+.editicon{
+    position: absolute;
+    width: 24px;
+    height: 23px;
+    left: 360px;
+    top: 425px;
+  }
+  .editbutton{
+    background-color: white;
+    width: 0.2px;
+    height: 0.2px;
+  }
+  .shadearea{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modalcontainer{
+    width: 500px;
+    height: 350px;
+    padding: 20px;
+    background: #FFFFFF;
+    position: relative;
+    z-index: 3;
+    border-radius: 40px 40px 40px 40px;
+
+  }
+  .editbiotext{
+    position: absolute;
+    width: 300px;
+    height: 45px;
+    left: 110px;
+    top: 41px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 20px;
+    text-align: center;
+    color: black;
+    
+  }
+  .closeedit{
+    background: #fff;
+    border: none;
+    float: right;
+    padding-right: 0.7rem;
+    padding-top: 0.1rem;
+    margin-left:400px;
+    position: absolute;
+    z-index: 3;
+    bottom: 450px;
+   
+  }
+  .edittextfield{
+    position: absolute;
+    width:400px;
+    height: 100px;
+    left: 50px;
+    top: 100px;
+  }
+  .submiteditbutton{
+    position: absolute;
+    width: 100px;
+    height: 48px;
+    left: 199px;
+    top: 290px;
+    border-radius: 40px 40px 40px 40px;
+    background: #17cf97;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 44px;
+    text-align: center;
+    border:black;
+
+    color: #FFFFFF;
+    
+  }
+.stars{
+    margin-top: 230px;
+    left:170px;
+    display: inline-block;
+}
+.rateText{
+    position: absolute;
+    width: 300px;
+    height: 45px;
+    left: 110px;
+    top: 220px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 20px;
+    text-align: center;
+    color: black;
+}
+.para{
+    background: #fff;
+    border: none;
+    text-decoration: underline;
+    outline: none;
+}
+.try{
+    z-index: 3;
+    position: relative;
+}

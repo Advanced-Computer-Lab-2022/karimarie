@@ -314,7 +314,7 @@ padding: 20px;
   background: #FFFFFF;
   position: relative;
   border-radius: 40px 40px 40px 40px;
-  z-index: 3;
+  z-index: 10;
 
 }
 .logouttext1{

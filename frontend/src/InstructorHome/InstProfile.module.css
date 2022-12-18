@@ -570,6 +570,15 @@ font-weight: 500;
     margin-left: 28px;
     margin-top: 5px;
  }
+ .priceetext1{
+  margin-left: 28px;
+  margin-top: 5px;
+  text-decoration: line-through;
+}
+.priceetext11{
+  margin-left: 188px;
+  margin-top: -3px;
+}
  .FFF{
     margin-left: -300px;
     top: -120px;
@@ -696,3 +705,58 @@ font-weight: 500;
   background-color: transparent;
   text-decoration: none;
 }
+
+.mainchange{
+  position:absolute;
+  left:450px;
+}
+.changepass1{
+  position: absolute;
+    left:76px;
+    top:40px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 20px;
+    text-align: right;
+    
+    color: black;
+  }
+  .passtextfield2c{
+    position: absolute;
+    top:190px;
+    left:-110px;
+  }
+  .confirmpass1{
+    position: absolute;
+    top:175px;
+    left:185px;
+  }
+  .passtextfield1c{
+    position: absolute;
+    top:90px;
+    left:110px;
+  }
+  .newpass1{
+    position: absolute;
+    top:85px;
+    left:190px;
+  }
+  .submitpassbutton1{
+    position: absolute;
+    width: 100px;
+    height: 48px;
+    left: 190px;
+    top: 285px;
+    border-radius: 40px 40px 40px 40px;
+    background: #17cf97;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 44px;
+    text-align: center;
+    border:black;
+    color: #FFFFFF;
+  }
