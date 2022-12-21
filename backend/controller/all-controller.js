@@ -623,4 +623,36 @@ const getMyNotification=async(req,res)=>{
         return res.status(200).json({ balance });
   
   }
-  module.exports={getAllCourses,logout,getSubjects,exchangecurr,checkfoll,followUp,getMyNotification,postFilterAll,getCourseReviews,seeMyReports,reportProblem,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+  const requireAuth =async (req, res, next) => {
+    const token = req.params.token;
+      console.log(token)
+    // check json web token exists & is verified
+    if (token) {
+      jwt.verify(token, 'supersecret', (err, decodedToken) => {
+        if (err) {
+          // console.log('You are not logged in.');
+          // res send status 401 you are not logged in
+          return res.status(200).json({message:"no"})
+          // res.redirect('/login');
+        } else {
+          var decodeID=decodedToken.name;
+          let x=  instTable.findOne({userName:decodeID})
+          let y= traineeTable.findOne({userName:decodeID}) 
+          let z= adminTable.findOne({userName:decodeID})
+          if(x){
+           return res.status(200).json({message:"Inst"})
+          }
+          if(y){
+            return res.status(200).json({message:"Trainee"})
+          }
+          if(z){
+           return res.status(200).json({message:"Admin"})
+          }
+          next();
+        }
+      });
+    } else {
+      return res.status(200).json({message:"no"})
+    }
+  };
+  module.exports={getAllCourses,logout,getSubjects,requireAuth,exchangecurr,checkfoll,followUp,getMyNotification,postFilterAll,getCourseReviews,seeMyReports,reportProblem,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}

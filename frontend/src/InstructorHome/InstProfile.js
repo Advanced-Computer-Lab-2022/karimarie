@@ -28,8 +28,36 @@ import quotationIcon from "../InstructorHome/quotation (1).png"
 import star from "../S3_components/star.png"
 import x from "../TraineeHome/Watchh.module.css";
 import InstBalancePage from './InstBalancePage'
+import error from "../InstructorHome/error.png"
+
 
 const InstProfile = () => {
+  const [access,hasaccess]=useState(false)
+  const [datas,setdata]=useState("")
+  const grantAccess = async () => {
+      console.log(localStorage.getItem("token"))
+      if(localStorage.getItem("token")===""){
+          console.log("hi")
+          hasaccess(false)
+      }else {
+      const res = await axios
+        .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        return data;}
+    };
+    useEffect(() => {
+      if(localStorage.getItem("token")!==""){
+          grantAccess().then((data)=>{setdata(data.message)
+          if(data.message==="Inst"){
+              hasaccess(true)
+          }
+          else {
+              hasaccess(false)
+          }
+      });
+    }}, []);
+
     const[Edit,isShowEdit]=useState(false);
     const[Password,isShowPassword]=useState(false);
     const[Email,isShowEmail]=useState(false);
@@ -300,6 +328,7 @@ const InstProfile = () => {
   
     return (
       <React.Fragment>
+        {access &&
         <div className={inst.allall}>
           
             <InstructorNavBar></InstructorNavBar>
@@ -571,7 +600,10 @@ const InstProfile = () => {
                 {balance  && <InstBalancePage
               instbalance={Instructor.balance}/>}
              
-        </div>
+        </div>}
+        {!access && <div>
+            <img src={error} width="64"></img> Access not granted
+            </div>}
          </React.Fragment>
 
     )

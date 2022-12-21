@@ -1,6 +1,6 @@
 const express=require('express');
 const allRouter=express.Router();
-const {getAllCourses,getSubjects,getFilterSubject,followUp,checkfoll,exchangecurr,getMyNotification,logout,reportProblem,seeMyReports,getCourseReviews,postFilterPrice,postFilterAll,getById,filterRating,searchCourse,getExamSolution,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,login}=require("../controller/all-controller")
+const {getAllCourses,getSubjects,getFilterSubject,requireAuth,followUp,checkfoll,exchangecurr,getMyNotification,logout,reportProblem,seeMyReports,getCourseReviews,postFilterPrice,postFilterAll,getById,filterRating,searchCourse,getExamSolution,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,login}=require("../controller/all-controller")
  allRouter.get("/home",getAllCourses);
  allRouter.get("/subjects",getSubjects);
  allRouter.get("/filterS/:subject",getFilterSubject)
@@ -24,5 +24,6 @@ const {getAllCourses,getSubjects,getFilterSubject,followUp,checkfoll,exchangecur
  allRouter.post('/checkfoll', checkfoll)
  allRouter.post('/getMyNotification', getMyNotification)
  allRouter.post('/exchangecurr', exchangecurr)
+ allRouter.get("/requireAuth/:token",requireAuth)
 // allRouter.get("/home/:id",viewAcourse)
  module.exports=allRouter  

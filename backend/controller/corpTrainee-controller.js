@@ -296,6 +296,8 @@ const payForCourse = async (req, res, next) => {
   const currencyprice = req.params.currencyPrice;
   console.log("currency " + currencyprice);
   const course = await courseTable.findById(courseid);
+  course.numStudents=course.numStudents+1;
+  course.save()
   const price = course.price;
 
   // console.log(email);
@@ -303,6 +305,7 @@ const payForCourse = async (req, res, next) => {
     { _id: decodeID },
     { $addToSet: { courses: courseid } }
   );
+  
   if(trainee.email!==email){
     return res.status(200).json({message:"no"})
   }else {

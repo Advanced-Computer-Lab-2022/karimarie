@@ -42,9 +42,9 @@ const coursesSchema = new Schema({
         type: String,
         required: true,
       },
-      Video: {
+      Video: [{
         type: String,
-      },
+      }],
       totalHours: {
         type: Number,
         required: true,

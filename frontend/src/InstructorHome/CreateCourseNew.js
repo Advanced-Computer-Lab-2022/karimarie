@@ -9,10 +9,13 @@ import TextField from '@mui/material/TextField';
 import {Box} from '@mui/material'
 import st from './ExamStyle.module.css'
 import inst from "./InstProfile.module.css"
+import error from "../InstructorHome/error.png"
 
 
 
 const CreateCourseNew = () => {
+ 
+
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const [totalHours, setTotalHours] = useState('')
@@ -76,11 +79,21 @@ const [showExam,isExam]=useState(false);
     isExam(true);
     setinputList([{ title:'', Video:'',totalHours:'',shortDescrip:''}])
   };
-  const [inputList, setinputList]= useState([{ title:'', Video:'',totalHours:'',shortDescrip:''}]);
-  const handleinputchange=(e, index)=>{
-    const {name, value}= e.target;
-    const list= [...inputList];
-    list[index][name]= value;
+  const [inputList3, setinputList3]= useState([{Video:''}])
+  const [inputList, setinputList]= useState([{ title:'', Video:[],totalHours:'',shortDescrip:''}]);
+  const handleinputchange=(e, index,index2)=>{
+     const {name, value}= e.target;
+     const list= [...inputList];
+    console.log(index)
+    console.log(index2)
+    if(name=="Video"){
+      console.log("hi")
+      list[index2][name][index]=value
+    }
+    else {
+      list[index][name]= value;
+
+    }
     setinputList(list);
 
   }
@@ -91,8 +104,26 @@ const [showExam,isExam]=useState(false);
   }
 
   const handleaddclick=()=>{ 
-    setinputList([...inputList, { title:'', Video:'',totalHours:'',shortDescrip:''}]);
+    setinputList([...inputList, { title:'', Video:[],totalHours:'',shortDescrip:''}]);
   }
+      // const handleinputchange3 =(e, index)=>{
+      //   console.log(index)
+      //   const {name, value}= e.target;
+      //   const list= [...inputList3];
+      //   list[index]= value;
+      //   setinputList3(list);
+      //   console.log(inputList[0].Video.concat(inputList3))
+      // }
+      console.log(inputList)
+      const handleremove3= index=>{
+        const list=[...inputList3];
+        list.splice(index,1);
+        setinputList3(list);
+      }
+      const handleaddclick3=()=>{ 
+        setinputList3([...inputList3, { Video:''}]);
+      }
+      // console.log(inputList)
   const [countries,setCountries]=useState('');
   const getCountires = async () => {
     const res = await axios
@@ -184,7 +215,8 @@ const [showExam,isExam]=useState(false);
 
   return (
     <React.Fragment>
-        <div>
+      
+       <div>
        {showCreate && <div className={cc.allC}>
         <form className={cc.create} onSubmit={handleSubmit}>
         <h1 className="mt-3 mb-4 fw-bold fs-" >Add a New Course</h1>
@@ -259,8 +291,26 @@ const [showExam,isExam]=useState(false);
                   <input className={cc.boxA} type="Number" name="totalHours" min="1" required   placeholder="Enter Total Hours" onChange={ e=>handleinputchange(e,i) }/>
                   <div>&nbsp;</div>
 
+               {/* <label >Video  :</label>
+                  <input className={cc.boxA} type="text" name="Video"  required    placeholder="Enter Video" onChange={ e=>handleinputchange(e,i) }/> */}
+                 {inputList3.map((y,j)=>{
+                return(
+                  <div>
                <label >Video  :</label>
-                  <input className={cc.boxA} type="text" name="Video"  required    placeholder="Enter Video" onChange={ e=>handleinputchange(e,i) }/>
+                  <input className={cc.boxA} type="text" placeholder="Enter Video" name="Video" onChange={ e=>handleinputchange(e,j,i) }/>
+                  <div className={cc.but}>
+               {
+                  inputList3.length!==1 &&
+                 <button  className={cc.buttonB} type="button" onClick={()=> handleremove3(j)}>Remove Video</button>
+               }
+               </div>
+                <div className={cc.but}>
+               { inputList3.length-1==j&&
+               <button  className={cc.buttonC} type="button" onClick={handleaddclick3} >Add More Videos</button>
+               }
+               </div>
+            </div>
+              ) })} 
                   <div>&nbsp;</div>
 
                <label >Short Description  :</label>
@@ -504,7 +554,7 @@ const [showExam,isExam]=useState(false);
             </div> 
           </div>}
             </div>}
-    
+          
     </React.Fragment>
 
   )

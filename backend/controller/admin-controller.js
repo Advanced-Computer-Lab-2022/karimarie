@@ -187,6 +187,8 @@ let xx=     await   traineeTable.findOneAndUpdate(
       
         let x=await requestsTable.findById(id);
         let course=await courseTable.findById(x.courses);
+        course.numStudents+=1;
+        course.save()
         let idd=course._id;
         if(answer.localeCompare('true')==0){
             let trainee= await traineeTable.findOneAndUpdate(
