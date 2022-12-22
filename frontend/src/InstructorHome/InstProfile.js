@@ -10,7 +10,6 @@ import c from "../S3_components/CourseCard.module.css"
 import ReactStars from 'react-stars'
 import priceTag from "../S3_components/priceTag.png"
 import axios from "axios"
-import SearchCourse from '../components/SearchCourse'
 import ViewMyCourses from './ViewMyCourses'
 import NavbarStyles from "../S3_components/NavbarHomePage.module.css"
 import language from "../S3_components/language.png"
@@ -527,7 +526,7 @@ const InstProfile = () => {
 </div>}
 </div>
 
-            <img src="https://source.unsplash.com/600x400/?food" alt="card__image" className={inst.image} width="600"/>    
+            <img src="https://source.unsplash.com/600x400/?portrait" alt="card__image" className={inst.image} width="600"/>    
             <button className={inst.changepassword} onClick={showPassword}>Change Password</button>
             <button className={inst.changeEmail} onClick={showEmail}>Change My Email</button>
             <button className={inst.ViewRatings} onClick={renderBalancePage}>View My Balance</button>

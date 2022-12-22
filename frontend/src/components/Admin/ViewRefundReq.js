@@ -31,6 +31,7 @@ const ViewRefundReq = () => {
   
     const refund=async (c)=>{
       console.log("hey")
+      console.log(c)
       const res = await axios
       .post("http://localhost:2000/admin/returnMoney",{
         id:c
@@ -75,7 +76,7 @@ const ViewRefundReq = () => {
 {req.courseName}
 </div>
 <div className={x.cell} >
-    {req.amount}
+    {req.amount} {req.currency}
 </div>
 <div className={x.cell} >
 <button  className={x.b10} onClick={() => refund(req._id)}>Refund</button>

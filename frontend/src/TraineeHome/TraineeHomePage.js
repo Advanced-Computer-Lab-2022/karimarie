@@ -13,6 +13,8 @@ import { useParams } from "react-router-dom";
 import DivText from '../S3_components/DivText';
 import trainee from "./Trainee.module.css"
 import Nav from "./TraineeNavbar.module.css"
+import error from "../InstructorHome/error.png"
+
 const TraineeHomePage=()=>{
     const typeUser = localStorage.getItem("userType");
     const[courses,setCourses]= useState('');
@@ -46,11 +48,37 @@ const TraineeHomePage=()=>{
       slidesToShow: 5,
       slidesToScroll: 2
     };
+    const [access,hasaccess]=useState(false)
+    const [datas,setdata]=useState("")
+    const grantAccess = async () => {
+        console.log(localStorage.getItem("token"))
+        if(localStorage.getItem("token")===""){
+            console.log("hi")
+            hasaccess(false)
+        }else {
+        const res = await axios
+          .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+          .catch((err) => console.log(err));
+          const data = await res.data;
+          return data;}
+      };
+      useEffect(() => {
+        if(localStorage.getItem("token")!==""){
+            grantAccess().then((data)=>{setdata(data.message)
+              console.log(data.message)
+            if(data.message==="Trainee"){
+                hasaccess(true)
+            }
+            else {
+                hasaccess(false)
+            }
+        });
+      }}, []);
 
     
     return(
         <React.Fragment>
-        <TraineeNavbar/>
+       {true && <div> <TraineeNavbar/>
         <div className={Nav.divtext}>
         <h3 className={Nav.maintext1}>A broad selection of courses</h3>
         <h6 className={Nav.secondarytext1}>You can view hundereds of videos.</h6>
@@ -101,7 +129,10 @@ const TraineeHomePage=()=>{
         />))}
          </Slider>
         </div>
-        </div>
+        </div></div>}
+        {!access && <div>
+            <img src={error} width="64"></img> Access not granted
+            </div>}
         </React.Fragment>
     )
 

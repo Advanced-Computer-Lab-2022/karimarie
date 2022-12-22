@@ -18,6 +18,9 @@ const RefundReqSchema=new Schema({
     },
     amount:{
        type:Number
+    },
+    currency:{
+        type:String
     }
 });
 const RefundReq = mongoose.model('RefundReq', RefundReqSchema);

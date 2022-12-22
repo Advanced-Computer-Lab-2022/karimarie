@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Subtitles from '../components/Subtitles';
 import det from './Details.module.css'
 // import Rating from '@mui/material/Rating';
 import NavbarHomePage from "./NavbarHomePage";

@@ -20,7 +20,7 @@ const InstSideBar = () => {
      dots: true,
      infinite: false,
      speed: 800,
-     slidesToShow: 5,
+     slidesToShow: 4,
      slidesToScroll: 2
    };
    const [mostPop,setMostPop]=useState('');
@@ -94,6 +94,7 @@ const InstSideBar = () => {
           <h6 className={l.toppopular1}>Top Rated</h6>
           <img src={arrowIcon} className={l.arrow12}></img>
       </div>
+      <div className={l.moveee}>
       <div className={h.container2}>
         <Slider {...settings} >
         {topRated && topRated.map((courses)=>(<CourseCard
@@ -110,6 +111,7 @@ const InstSideBar = () => {
          type2="Instructor"
         />))}
          </Slider>
+        </div>
         </div>
         </div>}
 

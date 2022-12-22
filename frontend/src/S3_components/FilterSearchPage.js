@@ -6,10 +6,12 @@ import h from "../S3_components/HomePage.module.css"
 import { Carousel } from 'react-responsive-carousel';
 import NavbarHomePage from './NavbarHomePage';
 import { Navigate, useParams } from "react-router-dom";
-import CourseDetails from '../pages/CourseDetails';
 import f from "../S3_components/FilterSearchPage.module.css"
 import InstructorNavBar from '../InstructorHome/InstructorNavBar';
 import TraineeNavbar from '../TraineeHome/TraineeNavbar';
+import NavbarAdminPage from '../pages/Admin/S3_components/NavbarAdminPage';
+import error from "../InstructorHome/error.png"
+
 const FilterSearchPage=()=>{
     const params = new URLSearchParams(window.location.search);
     const x = params.get('courses');
@@ -30,12 +32,24 @@ const FilterSearchPage=()=>{
         window.location.href=`/Trainee`
       }
     }
+    const [access,hasaccess]=useState(false)
+    console.log(type)
+    useEffect(() => {
+      if(type==null){
+        hasaccess(false)
+      }
+      else {
+        hasaccess(true)
+      }
+    }, []);
+    
   return(
     <React.Fragment>
-        <div>
+       {access &&  <div>
        {type==="Guest" && <NavbarHomePage></NavbarHomePage>}
        {type==="Instructor" && <InstructorNavBar/>}
        {type==="Trainee" && <TraineeNavbar/>}
+       {type==="Admin" && <NavbarAdminPage/>}
        {/* {type==="Admin" && <NavbarHomePage/>} */}
           <button className={f.button79} onClick={handleClearNavigate}>Clear Filter</button>
          <div class={f.container}>
@@ -75,7 +89,10 @@ const FilterSearchPage=()=>{
 
        
         </div>
-        </div>
+        </div>}
+        {!access && <div>
+            <img src={error} width="64"></img> Access not granted
+            </div>}
 
 
     </React.Fragment>

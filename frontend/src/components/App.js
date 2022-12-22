@@ -1,19 +1,7 @@
 import React, { Fragment } from 'react'
 import {BrowserRouter} from 'react-router-dom';
 import {Route,Routes} from 'react-router-dom';
-import AllCourses from './AllCourses'
-import Choose from './Choose';
-import InstructorHome from '../pages/InstructorHome';
-import CorpTraineeHome from '../pages/CorpTraineeHome';
-import FilterPrice from './Filter/FilterPrice';
-import CourseDetails from '../pages/CourseDetails';
-import Countries from '../pages/Countries';
-import RateCourse from './Trainee/RateCourse';
-import ForgetPasswordInstructor from '../pages/ForgetPasswordInstructor';
-import ForgetPass from '../components/ForgetPass';
-import ForgetPasswordAll from '../pages/ForgetPasswordAll';
 import McqQuiz from './Insructor/Quiz/McqQuiz';
-import CourseCard from '../S3_components/CourseCard';
 import HomePage from '../S3_components/HomePage';
 import FilterSearchPage from '../S3_components/FilterSearchPage';
 import SignUp from '../S3_components/SignUp';
@@ -33,8 +21,12 @@ import ViewMyReports from '../TraineeHome/ViewMyReports';
 import TermsConditions from '../S3_components/TermsConditions';
 import Contract from '../S3_components/Contract';
 import PayCredit from "../TraineeHome/PayCredit";
+import ReactGA from "react-ga"
 
 const App = () => {
+  const Tracking_ID="UA-252625280-1"
+  ReactGA.initialize(Tracking_ID);
+  
   return <React.Fragment>
     {/* <header>
       <Header/>
@@ -42,22 +34,23 @@ const App = () => {
     <main>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/Choose" element={<Fragment> <Choose/> <AllCourses/></Fragment>}/>
-        <Route path="/Home" element={<AllCourses/>}/>
-       // <Route path="/InstructorHome" element={<InstructorHome/>}/>
-        <Route path="/CorpTraineeHome" element={<CorpTraineeHome/>}/>
-        <Route path="/course/:id/:newPrice/:currencyP/:type/:type2/:priceafter" element={<ShowCourseDetails/>} />
-        <Route path="/forgetpasswordInstructor" element={<ForgetPasswordInstructor/>} />
-        <Route path="/forgetpasswordAll" element={<ForgetPasswordAll/>} />
-        <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
-        <Route path="/dropdownCountry" element={<Countries/>} />
-        <Route path="/FilterSearchPage" element={<FilterSearchPage/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/InstructorHomePage" element={<InstructorHomePage/>} />
-        <Route path="/TraineeHomePage" element={<TraineeHomePage/>} />
-        <Route path="/ForgetPassword" element={<ForgetPassword/>} />
         <Route path="/profile" element={<InstProfile/>} />
+        <Route path="/Terms&Conditions" element={<TermsConditions/>} />
+        <Route path="/Contract" element={<Contract/>} />
+        <Route path="/TraineeHomePage" element={<TraineeHomePage/>} />
+        <Route path="/FilterSearchPage" element={<FilterSearchPage/>} />
+
+
+       
+        
+
+        <Route path="/course/:id/:newPrice/:currencyP/:type/:type2/:priceafter" element={<ShowCourseDetails/>} />
+        <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
+      
+        <Route path="/ForgetPassword" element={<ForgetPassword/>} />
         <Route path="/instprofile/:id/:userType" element={<GetInstProfile/>} />
         <Route path="/hii" element={<Start/>} />
         <Route path="/ViewMyRatings" element={<ViewReviewsInst/>} />
@@ -66,8 +59,7 @@ const App = () => {
         <Route path="/Bye/:id/:instructor" element={<Watch/>} />
         <Route path="/Mycourses" element={<VMyCourses/>} />
         <Route path="/viewMyR/:id" element={<ViewMyReports/>} />
-        <Route path="/Terms&Conditions" element={<TermsConditions/>} />
-        <Route path="/Contract" element={<Contract/>} />
+        
         <Route path="/PayCredit/:id/:currencyPrice" element={<PayCredit />} />
       </Routes>
     </main>

@@ -83,6 +83,9 @@ const coursesSchema = new Schema({
   },
   discountapplied:{
     type:Boolean,default:false
+  },
+  totalNumVideos:{
+    type:Number
   }
 });
 

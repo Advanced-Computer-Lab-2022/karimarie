@@ -162,7 +162,8 @@ const editPassword = async (req, res) => {
       courseId: courseId,
       courseName:courseName.title,
       traineeName:traineeName.userName,
-      amount: coursePrice.price
+      amount: coursePrice.price,
+      currency :coursePrice.currency
     }
     const req = await refundReqTable.create(data);
     req.save();
@@ -303,7 +304,7 @@ const payForCourse = async (req, res, next) => {
   // console.log(email);
   const trainee = await traineeTable.findOneAndUpdate(
     { _id: decodeID },
-    { $addToSet: { courses: courseid } }
+    { $addToSet: { courses:{courseID: courseid }} }
   );
   
   if(trainee.email!==email){

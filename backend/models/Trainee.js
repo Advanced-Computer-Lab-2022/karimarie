@@ -28,9 +28,12 @@ const traineeSchema=new Schema({
         required:true
     },
     courses:[{
-        type:mongoose.Types.ObjectId,
+       courseID:{ type:mongoose.Types.ObjectId,
         ref:"Course"
-    }],
+    },progress: {
+        type: Number,
+        default: 0,
+      }}],
     type:{
         type:String
     },

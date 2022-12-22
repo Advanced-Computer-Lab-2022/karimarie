@@ -145,8 +145,9 @@ const Watch = () => {
                 </summary>
                 <p className={x.inside}>
                     <div className={x.gowa}>
-                     <div className={x.div1}> <a className={x.a} onClick={()=>{setPreview(req.Video);setTitle(req.title);setDescrip(req.shortDescrip);isVideo(true)}} >Start Session</a> </div>
-                     
+                      {course.subtitles[i].Video.map((video,j)=>(
+                     <div className={x.div1}> <a className={x.a} onClick={()=>{setPreview(video);setTitle(req.title);setDescrip(req.shortDescrip);isVideo(true)}} >Start Session {j+1}</a> </div>
+                      ))}
                      <div className={x.div2}> <a className={x.a} onClick={()=>{setGreen(false);setTitle("Exam "+req.title);callExam(req._id);setCourseId(req._id);isVideo(false); console.log(vid); seTitlenum2(req.title)}} >Solve Exam</a> </div>
                      </div>
                 </p>

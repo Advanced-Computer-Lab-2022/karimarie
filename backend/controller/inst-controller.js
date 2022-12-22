@@ -38,6 +38,12 @@ const createCourse=async (req,res,next)=>{
   let course;
   console.log(decodeID)
   console.log(req.body)
+  const x=0;
+  console.log([1, 2, 3, 4].reduce((a, b) => a + b, 0))
+  console.log(subtitles)
+
+  const list=subtitles.reduce((a,b)=>a.Video.length+b.Video.length)
+  console.log(list);
   try{
       course =new courseTable({
           title:title,
@@ -50,7 +56,8 @@ const createCourse=async (req,res,next)=>{
           subtitles:subtitles,
           rating:rating,
           preview:preview,
-          originalPrice:price
+          originalPrice:price,
+          totalNumVideos:list
       })
       await course.save();
       return res.status(201).json({course:course})

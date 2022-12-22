@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import {AppBar, Typography,Toolbar, Button,Box, Tabs,Tab} from '@mui/material'
 import {Link} from 'react-router-dom';
 import l from "../Admin/StartC.module.css";
-import NavbarHomePage from './S3_components/NavbarHomePage';
 import AddInstructor from './Create/AddInstructor';
+import NavbarAdminPage from './S3_components/NavbarAdminPage';
 import AddAdmin from './Create/AddAdmin';
 import AddCorpTrainee from './Create/AddCorpTrainee';
 import ViewReq from '../../components/Admin/ViewReq';
@@ -42,7 +42,7 @@ const Start = () => {
 
 </body>
 
-<NavbarHomePage className={l.zz}></NavbarHomePage> 
+<NavbarAdminPage className={l.zz}></NavbarAdminPage> 
 <div className={l.home}>
 {choose=='home'&&
 <React.Fragment>

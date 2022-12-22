@@ -7,6 +7,7 @@
      text-decoration: none;
      font-family: 'Josefin Sans', sans-serif;
      height: 100%;
+     overflow: hidden;
      /* margin-top:-118px; */
   }
   
@@ -144,4 +145,8 @@ color:black;
   }
   .movee{
     margin-top: 100px;
+    margin-left: 170px;
+  }
+  .moveee{
+    margin-left: 170px;
   }

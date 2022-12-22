@@ -67,7 +67,7 @@ return (
 <div class={c.card}>
 <a href={`/course/${id}/${newPrice}/${currencySelected}/${type}/${type2}/${pricediscount}`} className={c.ref}>
     <div class={c.cardheader}>
-      <img src="https://source.unsplash.com/600x400/?food" alt="card__image" class={c.cardimage} width="600"/>
+      <img src="https://source.unsplash.com/600x400/?code" alt="card__image" class={c.cardimage} width="600"/>
       </div>
     <div class={c.cardbody}>
       <span class={c.tagbrown}>{subject}</span>

@@ -10,6 +10,8 @@ import closeIcon from '../S3_components/closeButton.png'
 import {useParams } from "react-router-dom";
 import TraineeNavbar from './TraineeNavbar';
 import { Rating } from 'react-simple-star-rating'
+import ProgressBar from "@ramonak/react-progress-bar";
+import cc from '../InstructorHome/CreateCourse.module.css'
 
 const VMyCourses = () => {
     const id = useParams().id;
@@ -101,6 +103,16 @@ const VMyCourses = () => {
             isShowReviewInst(false);
     
          }
+         const [showref,isshowref]=useState(false)
+         const [message,showmessage]=useState(false)
+         const handleRefund=async (cid)=>{
+              isshowref(true);
+              const res = await axios
+                .post(`http://localhost:2000/corpTrainee/refundRequest`, {
+                  traineeId:trainee._id,
+                  courseId:cid,
+                })
+         }
 
          const getCourses = async () => {
             const res = await axios
@@ -128,7 +140,7 @@ const VMyCourses = () => {
             courses.map( async (id,i) => (
                     
                 res = await axios
-                .get(`http://localhost:2000/getByid/${id}`)
+                .get(`http://localhost:2000/getByid/${id.courseID}`)
                 .catch((err) => console.log(err)).then((data)=>{
                     interarray[i]=data.data.course
                     instids[i]=data.data.course.instructor
@@ -172,6 +184,7 @@ const VMyCourses = () => {
 	
         <div className={x.hi}>
 		{finalarray &&finalarray.map((req,i) =>(
+      
 					<div className={x.course}>
 						<div className={x.coursepreview}>
 							<h6 className={x.courseh6}>Course</h6>
@@ -180,11 +193,16 @@ const VMyCourses = () => {
 						</div>
 						<div className={x.courseinfo}>
 							<div className={x.progresscontainer}>
-								<div className={x.progress}></div>
-								<span className={x.progresstext}>
-									6/9 Challenges
-								</span>
-							</div>
+                <ProgressBar completed={(myCourses[i].progress)/req.totalNumVideos*100} maxCompleted={100} bgColor="#2A265F"/>
+								{/* <span className={x.progresstext}>
+									{myCourses[i].progress}/{req.totalNumVideos} Video Watched
+								</span> */}
+               { localStorage.getItem("userType")!=="CorpTrainee" &&((myCourses[i].progress)/req.totalNumVideos*100)<50 &&  <button className={x.req} onClick={()=>handleRefund(req._id)}>Request Refund</button>}
+               {((myCourses[i].progress)/req.totalNumVideos*100)===100 && <a href="Kariman-Zein-Eldein-01-04-2022.pdf"
+            download= "Kariman-Zein-Eldein-01-04-2022.pdf">
+            <button className={x.req} onClick={()=>showmessage(true)} > Download certificate</button></a>}
+               
+            	</div>
 							<Rating size="25" initialValue={req.rating} allowFraction="true" readonly="true"/>
 							<p className={x.chapterName}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-clock" viewBox="0 0 16 16">
   <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
@@ -247,6 +265,20 @@ const VMyCourses = () => {
 				
 ))}
 </div>
+{showref && <div className={cc.shadearea}>
+            <div className={cc.modalcontainerr}>
+                <p className={cc.editbiotext2}>Request was sent successfully </p>
+                <button className={cc.submiteditbutton2} onClick={()=>isshowref(false)}>Ok</button>
+                
+            </div> 
+          </div>}
+          {message && <div className={cc.shadearea}>
+            <div className={cc.modalcontainerr}>
+                <p className={cc.editbiotext2}>Certificate was also sent to your registered email. </p>
+                <button className={cc.submiteditbutton2} onClick={()=>showmessage(false)}>Ok</button>
+                
+            </div> 
+          </div>}
 </div>
     </React.Fragment>
   )

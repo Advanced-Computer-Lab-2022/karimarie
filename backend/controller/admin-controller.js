@@ -7,6 +7,7 @@ const refundReqTable=require("../models/RefundReq")
 const notificationsTable=require("../models/Notification")
 const problemTable = require("../models/Problem");
 const courseTable=require("../models/Course");
+const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 
 
 const getAllInst=async(req,res,next)=>{
@@ -151,10 +152,19 @@ const viewRefundReq=async(req,res)=>{
  
   const returnMoney=async(req,res)=>{
     const {id}=req.body;
+    console.log("hio")
     try{
         let x=await refundReqTable.findById(id);
         let t=await traineeTable.findById(x.traineeId);
-        let newm=x.amount+t.money;
+
+
+
+        const fromCurrency=x.currency
+        const toCurrency="EGP"
+        const base_URL='https://api.exchangerate.host/latest'
+        const res1= await axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then( res1=>res1.data);
+        const exchangeRate=res1.rates[toCurrency];
+        let newm=Math.ceil(((x.amount*exchangeRate)+t.money)*100)/100;
         console.log(newm);
 let xx=     await   traineeTable.findOneAndUpdate(
             { _id: x.traineeId },
@@ -164,6 +174,12 @@ let xx=     await   traineeTable.findOneAndUpdate(
                }
             },  { new: true }
          )
+         await traineeTable.findOneAndUpdate({
+            _id: x.traineeId},
+            {
+                $pull: { 'courses': { courseID: x.courseId } }
+            })
+       
          let del=await refundReqTable.findByIdAndDelete(id);
          let noti;
          noti= new notificationsTable({
@@ -196,7 +212,7 @@ let xx=     await   traineeTable.findOneAndUpdate(
                     _id: x.corpId
                 
                 },
-                { $push: { "courses" : idd} }
+                { $push: { "courses" : {courseID:idd}} }
              )
              ans="Accepted"
         }

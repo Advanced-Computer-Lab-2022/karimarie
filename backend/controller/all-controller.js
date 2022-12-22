@@ -623,8 +623,9 @@ const getMyNotification=async(req,res)=>{
         return res.status(200).json({ balance });
   
   }
-  const requireAuth =async (req, res, next) => {
+  const requireAuth =async (req, res) => {
     const token = req.params.token;
+    var decodeID=""
       console.log(token)
     // check json web token exists & is verified
     if (token) {
@@ -635,10 +636,17 @@ const getMyNotification=async(req,res)=>{
           return res.status(200).json({message:"no"})
           // res.redirect('/login');
         } else {
-          var decodeID=decodedToken.name;
-          let x=  instTable.findOne({userName:decodeID})
-          let y= traineeTable.findOne({userName:decodeID}) 
-          let z= adminTable.findOne({userName:decodeID})
+           decodeID=decodedToken.name;
+          
+        }
+      });
+      if(decodeID){
+        let x=  await instTable.find({userName:decodeID})
+          let y= await traineeTable.find({userName:decodeID}) 
+          let z=  await adminTable.find({userName:decodeID})
+          console.log(x)
+          console.log(y)
+          console.log(z)
           if(x){
            return res.status(200).json({message:"Inst"})
           }
@@ -648,9 +656,8 @@ const getMyNotification=async(req,res)=>{
           if(z){
            return res.status(200).json({message:"Admin"})
           }
-          next();
-        }
-      });
+          
+      }
     } else {
       return res.status(200).json({message:"no"})
     }

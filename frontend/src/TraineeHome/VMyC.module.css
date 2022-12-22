@@ -120,6 +120,7 @@
 	font-size: 10px;
 	opacity: 0.6;
 	letter-spacing: 1px;
+	display: flex;
 }
 
 .btn {
@@ -141,4 +142,9 @@
 }
 .chaptername{
 	font-weight: 400;
+}
+.req{
+	border: none;
+	background-color: #fff;
+	text-decoration: underline;
 }
