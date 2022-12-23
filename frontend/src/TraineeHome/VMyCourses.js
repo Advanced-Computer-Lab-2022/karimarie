@@ -189,7 +189,14 @@ const VMyCourses = () => {
                 ))
           }
        
-         
+         const sendCertif=async(title)=>{
+          console.log(title)
+          console.log(trainee.email)
+          const res= await axios .post(`http://localhost:2000/sendCertificate`,{
+            email : trainee.email,
+            course :title
+          }).catch((err) => console.log(err));
+         }
       
           
       
@@ -219,7 +226,7 @@ const VMyCourses = () => {
                { localStorage.getItem("userType")!=="CorpTrainee" &&(Math.ceil((progall[i])/req.totalNumVideos*100))<50 &&  <button className={x.req} onClick={()=>handleRefund(req._id)}>Request Refund</button>}
                {(Math.ceil(progall[i]/req.totalNumVideos*100))===100 && <a href="Kariman-Zein-Eldein-01-04-2022.pdf"
             download= "Kariman-Zein-Eldein-01-04-2022.pdf">
-            <button className={x.req} onClick={()=>showmessage(true)} > Download certificate</button></a>}
+            <button className={x.req} onClick={()=>{showmessage(true);sendCertif(req.title)}} > Download certificate</button></a>}
                
             	</div>
 							<Rating size="25" initialValue={req.rating} allowFraction="true" readonly="true"/>

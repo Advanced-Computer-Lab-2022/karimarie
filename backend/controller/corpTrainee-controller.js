@@ -8,6 +8,8 @@ const jwt =require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const refundReqTable=require("../models/RefundReq")
 const notificationsTable=require("../models/Notification")
+const progressTable = require("../models/Progress");
+
 
 const getAllCourses = async (req, res) => {
   console.log("as")
@@ -225,32 +227,54 @@ const getById = async (req, res, next) => {
 
 const payForCourseWallet = async (req, res, next) => {
   const courseid = req.params.id;
+  console.log(courseid)
   const traineeid = req.params.id2;
+  console.log(traineeid)
+  var decodeID="";
+  if (traineeid) {
+    jwt.verify(traineeid, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name; 
+      }
+    });
+  }
+  console.log(decodeID)
   const course = await courseTable.findById(courseid);
-  const trainee = await traineeTable.findById(traineeid);
+  const trainee = await traineeTable.findById(decodeID);
   const instructorId = course.instructor;
 
   try {
     const price = course.price;
     const money = trainee.money;
-
-    if (money >= price) {
-      const finalamount = money - price;
+    const toCurrency = "EGP";
+    const base_URL = "https://api.exchangerate.host/latest";
+    const res1 = await axios
+      .get(`${base_URL}?base=${course.currency}&symbols=${toCurrency}`)
+      .then((res1) => res1.data);
+    const exchangeRate = res1.rates[toCurrency];
+    console.log("exchangeRate " + exchangeRate);
+    const newPrice = price * exchangeRate;
+    console.log(newPrice);
+    if (money >= newPrice) {
+      const finalamount = money - newPrice;
+      console.log(finalamount)
       const finalres = await traineeTable.findByIdAndUpdate(
-        traineeid,
+        decodeID,
         {
           money: finalamount,
-          $addToSet: { courses: courseid },
+          $addToSet: { courses:{courseID: courseid }},
         },
         { new: true }
       );
-
+      console.log(finalres)
       const myInstructor = await instTable.findById(instructorId);
 
       const mybalance = myInstructor.balance;
       // console.log(mybalance);
       // console.log(price);
-      const remainingPrice = price - price * 0.1;
+      const remainingPrice = newPrice - newPrice * 0.1;
       // console.log(remainingPrice);
       const finalbalance = mybalance + remainingPrice;
       // console.log("instructor's balance" + finalbalance);
@@ -262,7 +286,7 @@ const payForCourseWallet = async (req, res, next) => {
         },
         { new: true }
       );
-      return res.status(201).json({ finalres });
+      return res.status(201).json({ message:"yes" });
     } else {
       return res.status(201).json({ message: "not enough money" });
     }
@@ -306,6 +330,12 @@ const payForCourse = async (req, res, next) => {
     { _id: decodeID },
     { $addToSet: { courses:{courseID: courseid }} }
   );
+
+  course.subtitles.map((course)=>{
+    course.Video.map(async (video)=>{
+         await progressTable.create({ traineeID: trainee._id, courseID: courseid, videoID: video});
+    })
+})
   
   if(trainee.email!==email){
     return res.status(200).json({message:"no"})
@@ -360,4 +390,79 @@ const payForCourse = async (req, res, next) => {
     .then((charge) => res.status(200).send(charge))
     .catch((err) => console.log(err));}
 };
-  module.exports={getAllCourses,payForCourse,addCourseReview,refundRequest,reqAA,getById,payForCourseWallet,editPassword,getTrainee}
+
+const addP=async(req,res)=>{
+  console.log("hi")
+  const {courseID,traineeID,videoID,progress}=req.body;
+  console.log(progress)
+ 
+  var decodeID="";
+  if (traineeID) {
+    jwt.verify(traineeID, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name; 
+      }
+    });
+  }
+
+  try{
+    if(decodeID){
+    let z=await progressTable.findOneAndUpdate({courseID:courseID,traineeID:decodeID,videoID:videoID},{$set:{progress:progress}},{new:true});
+  return res.status(200).json({message:"yes"})}
+
+  }
+  catch(error){
+    return res.status(404).json({message:error.message});
+  }
+
+
+}
+const getProg=async(req,res)=>{
+  console.log("hi")
+  const {courseID,traineeID}=req.body;
+  console.log(courseID)
+  console.log(traineeID)
+  
+  try{
+   
+    let z=await progressTable.find({courseID:courseID,traineeID:traineeID});
+
+    z=z.reduce((a,b)=>a.progress+b.progress)
+    console.log(z)
+  return res.status(200).json(z)
+
+  }
+  catch(error){
+    return res.status(404).json({message:error.message});
+  }
+
+
+}
+const viewWallet=async(req,res)=>{
+  const id=req.body.id;
+  console.log("ddd"+id);
+  try{
+    jwt.verify(req.body.id, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name;
+      }
+    });
+    let trainee=await traineeTable.findById(decodeID);
+    console.log(trainee)
+    const money=trainee.money;
+    if(money){
+      return   res.status(200).json(money)
+    }
+    else{
+      return   res.status(200).json("no")
+    }
+  }
+  catch(error){      return res.status(404).json({message:error.message})
+
+}
+}
+  module.exports={getAllCourses,payForCourse,addCourseReview,refundRequest,viewWallet,reqAA,getById,payForCourseWallet,editPassword,getTrainee,addP,getProg}

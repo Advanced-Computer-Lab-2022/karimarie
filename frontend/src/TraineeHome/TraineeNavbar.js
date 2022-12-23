@@ -18,7 +18,7 @@ import userIcon from "../InstructorHome/userIcon.png"
 import Logincss from "../S3_components/Login.module.css"
 import inst from "../InstructorHome/InstProfile.module.css"
 import wallet2 from "../TraineeHome/wallet.png"
-
+import notiIcon from"../S3_components/icons8-notification-24.png"
 
 function TraineeNavbar(isactive){
     const type = localStorage.getItem("userType");
@@ -255,49 +255,33 @@ function TraineeNavbar(isactive){
             .catch((err) => console.log(err)).then((data)=>{
               if(data!="no"){
                setHisAmount(data.data);
-              //  const toCurrency=localStorage.getItem("currency");
-              // setOmla(toCurrency);
-              // console.log("Fff"+toCurrency)
               let rate;
               if(fromCurrency!=null && toCurrency!=null){
                 const res= axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then(
                      res=>res.data).then(data2 => {setExchanheRate(data2.rates[toCurrency])
                       setHisAmount(Math.ceil(data.data*(data2.rates[toCurrency])))
                     })}
-              // if(hisAmount!=""){
-              // const res2= axios.get(`${base_URL}?base=${fromCurrency}&symbols=${omla}`).then(
-              //   res=>res.data).then(data => {
-              //     console.log(data.rates[toCurrency])
-              //     const x=Math.ceil(2.4)
-              //     console.log(x)
-              //     setExchanheRate(data.rates[toCurrency]);setHisAmount2(Math.ceil(hisAmount*(data.rates[toCurrency]*100))/100)})
-              //   }
-                
               }
             });
            
           }
-         
-          
-            const refund=async (c)=>{
-              // setFromCurrency(localStorage.getItem("currency"));
-              // const toCurrency=localStorage.getItem("currency");
-              // setOmla(toCurrency);
-              // console.log("Fff"+toCurrency)
-              let rate;
-             
 
-              // if(hisAmount!="" && hisAmount2!=""){
-              // const res2= axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then(
-              //   res=>res.data).then(data => {
-              //     console.log(data.rates[toCurrency])
-              //     setExchanheRate(data.rates[toCurrency]);setHisAmount2(Math.ceil(hisAmount*(data.rates[toCurrency]*100))/100)})
-              //   }
-            
+
+          const [noti,setNotis]= useState([])
+       const getNotis = async () => {
+           const res = await axios
+             .get(`http://localhost:2000/getMyNotification/${decodeID}`)
+             .catch((err) => console.log(err));
+             const data = await res.data;
+             console.log(data)
+             
+             return data;
+         };
+         useEffect(() => {
+           getNotis().then((data) => { setNotis(data.resultList)
+           });    
+         }, []);
       
-          }
-          console.log(hisAmount)
-          console.log(exchangeRate)
     return(
         <>
         
@@ -327,6 +311,19 @@ function TraineeNavbar(isactive){
   </div>
 </div>
 <li><button onClick={showDropDown}><img src={language} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
+<div className={Nav.dropdown2}>
+    <button className={Nav.dropbt2}><img src={notiIcon} width="40"></img></button>
+    <div className={Nav.maincontainer}>
+    {noti && noti.map((notis)=>(
+                <div className={Nav.noti}>
+                <p className={Nav.type}>{notis.type}</p>
+                <p className={Nav.message}> {notis.message}</p>
+               
+                </div>
+               
+                ))}
+                </div>
+    </div>
 </ul>
 </div>
 </div>

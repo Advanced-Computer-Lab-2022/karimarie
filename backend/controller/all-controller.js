@@ -596,16 +596,29 @@ const checkfoll=async(req,res)=>{
 const getMyNotification=async(req,res)=>{
   let resultList;
     const userId=req.params.userId;
+    console.log(userId)
+    var decodeID="";
+    if(userId){
+     jwt.verify(userId, 'supersecret', (err, decodedToken) => {
+       if (err) {
+         res.status(401).json({message:"You are not logged in."})
+       } else {
+         decodeID=decodedToken.name;
+       }
+     });
+    }
+    console.log(decodeID)
+    if(decodeID){
     console.log(userId);
     console.log("hey")
-    resultList= await notificationsTable.find({userId:userId})
+    resultList= await notificationsTable.find({userId:decodeID})
     if(resultList){
       console.log(resultList)
       console.log("hey")
     res.status(200).json({resultList })
     
     }
-  }
+  }}
   const exchangecurr=async (req,res) => {
     let balance= req.body.balance;
     const curr=req.body.curr;
@@ -663,4 +676,43 @@ const getMyNotification=async(req,res)=>{
       return res.status(200).json({message:"no"})
     }
   };
-  module.exports={getAllCourses,logout,getSubjects,requireAuth,exchangecurr,checkfoll,followUp,getMyNotification,postFilterAll,getCourseReviews,seeMyReports,reportProblem,getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,changepasswordAll,getByIdCourseDiscount,getExamSolution,login}
+  const fs = require("fs");
+pathToAttachment = `${__dirname}/Kariman-Zein-Eldein-01-04-2022.pdf`;
+attachment = fs.readFileSync(pathToAttachment).toString("base64");
+const sendCertificate= async (req, res) =>{
+    const email= req.body.email;
+    const course=req.body.course;
+     await traineeTable.find({
+      email
+  }).then(traineeTable => {
+    if (traineeTable.length > 0) {
+    const msg = {
+      to: email,
+      from: 'karimankamal15@gmail.com',
+      subject: course,
+      text: 'Please find attached your certificate of completition. Congratulations!!!!',
+      attachments: [
+        {
+          content: attachment,
+          filename: "Kariman-Zein-Eldein-01-04-2022.pdf",
+          type: "application/pdf",
+          disposition: "attachment"
+        }
+      ]
+    };
+    
+    sgMail.send(msg).catch(err => {
+      console.log(err);
+    });
+    return res.send('Email sent');
+  }
+  else{
+    return res.send('This email belongs to no signed up user');
+
+  }
+  });}
+  
+  module.exports={getAllCourses,logout,getSubjects,requireAuth,exchangecurr,
+    checkfoll,followUp,getMyNotification,postFilterAll,getCourseReviews,seeMyReports,reportProblem,
+    getFilterSubject,postFilterPrice,getById,filterRating,searchCourse,filterRatingSubject,addInstructorReview,sendMailAll,
+    changepasswordAll,getByIdCourseDiscount,getExamSolution,login,sendCertificate}

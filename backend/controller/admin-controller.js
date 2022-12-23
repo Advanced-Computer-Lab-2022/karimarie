@@ -7,6 +7,7 @@ const refundReqTable=require("../models/RefundReq")
 const notificationsTable=require("../models/Notification")
 const problemTable = require("../models/Problem");
 const courseTable=require("../models/Course");
+const progressTable = require("../models/Progress");
 const axios=require("axios").create({baseUrl:"https://api.exchangerate.host/latest"});
 
 
@@ -185,7 +186,7 @@ let xx=     await   traineeTable.findOneAndUpdate(
          noti= new notificationsTable({
              userId:x.traineeId,
              type:"refund",
-             message: `An amount of ${newm} has been refunded to your wallet for the  course  ${x.courseName}`
+             message: `An amount of ${x.amount*exchangeRate} has been refunded to your wallet for the  course  ${x.courseName}`
          }) 
          await noti.save();
 
@@ -215,6 +216,14 @@ let xx=     await   traineeTable.findOneAndUpdate(
                 { $push: { "courses" : {courseID:idd}} }
              )
              ans="Accepted"
+            course.subtitles.map((course)=>{
+                course.Video.map(async (video)=>{
+                     await progressTable.create({ traineeID: id, courseID: idd, videoID: video});
+                })
+            })
+             
+
+
         }
         try{
             // const noti=await notificationsTable.create({
