@@ -171,3 +171,63 @@ color:black;
     margin-left: 350px;
     margin-top: 70px;
   }
+  .wallettt{
+    width: 105px;
+    height: 105px;
+    margin-top: 40px;
+    margin-left: 45px;
+    /* z-index: 3; */
+  }
+  .para{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 20px;
+    margin-left: 145px;
+  }
+  .nada{
+    display: flex;
+  }
+  .felooso{
+    padding-left: 50px;
+    padding-top: 90px;
+    font-size: 40px;
+  }
+  .omla{
+    font-size: 40px;
+    padding-left: 10px;
+  }
+  .allW{
+    position: relative;
+    z-index: 10;
+  }
+  .pressokey{
+    position: absolute;
+  
+    width: 80px;
+    height: 40px;
+    left: 220px;
+    top: 300px;
+    background: #17cf97 ;
+  color: white;
+  border:none;
+    border-radius: 40px 40px 40px 40px;
+  
+  
+  }
+  .moveW{
+    margin-left: 500px;
+  }
+  .moveB{
+    margin-top: -80px;
+    margin-left: -20px;
+  }
+  .movePay{
+    position: relative;
+    margin-left: -20px;
+    margin-top: -230px;
+  }
+  .mm{
+    margin-top: 200px;
+  }

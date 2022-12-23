@@ -349,7 +349,7 @@ const [showExam,isExam]=useState(false);
     {times===0 && 
     <form className={cc.create} onSubmit={handleSubmit2}>
           <div className={st.create2}>
-         <h1> Fill this form {nbExams} times</h1>
+         {/* <h1> Fill this form {nbExams} times</h1> */}
           <div>&nbsp;</div>
           <div>&nbsp;</div>
           <div>&nbsp;</div>

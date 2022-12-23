@@ -128,12 +128,31 @@ const VMyCourses = () => {
           const [count,setcount]=useState(1)
           useEffect(() => {
             
-            getCourses().then((data) => { setMyCourses(data.trainee.courses); getActual(data.trainee.courses) ; setTrainee(data.trainee)
+            getCourses().then((data) => { setMyCourses(data.trainee.courses); getActual(data.trainee.courses) ; setTrainee(data.trainee);
+              getProgress(data.trainee._id,data.trainee.courses)
           })
           
         }, []);
           const [user,setuser]=useState([])
           const [userfinal,setuserfinal]=useState([])
+          const [progall,setprogall]=useState([])
+          const getProgress=async(traineeID,courses)=>{
+            let res;
+            courses.map(async (id,i)=>{
+              console.log(id)
+              res=await axios .post(`http://localhost:2000/corpTrainee/getProg`, {
+                traineeID:traineeID,
+                courseID: id.courseID,
+              }).catch((err) => console.log(err)).then((data)=>{
+               console.log(data)
+                progall[i]=data.data
+                if(i===courses.length-1){
+                  setprogall(progall)
+                }
+              })
+            })
+          }
+          console.log(progall)
           const getActual=async(courses)=>{
             let res;
             let res2;
@@ -193,12 +212,12 @@ const VMyCourses = () => {
 						</div>
 						<div className={x.courseinfo}>
 							<div className={x.progresscontainer}>
-                <ProgressBar completed={(myCourses[i].progress)/req.totalNumVideos*100} maxCompleted={100} bgColor="#2A265F"/>
+                <ProgressBar completed={Math.ceil((progall[i])/req.totalNumVideos*100)} maxCompleted={100} bgColor="#2A265F"/>
 								{/* <span className={x.progresstext}>
 									{myCourses[i].progress}/{req.totalNumVideos} Video Watched
 								</span> */}
-               { localStorage.getItem("userType")!=="CorpTrainee" &&((myCourses[i].progress)/req.totalNumVideos*100)<50 &&  <button className={x.req} onClick={()=>handleRefund(req._id)}>Request Refund</button>}
-               {((myCourses[i].progress)/req.totalNumVideos*100)===100 && <a href="Kariman-Zein-Eldein-01-04-2022.pdf"
+               { localStorage.getItem("userType")!=="CorpTrainee" &&(Math.ceil((progall[i])/req.totalNumVideos*100))<50 &&  <button className={x.req} onClick={()=>handleRefund(req._id)}>Request Refund</button>}
+               {(Math.ceil(progall[i]/req.totalNumVideos*100))===100 && <a href="Kariman-Zein-Eldein-01-04-2022.pdf"
             download= "Kariman-Zein-Eldein-01-04-2022.pdf">
             <button className={x.req} onClick={()=>showmessage(true)} > Download certificate</button></a>}
                

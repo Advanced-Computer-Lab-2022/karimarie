@@ -6,6 +6,8 @@ import Card from "./Card";
 import x from "./Watchh.module.css";
 import { useParams } from "react-router-dom";
 import cc from '../InstructorHome/CreateCourse.module.css'
+import wallet2 from "../TraineeHome/wallet.png"
+import Nav from "./TraineeNavbar.module.css"
 import {
   formatCreditCardNumber,
   formatCVC,
@@ -21,6 +23,9 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function PayCredit() {
   const { id, currencyPrice } = useParams();
+  console.log(id)
+  const [cid,setcid]=useState(id)
+  console.log(cid)
   // eslint-disable-next-line no-undef
   const [green,setGreen]=useState(true)
   useEffect(() => {
@@ -40,6 +45,7 @@ function PayCredit() {
   const [sendmessage,setmessage]=useState(false)
   const [sendmessage2,setmessage2]=useState(false)
   const [sendmessage3,setmessage3]=useState(false)
+  const [sendmessage4,setmessage4]=useState(false)
   const onSubmit = async (values) => {
     await sleep(300);
     try {
@@ -85,6 +91,59 @@ function PayCredit() {
       );
     } catch (error) {}
   };
+  const [hisAmount,setHisAmount]=useState("");
+  const [hisAmount2,setHisAmount2]=useState();
+  const base_URL='https://api.exchangerate.host/latest'
+  const [fromCurrency,setFromCurrency]=useState('EGP')
+  const [toCurrency,setToCurrency]=useState(localStorage.getItem("currency"))
+  const [exchangeRate,setExchanheRate]=useState('')
+  const [omla,setOmla]=useState();
+  
+  const getM=async()=>{
+    const res = await axios
+    
+    .post("http://localhost:2000/corpTrainee/viewWallet", {
+      id : localStorage.getItem("token")
+    })
+    .catch((err) => console.log(err)).then((data)=>{
+      if(data!="no"){
+       setHisAmount(data.data);
+      let rate;
+      if(fromCurrency!=null && toCurrency!=null){
+        const res= axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then(
+             res=>res.data).then(data2 => {setExchanheRate(data2.rates[toCurrency])
+              setHisAmount(Math.ceil(data.data*(data2.rates[toCurrency])))
+            })}
+     
+        
+      }
+    });
+    
+  }
+  useEffect(() => {
+    if(green===false){
+      console.log("hi")
+    getM();}
+   }, [green]);
+   const handlePayWallet=()=>{
+    console.log(id)
+    axios
+    .post(
+      `http://localhost:2000/corpTrainee/payCourseWallet/${id}/${localStorage.getItem("token")}`
+    )
+    .then((res) =>{
+      console.log(res.data.message)
+    if(res.data.message==="not enough money"){
+        setmessage3(false)
+        setmessage4(true)
+    }else {
+      console.log("hi")
+      setmessage3(true)
+      setmessage4(false)
+     }})
+     
+    .catch((err) => console.log(err));
+   }
   return (
     <React.Fragment>
      <div className={x.topnav2}>
@@ -163,7 +222,7 @@ function PayCredit() {
               </div>
               {sendmessage && <div style={{"color":"red"}}>The email does not belong to signed up user</div>}
               {sendmessage2 && <div style={{"color":"red"}}>Credentials were not entered correctly</div>}
-              {sendmessage3 && <div className={cc.movete}>
+              {green && sendmessage3 && <div className={cc.movete}>
             <div className={cc.modalcontainerr}>
                 <p className={cc.editbiotext2}>You have successfully registered to this course </p>
                 <button className={cc.submiteditbutton2} onClick={()=>{window.location.href="/Trainee"}}>Go to Home Page</button>
@@ -188,6 +247,34 @@ function PayCredit() {
           );
         }}
       /></div>}
+      {!green && <div className={Nav.moveW}>
+        <img src={wallet2} className={Nav.wallettt}></img>
+        <div className={Nav.moveB}>
+        <p className={Nav.para}>Your Balance</p>
+
+        <span className={Nav.felooso}>{hisAmount}<span className={Nav.omla}>{toCurrency}</span></span>
+
+        </div>
+        <div className={Nav.movePay}>
+        <button className={Nav.pressokey} onClick={handlePayWallet}>Pay</button>
+        </div>
+        {!green && sendmessage3 && <div className={Nav.mm}>
+          
+            <div className={cc.modalcontainerr}>
+                <p className={cc.editbiotext2}>You have successfully registered to this course </p>
+                <button className={cc.submiteditbutton2} onClick={()=>{window.location.href="/Trainee"}}>Go to Home Page</button>
+                
+           </div>
+          </div>}
+          {!green && sendmessage4 && <div className={Nav.mm}>
+          
+          <div className={cc.modalcontainerr}>
+              <p className={cc.editbiotext2}>There is no enough money in you wallet. </p>
+              <button className={cc.submiteditbutton2} onClick={()=>{window.location.href="/Trainee"}}>Go to Home Page</button>
+              
+         </div>
+        </div>}
+        </div>}
     </Styles>
     </React.Fragment>
   );

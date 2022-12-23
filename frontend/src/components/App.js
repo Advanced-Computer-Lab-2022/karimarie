@@ -42,6 +42,7 @@ const App = () => {
         <Route path="/Contract" element={<Contract/>} />
         <Route path="/TraineeHomePage" element={<TraineeHomePage/>} />
         <Route path="/FilterSearchPage" element={<FilterSearchPage/>} />
+        <Route path="/Trainee" element={<TraineeHomePage/>} />
 
 
        
@@ -54,7 +55,6 @@ const App = () => {
         <Route path="/instprofile/:id/:userType" element={<GetInstProfile/>} />
         <Route path="/hii" element={<Start/>} />
         <Route path="/ViewMyRatings" element={<ViewReviewsInst/>} />
-        <Route path="/Trainee" element={<TraineeHomePage/>} />
         <Route path="/forgetpasswordform/:id" element={<ForgetPasswordForm/>} />
         <Route path="/Bye/:id/:instructor" element={<Watch/>} />
         <Route path="/Mycourses" element={<VMyCourses/>} />

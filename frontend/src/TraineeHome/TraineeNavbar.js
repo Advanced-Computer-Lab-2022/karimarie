@@ -17,6 +17,7 @@ import Nav from "./TraineeNavbar.module.css"
 import userIcon from "../InstructorHome/userIcon.png"
 import Logincss from "../S3_components/Login.module.css"
 import inst from "../InstructorHome/InstProfile.module.css"
+import wallet2 from "../TraineeHome/wallet.png"
 
 
 function TraineeNavbar(isactive){
@@ -76,6 +77,7 @@ function TraineeNavbar(isactive){
         localStorage.setItem("country",newTxt[0]);
         localStorage.setItem("currency",x1[0]);
         isDropDown(false);
+        window.location.reload();
   }
 
 
@@ -233,6 +235,69 @@ function TraineeNavbar(isactive){
          }
          setPasswordType1("password")
        }
+
+
+
+       const [wallet,setWallet]=useState(false);
+          const [hisAmount,setHisAmount]=useState("");
+          const [hisAmount2,setHisAmount2]=useState();
+          const base_URL='https://api.exchangerate.host/latest'
+          const [fromCurrency,setFromCurrency]=useState('EGP')
+          const [toCurrency,setToCurrency]=useState(localStorage.getItem("currency"))
+          const [exchangeRate,setExchanheRate]=useState('')
+          const [omla,setOmla]=useState();
+          const getM=async()=>{
+            const res = await axios
+            
+            .post("http://localhost:2000/corpTrainee/viewWallet", {
+              id : decodeID
+            })
+            .catch((err) => console.log(err)).then((data)=>{
+              if(data!="no"){
+               setHisAmount(data.data);
+              //  const toCurrency=localStorage.getItem("currency");
+              // setOmla(toCurrency);
+              // console.log("Fff"+toCurrency)
+              let rate;
+              if(fromCurrency!=null && toCurrency!=null){
+                const res= axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then(
+                     res=>res.data).then(data2 => {setExchanheRate(data2.rates[toCurrency])
+                      setHisAmount(Math.ceil(data.data*(data2.rates[toCurrency])))
+                    })}
+              // if(hisAmount!=""){
+              // const res2= axios.get(`${base_URL}?base=${fromCurrency}&symbols=${omla}`).then(
+              //   res=>res.data).then(data => {
+              //     console.log(data.rates[toCurrency])
+              //     const x=Math.ceil(2.4)
+              //     console.log(x)
+              //     setExchanheRate(data.rates[toCurrency]);setHisAmount2(Math.ceil(hisAmount*(data.rates[toCurrency]*100))/100)})
+              //   }
+                
+              }
+            });
+           
+          }
+         
+          
+            const refund=async (c)=>{
+              // setFromCurrency(localStorage.getItem("currency"));
+              // const toCurrency=localStorage.getItem("currency");
+              // setOmla(toCurrency);
+              // console.log("Fff"+toCurrency)
+              let rate;
+             
+
+              // if(hisAmount!="" && hisAmount2!=""){
+              // const res2= axios.get(`${base_URL}?base=${fromCurrency}&symbols=${toCurrency}`).then(
+              //   res=>res.data).then(data => {
+              //     console.log(data.rates[toCurrency])
+              //     setExchanheRate(data.rates[toCurrency]);setHisAmount2(Math.ceil(hisAmount*(data.rates[toCurrency]*100))/100)})
+              //   }
+            
+      
+          }
+          console.log(hisAmount)
+          console.log(exchangeRate)
     return(
         <>
         
@@ -256,7 +321,7 @@ function TraineeNavbar(isactive){
     <div className={Nav.dropdown}>
     <button className={Nav.dropbt}><img src={userIcon} width="40"></img></button>
     <div className={Nav.dropdowncontent}>
-      <a href="#" className={Nav.hr}>Wallet</a>
+      {type!="CorpTrainee" && <a onClick={()=>{setWallet(true);getM()}} className={Nav.hr}><img src={wallet}  width="9px" height="8px"></img>Wallet</a>}
       <a href={`/viewMyR/${localStorage.getItem("token")}`}  className={Nav.hr}>Reports</a>
       <a onClick={()=>{isShowPassword(true);console.log("h")}} className={Nav.hr}>Change Password</a>
   </div>
@@ -351,6 +416,18 @@ function TraineeNavbar(isactive){
               </div>
 
           }
+          {wallet&&
+          <div className={Nav.allW}>
+                <div className={inst.shadearea}>
+                  <div className={inst.modalcontainer}>
+                    
+                  <p className={Nav.para}>Your Wallet</p>
+
+                   <div className={Nav.nada}> <img src={wallet2} className={Nav.wallettt}></img> <span className={Nav.felooso}>{hisAmount}<span className={Nav.omla}>{toCurrency}</span></span></div>
+                    <button className={Nav.pressokey} onClick={()=>setWallet(false)}
+                     >Ok</button>
+
+                    </div></div></div>}
           {Password &&<div className={Nav.mo}><div className={inst.shadearea}> 
             <div className={inst.modalcontainer}>
             <p className={inst.changepass}>Change Your Password</p>

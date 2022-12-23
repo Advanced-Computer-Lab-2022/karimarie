@@ -11,6 +11,8 @@ import McqQuiz from '../components/Insructor/Quiz/McqQuiz';
 import { useParams } from 'react-router-dom';
 import TraineeNavbar from './TraineeNavbar';
 import ReactPlayer from "react-player"
+import YouTube from "react-youtube";
+import getVideoId from 'get-video-id';
 
 
 const Watch = () => {
@@ -46,7 +48,7 @@ const Watch = () => {
           return data;
       };
       useEffect(() => {
-        sendRequest().then((data) => {setCourse(data.course);setTitle2(data.course.title);setPreview(data.course.preview);setDescrip(data.course.description)});
+        sendRequest().then((data) => {setCourse(data.course);setTitle2(data.course.title);setPreview(getVideoId(data.course.preview));setDescrip(data.course.description)});
         sendReq().then((data)=>setinst(data))
         
       }, []);
@@ -84,6 +86,45 @@ const Watch = () => {
     const callExam=(CourseId)=>{
       console.log(CourseId)
     }
+    const [dur,setdur]=useState(0);
+    const addP=async()=>{
+      
+        console.log(id)
+        console.log(previewUrl)
+        console.log(dur)
+        if(dur!=0){
+      const res = await axios
+          .post(`http://localhost:2000/corpTrainee/addP`,{
+            courseID:id,
+            traineeID:localStorage.getItem("token"),
+            videoID:previewUrl,
+            progress:dur
+          }) 
+          .catch((err) => console.log(err));
+    }}
+    useEffect(() => {
+      addP();
+    },[dur]);
+    const [previewUrl,setPreviewUrl]=useState("")
+   
+    const checkElapsedTime = (e) => {
+      setdur((e.target.getCurrentTime())/60);
+      const currentTime = (e.target.getCurrentTime())/60;
+       //addP();
+      
+    };
+  
+    const opts = {
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
+        autoplay: 1
+      }
+    };
+    const [videoUrl, setVideoUrl] = React.useState("");
+
+
+
+
    
     return (
    <React.Fragment >
@@ -96,8 +137,16 @@ const Watch = () => {
           <h2 className={x.h}>{title}</h2>
   
        {vid ?  <div className={x.video}>
+       {preview&&<YouTube
+            videoId={preview.id}
+            containerClassName="embed embed-youtube"
+            onStateChange={(e) => checkElapsedTime(e)}
+            opts={opts}
+            
+            
+          />}
         {/* <iframe src={preview} width="710px" height="410px" title="YouTube video" allowfullscreen></iframe> */}
-     <ReactPlayer controls url={preview}/>
+     {/* <ReactPlayer controls url={preview}/> */}
      
      
         </div>
@@ -153,7 +202,7 @@ const Watch = () => {
                 <p className={x.inside}>
                     <div className={x.gowa}>
                       {course.subtitles[i].Video.map((video,j)=>(
-                     <div className={x.div1}> <a className={x.a} onClick={()=>{setPreview(video);setTitle(req.title);setDescrip(req.shortDescrip);isVideo(true)}} >Start Session {j+1}</a> </div>
+                     <div className={x.div1}> <a className={x.a} onClick={()=>{setPreview(getVideoId(video));setPreviewUrl(video);setTitle(req.title);setDescrip(req.shortDescrip);isVideo(true)}} >Start Session {j+1}</a> </div>
                       ))}
                      <div className={x.div2}> <a className={x.a} onClick={()=>{setGreen(false);setTitle("Exam "+req.title);callExam(req._id);setCourseId(req._id);isVideo(false); console.log(vid); seTitlenum2(req.title)}} >Solve Exam</a> </div>
                      </div>

@@ -73,6 +73,7 @@ function InstructorNavBar(isactive){
         localStorage.setItem("country",newTxt[0]);
         localStorage.setItem("currency",x1[0]);
         isDropDown(false);
+        window.location.reload();
   }
 
 

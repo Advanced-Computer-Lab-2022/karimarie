@@ -222,8 +222,8 @@ const ShowCourseDetails=()=> {
           console.log(data.trainee.courses)
             data.trainee.courses.map((course)=>{
               console.log(Course._id)
-              console.log(course._id)
-              if(course===Course._id){
+              console.log(course)
+              if(course.courseID===Course._id){
                 console.log("ohhhh")
                 x=2;
                 settraineeC(true)
