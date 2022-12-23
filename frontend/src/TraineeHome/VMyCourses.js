@@ -12,8 +12,39 @@ import TraineeNavbar from './TraineeNavbar';
 import { Rating } from 'react-simple-star-rating'
 import ProgressBar from "@ramonak/react-progress-bar";
 import cc from '../InstructorHome/CreateCourse.module.css'
+import error from '../InstructorHome/error.png'
 
 const VMyCourses = () => {
+  const [access,hasaccess]=useState(false)
+  const [datas,setdata]=useState("")
+  const grantAccess = async () => {
+      console.log(localStorage.getItem("token"))
+      if(localStorage.getItem("token")===""){
+          console.log("hi")
+          hasaccess(false)
+      }else {
+      const res = await axios
+        .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        return data;}
+    };
+    useEffect(() => {
+      if(localStorage.getItem("token")!==""){
+          grantAccess().then((data)=>{setdata(data.message)
+          if(data.message==="Trainee"){
+              hasaccess(true)
+          }
+          else {
+              hasaccess(false)
+          }
+      });
+    }}, []);
+
+
+
+
+
     const id = useParams().id;
     const id2 = useParams().id;
     const [course,setCourse]=useState('');
@@ -202,6 +233,7 @@ const VMyCourses = () => {
       
   return (
     <React.Fragment>
+    {access&&<React.Fragment>
 		<TraineeNavbar/>
 		<div className={x.title}>
           <h6 className={x.mostpopular}>My Courses ({finalarray.length})</h6>
@@ -306,6 +338,10 @@ const VMyCourses = () => {
             </div> 
           </div>}
 </div>
+    </React.Fragment>}
+    {access===false && <div>
+            <img src={error} width="64"></img> Access not granted
+            </div>}
     </React.Fragment>
   )
 }

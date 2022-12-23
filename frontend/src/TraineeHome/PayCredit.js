@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import cc from '../InstructorHome/CreateCourse.module.css'
 import wallet2 from "../TraineeHome/wallet.png"
 import Nav from "./TraineeNavbar.module.css"
+import error from '../InstructorHome/error.png'
+
 import {
   formatCreditCardNumber,
   formatCVC,
@@ -22,6 +24,38 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 //   const [error, setError] = useState(null);
 
 function PayCredit() {
+
+
+
+  const [access,hasaccess]=useState(false)
+  const [datas,setdata]=useState("")
+  const grantAccess = async () => {
+      console.log(localStorage.getItem("token"))
+      if(localStorage.getItem("token")===""){
+          console.log("hi")
+          hasaccess(false)
+      }else {
+      const res = await axios
+        .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        return data;}
+    };
+    useEffect(() => {
+      if(localStorage.getItem("token")!==""){
+          grantAccess().then((data)=>{setdata(data.message)
+          if(data.message==="Trainee"){
+              hasaccess(true)
+          }
+          else {
+              hasaccess(false)
+          }
+      });
+    }}, []);
+
+
+
+
   const { id, currencyPrice } = useParams();
   console.log(id)
   const [cid,setcid]=useState(id)
@@ -146,6 +180,7 @@ function PayCredit() {
    }
   return (
     <React.Fragment>
+      {access&& <React.Fragment>
      <div className={x.topnav2}>
           <div className={x.xx}>
             <div className={x.moveee2}>
@@ -276,6 +311,10 @@ function PayCredit() {
         </div>}
         </div>}
     </Styles>
+    </React.Fragment>}
+    {access===false && <div>
+            <img src={error} width="64"></img> Access not granted
+            </div>}
     </React.Fragment>
   );
 }

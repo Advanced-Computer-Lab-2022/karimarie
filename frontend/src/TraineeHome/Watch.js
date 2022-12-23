@@ -1,6 +1,7 @@
 import React from 'react'
 import x from "./Watchh.module.css";
 import { useEffect, useState } from "react";
+import error from '../InstructorHome/error.png'
 
 import axios from "axios";
 import closeIcon from '../S3_components/closeButton.png'
@@ -16,6 +17,39 @@ import getVideoId from 'get-video-id';
 
 
 const Watch = () => {
+
+
+  const [access,hasaccess]=useState(false)
+  const [datas,setdata]=useState("")
+  const grantAccess = async () => {
+      console.log(localStorage.getItem("token"))
+      if(localStorage.getItem("token")===""){
+          console.log("hi")
+          hasaccess(false)
+      }else {
+      const res = await axios
+        .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        return data;}
+    };
+    useEffect(() => {
+      if(localStorage.getItem("token")!==""){
+          grantAccess().then((data)=>{setdata(data.message)
+          if(data.message==="Trainee"){
+              hasaccess(true)
+          }
+          else {
+              hasaccess(false)
+          }
+      });
+    }}, []);
+
+
+
+
+
+    
     const [xx,setX]=useState([1,2,3,4]);
     const [course,setCourse]=useState([])
     const id=useParams().id
@@ -128,6 +162,7 @@ const Watch = () => {
    
     return (
    <React.Fragment >
+   {access&& <React.Fragment >
         <TraineeNavbar/>
         <div className={x.wholePage}>
           
@@ -219,6 +254,10 @@ const Watch = () => {
 
 
 </div>
+</React.Fragment>}
+{access===false && <div>
+            <img src={error} width="64"></img> Access not granted
+            </div>}
    </React.Fragment>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import {AppBar, Typography,Toolbar, Button,Box, Tabs,Tab} from '@mui/material'
 import {Link} from 'react-router-dom';
 import l from "../Admin/StartC.module.css";
@@ -12,8 +12,52 @@ import ViewRefundReq from '../../components/Admin/ViewRefundReq';
 import graduated from "./graduated.png"
 import instructors from "./instructors.png"
 import admin from "./setting.png"
+ import error from '../../InstructorHome/error.png'
+import axios from "axios";
 
 const Start = () => {
+  const [access,hasaccess]=useState(false)
+  const [datas,setdata]=useState("")
+  const grantAccess = async () => {
+      console.log(localStorage.getItem("token"))
+      if(localStorage.getItem("token")===""){
+          console.log("hi")
+          hasaccess(false)
+      }else {
+      const res = await axios
+        .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        return data;}
+    };
+    useEffect(() => {
+      if(localStorage.getItem("token")!==""){
+        grantAccess().then((data)=>{setdata(data.message)
+          if(data.message==="Admin"){
+              hasaccess(true)
+          }
+          else {
+              hasaccess(false)
+          }
+      });
+        
+      
+    }}, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const [active,isActive]=useState("");
     const [choose,setChoose]=useState('home');
@@ -23,8 +67,9 @@ const Start = () => {
       };
   return (
     <React.Fragment>
-    
+       {access&&
    <React.Fragment>
+ 
    <body className={l.bodyy}>
     <div className={l.wrapper} style={{display:"inline"}}>
     <div className={l.sidebar}>
@@ -136,9 +181,11 @@ const Start = () => {
 </div>
 </React.Fragment>
 
+}
 
-
-
+{access===false && <div>
+            <img src={error} width="64"></img> Access not granted
+            </div>}
     </React.Fragment>
   )
 }

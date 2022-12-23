@@ -10,7 +10,6 @@ import InstructorHomePage from '../InstructorHome/InstructorHomePage';
 import ForgetPassword from '../S3_components/ForgetPassword';
 import InstProfile from '../InstructorHome/InstProfile';
 import Start from '../pages/Admin/Start';
-import ViewReviewsInst from "../InstructorHome/ViewReviewsInst"
 import ShowCourseDetails from '../S3_components/ShowCourseDetails';
 import GetInstProfile from "../S3_components/GetInstProfile"
 import TraineeHomePage from "../TraineeHome/TraineeHomePage"
@@ -43,23 +42,16 @@ const App = () => {
         <Route path="/TraineeHomePage" element={<TraineeHomePage/>} />
         <Route path="/FilterSearchPage" element={<FilterSearchPage/>} />
         <Route path="/Trainee" element={<TraineeHomePage/>} />
-
-
-       
-        
-
-        <Route path="/course/:id/:newPrice/:currencyP/:type/:type2/:priceafter" element={<ShowCourseDetails/>} />
-        <Route path="/myExam/:CourseId" element={<McqQuiz/>} />
-      
-        <Route path="/ForgetPassword" element={<ForgetPassword/>} />
-        <Route path="/instprofile/:id/:userType" element={<GetInstProfile/>} />
         <Route path="/hii" element={<Start/>} />
-        <Route path="/ViewMyRatings" element={<ViewReviewsInst/>} />
-        <Route path="/forgetpasswordform/:id" element={<ForgetPasswordForm/>} />
         <Route path="/Bye/:id/:instructor" element={<Watch/>} />
-        <Route path="/Mycourses" element={<VMyCourses/>} />
         <Route path="/viewMyR/:id" element={<ViewMyReports/>} />
+        <Route path="/Mycourses" element={<VMyCourses/>} />
+        <Route path="/course/:id/:newPrice/:currencyP/:type/:type2/:priceafter" element={<ShowCourseDetails/>} />
+        <Route path="/ForgetPassword" element={<ForgetPassword/>} />
+        <Route path="/forgetpasswordform/:id" element={<ForgetPasswordForm/>} />
+        <Route path="/instprofile/:id/:userType" element={<GetInstProfile/>} />  
         
+          
         <Route path="/PayCredit/:id/:currencyPrice" element={<PayCredit />} />
       </Routes>
     </main>

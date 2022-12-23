@@ -32,6 +32,8 @@ const ShowCourseDetails=()=> {
     newPrice=Math.ceil(newPrice*100)/100;
     const currencyP = useParams().currencyP;
     const type=useParams().type;
+    const [etype,setetype]=useState(type)
+    
     const type2=useParams().type2;
     const [Course, setCourses] = useState([""]);
     const [subtitles, setSubtitles] = useState([]);
@@ -107,8 +109,8 @@ const ShowCourseDetails=()=> {
      if(newPrice===0){
         isfree(true);
      }
-
     }, []);
+    console.log(etype)
     const addMyDiscountAuto = async (x,y,z) => {
         const res = await axios
           .post(`http://localhost:2000/instructor/adddiscount/${id}`, {
@@ -264,7 +266,7 @@ const ShowCourseDetails=()=> {
            </div>
         </Typography>
         <Typography sx={{ mb: 1.5 }}   >
-      {type==="Guest" &&  <a href={`/instprofile/${Course.instructor}/${localStorage.getItem("userType")}`}>
+      {type==="Guest" &&  <a href={`/instprofile/${Course.instructor}/${type2}`}>
           Instructor: {instructorTable.inst.userName}
           </a>}
         {type==="Instructor" && <a href={`/profile`}>
@@ -363,7 +365,28 @@ const ShowCourseDetails=()=> {
              <img className={det.quot1} src={quotationIcon}></img>
              </div>
         ))}
-</div>}
+</div>} {gender && 
+<div className={det.repo0}>
+<div className={det.shadeareaa}>
+            <div class={det.countryy}>
+        <h3 className={x.r}>Report a problem:</h3>
+        <button class={det.closeButtonn} onClick={()=>isGender(false)}>  <img src={closeIcon} width="20"></img></button>
+        <div class={x.forms}>
+            <Box className={x.reportbox} width="250px">
+            <select className={x.select} id="language" onChange={(e) => setReportType(e.target.value)}  >
+            <option value="c" selected="selected" hidden><p className={x.c} >Problem Type</p></option>  
+            <option className={x.createO}value="Technical">Technical</option>
+            <option className={x.createO}value="Financial">Financial</option>
+            <option className={x.createO}value="Others">Others</option>
+          </select>
+          <textarea rows="7" cols="47 " id="message" name="message"placeholder='Problem Description' className={x.notess }onChange={(e)=>setReportText(e.target.value)}></textarea>
+          <button className={x.b2} onClick={()=>{reportNow();isGender(false)}}>Report</button>
+
+            </Box>
+  </div>    </div>
+            </div>
+            </div>
+            }
 {addPromo && <div className={DefinePromotioncss.shadearea}>
           <div className={DefinePromotioncss.modalcontainer}>
             <p className={DefinePromotioncss.AddDiscounttext}>
@@ -437,26 +460,7 @@ const ShowCourseDetails=()=> {
             </div> 
           </div>}
 
-          {gender && <div className={x.shadearea}>
-            <div class={x.country}>
-        <h3 className={x.r}>Report a problem:</h3>
-        <button class={x.closeButton} onClick={()=>isGender(false)}>  <img src={closeIcon} width="20"></img></button>
-        <div class={x.forms}>
-            <Box className={x.reportbox} width="250px">
-            <select className={x.select} id="language" onChange={(e) => setReportType(e.target.value)}  >
-            <option value="c" selected="selected" hidden><p className={x.c} >Problem Type</p></option>  
-            <option className={x.createO}value="Technical">Technical</option>
-            <option className={x.createO}value="Financial">Financial</option>
-            <option className={x.createO}value="Others">Others</option>
-          </select>
-          <textarea rows="7" cols="47 " id="message" name="message"placeholder='Problem Description' className={x.notess }onChange={(e)=>setReportText(e.target.value)}></textarea>
-          <button className={x.b2} onClick={()=>{reportNow();isGender(false)}}>Report</button>
-
-            </Box>
-  </div>    </div>
-            </div>
-
-            }
+         
 </div>}
 </React.Fragment>
      )

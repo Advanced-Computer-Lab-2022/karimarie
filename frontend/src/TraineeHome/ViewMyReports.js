@@ -7,8 +7,38 @@ import x from "./ViewMyReportsC.module.css"
 import {Box} from '@mui/material'
 import { useParams } from 'react-router-dom';
 import cc from '../InstructorHome/CreateCourse.module.css'
+import error from '../InstructorHome/error.png'
 
 const ViewMyReports = () => {
+    const [access,hasaccess]=useState(false)
+    const [datas,setdata]=useState("")
+    const grantAccess = async () => {
+        console.log(localStorage.getItem("token"))
+        if(localStorage.getItem("token")===""){
+            console.log("hi")
+            hasaccess(false)
+        }else {
+        const res = await axios
+          .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+          .catch((err) => console.log(err));
+          const data = await res.data;
+          return data;}
+      };
+      useEffect(() => {
+        if(localStorage.getItem("token")!==""){
+            grantAccess().then((data)=>{setdata(data.message)
+            if(data.message==="Trainee"){
+                hasaccess(true)
+            }
+            else {
+                hasaccess(false)
+            }
+        });
+      }}, []);
+  
+  
+
+
     const [reports,setReports]=useState()
     // const [id,setId]=useState("639b3cb9b925a46e7a60ac97")
     const id=useParams().id;
@@ -60,7 +90,8 @@ const ViewMyReports = () => {
             isGender(true);}
       }
   return (
-   <React.Fragment>
+    <React.Fragment>
+  {access&& <React.Fragment>
     <TraineeNavbar></TraineeNavbar>
     <h2 className={x.title}>Reports</h2>
 
@@ -162,6 +193,11 @@ const ViewMyReports = () => {
          </div> 
        </div>}
 
+
+   </React.Fragment>}
+   {access===false && <div>
+            <img src={error} width="64"></img> Access not granted
+            </div>}
 
    </React.Fragment>
   )
