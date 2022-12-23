@@ -60,6 +60,7 @@ const TraineeHomePage=()=>{
           .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
           .catch((err) => console.log(err));
           const data = await res.data;
+          console.log(data)
           return data;}
       };
       useEffect(() => {
@@ -78,7 +79,7 @@ const TraineeHomePage=()=>{
     
     return(
         <React.Fragment>
-       {true && <div> <TraineeNavbar/>
+       {access && <div> <TraineeNavbar/>
         <div className={Nav.divtext}>
         <h3 className={Nav.maintext1}>A broad selection of courses</h3>
         <h6 className={Nav.secondarytext1}>You can view hundereds of videos.</h6>

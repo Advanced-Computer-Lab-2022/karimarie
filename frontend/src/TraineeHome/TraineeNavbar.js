@@ -171,6 +171,7 @@ function TraineeNavbar(isactive){
             localStorage.setItem("token","")
             localStorage.setItem("currency","")
             localStorage.setItem("country","")
+            localStorage.setItem("userType","")
             window.location.href="/";
           }
           

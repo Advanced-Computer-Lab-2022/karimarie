@@ -641,9 +641,10 @@ const getMyNotification=async(req,res)=>{
         }
       });
       if(decodeID){
-        let x=  await instTable.find({userName:decodeID})
-          let y= await traineeTable.find({userName:decodeID}) 
-          let z=  await adminTable.find({userName:decodeID})
+        console.log(decodeID)
+        let x=  await instTable.findOne({_id:decodeID})
+          let y= await traineeTable.findOne({_id:decodeID}) 
+          let z=  await adminTable.findOne({_id:decodeID})
           console.log(x)
           console.log(y)
           console.log(z)

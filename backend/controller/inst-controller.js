@@ -22,8 +22,15 @@ const getAllInst=async(req,res,next)=>{
         return res.status(200).json({inst:inst})
 
 }
-
 const createCourse=async (req,res,next)=>{    
+ const KEY="AIzaSyBlhTt07_yi5AwS4GlIqhaxfKjwiigmF4Y"
+ 
+// console.log(res3.data.items)
+// $duration = json_decode($dur, true);
+// foreach ($duration['items'] as $vidTime) {
+//     $vTime= $vidTime['contentDetails']['duration'];
+// }
+
   var decodeID="";
   if (req.body.instructor) {
     jwt.verify(req.body.instructor, 'supersecret', (err, decodedToken) => {
@@ -36,14 +43,42 @@ const createCourse=async (req,res,next)=>{
   }
   const{title,price, totalHours, subject, description,subtitles,currency,rating,preview}=req.body
   let course;
-  console.log(decodeID)
-  console.log(req.body)
-  const x=0;
-  console.log([1, 2, 3, 4].reduce((a, b) => a + b, 0))
-  console.log(subtitles)
+  
+  console.log(subtitles[0].Video)
+  var acc=0;
+  for(let i=0;i<subtitles.length;i++){
+    for(let j=0;j<subtitles[i].Video.length;j++){
+        console.log(subtitles[i].Video[j])
+        const x=subtitles[i].Video[j].split("/")
+        const id=x[4];
 
-  const list=subtitles.reduce((a,b)=>a.Video.length+b.Video.length)
-  console.log(list);
+      const res3 = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${id}&key=AIzaSyBlhTt07_yi5AwS4GlIqhaxfKjwiigmF4Y`).then((data)=>
+  {
+    const time_extractor = /([0-9]*H)?([0-9]*M)?([0-9]*S)?$/;
+    const extracted = time_extractor.exec(data.data.items[0].contentDetails.duration);
+    const hours = parseInt(extracted[1], 10) || 0;
+    const minutes = parseInt(extracted[2], 10) || 0;
+    const seconds = parseInt(extracted[3], 10) || 0;
+    console.log( (hours * 60) + (minutes) + (seconds *(1/60)));
+    acc+= (hours * 60) + (minutes) + (seconds *(1/60));
+
+
+  });
+    }
+  }
+  console.log(acc)
+//  const res3 = await axios.get("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=QzakjlbO2Lc&key=AIzaSyBlhTt07_yi5AwS4GlIqhaxfKjwiigmF4Y").then((data)=>
+//   {
+//     const time_extractor = /([0-9]*H)?([0-9]*M)?([0-9]*S)?$/;
+//     const extracted = time_extractor.exec(data.data.items[0].contentDetails.duration);
+//     const hours = parseInt(extracted[1], 10) || 0;
+//     const minutes = parseInt(extracted[2], 10) || 0;
+//     const seconds = parseInt(extracted[3], 10) || 0;
+//     console.log( (hours * 60) + (minutes) + (seconds *(1/60)));
+
+
+//   });
+
   try{
       course =new courseTable({
           title:title,
@@ -57,7 +92,7 @@ const createCourse=async (req,res,next)=>{
           rating:rating,
           preview:preview,
           originalPrice:price,
-          totalNumVideos:list
+          totalNumVideos:acc
       })
       await course.save();
       return res.status(201).json({course:course})

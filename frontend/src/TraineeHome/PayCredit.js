@@ -165,7 +165,7 @@ function PayCredit() {
               {sendmessage2 && <div style={{"color":"red"}}>Credentials were not entered correctly</div>}
               {sendmessage3 && <div className={cc.movete}>
             <div className={cc.modalcontainerr}>
-                <p className={cc.editbiotext2}>You have successfully to this course </p>
+                <p className={cc.editbiotext2}>You have successfully registered to this course </p>
                 <button className={cc.submiteditbutton2} onClick={()=>{window.location.href="/Trainee"}}>Go to Home Page</button>
                 
             </div> 

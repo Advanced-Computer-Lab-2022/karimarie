@@ -41,7 +41,7 @@ const InstructorHomePage=()=>{
         {access && <div><InstructorNavBar/>
         <div className={l.low}>
         <InstSideBar/></div></div>}
-        {!access && <div>
+        {access===false && <div>
             <img src={error} width="64"></img> Access not granted
             </div>}
         </React.Fragment>

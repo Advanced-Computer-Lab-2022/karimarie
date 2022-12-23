@@ -10,6 +10,7 @@ import {Box} from '@mui/material'
 import McqQuiz from '../components/Insructor/Quiz/McqQuiz';
 import { useParams } from 'react-router-dom';
 import TraineeNavbar from './TraineeNavbar';
+import ReactPlayer from "react-player"
 
 
 const Watch = () => {
@@ -94,7 +95,13 @@ const Watch = () => {
         <div className={x.box}>
           <h2 className={x.h}>{title}</h2>
   
-       {vid ?  <div className={x.video}><iframe src={preview} width="710px" height="410px" title="YouTube video" allowfullscreen></iframe></div>:<div className={x.ex}><McqQuiz  CourseId={CourseId} /> </div>}
+       {vid ?  <div className={x.video}>
+        {/* <iframe src={preview} width="710px" height="410px" title="YouTube video" allowfullscreen></iframe> */}
+     <ReactPlayer controls url={preview}/>
+     
+     
+        </div>
+        :<div className={x.ex}><McqQuiz  CourseId={CourseId} /> </div>}
         {!vid&&<div>hey</div>}
         </div>
         <div className={x.topnav}>
