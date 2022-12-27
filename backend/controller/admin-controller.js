@@ -284,4 +284,87 @@ const editReport = async (req, res) => {
       res.status(400).json({ error: "couldn't" });
    }
 };
-module.exports={getAllInst,addInst,addCorpTrainee,returnMoney,getReports,editReport,viewRefundReq,addAdmin,viewReq,giveCourse};
+const adddiscount2 = async (req, res) => {
+    //const myid = req.params.myid;
+    // const courseid = req.params.id;
+    const c=req.body.c;
+    console.log(c);
+    const { discount, expirationTime, startTime } = req.body;
+    console.log(expirationTime);
+    if ( discount && expirationTime && startTime) {
+      const endDate = new Date(expirationTime).toJSON().split("T")[0];
+      const startDate = new Date(startTime).toJSON().split("T")[0];
+      let currentDate1 = new Date();
+      let currentDate= currentDate1.toJSON().split("T")[0]// new Date().getTime() returns value in number
+      if (currentDate === startDate && currentDate <= endDate) {
+        c.map(async(c) => 
+       { const finalres = await courseTable.findByIdAndUpdate(
+          c,
+          {
+            discount: discount,
+            expirationTime: expirationTime,
+            startTime: startTime,
+            discountapplied:true
+          },
+          { new: true }
+        );
+        const price  = await courseTable
+          .findOne({ _id: c })
+          // .select("price")
+          // .exec();
+
+          console.log("Ff"+price);
+  
+        const intermediatePrice = price.price;
+        const totalPrice =
+          intermediatePrice - intermediatePrice * (discount / 100);
+  
+      
+        const updatedcourse = await courseTable.findByIdAndUpdate(
+          c,
+          { price: totalPrice },
+          { new: true }
+        );});
+        
+        await res.status(200).json("updatedcourse");
+      } else {
+        if (currentDate < startDate) {
+          c.map(async(c) =>{
+            const finalres = await courseTable.findByIdAndUpdate(
+              c,
+              {
+                discount: discount,
+                expirationTime: expirationTime,
+                startTime: startTime,
+              },
+              { new: true }
+            );
+          });
+        
+        } else {
+          if (currentDate > endDate) {
+            c.map(async(c) =>{
+              const  originalPrice  = await courseTable
+              .findOne({ _id: c })
+              originalPrice=originalPrice.originalPrice;
+            //  console.log(originalPrice);
+            const updatedcourse1 = await courseTable.findByIdAndUpdate(
+              c,
+              {
+                price: originalPrice,
+                discountapplied:false,
+                startTime:"",
+                expirationTime:""
+              },
+              { new: true }
+            );
+            await res.status(200).json(updatedcourse1);
+            });
+           
+          }
+        }
+      }
+    } else res.status(400).json({ error: " Invalid Data" });
+  };
+
+module.exports={getAllInst,adddiscount2,addInst,addCorpTrainee,returnMoney,getReports,editReport,viewRefundReq,addAdmin,viewReq,giveCourse};

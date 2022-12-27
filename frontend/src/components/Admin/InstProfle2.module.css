@@ -1,0 +1,207 @@
+.all{
+    z-index: 1;
+    position: relative;
+}
+
+
+
+
+  .shadearea{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modalcontainer{
+    width: 500px;
+    height: 350px;
+    padding: 20px;
+    background: #FFFFFF;
+    position: relative;
+    border-radius: 40px 40px 40px 40px;
+    z-index: 3;
+
+  }
+  
+  .submiteditbutton{
+    position: absolute;
+    width: 100px;
+    height: 48px;
+    left: 199px;
+    top: 280px;
+    border-radius: 40px 40px 40px 40px;
+    background: #17cf97;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 44px;
+    text-align: center;
+    border:black;
+
+    color: #FFFFFF;
+    
+  }
+  
+  .message{
+    margin-top:190px;
+    margin-left: 90px;
+    color: red;
+    position: fixed;
+  }
+  .closeedit2{
+    background: #fff;
+    border: none;
+    float: right;
+    margin-top:-45px;
+    padding-right: 0.7rem;
+    padding-top: 0.1rem;
+   
+  }
+  
+
+  
+  .ViewCourses{
+    background-color: whitesmoke;
+    position: relative;
+    width: 700px;
+    height: 140px;
+    margin-top: 1px;
+    margin-left: -2px;
+  }
+  .ViewCourses span{
+    margin-top: 160px;
+
+    margin-left: 160px;
+  }
+  .ViewCourses2{
+    background-color: whitesmoke;
+    /* margin-top: 650px; */
+    margin-top: 600px;
+    position: relative;
+    width: 700px;
+    /* height: 100%; */
+    margin-left: 250px;
+  }
+  .ViewCourses2 p{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin-left: -530px;
+    z-index: 2;
+    color: #000000; 
+  }
+  .courseimg{
+    margin-top: 40px;
+    margin-left: 10px;
+    height: 140px;
+    position: relative;
+  }
+  .ViewCourses h2{
+    margin-left: 160px;
+    margin-top: -130px;
+    font-size: 20px;
+  }
+
+  .ViewCourses p{
+    margin-left: -290px;
+    margin-top: -30px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  .ViewCourses i{
+    margin-left: 160px;
+    margin-top: 5px;
+  }
+  .starimage1{
+    margin-left: 185px;
+    margin-top: -23px;
+  }
+  .rat{
+   margin-top: 20px;
+   margin-left: -70px;
+   font-weight: 400;
+  }
+  
+  
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  /* width: 60%; */
+  width: 10px;
+  position: absolute;
+ margin-left: 10px;
+ margin-top: -30px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+ .pricee{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    color: #000000;
+    margin-left: 155px;
+    margin-top: 40px;
+ }
+ .priceetext{
+    
+    margin-left: 470px;
+    margin-top: 12px;
+ }
+ .priceetext1{
+  margin-left: 470px;
+  margin-top: 5px;
+  text-decoration: line-through;
+}
+.priceetext11{
+  margin-left: 540px;
+  margin-bottom: -150px;
+}
+ 
+ 
+ .shadearea2{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+ .ref:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.ref:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+
+
+.ref:active {
+  color:black;
+  background-color: transparent;
+  text-decoration: none;
+}
