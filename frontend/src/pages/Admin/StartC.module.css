@@ -136,7 +136,7 @@ bodyy{
   background-color: #F7F7F7;
 }
 .analytics{
-  display:flex;
+  /* display:flex; */
   /* background-color: green; */
   height: 90px;
 }

@@ -292,6 +292,8 @@ const adddiscount2 = async (req, res) => {
     const { discount, expirationTime, startTime } = req.body;
     console.log(expirationTime);
     if ( discount && expirationTime && startTime) {
+        console.log(startTime);
+        console.log(expirationTime);
       const endDate = new Date(expirationTime).toJSON().split("T")[0];
       const startDate = new Date(startTime).toJSON().split("T")[0];
       let currentDate1 = new Date();
@@ -344,7 +346,7 @@ const adddiscount2 = async (req, res) => {
         } else {
           if (currentDate > endDate) {
             c.map(async(c) =>{
-              const  originalPrice  = await courseTable
+              let  originalPrice  = await courseTable
               .findOne({ _id: c })
               originalPrice=originalPrice.originalPrice;
             //  console.log(originalPrice);

@@ -27,7 +27,6 @@ console.log(initialState)
       return newState;
     });
   };
-console.log(checked)
 
   const selectAll = (value) => {
     setCheckedAll(value);

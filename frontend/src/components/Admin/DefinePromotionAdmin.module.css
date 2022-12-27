@@ -1,0 +1,77 @@
+.title{
+
+  
+
+
+    font-size: clamp(26px, 5vw, 40px);
+    color: #1b2430;
+    /* margin-bottom: 30px; */
+    margin-left: 37%;
+    /* justify-content: center; */
+    padding-top: 25px;
+    font-family: "Poppins", sans-serif;
+  
+}
+.buttonAe {
+    background-color: #17cf97;
+    background-image: linear-gradient(#17cf97, #17cf97);
+    border: 1px solid #17cf97;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-family: -apple-system,".SFNSDisplay-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 17px;
+    line-height: 100%;
+    margin: 0;
+    outline: 0;
+    margin-left:400px ;
+    padding: 11px 15px 12px;
+    text-align: center;
+    transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 200px;
+  }
+.checkboxx{
+    /* margin-right: 100px; */
+    margin-left: -10px;
+    padding:50px;
+    margin-top: 70px;
+    color: aqua;
+    /* padding-bottom: -100px; */
+  }
+.firstDiv {
+
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 900;
+font-size: 20px;
+line-height: 48px;
+/* text-align: center; */
+margin-top: 30px;
+margin-left: 100px;
+display:flex;
+color: #000000;
+}
+.secondDiv {
+
+    /* font-family: 'Inter';
+font-style: normal;
+font-weight: 900;
+font-size: 20px; */
+/* line-height: 48px; */
+/* text-align: center; */
+/* display: flex; */
+margin-top: 30px;
+margin-left: 100px;
+
+/* color: #000000; */
+}
+.main2Div {
+    display:flex;
+
+
+}

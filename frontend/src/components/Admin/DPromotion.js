@@ -11,7 +11,7 @@ import DefinePromotioncss2 from "./DefinePromotionAdmin.module.css";
 import { TextField } from "@mui/material";
 import closeIcon from "../../S3_components/closeButton.png";
 
-const Dpromotion = () => {
+const DPromotion = () => {
   const [courses, setcourses] = useState("");
   const [freecourse, isfree] = useState(false);
   const [ready, isready] = useState(false);
@@ -38,7 +38,9 @@ const Dpromotion = () => {
   const [addDiscount, setAddDiscount] = useState("");
   const [addStartDAte, setStartDate] = useState("");
   const [addExpirationDate, setExpirationDate] = useState("");
-
+  const [showError,setShowError]=useState(false);
+  const [message,setMessage]=useState('');
+  const [x,setX]=useState(0);
   const addMyDiscount = async () => {
     const res = await axios
       .post("http://localhost:2000/admin/adddiscount2", {
@@ -48,26 +50,37 @@ const Dpromotion = () => {
         startTime: addStartDAte,
       })
       .catch((err) => console.log(err));
+      setX(x+1);
   };
   const addedDiscount = (e) => {
     // console.log(addDiscount);
     // console.log(addExpirationDate);
     // console.log(addStartDAte);
     e.preventDefault();
-    if (addStartDAte === currentTime) {
-   //   console.log("okkkkk");
+    if (addStartDAte < currentTime) {
+        setShowError(true);
+        setMessage(`Start date should be greater than ${currentTime}`);
     }
+    else if(addExpirationDate<=currentTime){
+        setMessage(`End date should be greater than ${currentTime}`);
+    }
+    else{
+
+    
     addMyDiscount();
     setAddDiscount("");
     setStartDate("");
     setExpirationDate("");
     isaddPromo(false);
-    window.location.reload();
+    setShowError(false);
+    //window.location.reload();
+    setX(x+1);
+    }
   };
 
   useEffect(() => {
     getCourses().then((data) => setcourses(data.priceList));
-  }, []);
+  }, [x]);
 
 
 
@@ -150,9 +163,11 @@ const handleSelectAll =( e) => {
       {addPromo && (
         <div className={DefinePromotioncss.shadearea}>
           <div className={DefinePromotioncss.modalcontainer}>
+          
             <p className={DefinePromotioncss.AddDiscounttext}>
               Add Your Discount
             </p>
+            {showError&&<h5 style={{color:"red"}}>{message}</h5>}
             <form className={DefinePromotioncss.DiscountForm} onSubmit={addedDiscount}>
               <div className={DefinePromotioncss.textFields}>
                 <TextField
@@ -202,4 +217,4 @@ const handleSelectAll =( e) => {
     </React.Fragment>
   );
 };
-export default Dpromotion;
+export default DPromotion;
