@@ -64,6 +64,10 @@ const FilterSearchPage=()=>{
          currency={courses.currency}
          subject={courses.subject}
          description={courses.description}
+         startTime={courses.startTime}
+         expirationTime={courses.expirationTime}
+         discount={courses.discount}
+         discountapplied={courses.discountapplied}
          type="Guest"
          type2={type}
         />))}

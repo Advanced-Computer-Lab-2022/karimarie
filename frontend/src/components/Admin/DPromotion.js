@@ -73,6 +73,8 @@ const DPromotion = () => {
     setExpirationDate("");
     isaddPromo(false);
     setShowError(false);
+    setIsCheckAll(false)
+    setIsCheck([])
     //window.location.reload();
     setX(x+1);
     }
@@ -137,7 +139,7 @@ const handleSelectAll =( e) => {
                   currency={data.currency}
                   subject={data.subject}
                   type="Guest"
-                  type2="Guest"
+                  type2="Admin"
                 />
               ))}
           </div>

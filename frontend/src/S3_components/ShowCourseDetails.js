@@ -20,6 +20,7 @@ import cc from '../InstructorHome/CreateCourse.module.css'
 import x from "../TraineeHome/Watchh.module.css";
 import {Box} from '@mui/material'
 import { Rating } from 'react-simple-star-rating'
+import NavbarAdminPage from "../pages/Admin/S3_components/NavbarAdminPage";
 
 
 
@@ -84,7 +85,7 @@ const ShowCourseDetails=()=> {
             console.log("ho")
             addMyDiscountAuto(data.course.discount,data.course.startTime,data.course.expirationTime)
         }
-        if(data.course.expirationTime<currentTime){
+        if(data.course.expirationTime<=currentTime){
             console.log("hi")
             addMyDiscountAuto(data.course.discount,data.course.startTime,data.course.expirationTime)
         }
@@ -253,6 +254,7 @@ const ShowCourseDetails=()=> {
        {type2==="Guest" && <NavbarHomePage></NavbarHomePage>}
        {type2==="Instructor" && <InstructorNavBar/>}
        {type2==="CorpTrainee" && <TraineeNavbar/>}
+       {type2==="Admin" && <NavbarAdminPage/>}
         { instructorTable && 
         <div>
         <div className={det.wholee} sx={{ minWidth: 275 }}>
@@ -325,9 +327,10 @@ const ShowCourseDetails=()=> {
                 {Course.subtitles[i].Video.map((video,j)=>(
                  <div>
                  {type==="Instructor" && <div><iframe src={video} title="YouTube video" allowfullscreen></iframe><br></br></div>}
+                 {type2==="Admin" && <div><iframe src={video} title="YouTube video" allowfullscreen></iframe><br></br></div>}
                {type==="Guest" && type2!=="CorpTrainee" && freecourse===true && <div><iframe src={video} title="YouTube video" allowfullscreen></iframe><br></br></div>}
                {type==="Guest" && type2==="CorpTrainee" && freecourse===true && <img src={novideo} alt="card__image" class={det.novideo} width="40"></img>}
-               {type==="Guest" && freecourse===false && <img src={novideo} alt="card__image" class={det.novideo} width="40"></img>}
+               {type==="Guest"&& type2!=="Admin" && freecourse===false && <img src={novideo} alt="card__image" class={det.novideo} width="40"></img>}
                 </div>
                 ))}
               

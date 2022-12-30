@@ -63,13 +63,13 @@ const SuccMessage = () => (
     {/* <label className={x.label}>User Name</label> */}
     <div className={x.elem}>
     <i className={["material-icons-outlined", x.iconn].join(' ')} >account_circle</i>{" "}
-    <input className={x.textt}  placeholder="UserName" required onChange={(e) => setUserName(e.target.value)} 
+    <input className={x.textt}  placeholder="UserName" required onChange={(e) => setUserName(e.target.value.toLowerCase())} 
         value={userName}  ></input>
     </div>
     {/* <label className={x.label}>Password</label> */}
     <div className={x.elem}>
     <i className={["material-icons-outlined", x.iconn].join(' ')} >https</i>{" "}
-    <input className={x.textt}  placeholder="Password"required onChange={(e) => setPassword(e.target.value)} 
+    <input className={x.textt}  placeholder="Password"required onChange={(e) => setPassword(e.target.value.toLowerCase())} 
         value={password}  ></input>
     </div>
     <button className={x.b}>Create Instructor</button>

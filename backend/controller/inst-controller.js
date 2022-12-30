@@ -462,12 +462,13 @@ const adddiscount = async (req, res) => {
   //const myid = req.params.myid;
   const courseid = req.params.id;
   const { discount, expirationTime, startTime } = req.body;
+  console.log(discount,expirationTime,startTime);
   if (courseid && discount && expirationTime && startTime) {
     const endDate = new Date(expirationTime).toJSON().split("T")[0];
     const startDate = new Date(startTime).toJSON().split("T")[0];
     let currentDate1 = new Date();
     let currentDate= currentDate1.toJSON().split("T")[0]// new Date().getTime() returns value in number
-    if (currentDate === startDate && currentDate <= endDate) {
+    if (currentDate === startDate && currentDate < endDate) {
       const finalres = await courseTable.findByIdAndUpdate(
         courseid,
         {
@@ -502,11 +503,12 @@ const adddiscount = async (req, res) => {
             discount: discount,
             expirationTime: expirationTime,
             startTime: startTime,
+            discountapplied:false
           },
           { new: true }
         );
       } else {
-        if (currentDate > endDate) {
+        if (currentDate >= endDate) {
           const { originalPrice } = await courseTable
             .findOne({ _id: courseid })
             .select("originalPrice")

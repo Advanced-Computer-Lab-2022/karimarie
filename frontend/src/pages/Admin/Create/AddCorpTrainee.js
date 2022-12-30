@@ -67,7 +67,7 @@ const AddCorpTrainee = () => {
     {/* <label className={x.label}>User Name</label> */}
     <div className={x.elem}>
     <i className={["material-icons-outlined", x.iconn].join(' ')} >email</i>{" "}
-    <input className={x.textt} required placeholder="Email" type="email"  onChange={(e) => setEmail(e.target.value)} 
+    <input className={x.textt} required placeholder="Email" type="email"  onChange={(e) => setEmail(e.target.value.toLowerCase())} 
      value={email} 
       ></input>
     </div>
@@ -79,13 +79,13 @@ const AddCorpTrainee = () => {
     </div>
     <div className={x.elem}>
     <i className={["material-icons-outlined", x.iconn].join(' ')} >account_circle</i>{" "}
-    <input className={x.textt} required placeholder="UserName"  onChange={(e) => setUserName(e.target.value)} 
+    <input className={x.textt} required placeholder="UserName"  onChange={(e) => setUserName(e.target.value.toLowerCase())} 
         value={userName}  ></input>
     </div>
     {/* <label className={x.label}>Password</label> */}
     <div className={x.elem}>
     <i className={["material-icons-outlined", x.iconn].join(' ')} >https</i>{" "}
-    <input className={x.textt} required placeholder="Password" onChange={(e) => setPassword(e.target.value)} 
+    <input className={x.textt} required placeholder="Password" onChange={(e) => setPassword(e.target.value.toLowerCase())} 
         value={password}  ></input>
     </div>
  

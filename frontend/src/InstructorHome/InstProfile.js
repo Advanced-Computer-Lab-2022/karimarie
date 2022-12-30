@@ -423,6 +423,10 @@ const InstProfile = () => {
          Instructor={Instructor.userName}
          currency={courses.currency}
          subject={courses.subject}
+         startTime={courses.startTime}
+         expirationTime={courses.expirationTime}
+         discount={courses.discount}
+         discountapplied={courses.discountapplied}
          type="Instructor"
          type2="Instructor"
         />
@@ -498,6 +502,10 @@ const InstProfile = () => {
          priceafter={courses.price}
          currency={courses.currency}
          subject={courses.subject}
+         startTime={courses.startTime}
+         expirationTime={courses.expirationTime}
+         discount={courses.discount}
+         discountapplied={courses.discountapplied}
          type="Instructor"
          type2="Instructor"
         />

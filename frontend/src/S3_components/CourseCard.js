@@ -7,7 +7,10 @@ import priceTag from "../S3_components/priceTag.png"
 import star from "../S3_components/star.png"
 import  Rating from '@mui/material/Rating';
 import { useParams } from 'react-router-dom';
-const CourseCard=({id,title,totalHours,rating,price,priceafter,currency,type,type2,subject,description}) =>{
+const CourseCard=({id,title,totalHours,rating,price,priceafter,currency,type,type2,subject,description,startTime,expirationTime,discount,discountapplied}) =>{
+  var cc=new Date();
+  const currentTime=cc.toJSON().split("T")[0];
+  const [existDiscount,isexistDiscount]=useState(false);
   const [newPrice1,setNewPrice1]= useState('')
   const [newPrice,setNewPrice]= useState('')
   const [pricediscount,setpricediscount]=useState('')
@@ -32,8 +35,18 @@ const CourseCard=({id,title,totalHours,rating,price,priceafter,currency,type,typ
         const data = await res.data;
         return data;
     };
-  
+   
+    const addMyDiscountAuto = async (x,y,z) => {
+      const res = await axios
+        .post(`http://localhost:2000/instructor/adddiscount/${id}`, {
+          discount: x,
+          expirationTime: z,
+          startTime: y,
+        })
+        .catch((err) => console.log(err));
+    };
   useEffect(()=>{
+   
       getExchangeRate().then(data =>{setCurrencyOptions([data.base,...Object.keys(data.rates)])
       setFromCurrency(currency)
       setToCurrency(currencySelected)
@@ -44,6 +57,18 @@ const CourseCard=({id,title,totalHours,rating,price,priceafter,currency,type,typ
       }else {
         isRating("")
       }
+      if(discount!=="" && startTime===currentTime && discountapplied===false){
+        console.log("ho")
+        addMyDiscountAuto(discount,startTime,expirationTime)
+    }
+    if(expirationTime<=currentTime){
+        console.log("hi")
+        addMyDiscountAuto(discount,startTime,expirationTime)
+    }
+    if(discount!=="" && startTime===currentTime && expirationTime>=currentTime){
+        isexistDiscount(true)
+    }
+    
       
  },[])
 
@@ -58,7 +83,9 @@ const CourseCard=({id,title,totalHours,rating,price,priceafter,currency,type,typ
 
           useEffect(()=>{
           setNewPrice(Math.ceil((price)*exchangeRate*100)/100)
-          setpricediscount(Math.ceil((priceafter)*exchangeRate*100)/100)
+          if(discount!=="" && startTime!=""){
+            setpricediscount(Math.ceil((priceafter)*exchangeRate*100)/100)
+          }
       },[exchangeRate])
 return (
     <React.Fragment>

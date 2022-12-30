@@ -195,7 +195,7 @@ function InstructorNavBar(isactive){
 <ul id={NavbarStyles.navbar}>
     <li><button onClick={showFilter} title="Filter" className={NavbarStyles.buttonFilter}><img src={filterIcon} alt="card__image" width="40"></img>
             </button></li>
-    <li><a  style={{ color: isactive.isactive === "true" ? "#17cf97" : null }}href>View </a></li>
+    {/* <li><a  style={{ color: isactive.isactive === "true" ? "#17cf97" : null }}href>View </a></li> */}
     <li><a href onClick={showLogout}style={{ color: isactive.isactive === "false" ? "#17cf97" : null }}>Logout</a></li>
     <li><button onClick={showDropDown}><img src={language} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>
     <li><button onClick={navigateTo}><img src={profileIcon} alt="card__image" class={NavbarStyles.languageimage} width="40"></img></button></li>

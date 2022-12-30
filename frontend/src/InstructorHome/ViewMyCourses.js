@@ -14,7 +14,7 @@ import { Rating } from '@mui/material';
 
 
 
-const ViewMyCourses = ({id,title,totalHours,rating,price,priceafter,currency,type,type2,Instructor,subject,description}) => {
+const ViewMyCourses = ({id,title,totalHours,rating,price,priceafter,currency,type,type2,Instructor,subject,description,startTime,expirationTime,discount,discountapplied}) => {
   console.log(priceafter)
     const [newPrice,setNewPrice]= useState('')
     const [pricediscount,setpricediscount]=useState('')
@@ -32,6 +32,10 @@ const ViewMyCourses = ({id,title,totalHours,rating,price,priceafter,currency,typ
     const [toCurrency,setToCurrency]=useState('')
     const [amount,setAmount]=useState(1);
     const [exchangeRate,setExchanheRate]=useState('')
+    const [existDiscount,isexistDiscount]=useState(false);
+    var c=new Date();
+    const currentTime=c.toJSON().split("T")[0];
+    const [prpr,setprpr]=useState('');
     const getExchangeRate = async () => {
         const res = await axios
           .get(base_URL)
@@ -51,6 +55,18 @@ const ViewMyCourses = ({id,title,totalHours,rating,price,priceafter,currency,typ
         }else {
           isRating(0)
         }
+        if(discount!=="" && startTime===currentTime && discountapplied===false){
+          console.log("ho")
+          addMyDiscountAuto(discount,startTime,expirationTime)
+      }
+      if(expirationTime<=currentTime){
+          console.log("hi")
+          addMyDiscountAuto(discount,startTime,expirationTime)
+      }
+      if(discount!=="" && startTime===currentTime && expirationTime>=currentTime){
+          isexistDiscount(true)
+      }
+      
         
    },[])
    useEffect(()=>{
@@ -63,13 +79,26 @@ const ViewMyCourses = ({id,title,totalHours,rating,price,priceafter,currency,typ
   
             useEffect(()=>{
             setNewPrice(Math.ceil((price)*exchangeRate*100)/100)
-            setpricediscount(Math.ceil((priceafter)*exchangeRate*100)/100)
+            if(discount!=="" && startTime!=""){
+              setpricediscount(Math.ceil((priceafter)*exchangeRate*100)/100)
+            }
+           
         },[exchangeRate])
+
+        const addMyDiscountAuto = async (x,y,z) => {
+          const res = await axios
+            .post(`http://localhost:2000/instructor/adddiscount/${id}`, {
+              discount: x,
+              expirationTime: z,
+              startTime: y,
+            })
+            .catch((err) => console.log(err));
+        };
     return(
         <React.Fragment>
        <div className={inst.ViewCourses}>
        <a href={`/course/${id}/${newPrice}/${currency}/${type}/${type2}/${pricediscount}`} className={inst.ref}>
-             <img src="https://source.unsplash.com/600x400/?food" alt="card__image" className={inst.courseimg} width="140"/> 
+             <img src="https://source.unsplash.com/600x400/?code" alt="card__image" className={inst.courseimg} width="140"/> 
              <div><h2>{title}</h2> 
              <span className={c.tagbrown}>{subject}</span>
              </div>
