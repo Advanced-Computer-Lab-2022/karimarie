@@ -107,7 +107,8 @@ const getAll=async()=>{
           e.preventDefault()
             filterAll().then((data) => {           
             let x=JSON.stringify(data.priceList)
-            window.location.href=`FilterSearchPage?type=Admin&courses=${x}`
+            localStorage.setItem("filter",x);
+            window.location.href=`FilterSearchPage?type=Admin`
           }
             )
             isShowFilter(false);
@@ -135,7 +136,8 @@ const getAll=async()=>{
             e.preventDefault()
               searchCourse().then((data) => {           
               let x=JSON.stringify(data.priceList)
-              window.location.href=`/FilterSearchPage?type=Admin&courses=${x}`
+              localStorage.setItem("filter",x);
+              window.location.href=`/FilterSearchPage?type=Admin`
             }
               )
             }}
@@ -143,7 +145,8 @@ const getAll=async()=>{
               e.preventDefault()
                 searchCourse().then((data) => {           
                 let x=JSON.stringify(data.priceList)
-                window.location.href=`/FilterSearchPage?type=Admin&courses=${x}`
+                localStorage.setItem("filter",x);
+                window.location.href=`/FilterSearchPage?type=Admin`
               }
                 )
               }

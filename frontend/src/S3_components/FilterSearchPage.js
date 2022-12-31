@@ -14,7 +14,7 @@ import error from "../InstructorHome/error.png"
 
 const FilterSearchPage=()=>{
     const params = new URLSearchParams(window.location.search);
-    const x = params.get('courses');
+    const x = localStorage.getItem("filter");
     const type=params.get('type')
     const spec=localStorage.getItem("userType")
     const [courses,setCourses]=useState(JSON.parse(x));

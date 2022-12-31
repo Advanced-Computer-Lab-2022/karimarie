@@ -105,7 +105,8 @@ function TraineeNavbar(isactive){
           e.preventDefault()
             filterAll().then((data) => {           
             let x=JSON.stringify(data.priceList)
-            window.location.href=`/FilterSearchPage?type=Trainee&spec=${type}&courses=${x}`
+            localStorage.setItem("filter",x);
+            window.location.href=`/FilterSearchPage?type=Trainee&spec=${type}`
           }
             )
             isShowFilter(false);
@@ -133,7 +134,8 @@ function TraineeNavbar(isactive){
             e.preventDefault()
               searchCourse().then((data) => {           
               let x=JSON.stringify(data.priceList)
-              window.location.href=`/FilterSearchPage?type=Trainee&spec=${type}&courses=${x}`
+              localStorage.setItem("filter",x);
+              window.location.href=`/FilterSearchPage?type=Trainee&spec=${type}`
             }
               )
             }}
@@ -141,7 +143,8 @@ function TraineeNavbar(isactive){
               e.preventDefault()
                 searchCourse().then((data) => {           
                 let x=JSON.stringify(data.priceList)
-                window.location.href=`/FilterSearchPage?type=Trainee&spec=${type}&courses=${x}`
+                localStorage.setItem("filter",x);
+                window.location.href=`/FilterSearchPage?type=Trainee&spec=${type}`
               }
                 )
               }
@@ -253,7 +256,8 @@ function TraineeNavbar(isactive){
               id : decodeID
             })
             .catch((err) => console.log(err)).then((data)=>{
-              if(data!="no"){
+              if(data.data!="no"){
+                console.log(data.data)
                setHisAmount(data.data);
               let rate;
               if(fromCurrency!=null && toCurrency!=null){
@@ -262,11 +266,15 @@ function TraineeNavbar(isactive){
                       setHisAmount(Math.ceil(data.data*(data2.rates[toCurrency])))
                     })}
               }
+              else {
+                console.log("hi")
+                setHisAmount(0);
+              }
             });
            
           }
 
-
+          console.log(hisAmount)
           const [noti,setNotis]= useState([])
        const getNotis = async () => {
            const res = await axios

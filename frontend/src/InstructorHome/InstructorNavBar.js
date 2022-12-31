@@ -101,7 +101,8 @@ function InstructorNavBar(isactive){
           e.preventDefault()
             filterAll().then((data) => {           
             let x=JSON.stringify(data.priceList)
-            window.location.href=`FilterSearchPage?type=Instructor&courses=${x}`
+            localStorage.setItem("filter",x);
+            window.location.href=`FilterSearchPage?type=Instructor`
           }
             )
             isShowFilter(false);
@@ -134,7 +135,8 @@ function InstructorNavBar(isactive){
             e.preventDefault()
               searchCourse().then((data) => {           
               let x=JSON.stringify(data.priceList)
-              window.location.href=`/FilterSearchPage?type=Instructor&courses=${x}`
+              localStorage.setItem("filter",x);
+              window.location.href=`/FilterSearchPage?type=Instructor`
             }
               )
             }}
@@ -142,7 +144,8 @@ function InstructorNavBar(isactive){
               e.preventDefault()
                 searchCourse().then((data) => {           
                 let x=JSON.stringify(data.priceList)
-                window.location.href=`/FilterSearchPage?type=Instructor&courses=${x}`
+                localStorage.setItem("filter",x);
+                window.location.href=`/FilterSearchPage?type=Instructor`
               }
                 )
               }

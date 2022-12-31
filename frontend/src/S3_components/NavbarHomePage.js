@@ -102,7 +102,8 @@ function NavbarHomePage(isactive){
           e.preventDefault()
             filterAll().then((data) => {           
             let x=JSON.stringify(data.priceList)
-            window.location.href=`/FilterSearchPage?type=Guest&courses=${x}`
+            localStorage.setItem("filter",x);
+            window.location.href=`/FilterSearchPage?type=Guest`
           }
             )
             isShowFilter(false);
@@ -130,7 +131,8 @@ function NavbarHomePage(isactive){
             e.preventDefault()
               searchCourse().then((data) => {           
               let x=JSON.stringify(data.priceList)
-              window.location.href=`/FilterSearchPage?type=Guest&courses=${x}`
+              localStorage.setItem("filter",x);
+              window.location.href=`/FilterSearchPage?type=Guest`
             }
               )
             }}
@@ -138,7 +140,8 @@ function NavbarHomePage(isactive){
               e.preventDefault()
                 searchCourse().then((data) => {           
                 let x=JSON.stringify(data.priceList)
-                window.location.href=`/FilterSearchPage?type=Guest&courses=${x}`
+                localStorage.setItem("filter",x);
+                window.location.href=`/FilterSearchPage?type=Guest`
               }
                 )
               }
