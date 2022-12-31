@@ -271,6 +271,14 @@ const editReport = async (req, res) => {
         },
         { new: true }
       );
+      let noti;
+      
+      noti= new notificationsTable({
+          userId:finalres.ReportById,
+          type:"Problem followup",
+          message: `Problem is ${finalres.Status} for the  course  ${finalres.CourseName}`
+      }) 
+      await noti.save();
       await res.status(200).json(finalres);
       if(Status=="Resolved"){
         problemTable.findOneAndRemove({_id: probId}, req.body, function(err,data)
