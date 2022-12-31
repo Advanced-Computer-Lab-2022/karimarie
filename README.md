@@ -114,7 +114,7 @@ npm start
 
 |Name    |GitHub  |
 |---------|-------|
-|Anegela Emil| https://github.com/AngelaEmil|
+|Angela Emil| https://github.com/AngelaEmil|
 |Kariman Kamal| https://github.com/karimankamaal|
 |Eliane Fares| https://github.com/ElianeFares|
 |Nada Nazeer| https://github.com/nadanazeer11|
