@@ -565,10 +565,10 @@ const InstProfile = () => {
             <div className={inst.modalcontainer}>
             <p className={inst.changepass}>Change Your Password</p>
             <p className={inst.newpass}>New Password:</p>
-            <TextField className={inst.passtextfield1} type={passwordType}  required value={newpassword} onChange={(e) => setnewpassword(e.target.value)} ></TextField>
+            <TextField className={inst.passtextfield1} type={passwordType}  required value={newpassword} onChange={(e) => setnewpassword(e.target.value.toLowerCase())} ></TextField>
             
             <p className={inst.confirmpass}>Confirm Password:</p>
-            <TextField className={inst.passtextfield2} type={passwordType1} required value={confirmpassword} onChange={(e) => setconfirmpassword(e.target.value)} ></TextField>
+            <TextField className={inst.passtextfield2} type={passwordType1} required value={confirmpassword} onChange={(e) => setconfirmpassword(e.target.value.toLowerCase())} ></TextField>
           {sendmessage && <div className={inst.message2}><p className={inst.message}>Those passwords didn't match. Try Again </p></div>}
             {sendmessage2 && <div className={inst.message}><p>Your password should be at least 8 characters</p></div>}
             <button className={inst.submitpassbutton} onClick={changePassword}>Submit</button>

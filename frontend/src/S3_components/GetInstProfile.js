@@ -89,7 +89,7 @@ const GetInstProfile = () => {
         <div className={det.allalll}>
             {reviewsInst && 
             <div className={det.all}>
-            <img src="https://source.unsplash.com/600x400/?food" alt="card__image" className={inst.image} width="600"/>    
+            <img src="https://source.unsplash.com/600x400/?portrait" alt="card__image" className={inst.image} width="600"/>    
             <p className={inst.firsttitle}>INSTRUCTOR</p>
             <p className={inst.name}>{Instructor.userName}</p>
             <p className={inst.shortdescription}>CEO of TheCodex.me - Teaching 500,000+ Students how to code</p>

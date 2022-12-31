@@ -175,8 +175,8 @@ const VMyCourses = () => {
                 traineeID:traineeID,
                 courseID: id.courseID,
               }).catch((err) => console.log(err)).then((data)=>{
-               console.log(data)
-                progall[i]=data.data
+               
+               progall[i]=data.data
                 if(i===courses.length-1){
                   setprogall(progall)
                 }

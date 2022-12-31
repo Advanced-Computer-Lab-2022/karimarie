@@ -55,15 +55,16 @@ const ViewMyCourses = ({id,title,totalHours,rating,price,priceafter,currency,typ
         }else {
           isRating(0)
         }
-        if(discount!=="" && startTime===currentTime && discountapplied===false){
+        if(discount!=="" && startTime!=""&&startTime===currentTime && discountapplied===false){
           console.log("ho")
           addMyDiscountAuto(discount,startTime,expirationTime)
       }
-      if(expirationTime<=currentTime){
+      if(expirationTime!=""&&expirationTime<currentTime){
           console.log("hi")
           addMyDiscountAuto(discount,startTime,expirationTime)
       }
-      if(discount!=="" && startTime===currentTime && expirationTime>=currentTime){
+      if(discount!=="" && expirationTime>=currentTime && startTime<=currentTime){
+        console.log("okkkkkkk")
           isexistDiscount(true)
       }
       

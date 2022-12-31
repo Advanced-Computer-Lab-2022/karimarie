@@ -428,10 +428,19 @@ const getProg=async(req,res)=>{
   try{
    
     let z=await progressTable.find({courseID:courseID,traineeID:traineeID});
-
-    z=z.reduce((a,b)=>a.progress+b.progress)
+    console.log("ggggggggggggggggggg")
+    
+      console.log("jijijji")
+      console.log(z);
+      var reduced = z.reduce(function (r, a) {
+        return r + a.progress;
+        //    ^^^ use the last result without property
+    }, 0);
+      
+    
+    console.log(reduced)
     console.log(z)
-  return res.status(200).json(z)
+  return res.status(200).json(reduced)
 
   }
   catch(error){

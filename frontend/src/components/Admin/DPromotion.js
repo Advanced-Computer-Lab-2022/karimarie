@@ -61,7 +61,8 @@ const DPromotion = () => {
         setShowError(true);
         setMessage(`Start date should be greater than ${currentTime}`);
     }
-    else if(addExpirationDate<=currentTime){
+    else if(addExpirationDate<currentTime){
+        setShowError(true);
         setMessage(`End date should be greater than ${currentTime}`);
     }
     else{
@@ -81,12 +82,15 @@ const DPromotion = () => {
   };
 
   useEffect(() => {
-    getCourses().then((data) => setcourses(data.priceList));
+    console.log("hi")
+    getCourses().then((data) =>{ setcourses(data.priceList)
+
+    });
   }, [x]);
 
 
 
-
+console.log(x);
 const [isCheckAll, setIsCheckAll] = useState(false);
 const [isCheck, setIsCheck] = useState([]);
 const [list, setList] = useState([]);
@@ -199,7 +203,7 @@ const handleSelectAll =( e) => {
                   onChange={(e) => setExpirationDate(e.target.value)}
                 ></TextField>
               </div>
-
+              
               <button
                 className={DefinePromotioncss.submitadddiscountbutton}
                 //onClick={addedDiscount}

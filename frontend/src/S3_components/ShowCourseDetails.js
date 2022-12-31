@@ -85,14 +85,14 @@ const ShowCourseDetails=()=> {
             console.log("ho")
             addMyDiscountAuto(data.course.discount,data.course.startTime,data.course.expirationTime)
         }
-        if(data.course.expirationTime<=currentTime){
+        if(data.course.expirationTime<currentTime){
             console.log("hi")
             addMyDiscountAuto(data.course.discount,data.course.startTime,data.course.expirationTime)
         }
-        if(data.course.discount!=="" && data.course.startTime===currentTime && data.course.expirationTime>=currentTime){
+        if(data.course.discount!=="" && data.course.expirationTime>=currentTime && data.course.startTime<=currentTime){
             isexistDiscount(true)
         }
-        if(data.course.discount!==""){
+        if(data.course.discount!=="" && data.course.startTime!==""){
             setprpr((newPrice*(1-((data.course.discount)/100))))
         }
         

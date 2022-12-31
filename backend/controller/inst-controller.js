@@ -468,7 +468,7 @@ const adddiscount = async (req, res) => {
     const startDate = new Date(startTime).toJSON().split("T")[0];
     let currentDate1 = new Date();
     let currentDate= currentDate1.toJSON().split("T")[0]// new Date().getTime() returns value in number
-    if (currentDate === startDate && currentDate < endDate) {
+    if (currentDate === startDate && currentDate <= endDate) {
       const finalres = await courseTable.findByIdAndUpdate(
         courseid,
         {
@@ -481,7 +481,7 @@ const adddiscount = async (req, res) => {
       );
       const { price } = await courseTable
         .findOne({ _id: courseid })
-        .select("price")
+        .select("originalPrice")
         .exec();
 
       const intermediatePrice = price;
@@ -508,7 +508,7 @@ const adddiscount = async (req, res) => {
           { new: true }
         );
       } else {
-        if (currentDate >= endDate) {
+        if (currentDate > endDate) {
           const { originalPrice } = await courseTable
             .findOne({ _id: courseid })
             .select("originalPrice")

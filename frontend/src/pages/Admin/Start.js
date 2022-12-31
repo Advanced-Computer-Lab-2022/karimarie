@@ -206,8 +206,8 @@ const Start = () => {
        { courses &&<td className={l.tdd}>{courses[1].numStudents}  Students</td>}
       </tr>
       <tr>
-       {courses && <td className={l.tdd}>{courses[1].title}</td> }
-       {courses && <td className={l.tdd}>{courses[1].numStudents}  Students</td>}
+       {courses && <td className={l.tdd}>{courses[2].title}</td> }
+       {courses && <td className={l.tdd}>{courses[2].numStudents}  Students</td>}
       </tr>
     </table>
     </div>
