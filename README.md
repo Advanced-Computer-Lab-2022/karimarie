@@ -7,7 +7,7 @@
 <br /><br />
 
 ## Live Demo:
-
+https://drive.google.com/file/d/1VwryeQX14DvDACn3xs7YJh231oIbvcgK/view?usp=share_link
 <br /><br />
 
 ## Design Approach: 
@@ -240,12 +240,12 @@ npm start
 
 ## Credits
 
-|Name    |Email  |
+|Name    |GitHub  |
 |---------|-------|
-|Anegela Emil| angela.eskander@gmail.com|
-|Kariman Kamal| karimankamal15@gmail.com|
-|Eliane Fares| elianefares25@gmail.com|
-|Nada Nazeer| nadanazeer13@gmail.com|
-|Mariam Tarek| mariamtarek25@gmail.com|
+|Anegela Emil| https://github.com/AngelaEmil|
+|Kariman Kamal| https://github.com/karimankamaal|
+|Eliane Fares| https://github.com/ElianeFares|
+|Nada Nazeer| https://github.com/nadanazeer11|
+|Mariam Tarek| https://github.com/Mariamtkh|
 
 <br /><br />
