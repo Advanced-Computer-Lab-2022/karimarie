@@ -34,7 +34,7 @@ After the interview process was over the following were considered in our low-fi
 9. rate and review a course
 
 *Corporate Trainee*
-<p>Same as <strong>Individual  Trainee </strong> but instead of payimg for  a course the corporate trainee requests a curse for which an admin can accept or reject based on the contract between the corporate and our website ,  and therefore they can't request a refund. Also, corporate trainees have no option of signing up,instead, they are added by the admins to the system.</p>
+<p>Same as <strong>Individual  Trainee </strong> but instead of paying for  a course the corporate trainee requests a course for which an admin can accept or reject based on the contract between the corporate and our website ,  and therefore they can't request a refund. Also, corporate trainees have no option of signing up,instead, they are added by the admins to the system.</p>
 
 *Admin*
 1. add another admin
