@@ -108,7 +108,7 @@ npm start
 3. google api ()
 4. stripe api("https://js.stripe.com/v2/")---> for course payments
 
-
+![Screenshot](screenshot(9).png)
 
 ## Credits
 
