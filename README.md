@@ -65,26 +65,6 @@ This app features some technologies and functionalities that makes it a unique w
 - Clear and instructive error messages
 
 <br/><br/>
-## Code Example
- const[courses,setCourses]= useState('');
-  const [topRated,setTopRated]=useState('');
-  const [mostPop,setMostPop]=useState('');
-  const getCourses = async () => {
-    const res = await axios
-      .get("http://localhost:2000/home")
-      .catch((err) => console.log(err));
-      const data = await res.data;
-      return data;
-  };
-  useEffect(() => {
-    getCourses().then((data) => { setCourses(data.priceList)
-      setTopRated((data.priceList).sort((a,b)=>b.rating-a.rating).slice(0,10))
-      setMostPop((data.priceList).sort((a,b)=>b.numStudents-a.numStudents).slice(0,10));
-
-    });    
-  }, []);
-
-<br/><br/>
 
 ## Technologies Used
 * nodejs
