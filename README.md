@@ -116,7 +116,7 @@ npm start
 4. stripe api("https://js.stripe.com/v2/")---> for course payments
 
 
-
+![GitHub Logo](https://d1m75rqqgidzqn.cloudfront.net/images/logo.png) Format: ![Alt Text](url) 
 ## Credits
 
 |Name    |GitHub  |
