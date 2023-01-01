@@ -11,7 +11,7 @@ https://drive.google.com/file/d/1VwryeQX14DvDACn3xs7YJh231oIbvcgK/view?usp=share
 <br /><br />
 
 ## Design Approach: 
-Before the frontend web design phase, we have conducted user interviews in  order to utilise the given user requiremts. Through the interviewing process, we got to understand more about not only what functionalities our users expect but also about what experience are they looking for. Our interviewees were a selection of potential students that have tried or would consider trying online learing. It is also important to mention that we also considered existing competitive platforms,such as, Udemy,Coursera, and Udacity as a reference and to what will be our own imprint on our online learing platform.
+Before the frontend web design phase, we have conducted user interviews in  order to utilise the given user requiremts. Through the interviewing process, we got to understand more about not only what functionalities our users expect but also about what experience are they looking for. Our interviewees were a selection of potential students that have tried or would consider trying online learning. It is also important to mention that we also considered existing competitive platforms,such as, Udemy,Coursera, and Udacity as a reference and to what will be our own imprint on our online learing platform.
 <br />
 After the interview process was over the following were considered in our low-fidelity design:
 1. We aimed at designing simple yet efficient UI elements in order to make the learning process easier.
@@ -34,7 +34,7 @@ After the interview process was over the following were considered in our low-fi
 9. rate and review a course
 
 *Corporate Trainee*
-<p>Same as <strong>Individual  Trainee </strong> but instead of payimg for  a course the corporate trainee requests a curse for which an admin can accept or reject based onthe contract between the corporate and our website ,  and therefore they can't request a refund. Also, corporate traineeshave no option of signing up,instead, they are added by the admins to the system.</p>
+<p>Same as <strong>Individual  Trainee </strong> but instead of payimg for  a course the corporate trainee requests a curse for which an admin can accept or reject based on the contract between the corporate and our website ,  and therefore they can't request a refund. Also, corporate trainees have no option of signing up,instead, they are added by the admins to the system.</p>
 
 *Admin*
 1. add another admin
@@ -49,7 +49,7 @@ After the interview process was over the following were considered in our low-fi
 1. login
 2. create a course with its coresspnding quizzes and  exam
 3. view all courses with its corresponding info: rates,reviews, price,etc.
-4. add a discount for a chosen period of time on  any oh his courses
+4. add a discount for a chosen period of time on  any of his courses
 
 *Notes*
 1. Instructors and trainees can change their passowrd and email at any times
@@ -82,7 +82,6 @@ This app features some technologies and functionalities that makes it a unique w
 
 1-clone the project to visual studio code 
 
-bash
 git clone "https://github.com/Advanced-Computer-Lab-2022/karimarie.git"
 
 
