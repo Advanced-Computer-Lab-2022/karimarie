@@ -32,6 +32,7 @@ After the interview process was over the following were considered in our low-fi
 7. report problems for a course they are registered for
 8. request a refund for a course if only 50% or less of  the course has been watched
 9. rate and review a course
+10. download the certificate after completing the course
 
 *Corporate Trainee*
 <p>Same as <strong>Individual  Trainee </strong> but instead of paying for  a course the corporate trainee requests a course for which an admin can accept or reject based on the contract between the corporate and our website ,  and therefore they can't request a refund. Also, corporate trainees have no option of signing up,instead, they are added by the admins to the system.</p>
@@ -58,6 +59,13 @@ After the interview process was over the following were considered in our low-fi
 <br/><br/>
 
 ## Features
+This app features some technologies and functionalities that makes it a unique website for courses.
+- Currency exchange with very high accuracy
+- Search and filter functionalities 
+- Clear and instructive error messages
+
+<br/><br/>
+## Code Example
 This app features some technologies and functionalities that makes it a unique website for courses.
 - Currency exchange with very high accuracy
 - Search and filter functionalities 
