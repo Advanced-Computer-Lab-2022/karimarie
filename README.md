@@ -66,10 +66,23 @@ This app features some technologies and functionalities that makes it a unique w
 
 <br/><br/>
 ## Code Example
-This app features some technologies and functionalities that makes it a unique website for courses.
-- Currency exchange with very high accuracy
-- Search and filter functionalities 
-- Clear and instructive error messages
+ const[courses,setCourses]= useState('');
+  const [topRated,setTopRated]=useState('');
+  const [mostPop,setMostPop]=useState('');
+  const getCourses = async () => {
+    const res = await axios
+      .get("http://localhost:2000/home")
+      .catch((err) => console.log(err));
+      const data = await res.data;
+      return data;
+  };
+  useEffect(() => {
+    getCourses().then((data) => { setCourses(data.priceList)
+      setTopRated((data.priceList).sort((a,b)=>b.rating-a.rating).slice(0,10))
+      setMostPop((data.priceList).sort((a,b)=>b.numStudents-a.numStudents).slice(0,10));
+
+    });    
+  }, []);
 
 <br/><br/>
 
@@ -116,7 +129,7 @@ npm start
 4. stripe api("https://js.stripe.com/v2/")---> for course payments
 
 
-![GitHub Logo](https://d1m75rqqgidzqn.cloudfront.net/images/logo.png) Format: ![Alt Text](url) 
+
 ## Credits
 
 |Name    |GitHub  |
