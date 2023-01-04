@@ -103,11 +103,54 @@ npm start
 <br /><br />
 
 ## API Reference
-1. rest API ('https://api.exchangerate.host/latest')---> for currency exchange
-2. Send Grid ---> for sending emails
-3. google api ()
-4. stripe api("https://js.stripe.com/v2/")---> for course payments
-
+GET (all courses)
+```
+http://localhost:2000/home
+```
+POST (login)
+```
+http://localhost:2000/login
+```
+POST (Signup)
+```
+http://localhost:2000/signup"
+```
+POST (edit password for trainee)
+```
+http://localhost:2000/corpTrainee/editpassword/${decodeID}
+```
+POST (edit password for instructor)
+```
+http://localhost:2000/instructor/editpassword/${decodeID}
+```
+GET (all countries)
+```
+https://restcountries.com/v2/all
+```
+POST (filter courses)
+```
+http://localhost:2000/postFilterAll
+```
+GET (search for courses)
+```
+http://localhost:2000/search/${search}
+```
+GET (exam solution)
+```
+http://localhost:2000/getExamSol/${id}
+```
+GET (instructor's details)
+```
+http://localhost:2000/instructor/getByid2/${Course.instructor}
+```
+POST (pay for a course)
+```
+http://localhost:2000/payCourse/${id}/${currencyPrice}
+```
+GET (get admin reports)
+```
+http://localhost:2000/seeMyReports/${id}
+```
 
 ## Code Examples
 
