@@ -82,24 +82,24 @@ This app features some technologies and functionalities that makes it a unique w
 ## Installation
 
 1-clone the project to visual studio code 
-
+bash```
 git clone "https://github.com/Advanced-Computer-Lab-2022/karimarie.git"
-
+```
 
 2-Install needed dependencies for the server side and run
-
+bash```
 cd backend
 npm install --force
 #run
 npm start
-
+```
 2-Install needed dependencies for the client side and run
-
+bash```
 cd frontend
 npm install --force
 #run
 npm start
-
+```
 <br /><br />
 
 ## API Reference(using axios)
