@@ -166,7 +166,7 @@ http://localhost:2000/sendCertificate
 
 ## Code Examples
 getting a token(client side)
-```
+``
 const VMyCourses = () => {
   const [access,hasaccess]=useState(false)
   const [datas,setdata]=useState("")
@@ -193,7 +193,7 @@ const VMyCourses = () => {
           }
       });
     }}, []);
-    ```
+    ``
     Sign up(client side)
     ``
     const sendUser = async () => {
