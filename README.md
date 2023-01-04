@@ -166,7 +166,7 @@ http://localhost:2000/sendCertificate
 
 ## Code Examples
 getting a token(client side)
-`
+``ruby
 const VMyCourses = () => {
   const [access,hasaccess]=useState(false)
   const [datas,setdata]=useState("")
@@ -193,7 +193,7 @@ const VMyCourses = () => {
           }
       });
     }}, []);
-    `
+    ``
     Sign up(client side)
     `
     const sendUser = async () => {
@@ -356,7 +356,7 @@ const getAllCourses = async (req, res) => {
   }
   `
   Using Stripe to pay for a course
-  `
+  ``
   const { id, currencyPrice } = useParams();
   console.log(id)
   const [cid,setcid]=useState(id)
@@ -376,7 +376,7 @@ const getAllCourses = async (req, res) => {
       window.document.body.appendChild(s);
     }
   }, []);
-  `
+  ``
   
 ## Screenshots from the website
 
