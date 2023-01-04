@@ -108,7 +108,33 @@ npm start
 3. google api ()
 4. stripe api("https://js.stripe.com/v2/")---> for course payments
 
-![Screenshot](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/Screenshot%20(9).png)
+
+## Code Examples
+
+
+## Screenshots from the website
+
+### SignUp
+![SignUp]
+### Login
+![Login]
+### HomePage
+![HomePage]
+### Payment Page
+![Payment]
+### Course Details Page
+![Course Details]
+### Watching Subtitles
+![Watching]
+### Solving a Quiz/Exam
+![Quiz/Exam]
+### Instructor Profile
+![Instructor Profile]
+### Instructor Balance
+![Instructor Balance]
+
+
+
 
 ## Credits
 
