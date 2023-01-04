@@ -177,7 +177,7 @@ const VMyCourses = () => {
           hasaccess(false)
       }else {
       const res = await axios
-        .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+        .get("http://localhost:2000/requireAuth/${localStorage.getItem("token")}")
         .catch((err) => console.log(err));
         const data = await res.data;
         return data;}
