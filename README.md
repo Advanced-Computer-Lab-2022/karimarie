@@ -115,23 +115,47 @@ npm start
 ## Screenshots from the website
 
 ### SignUp
-![SignUp]
+![SignUp](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.08.26%20PM.png)
 ### Login
-![Login]
+![Login](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.08.43%20PM.png)
+### Admin Home Page
+![Admin Home](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.06.59%20PM.png)
+### Create User (Admin)
+![Create User](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.07.05%20PM.png)
+![Create Inst](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.07.12%20PM.png)
+### Add Discount (Admin)
+![Add Promo](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.07.17%20PM.png)
+### View Reports (Admin)
+![view](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.07.22%20PM.png)
+### View Refund Requests (Admin)
+![refund](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.07.29%20PM.png)
 ### HomePage
-![HomePage]
+![HomePage](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.07.59%20PM.png)
+![Home](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.08.04%20PM.png)
+![H](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.08.09%20PM.png)
 ### Payment Page
-![Payment]
+![Payment](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.10.26%20PM.png)
+### Wallet of Trainee
+![wallet](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.10.53%20PM.png)
+### Tainee's Courses Page
+![Trainee](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.11.29%20PM.png)
 ### Course Details Page
-![Course Details]
+![Course Details](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.09.59%20PM.png)
+![course details2](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.12.43%20PM.png)
 ### Watching Subtitles
-![Watching]
+![Watching](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.11.46%20PM.png)
+### Solving Exam
+![solve](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.11.53%20PM.png)
+![solve2](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.12.01%20PM.png)
+![solve3](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.12.09%20PM.png)
 ### Solving a Quiz/Exam
 ![Quiz/Exam]
 ### Instructor Profile
-![Instructor Profile]
+![Instructor Profile](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.13.43%20PM.png)
+![Inst](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.13.49%20PM.png)
 ### Instructor Balance
-![Instructor Balance]
+![Instructor Balance](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.14.02%20PM.png)
+
 
 
 
