@@ -102,7 +102,7 @@ npm start
 
 <br /><br />
 
-## API Reference
+## API Reference(using axios)
 GET (all courses)
 ```
 http://localhost:2000/home
@@ -151,9 +151,49 @@ GET (get admin reports)
 ```
 http://localhost:2000/seeMyReports/${id}
 ```
+POST (a report follow up)
+```
+http://localhost:2000/followUp
+```
+POST (instructor review)
+```
+http://localhost:2000/addInstructorReview/${instid}
+```
+POST (send certificate)
+```
+http://localhost:2000/sendCertificate
+```
 
 ## Code Examples
-
+getting a token
+```
+const VMyCourses = () => {
+  const [access,hasaccess]=useState(false)
+  const [datas,setdata]=useState("")
+  const grantAccess = async () => {
+      console.log(localStorage.getItem("token"))
+      if(localStorage.getItem("token")===""){
+          console.log("hi")
+          hasaccess(false)
+      }else {
+      const res = await axios
+        .get(`http://localhost:2000/requireAuth/${localStorage.getItem("token")}`)
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        return data;}
+    };
+    useEffect(() => {
+      if(localStorage.getItem("token")!==""){
+          grantAccess().then((data)=>{setdata(data.message)
+          if(data.message==="Trainee"){
+              hasaccess(true)
+          }
+          else {
+              hasaccess(false)
+          }
+      });
+    }}, []);
+    ```
 
 ## Screenshots from the website
 
