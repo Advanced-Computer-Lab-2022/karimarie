@@ -166,7 +166,7 @@ http://localhost:2000/sendCertificate
 
 ## Code Examples
 getting a token
-```
+``json
 const VMyCourses = () => {
   const [access,hasaccess]=useState(false)
   const [datas,setdata]=useState("")
@@ -193,8 +193,7 @@ const VMyCourses = () => {
           }
       });
     }}, []);
-    ```
-
+    ``
 ## Screenshots from the website
 
 ### SignUp
