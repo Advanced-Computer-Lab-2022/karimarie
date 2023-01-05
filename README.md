@@ -193,8 +193,7 @@ const VMyCourses = () => {
           }
       });
     }}, []);
-    ```
-    
+    ```  
     Sign up(client side)
     ```
     const sendUser = async () => {
@@ -280,7 +279,7 @@ const VMyCourses = () => {
      return;
     }
     setPasswordType("password")
-  }
+  };
   ```
   admin adding a new admin (server side)
   ```
