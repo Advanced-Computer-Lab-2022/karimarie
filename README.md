@@ -18,7 +18,9 @@ After the interview process was over the following were considered in our low-fi
 2. In case the user has made any mistake  throughout any process required, a clear message stating what the error was and how to overcome this error were required
 
 <br /><br />
-
+## Build Status: 
+ 1. The project is currently in development.
+ 2. Unit tests need to be implemented.
 
 ## Tests:
 
