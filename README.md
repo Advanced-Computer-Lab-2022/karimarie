@@ -182,10 +182,12 @@ To get Started
  8. Wait for your pull request to be reviewed and merged
  
 ## Code Examples
- 
- ![Login]()
-     
-
+ ### Login(client)
+ ![Login](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-05%20at%208.07.07%20PM.png)
+ ### addinga new admin to database (server)
+ ![Admin](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-05%20at%208.08.04%20PM.png)
+ ### HTML of forget password pop up (client)
+ ![forget](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-05%20at%208.10.55%20PM.png)
 
   
 ## Screenshots from the website
