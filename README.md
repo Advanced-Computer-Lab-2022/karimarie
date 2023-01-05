@@ -194,6 +194,7 @@ const VMyCourses = () => {
       });
     }}, []);
     ```
+    
     Sign up(client side)
     ```
     const sendUser = async () => {
