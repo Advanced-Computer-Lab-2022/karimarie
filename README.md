@@ -415,12 +415,10 @@ const getAllCourses = async (req, res) => {
 ![solve](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.11.53%20PM.png)
 ![solve2](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.12.01%20PM.png)
 ![solve3](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.12.09%20PM.png)
-### Solving a Quiz/Exam
-![Quiz/Exam]
 ### Instructor Profile
 ![Instructor Profile](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.13.43%20PM.png)
 ![Inst](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.13.49%20PM.png)
-### Instructor Balance
+### Create Course
 ![Instructor Balance](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-04%20at%2010.14.02%20PM.png)
 
 
