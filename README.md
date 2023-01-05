@@ -23,7 +23,7 @@ After the interview process was over the following were considered in our low-fi
  2. Unit tests need to be implemented.
 <br /><br />
 ## Code Style: 
- Standard code styles that are easy to follow for any new contributors.
+ Standard code styles that are easy to follow for any new contributors.<br />
  Backend methods are defined in controller folder then called in their designated route.
 <br /><br />
 ## Tests:
