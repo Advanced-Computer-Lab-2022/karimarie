@@ -21,7 +21,10 @@ After the interview process was over the following were considered in our low-fi
 ## Build Status: 
  1. The project is currently in development.
  2. Unit tests need to be implemented.
-
+<br /><br />
+## Code Style: 
+ Standard code styles that are easy to follow for any new contributors.
+<br /><br />
 ## Tests:
 
 *Individual Trainee*
@@ -88,7 +91,7 @@ This app features some technologies and functionalities that makes it a unique w
 git clone "https://github.com/Advanced-Computer-Lab-2022/karimarie.git"
 ```
 
-2-Install needed dependencies for the server side and run
+2-Open new terminal,install needed dependencies for the server side and run
 ```
 cd backend
 npm install --force
