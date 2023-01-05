@@ -91,14 +91,14 @@ This app features some technologies and functionalities that makes it a unique w
 git clone "https://github.com/Advanced-Computer-Lab-2022/karimarie.git"
 ```
 
-2-Open new terminal,install needed dependencies for the server side and run
+2-Install needed dependencies for the server side and run
 ```
 cd backend
 npm install --force
 #run
 npm start
 ```
-2-Install needed dependencies for the client side and run
+2-Open new terminal,install needed dependencies for the client side and run
 ```
 cd frontend
 npm install --force
