@@ -166,7 +166,7 @@ http://localhost:2000/sendCertificate
 
 ## Code Examples
 getting a token(client side)
-``
+```
 const VMyCourses = () => {
   const [access,hasaccess]=useState(false)
   const [datas,setdata]=useState("")
@@ -193,9 +193,9 @@ const VMyCourses = () => {
           }
       });
     }}, []);
-    ``
+    ```
     Sign up(client side)
-    ``
+    ```
     const sendUser = async () => {
     const res = await axios
       .post(
@@ -280,9 +280,9 @@ const VMyCourses = () => {
     }
     setPasswordType("password")
   }
-  ``
+  ```
   admin adding a new admin (server side)
-  ``
+  ```
   const addAdmin=async (req,res,next)=>{
     
      const{userName,password}=req.body
@@ -316,9 +316,9 @@ const VMyCourses = () => {
 }
     
 }
-``
+```
 getting all courses (server side)
-``
+```
 const getAllCourses = async (req, res) => {
   
  
@@ -338,9 +338,9 @@ const getAllCourses = async (req, res) => {
     }
     catch(error){res.status(404).json({error:error.message}) }
   }
-  ``
+  ```
   instructor editing his password
-  ``
+  ```
   const editPassword = async (req, res) => {
   
   var decodeID="";
@@ -354,9 +354,9 @@ const getAllCourses = async (req, res) => {
       }
     });
   }
-  ``
+  ```
   Using Stripe to pay for a course
-  ``
+  ```
   const { id, currencyPrice } = useParams();
   console.log(id)
   const [cid,setcid]=useState(id)
@@ -376,7 +376,7 @@ const getAllCourses = async (req, res) => {
       window.document.body.appendChild(s);
     }
   }, []);
-  ``
+  ```
   
 ## Screenshots from the website
 
