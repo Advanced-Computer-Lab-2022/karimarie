@@ -163,7 +163,18 @@ POST (send certificate)
 ```
 http://localhost:2000/sendCertificate
 ```
-
+## Contribute
+Contributions are always welcome.
+To get Started
+ 1. Fork the repository
+ 2. Clone the repository
+ 3. Install dependencies
+ 4. Create a new branch
+ 5. Make your changes
+ 6. Commit and push your changes
+ 7. Create a pull request
+ 8. Wait for your pull request to be reviewed and merged
+ 
 ## Code Examples
  Sign up(client side)
  ```
