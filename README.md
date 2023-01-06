@@ -38,7 +38,18 @@ After the interview process was over the following were considered in our low-fi
 7. report problems for a course they are registered for
 8. request a refund for a course if only 50% or less of  the course has been watched
 9. rate and review a course
-10. download the certificate after completing the course
+10. rate and review an instructor
+11. download the certificate after completing the course
+12. receive a certificate as a PDF after completing the course via email
+13. view and accept the website/ company refund/ payment policy while signing up
+14. view the most viewed/ most popular courses
+15. solve a mcq exam
+16. view his/her grade after submitting the exam
+17. view the questions with the correct solution to view the incorrect answers
+18. see his/her progress in the course as a percentage of how much of the course has been completed so far
+19. write notes while watching the video
+20. download the notes as a PDF
+21. select their country 
 
 *Corporate Trainee*
 <p>Same as <strong>Individual  Trainee </strong> but instead of paying for  a course the corporate trainee requests a course for which an admin can accept or reject based on the contract between the corporate and our website ,  and therefore they can't request a refund. Also, corporate trainees have no option of signing up,instead, they are added by the admins to the system.</p>
@@ -54,9 +65,15 @@ After the interview process was over the following were considered in our low-fi
 
 *Instructor*
 1. login
-2. create a course with its coresspnding quizzes and  exam
+2. create a course with its coressonding quizzes and  exam
 3. view all courses with its corresponding info: rates,reviews, price,etc.
 4. add a discount for a chosen period of time on  any of his courses
+5. view and accept the website/ company refund/ payment policy while loging in for the first time
+6. view the most viewed/ most popular courses
+7. view the ratings and reviews on all his/her courses
+8. view his/her balance
+9. edit his/her mini biography or email
+10. select their country 
 
 *Notes*
 1. Instructors and trainees can change their passowrd and email at any times
