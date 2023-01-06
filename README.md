@@ -182,6 +182,18 @@ POST (instructor review)
 ```
 http://localhost:2000/addInstructorReview/${instid}
 ```
+GET (instructor's courses)
+```
+http://localhost:2000/instructor/instCourses/:token
+```
+POST (edit instructor's email)
+```
+http://localhost:2000/instructor/editemail/:token
+```
+GET (create exam)
+```
+http://localhost:2000/instructor/createExam
+```
 POST (send certificate)
 ```
 http://localhost:2000/sendCertificate
