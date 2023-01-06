@@ -224,12 +224,214 @@ To get Started
  8. Wait for your pull request to be reviewed and merged
  
 ## Code Examples
- ### Login(client)
- ![Login](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-05%20at%208.07.07%20PM.png)
- ### addinga new admin to database (server)
- ![Admin](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-05%20at%208.08.04%20PM.png)
- ### HTML of forget password pop up (client)
- ![forget](https://github.com/Advanced-Computer-Lab-2022/karimarie/blob/main/frontend/public/Screenshot%202023-01-05%20at%208.10.55%20PM.png)
+ Sign up(client side)
+ ```
+    const sendUser = async () => {
+    const res = await axios
+      .post(
+        "http://localhost:2000/signup",
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          userName: userName,
+          password: password,
+          gender: gender,
+        },
+        { withCredentials: true, credentials: "include" }
+      )
+      .catch((err) => console.log(err));
+    console.log(res.data.msg);
+    return res.data;
+  };
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    if (document.getElementById("male").checked) {
+      setGender("male");
+    } else if (document.getElementById("female").checked) {
+      setGender("female");
+    } else {
+      setGender("");
+    }
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      email === "" ||
+      userName === "" ||
+      password === "" ||
+      gender === ""
+    ) {
+      isShowText3(true);
+      isShowText(false);
+      isShowText1(false);
+      isShowText2(false);
+    } else {
+      sendUser().then((data) => {
+        if (data.msg.localeCompare("Email entered is already taken") === 0) {
+          isShowText(true);
+          isShowText1(false);
+          isShowText2(false);
+          isShowText3(false);
+        } else if (
+          data.msg.localeCompare(
+            "Password must be greater than 5 characters and less than 25 characters"
+          ) === 0
+        ) {
+          isShowText1(true);
+          isShowText(false);
+          isShowText2(false);
+          isShowText3(false);
+        } else if (data.msg.localeCompare("Username already taken!") === 0) {
+          isShowText2(true);
+          isShowText(false);
+          isShowText1(false);
+          isShowText3(false);
+        } else if (data.msg.localeCompare("Individual Trainee") === 0) {
+          isShowText(false);
+          isShowText1(false);
+          isShowText2(false);
+          isShowText3(false);
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("userType","Trainee")
+          window.location.href = "/Terms&Conditions";
+        }
+      });
+    }
+  };
+  const [passwordType, setPasswordType] = useState("password");
+  const togglePassword =()=>{
+    if(passwordType==="password")
+    {
+     setPasswordType("text")
+     return;
+    }
+    setPasswordType("password")
+  };
+```
+getting a token(client side)
+```
+const VMyCourses = () => {
+  const [access,hasaccess]=useState(false)
+  const [datas,setdata]=useState("")
+  const grantAccess = async () => {
+      console.log(localStorage.getItem("token"))
+      if(localStorage.getItem("token")===""){
+          console.log("hi")
+          hasaccess(false)
+      }else {
+      const res = await axios
+        .get("http://localhost:2000/requireAuth/${localStorage.getItem("token")}")
+        .catch((err) => console.log(err));
+        const data = await res.data;
+        return data;}
+    };
+    useEffect(() => {
+      if(localStorage.getItem("token")!==""){
+          grantAccess().then((data)=>{setdata(data.message)
+          if(data.message==="Trainee"){
+              hasaccess(true)
+          }
+          else {
+              hasaccess(false)
+          }
+      });
+    }}, []);
+  ```  
+   
+  admin adding a new admin (server side)
+  ```
+  const addAdmin=async (req,res,next)=>{
+    
+     const{userName,password}=req.body
+     let adm;
+     let x= await instTable.findOne({userName:req.body.userName})
+     let y= await traineeTable.findOne({userName:req.body.userName}) 
+     if(x){
+        return res.json({success: false, message: 'Username already taken!'});
+    }
+    else  if(y){
+        return res.json({success: false, message: 'Username already taken!'});
+    }else {
+     try{
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        const adm = await adminTable.create({ password: hashedPassword ,userName:userName});
+         await adm.save();
+         return res.json({success: true, message: 'Successfully Added!'});
+        }
+     catch(err){
+         adminTable.find({userName:req.body.userName},function(err,person){
+        if(err){
+            return res.json({success: false, message: 'DataBase Error,Please Wait!'});
+        }
+        else{
+            return res.json({success: false, message: 'Username already taken!'});
+        }
+    })}
+}
+    
+}
+```
+getting all courses (server side)
+```
+const getAllCourses = async (req, res) => {
+  
+ 
+    let priceList;
+    try{
+     priceList = await courseTable.find({});
+     return res.status(200).json({priceList})
+    }
+    catch(error){res.status(404).json({error:error.message}) }
+  }
+  const getSubjects=async(req,res)=>{
+    let subjects;
+    try{
+        subjects=await subjectTable.find();
+        subjects.save
+        return res.status(200).json({subjects})
+    }
+    catch(error){res.status(404).json({error:error.message}) }
+  }
+  ```
+  instructor editing his password
+  ```
+  const editPassword = async (req, res) => {
+  
+  var decodeID="";
+  var finalres=""
+  if (req.params.token) {
+    jwt.verify(req.params.token, 'supersecret', (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({message:"You are not logged in."})
+      } else {
+        decodeID=decodedToken.name;
+      }
+    });
+  }
+  ```
+  Using Stripe to pay for a course
+  ```
+  const { id, currencyPrice } = useParams();
+  console.log(id)
+  const [cid,setcid]=useState(id)
+  console.log(cid)
+  const [green,setGreen]=useState(true)
+  useEffect(() => {
+    if (!window.document.getElementById("stripe-script")) {
+      var s = window.document.createElement("script");
+      s.id = "stripe-script";
+      s.type = "text/javascript";
+      s.src = "https://js.stripe.com/v2/";
+      s.onload = () => {
+        window["Stripe"].setPublishableKey(
+          "pk_test_51MEI8aGdZfaXR0mrrTdQCdrYn34vXH4ZzxSPDBPHy9rvej06lBu5LIb5jQeNmsX3X3Gpbmh8dJwXDQtgRthqHag900qEpQhRKa"
+        );
+      };
+      window.document.body.appendChild(s);
+    }
+  }, []);
+  ```
 
   
 ## Screenshots from the website
