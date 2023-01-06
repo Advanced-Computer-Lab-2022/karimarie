@@ -168,11 +168,11 @@ http://localhost:2000/instructor/getByid2/${Course.instructor}
 ```
 POST (pay for a course)
 ```
-http://localhost:2000/payCourse/${id}/${currencyPrice}
+http://localhost:2000/corpTrainee/payCourse/${id}/${currencyPrice}
 ```
 GET (get admin reports)
 ```
-http://localhost:2000/seeMyReports/${id}
+http://localhost:2000/admin/seeMyReports/${id}
 ```
 POST (a report follow up)
 ```
@@ -198,6 +198,19 @@ POST (send certificate)
 ```
 http://localhost:2000/sendCertificate
 ```
+POST (add course review)
+```
+http://localhost:2000/corpTrainee/addCourseReview/:course
+```
+POST (request course refund)
+```
+http://localhost:2000/corpTrainee/refundRequest
+```
+GET (view notifications)
+```
+http://localhost:2000/getMyNotification/:userId
+```
+
 ## Contribute
 Contributions are always welcome.
 To get Started
